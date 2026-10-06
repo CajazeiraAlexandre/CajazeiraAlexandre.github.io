@@ -1,6 +1,8 @@
 # Projetos e trabalhos com dados — alimenta a seção de mesmo nome do portfólio.
 # Campos: titulo, ano, veiculo, tipo (painel | narrativa | visualizacao | exploratorio | padrao-de-dados | nota-tecnica | sistema-web),
 # link, acesso (aberto | assinantes), premios, temas, descricao (texto curto no cartão).
+# secao: onde o item aparece — sem secao = "Projetos e trabalhos com dados"; publicacoes = "Outras publicações";
+# sistemas = "Desenvolvimento de sistemas". O tipo é só um registro interno (não aparece na página).
 # link_suspenso: link oficial guardado enquanto a página está fora do ar (ex.: gov.br no período eleitoral);
 # quando voltar, troque link_suspenso por link e apague a nota.
 
@@ -136,6 +138,7 @@
   ano: 2025
   veiculo: Ministério da Cultura
   tipo: nota-tecnica
+  secao: publicacoes
   acesso: aberto
   link_suspenso: https://www.gov.br/cultura/pt-br/assuntos/politica-nacional-aldir-blanc/politica-nacional-aldir-blanc/padrao-de-dados/25_minc_pnabtemplate-2025-pdf-3.pdf
   nota: Página oficial temporariamente fora do ar (período eleitoral).
@@ -190,6 +193,7 @@
   ano: 2022–2024
   veiculo: Cerebrum Informática para o GPeSC/UFPI
   tipo: sistema-web
+  secao: sistemas
   acesso: aberto
   link: https://saudecoletivapicos.com.br/pt-br/about/
   descricao: >-
