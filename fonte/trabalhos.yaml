@@ -6,6 +6,24 @@
 # link_suspenso: link oficial guardado enquanto a página está fora do ar (ex.: gov.br no período eleitoral);
 # quando voltar, troque link_suspenso por link e apague a nota.
 
+- titulo: "Onde estão os votos? Distribuição territorial de candidaturas no Piauí"
+  ano: 2026
+  veiculo: Projeto Eleições no Piauí (dados do TSE e do IBGE)
+  tipo: exploratorio
+  acesso: aberto
+  link: https://cajazeiraalexandre.github.io/eleicoes/onde-estao-os-votos/
+  descricao: >-
+    Painel exploratório com os votos de cada candidatura do município ao local de votação (2018, 2022 e
+    2026), comparação entre eleições e correlação com outros cargos. Código e dados abertos.
+- titulo: "Forças políticas no Piauí: PT, PSD, MDB e os demais (2018–2026)"
+  ano: 2026
+  veiculo: Projeto Eleições no Piauí (dados do TSE e do IBGE)
+  tipo: narrativa
+  acesso: aberto
+  link: https://cajazeiraalexandre.github.io/eleicoes/forcas-politicas/
+  descricao: >-
+    Composição, evolução, consistência entre cargos e viradas dos grandes grupos políticos nas eleições
+    gerais e municipais, por município e região. Código e dados abertos.
 - titulo: Agregador de pesquisas eleitorais O POVO
   ano: 2022
   veiculo: O POVO / DATADOC
