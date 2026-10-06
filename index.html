@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alexandre Ribeiro Cajazeira Ramos — Portfólio</title>
+<meta name="description" content="Professor EBTT (Ciência da Computação) · Instituto Federal do Piauí — campus São Raimundo Nonato (IFPI-SRN)">
+<meta property="og:title" content="Alexandre Ribeiro Cajazeira Ramos — Portfólio">
+<meta property="og:description" content="Professor EBTT (Ciência da Computação) · Instituto Federal do Piauí — campus São Raimundo Nonato (IFPI-SRN)">
+<meta property="og:image" content="https://cajazeiraalexandre.github.io/assets/foto.png">
+<meta property="og:type" content="profile">
+<link rel="icon" href="assets/foto.png">
+<link rel="stylesheet" href="assets/tokens.css">
+<!-- Arquivo GERADO por gerar.py a partir de fonte/ — não edite à mão. -->
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cor-fundo,#f9f9f7);color:var(--cor-texto,#0b0b0b);
+       font-family:var(--fonte-texto,system-ui,sans-serif);font-size:var(--fs-texto,16px);line-height:1.55}
+  main{max-width:960px;margin:0 auto;padding:48px var(--margem-lateral,16px) 32px}
+  a{color:var(--cor-destaque,#2a78d6)}
+  header{border-bottom:1px solid var(--cor-borda,#ddd);padding-bottom:24px}
+  .topo{display:flex;gap:24px;align-items:center}
+  .foto{width:112px;height:112px;border-radius:50%;object-fit:cover;flex:none;border:1px solid var(--cor-borda,#ddd)}
+  h1{font-size:var(--fs-titulo,32px);font-weight:var(--peso-titulo,700);line-height:1.1;margin:0}
+  .papel{font-size:18px;color:var(--cor-texto-secundario,#52514e);margin:8px 0 0}
+  .resumo{max-width:var(--largura-texto,680px);margin:16px 0 0}
+  .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .links a{font-size:14px;text-decoration:none;border:1px solid var(--cor-borda,#ccc);border-radius:999px;padding:6px 12px;color:var(--cor-texto,#111)}
+  .links a:hover{border-color:var(--cor-destaque,#2a78d6)}
+  nav.secoes{display:flex;flex-wrap:wrap;gap:4px 16px;margin:20px 0 0;font-size:14px}
+  nav.secoes a{color:var(--cor-texto-secundario,#555);text-decoration:none}
+  nav.secoes a:hover{color:var(--cor-destaque,#2a78d6)}
+  h2{font-size:var(--fs-subtitulo,22px);margin:48px 0 4px;scroll-margin-top:16px}
+  .intro{color:var(--cor-texto-secundario,#555);margin:0 0 16px;font-size:15px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+  .card{background:var(--cor-superficie,#fff);border:1px solid var(--cor-borda,#ddd);border-radius:var(--raio,6px);
+        padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+  .card h3{font-size:16px;margin:0;line-height:1.35;overflow-wrap:anywhere}
+  .card h3 a{color:inherit;text-decoration:none} .card h3 a:hover{color:var(--cor-destaque,#2a78d6)}
+  .card p{margin:0;font-size:14px;color:var(--cor-texto-secundario,#555)}
+  .meta{font-size:12px;color:var(--cor-texto-suave,#6b6b6b)}
+  .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto;padding-top:4px}
+  .tag{font-size:11px;padding:1px 8px;border-radius:999px;border:1px solid var(--cor-borda,#ccc);color:var(--cor-texto-secundario,#555)}
+  .tag.premio{border-color:var(--cor-cat-4,#eda100)}
+  .tag.fechado{border-style:dashed}
+  .filtros{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+  .filtros button{font:inherit;font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid var(--cor-borda,#ccc);
+                  background:var(--cor-superficie,#fff);color:var(--cor-texto,#111);cursor:pointer}
+  .filtros button[aria-pressed="true"]{border-color:var(--cor-destaque,#2a78d6);color:var(--cor-destaque,#2a78d6)}
+  ul.lista{list-style:none;padding:0;margin:0}
+  ul.lista li{padding:10px 0;border-bottom:1px solid var(--cor-grade,#eee);display:grid;grid-template-columns:150px 1fr;gap:12px}
+  ul.lista .quando{font-size:13px;color:var(--cor-texto-suave,#6b6b6b);font-variant-numeric:tabular-nums}
+  footer{margin-top:64px;padding-top:16px;border-top:1px solid var(--cor-borda,#ddd);font-size:13px;color:var(--cor-texto-suave,#6b6b6b)}
+  @media (max-width:560px){
+    .topo{flex-direction:column;align-items:flex-start;gap:16px}
+    .foto{width:96px;height:96px}
+    ul.lista li{grid-template-columns:1fr;gap:2px}
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="topo">
+      <img class="foto" id="foto" alt="" width="112" height="112">
+      <div>
+        <h1 id="nome"></h1>
+        <p class="papel" id="papel"></p>
+      </div>
+    </div>
+    <p class="resumo" id="resumo"></p>
+    <div class="links" id="links"></div>
+    <nav class="secoes" id="nav" aria-label="Seções"></nav>
+  </header>
+  <div id="conteudo"></div>
+  <footer><span id="rodape"></span></footer>
+</main>
+<script>
+const D = {"perfil": {"nome": "Alexandre Ribeiro Cajazeira Ramos", "nome_curto": "Alexandre Cajazeira", "instituicao": "Instituto Federal do Piauí — campus São Raimundo Nonato (IFPI-SRN)", "cargo": "Professor EBTT (Ciência da Computação)", "foto": "assets/foto.png", "resumo": "Mestre em Ciência da Computação (MDCC/UFC), especialista em Gestão de TI (UCAM) e bacharel em Sistemas de Informação (UFPI/CSHNB). Pesquisa cidadania, gestão pública e comunicação guiadas por dados, com ênfase em visualizações interativas na web.", "links": {"lattes": "https://lattes.cnpq.br/0238517471078564", "github": "https://github.com/CajazeiraAlexandre", "observable": "https://observablehq.com/@cajazeiraramos", "flourish": "https://app.flourish.studio/@alexandre.cajazeira", "email": null}, "url": "https://cajazeiraalexandre.github.io/", "formacao": [{"nivel": "Mestrado", "curso": "Ciência da Computação", "instituicao": "UFC", "trabalho": "Uma abordagem de partição e interpolação de polígonos para visualização temporal e interativa de mapas de crimes"}, {"nivel": "Especialização", "curso": "Gestão de Tecnologia da Informação", "instituicao": "UCAM", "trabalho": "Política Nacional de Informação e Informática em Saúde: diretrizes e perspectivas atuais no âmbito do SUS"}, {"nivel": "Graduação", "curso": "Sistemas de Informação", "instituicao": "UFPI/CSHNB", "trabalho": "Desenvolvimento de descritores de forma para a redução de falsos positivos na detecção automática de nódulos pulmonares"}], "trajetoria": [{"periodo": "2024–atual", "funcao": "Professor EBTT efetivo", "onde": "IFPI campus São Raimundo Nonato"}, {"periodo": "2025–2026", "funcao": "Consultoria técnica em dados da gestão pública da cultura", "onde": "OEI em cooperação com o Ministério da Cultura"}, {"periodo": "2021–2024", "funcao": "Cientista de dados", "onde": "Central de Jornalismo de Dados do jornal O POVO (DATADOC)"}, {"periodo": "2024", "funcao": "Professor substituto", "onde": "UFPI/CSHNB"}, {"periodo": "2019–2020; 2022–2023", "funcao": "Professor substituto", "onde": "IFPI campus São Raimundo Nonato"}, {"periodo": "2018–2019", "funcao": "Bolsista de Inovação Tecnológica", "onde": "FUNCAP / UFC — Inteligência Científica e Tecnológica na Segurança Pública"}], "pesquisa": [{"titulo": "Boletim SNIIC Pesquisa nº 2 — Resultados do primeiro ciclo da Política Nacional Aldir Blanc de Fomento à Cultura: recursos distribuídos, agentes contemplados e ações fomentadas", "periodo": "Ministério da Cultura · jun. 2026", "descricao": "Estudo do primeiro ciclo da PNAB (2023–2025): 167.817 agentes culturais contemplados em 5.125 entes federados. Integrei a equipe de cientistas de dados. Página oficial temporariamente fora do ar (período eleitoral)."}], "ensino": [], "extensao": [{"titulo": "Mapa Cultural de São Raimundo Nonato", "periodo": "2023", "descricao": "Cooperação técnica na elaboração e análise do mapeamento cultural municipal (projeto Formação de Facilitadores para Mapeamento Cultural, IFPI-SRN).", "link": "https://docs.google.com/presentation/d/1OI1v-On7KHdizaA2URgTREIuU4YBed_g7y58BVr3y14/edit?usp=sharing"}, {"titulo": "Fique em casa e garanta a feira", "periodo": "2020–", "descricao": "Comercialização de produtos da agricultura familiar na pandemia (UFPI). Desenvolvedor full-stack.", "link": "https://feira.picos.ufpi.br/"}], "gestao": [], "palestras": [{"titulo": "Padronização e interoperabilidade entre sistemas: padrões de dados em políticas públicas descentralizadas — a experiência da Política Nacional Aldir Blanc", "evento": "ENSP/Fiocruz e Ministério do Desenvolvimento e Assistência Social · Qualificação de dados abertos (módulo 4) · 30/09/2026", "descricao": "Com Gabriel Bizerril. Slides da apresentação.", "link": "palestras/padronizacao-interoperabilidade.html"}, {"titulo": "Automação web para coleta e raspagem de dados com Selenium", "evento": "Coda Amazônia 2023 (Belém-PA)", "link": "https://escoladedados.org/coda/coda-amz2023/cautomacao-web-para-coleta-e-raspagem-de-dados-com-selenium/"}, {"titulo": "Como colocar tecnologias web (HTML, CSS e SVG) a serviço do jornalismo", "evento": "18º Congresso da Abraji", "link": "https://congresso.abraji.org.br/mesa/como-colocar-tecnologias-web-como-html-css-e-svgs-a-servico-do-jornalismo-parte-1"}, {"titulo": "Análise e visualizações interativas de dados na web com Observable", "evento": "Coda.Br 2022", "link": "https://escoladedados.org/coda/coda2022/analise-e-visualizacoes-interativas-de-dados-na-web-com-observable/"}, {"titulo": "Jornalismo de dados em Python", "evento": "Python Nordeste 2022", "link": "https://2022.pythonnordeste.org/"}]}, "trabalhos": [{"titulo": "Agregador de pesquisas eleitorais O POVO", "ano": 2022, "veiculo": "O POVO / DATADOC", "tipo": "painel", "acesso": "aberto", "link": "https://mais.opovo.com.br/interativos/agregador/index.php", "temas": ["eleicoes"]}, {"titulo": "Malha cicloviária para quem?", "ano": 2023, "veiculo": "O POVO / DATADOC", "tipo": "narrativa", "acesso": "aberto", "link": "https://mais.opovo.com.br/interativos/cicloviaria-fortaleza/episodio-01.php", "temas": ["territorio", "mobilidade", "desigualdade"]}, {"titulo": "Ceará versus Piauí: o mapa da discórdia", "ano": 2024, "veiculo": "O POVO / DATADOC", "tipo": "narrativa", "acesso": "assinantes", "link": "https://mais.opovo.com.br/reportagens-especiais/ceara-piaui-disputa-area-de-conflito/2024/03/28/ceara-i-versus-i-piaui-o-mapa-da-discordia.html", "temas": ["territorio", "piaui"]}, {"titulo": "Estabelecimentos mapeados pelo IBGE em 2022 na área do litígio PI/CE", "ano": 2024, "veiculo": "O POVO / DATADOC (Flourish)", "tipo": "visualizacao", "acesso": "aberto", "link": "https://public.flourish.studio/story/2292669/", "temas": ["territorio", "piaui"]}, {"titulo": "Itarema e Amontada: estradas construídas ilegalmente degradam mangue", "ano": 2023, "veiculo": "O POVO / DATADOC", "tipo": "narrativa", "acesso": "assinantes", "link": "https://mais.opovo.com.br/reportagens-especiais/itarema-especulacao-imobiliaria/2023/04/30/itarema-e-amontada-estradas-construidas-ilegalmente-degradam-mangue-e-tensionam-regiao.html", "premios": ["Finalista do 30º Prêmio CNT de Jornalismo"], "temas": ["territorio", "meio-ambiente"]}, {"titulo": "A cor da dor: violência doméstica e o registro de raça no Ceará", "ano": 2023, "veiculo": "O POVO / DATADOC", "tipo": "narrativa", "acesso": "assinantes", "link": "https://mais.opovo.com.br/reportagens-especiais/violencia-contra-mulher-dados", "premios": ["Finalista do IV Prêmio Cláudio Weber Abramo de Jornalismo de Dados"], "temas": ["seguranca", "genero", "raca"]}, {"titulo": "Cidade sob encomenda: como a especulação imobiliária redesenhou Fortaleza", "ano": 2023, "veiculo": "O POVO / DATADOC", "tipo": "narrativa", "acesso": "assinantes", "link": "https://mais.opovo.com.br/reportagens-especiais/fortaleza-especulacao-imobiliaria/2023/07/18/cidade-sob-encomenda-como-a-especulacao-imobiliaria-redesenhou-fortaleza.html?collection=premios_opmais", "premios": ["Vencedora do I Prêmio de Jornalismo do CAU/CE"], "temas": ["territorio", "urbanismo"]}, {"titulo": "Veja como a população de sua cidade mudou no Censo IBGE 2022", "ano": 2023, "veiculo": "O POVO / DATADOC (Flourish)", "tipo": "painel", "acesso": "aberto", "link": "https://public.flourish.studio/story/1964574/", "temas": ["populacao"]}, {"titulo": "Alinhamento ao governo no Congresso: votações das bancadas BBB", "ano": 2024, "veiculo": "O POVO / DATADOC (Flourish)", "tipo": "visualizacao", "acesso": "aberto", "link": "https://public.flourish.studio/story/2141280/", "temas": ["legislativo"]}, {"titulo": "LOA 2024 — funções e subfunções (Transporte e o Novo PAC)", "ano": 2023, "veiculo": "O POVO / DATADOC (Flourish)", "tipo": "visualizacao", "acesso": "aberto", "link": "https://public.flourish.studio/story/2037086/", "temas": ["financas-publicas"]}, {"titulo": "A atual divisão da Cisjordânia", "ano": 2023, "veiculo": "O POVO / DATADOC (Flourish)", "tipo": "visualizacao", "acesso": "aberto", "link": "https://public.flourish.studio/story/2065299/", "temas": ["internacional"]}, {"titulo": "Principais gráficos (coleção DATADOC 2021–2022)", "ano": 2022, "veiculo": "O POVO / DATADOC (Flourish)", "tipo": "visualizacao", "acesso": "aberto", "link": "https://public.flourish.studio/story/1625709/"}, {"titulo": "Coleção de notebooks Observable — DATADOC", "ano": 2021, "veiculo": "Observable", "tipo": "exploratorio", "acesso": "aberto", "link": "https://observablehq.com/collection/@cajazeiraramos/datadoc", "temas": ["financas-publicas", "seguranca", "genero", "meio-ambiente"]}, {"titulo": "Padrão de dados da Política Nacional Aldir Blanc (Ciclo 2)", "ano": 2025, "veiculo": "Ministério da Cultura (consultoria OEI/MinC)", "tipo": "padrao-de-dados", "acesso": "aberto", "link": "https://github.com/SGE-Subsecretaria-de-Gestao-Estrategica/aldir_blanc_ciclo2", "temas": ["cultura", "politicas-publicas"]}, {"titulo": "Guia prático de adoção do padrão de dados da PNAB — Ciclo 2", "ano": 2025, "veiculo": "Ministério da Cultura", "tipo": "nota-tecnica", "acesso": "aberto", "link_suspenso": "https://www.gov.br/cultura/pt-br/assuntos/politica-nacional-aldir-blanc/politica-nacional-aldir-blanc/padrao-de-dados/25_minc_pnabtemplate-2025-pdf-3.pdf", "nota": "Página oficial temporariamente fora do ar (período eleitoral).", "temas": ["cultura"]}, {"titulo": "Visão geral dos resultados de Docentes (CPA IFPI/SRN 2024)", "ano": 2024, "veiculo": "IFPI campus São Raimundo Nonato (Flourish)", "tipo": "visualizacao", "acesso": "aberto", "link": "https://public.flourish.studio/visualisation/24719162/", "temas": ["avaliacao-institucional", "educacao"]}, {"titulo": "Percentual de votos por campi (consulta UFPI)", "ano": 2024, "veiculo": "UFPI/CSHNB (Flourish)", "tipo": "visualizacao", "acesso": "aberto", "link": "https://public.flourish.studio/visualisation/18041875/", "temas": ["eleicoes", "universidade"]}, {"titulo": "Fortaleza 05/10 — Tendências do Agregador", "ano": 2024, "veiculo": "O POVO / OP+ (Flourish story)", "tipo": "narrativa", "acesso": "aberto", "link": "https://public.flourish.studio/story/2640962/", "temas": ["eleicoes", "pesquisas"]}, {"titulo": "Qual é a diferença de votos entre os candidatos em cada bairro de Fortaleza no 2º turno?", "ano": 2024, "veiculo": "O POVO / OP+ (Flourish story)", "tipo": "visualizacao", "acesso": "aberto", "link": "https://public.flourish.studio/story/2687344/", "temas": ["eleicoes", "territorio"]}, {"titulo": "Quem ganhou em cada bairro de Fortaleza?", "ano": 2024, "veiculo": "O POVO / OP+ (Flourish story)", "tipo": "visualizacao", "acesso": "aberto", "link": "https://public.flourish.studio/story/2684018/", "temas": ["eleicoes", "territorio"]}], "gerado_em": "2026-10-06"};
+const P = D.perfil || {};
+const el = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const TIPOS = { narrativa: "Narrativa", painel: "Painel", visualizacao: "Visualização", exploratorio: "Exploratório",
+  "nota-tecnica": "Nota técnica", "padrao-de-dados": "Padrão de dados" };
+
+el("nome").textContent = P.nome || "";
+el("papel").textContent = [P.cargo, P.instituicao].filter(Boolean).join(" · ");
+el("resumo").textContent = P.resumo || "";
+if (P.foto) { el("foto").src = P.foto; el("foto").alt = `Foto de ${P.nome_curto || P.nome}`; } else el("foto").remove();
+const L = P.links || {};
+el("links").innerHTML = [["lattes", "Currículo Lattes"], ["github", "GitHub"], ["observable", "Observable"], ["flourish", "Flourish"], ["email", "E-mail"]]
+  .filter(([k]) => L[k]).map(([k, n]) => `<a href="${k === "email" ? "mailto:" + esc(L[k]) : esc(L[k])}" target="_blank" rel="noopener">${n}</a>`).join("");
+el("rodape").textContent = `${P.nome_curto || P.nome || ""} · atualizado em ${new Date(D.gerado_em + "T12:00").toLocaleDateString("pt-BR")}`;
+
+const secoes = [];
+function secao(id, titulo, intro, html) { secoes.push([id, titulo]); return `<section id="${id}"><h2>${titulo}</h2>${intro ? `<p class="intro">${intro}</p>` : ""}${html}</section>`; }
+function card({ titulo, link, meta, texto, tags = [] }) {
+  const t = link ? `<a href="${esc(link)}" ${/^https?:/.test(link) ? 'target="_blank" rel="noopener"' : ""}>${esc(titulo)}</a>` : esc(titulo);
+  return `<article class="card"><div class="meta">${meta || ""}</div><h3>${t}</h3>${texto ? `<p>${esc(texto)}</p>` : ""}
+    ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}</article>`;
+}
+const tag = (t, cls = "") => `<span class="tag ${cls}">${esc(t)}</span>`;
+const itens = (lst) => `<div class="cards">${lst.map((i) => card({ titulo: i.titulo, link: i.link, meta: esc(i.periodo || i.evento || ""), texto: i.descricao })).join("")}</div>`;
+// seção sem itens não aparece na página
+const seTiver = (lst, id, titulo, intro = "") => (lst && lst.length ? secao(id, titulo, intro, itens(lst)) : "");
+
+let html = "";
+html += seTiver(P.pesquisa, "pesquisa", "Pesquisa");
+const temas = [...new Set(D.trabalhos.map((r) => TIPOS[r.tipo] || r.tipo))];
+html += secao("trabalhos", "Trabalhos anteriores",
+  "Reportagens de dados, visualizações e padrões de dados desenvolvidos em outras instituições. Alguns conteúdos jornalísticos são exclusivos para assinantes.",
+  `<div class="filtros" id="f-ref" role="group" aria-label="Filtrar por tipo"><button type="button" aria-pressed="true" data-t="">Todos</button>${temas.map((t) => `<button type="button" aria-pressed="false" data-t="${esc(t)}">${esc(t)}</button>`).join("")}</div><div class="cards" id="refs"></div>`);
+html += seTiver(P.palestras, "palestras", "Palestras e oficinas");
+html += seTiver(P.extensao, "extensao", "Extensão");
+html += seTiver(P.ensino, "ensino", "Ensino");
+html += seTiver(P.gestao, "gestao", "Gestão");
+html += secao("trajetoria", "Trajetória e formação", "",
+  `<ul class="lista">${(P.trajetoria || []).map((t) => `<li><span class="quando">${esc(t.periodo)}</span><span>${esc(t.funcao)} — ${esc(t.onde)}</span></li>`).join("")}
+   ${(P.formacao || []).map((f) => `<li><span class="quando">${esc(f.nivel)}</span><span>${esc(f.curso)} (${esc(f.instituicao)})${f.trabalho ? `<br><span class="meta">${esc(f.trabalho)}</span>` : ""}</span></li>`).join("")}</ul>`);
+el("conteudo").innerHTML = html;
+el("nav").innerHTML = secoes.map(([id, t]) => `<a href="#${id}">${t}</a>`).join("");
+
+function refs(filtro) {
+  el("refs").innerHTML = D.trabalhos.filter((r) => !filtro || (TIPOS[r.tipo] || r.tipo) === filtro).map((r) => card({
+    titulo: r.titulo, link: r.link, meta: `${esc(r.veiculo || "")} · ${esc(r.ano || "")}`, texto: r.nota,
+    tags: [tag(TIPOS[r.tipo] || r.tipo), ...(r.premios || []).map((p) => tag("★ " + p, "premio")),
+           r.acesso === "assinantes" ? tag("assinantes", "fechado") : ""] })).join("");
+}
+el("f-ref").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  el("f-ref").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  refs(b.dataset.t);
+});
+refs("");
+</script>
+</body>
+</html>

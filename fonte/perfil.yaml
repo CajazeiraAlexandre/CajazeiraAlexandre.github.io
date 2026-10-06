@@ -1,0 +1,59 @@
+# Perfil PÚBLICO — alimenta o portfólio (index.html). Tudo aqui é publicado.
+# NÃO inclua endereço residencial, telefone ou documentos pessoais.
+# Depois de editar: python gerar.py
+
+nome: Alexandre Ribeiro Cajazeira Ramos
+nome_curto: Alexandre Cajazeira
+instituicao: Instituto Federal do Piauí — campus São Raimundo Nonato (IFPI-SRN)
+cargo: Professor EBTT (Ciência da Computação)
+foto: assets/foto.png        # mesma foto do perfil do GitHub
+resumo: >-
+  Mestre em Ciência da Computação (MDCC/UFC), especialista em Gestão de TI (UCAM) e bacharel em
+  Sistemas de Informação (UFPI/CSHNB). Pesquisa cidadania, gestão pública e comunicação guiadas por
+  dados, com ênfase em visualizações interativas na web.
+
+links:
+  lattes: https://lattes.cnpq.br/0238517471078564
+  github: https://github.com/CajazeiraAlexandre
+  observable: https://observablehq.com/@cajazeiraramos
+  flourish: https://app.flourish.studio/@alexandre.cajazeira
+  email: null           # preencha só se quiser e-mail público
+
+url: https://cajazeiraalexandre.github.io/
+
+formacao:
+  - {nivel: Mestrado, curso: Ciência da Computação, instituicao: UFC, trabalho: "Uma abordagem de partição e interpolação de polígonos para visualização temporal e interativa de mapas de crimes"}
+  - {nivel: Especialização, curso: Gestão de Tecnologia da Informação, instituicao: UCAM, trabalho: "Política Nacional de Informação e Informática em Saúde: diretrizes e perspectivas atuais no âmbito do SUS"}
+  - {nivel: Graduação, curso: Sistemas de Informação, instituicao: UFPI/CSHNB, trabalho: "Desenvolvimento de descritores de forma para a redução de falsos positivos na detecção automática de nódulos pulmonares"}
+
+trajetoria:
+  - {periodo: "2024–atual", funcao: Professor EBTT efetivo, onde: IFPI campus São Raimundo Nonato}
+  - {periodo: "2025–2026", funcao: Consultoria técnica em dados da gestão pública da cultura, onde: OEI em cooperação com o Ministério da Cultura}
+  - {periodo: "2021–2024", funcao: Cientista de dados, onde: "Central de Jornalismo de Dados do jornal O POVO (DATADOC)"}
+  - {periodo: "2024", funcao: Professor substituto, onde: UFPI/CSHNB}
+  - {periodo: "2019–2020; 2022–2023", funcao: Professor substituto, onde: IFPI campus São Raimundo Nonato}
+  - {periodo: "2018–2019", funcao: Bolsista de Inovação Tecnológica, onde: "FUNCAP / UFC — Inteligência Científica e Tecnológica na Segurança Pública"}
+
+# Seções — cada item: {titulo, periodo ou evento, descricao, link}. Seção vazia não aparece na página.
+pesquisa:
+  - titulo: "Boletim SNIIC Pesquisa nº 2 — Resultados do primeiro ciclo da Política Nacional Aldir Blanc de Fomento à Cultura: recursos distribuídos, agentes contemplados e ações fomentadas"
+    periodo: "Ministério da Cultura · jun. 2026"
+    descricao: >-
+      Estudo do primeiro ciclo da PNAB (2023–2025): 167.817 agentes culturais contemplados em 5.125 entes
+      federados. Integrei a equipe de cientistas de dados. Página oficial temporariamente fora do ar
+      (período eleitoral).
+    # link: incluir o endereço oficial no gov.br quando a página voltar
+ensino: []
+extensao:
+  - {titulo: "Mapa Cultural de São Raimundo Nonato", periodo: "2023", descricao: "Cooperação técnica na elaboração e análise do mapeamento cultural municipal (projeto Formação de Facilitadores para Mapeamento Cultural, IFPI-SRN).", link: "https://docs.google.com/presentation/d/1OI1v-On7KHdizaA2URgTREIuU4YBed_g7y58BVr3y14/edit?usp=sharing"}
+  - {titulo: "Fique em casa e garanta a feira", periodo: "2020–", descricao: "Comercialização de produtos da agricultura familiar na pandemia (UFPI). Desenvolvedor full-stack.", link: "https://feira.picos.ufpi.br/"}
+gestao: []
+palestras:
+  - titulo: "Padronização e interoperabilidade entre sistemas: padrões de dados em políticas públicas descentralizadas — a experiência da Política Nacional Aldir Blanc"
+    evento: "ENSP/Fiocruz e Ministério do Desenvolvimento e Assistência Social · Qualificação de dados abertos (módulo 4) · 30/09/2026"
+    descricao: "Com Gabriel Bizerril. Slides da apresentação."
+    link: palestras/padronizacao-interoperabilidade.html
+  - {titulo: "Automação web para coleta e raspagem de dados com Selenium", evento: "Coda Amazônia 2023 (Belém-PA)", link: "https://escoladedados.org/coda/coda-amz2023/cautomacao-web-para-coleta-e-raspagem-de-dados-com-selenium/"}
+  - {titulo: "Como colocar tecnologias web (HTML, CSS e SVG) a serviço do jornalismo", evento: "18º Congresso da Abraji", link: "https://congresso.abraji.org.br/mesa/como-colocar-tecnologias-web-como-html-css-e-svgs-a-servico-do-jornalismo-parte-1"}
+  - {titulo: "Análise e visualizações interativas de dados na web com Observable", evento: "Coda.Br 2022", link: "https://escoladedados.org/coda/coda2022/analise-e-visualizacoes-interativas-de-dados-na-web-com-observable/"}
+  - {titulo: "Jornalismo de dados em Python", evento: "Python Nordeste 2022", link: "https://2022.pythonnordeste.org/"}

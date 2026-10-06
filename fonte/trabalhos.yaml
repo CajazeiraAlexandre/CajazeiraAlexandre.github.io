@@ -1,0 +1,188 @@
+# Trabalhos anteriores — alimenta a seção "Trabalhos anteriores" do portfólio.
+# Campos: titulo, ano, veiculo, tipo (painel | narrativa | visualizacao | exploratorio | padrao-de-dados | nota-tecnica),
+# link, acesso (aberto | assinantes), premios, temas.
+# link_suspenso: link oficial guardado enquanto a página está fora do ar (ex.: gov.br no período eleitoral);
+# quando voltar, troque link_suspenso por link e apague a nota.
+
+- titulo: Agregador de pesquisas eleitorais O POVO
+  ano: 2022
+  veiculo: O POVO / DATADOC
+  tipo: painel
+  acesso: aberto
+  link: https://mais.opovo.com.br/interativos/agregador/index.php
+  temas:
+  - eleicoes
+- titulo: Malha cicloviária para quem?
+  ano: 2023
+  veiculo: O POVO / DATADOC
+  tipo: narrativa
+  acesso: aberto
+  link: https://mais.opovo.com.br/interativos/cicloviaria-fortaleza/episodio-01.php
+  temas:
+  - territorio
+  - mobilidade
+  - desigualdade
+- titulo: 'Ceará versus Piauí: o mapa da discórdia'
+  ano: 2024
+  veiculo: O POVO / DATADOC
+  tipo: narrativa
+  acesso: assinantes
+  link: https://mais.opovo.com.br/reportagens-especiais/ceara-piaui-disputa-area-de-conflito/2024/03/28/ceara-i-versus-i-piaui-o-mapa-da-discordia.html
+  temas:
+  - territorio
+  - piaui
+- titulo: Estabelecimentos mapeados pelo IBGE em 2022 na área do litígio PI/CE
+  ano: 2024
+  veiculo: O POVO / DATADOC (Flourish)
+  tipo: visualizacao
+  acesso: aberto
+  link: https://public.flourish.studio/story/2292669/
+  temas:
+  - territorio
+  - piaui
+- titulo: 'Itarema e Amontada: estradas construídas ilegalmente degradam mangue'
+  ano: 2023
+  veiculo: O POVO / DATADOC
+  tipo: narrativa
+  acesso: assinantes
+  link: https://mais.opovo.com.br/reportagens-especiais/itarema-especulacao-imobiliaria/2023/04/30/itarema-e-amontada-estradas-construidas-ilegalmente-degradam-mangue-e-tensionam-regiao.html
+  premios:
+  - Finalista do 30º Prêmio CNT de Jornalismo
+  temas:
+  - territorio
+  - meio-ambiente
+- titulo: 'A cor da dor: violência doméstica e o registro de raça no Ceará'
+  ano: 2023
+  veiculo: O POVO / DATADOC
+  tipo: narrativa
+  acesso: assinantes
+  link: https://mais.opovo.com.br/reportagens-especiais/violencia-contra-mulher-dados
+  premios:
+  - Finalista do IV Prêmio Cláudio Weber Abramo de Jornalismo de Dados
+  temas:
+  - seguranca
+  - genero
+  - raca
+- titulo: 'Cidade sob encomenda: como a especulação imobiliária redesenhou Fortaleza'
+  ano: 2023
+  veiculo: O POVO / DATADOC
+  tipo: narrativa
+  acesso: assinantes
+  link: https://mais.opovo.com.br/reportagens-especiais/fortaleza-especulacao-imobiliaria/2023/07/18/cidade-sob-encomenda-como-a-especulacao-imobiliaria-redesenhou-fortaleza.html?collection=premios_opmais
+  premios:
+  - Vencedora do I Prêmio de Jornalismo do CAU/CE
+  temas:
+  - territorio
+  - urbanismo
+- titulo: Veja como a população de sua cidade mudou no Censo IBGE 2022
+  ano: 2023
+  veiculo: O POVO / DATADOC (Flourish)
+  tipo: painel
+  acesso: aberto
+  link: https://public.flourish.studio/story/1964574/
+  temas:
+  - populacao
+- titulo: 'Alinhamento ao governo no Congresso: votações das bancadas BBB'
+  ano: 2024
+  veiculo: O POVO / DATADOC (Flourish)
+  tipo: visualizacao
+  acesso: aberto
+  link: https://public.flourish.studio/story/2141280/
+  temas:
+  - legislativo
+- titulo: LOA 2024 — funções e subfunções (Transporte e o Novo PAC)
+  ano: 2023
+  veiculo: O POVO / DATADOC (Flourish)
+  tipo: visualizacao
+  acesso: aberto
+  link: https://public.flourish.studio/story/2037086/
+  temas:
+  - financas-publicas
+- titulo: A atual divisão da Cisjordânia
+  ano: 2023
+  veiculo: O POVO / DATADOC (Flourish)
+  tipo: visualizacao
+  acesso: aberto
+  link: https://public.flourish.studio/story/2065299/
+  temas:
+  - internacional
+- titulo: Principais gráficos (coleção DATADOC 2021–2022)
+  ano: 2022
+  veiculo: O POVO / DATADOC (Flourish)
+  tipo: visualizacao
+  acesso: aberto
+  link: https://public.flourish.studio/story/1625709/
+- titulo: Coleção de notebooks Observable — DATADOC
+  ano: 2021
+  veiculo: Observable
+  tipo: exploratorio
+  acesso: aberto
+  link: https://observablehq.com/collection/@cajazeiraramos/datadoc
+  temas:
+  - financas-publicas
+  - seguranca
+  - genero
+  - meio-ambiente
+- titulo: Padrão de dados da Política Nacional Aldir Blanc (Ciclo 2)
+  ano: 2025
+  veiculo: Ministério da Cultura (consultoria OEI/MinC)
+  tipo: padrao-de-dados
+  acesso: aberto
+  link: https://github.com/SGE-Subsecretaria-de-Gestao-Estrategica/aldir_blanc_ciclo2
+  temas:
+  - cultura
+  - politicas-publicas
+- titulo: Guia prático de adoção do padrão de dados da PNAB — Ciclo 2
+  ano: 2025
+  veiculo: Ministério da Cultura
+  tipo: nota-tecnica
+  acesso: aberto
+  link_suspenso: https://www.gov.br/cultura/pt-br/assuntos/politica-nacional-aldir-blanc/politica-nacional-aldir-blanc/padrao-de-dados/25_minc_pnabtemplate-2025-pdf-3.pdf
+  nota: Página oficial temporariamente fora do ar (período eleitoral).
+  temas:
+  - cultura
+- titulo: Visão geral dos resultados de Docentes (CPA IFPI/SRN 2024)
+  ano: 2024
+  veiculo: IFPI campus São Raimundo Nonato (Flourish)
+  tipo: visualizacao
+  acesso: aberto
+  link: https://public.flourish.studio/visualisation/24719162/
+  temas:
+  - avaliacao-institucional
+  - educacao
+- titulo: Percentual de votos por campi (consulta UFPI)
+  ano: 2024
+  veiculo: UFPI/CSHNB (Flourish)
+  tipo: visualizacao
+  acesso: aberto
+  link: https://public.flourish.studio/visualisation/18041875/
+  temas:
+  - eleicoes
+  - universidade
+- titulo: Fortaleza 05/10 — Tendências do Agregador
+  ano: 2024
+  veiculo: O POVO / OP+ (Flourish story)
+  tipo: narrativa
+  acesso: aberto
+  link: https://public.flourish.studio/story/2640962/
+  temas:
+  - eleicoes
+  - pesquisas
+- titulo: Qual é a diferença de votos entre os candidatos em cada bairro de Fortaleza no 2º turno?
+  ano: 2024
+  veiculo: O POVO / OP+ (Flourish story)
+  tipo: visualizacao
+  acesso: aberto
+  link: https://public.flourish.studio/story/2687344/
+  temas:
+  - eleicoes
+  - territorio
+- titulo: Quem ganhou em cada bairro de Fortaleza?
+  ano: 2024
+  veiculo: O POVO / OP+ (Flourish story)
+  tipo: visualizacao
+  acesso: aberto
+  link: https://public.flourish.studio/story/2684018/
+  temas:
+  - eleicoes
+  - territorio
