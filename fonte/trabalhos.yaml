@@ -1,29 +1,32 @@
 # Projetos e trabalhos com dados — alimenta a seção de mesmo nome do portfólio.
 # Campos: titulo, ano, veiculo, tipo (painel | narrativa | visualizacao | exploratorio | padrao-de-dados | nota-tecnica | sistema-web),
-# link, acesso (aberto | assinantes), premios, temas, descricao (texto curto no cartão).
+# link, acesso (aberto | assinantes), premios, temas, descricao (texto curto no cartão),
+# selo (ex.: Projeto pessoal), codigo (link do código-fonte).
 # secao: onde o item aparece — sem secao = "Projetos e trabalhos com dados"; publicacoes = "Outras publicações";
 # sistemas = "Desenvolvimento de sistemas". O tipo é só um registro interno (não aparece na página).
 # link_suspenso: link oficial guardado enquanto a página está fora do ar (ex.: gov.br no período eleitoral);
 # quando voltar, troque link_suspenso por link e apague a nota.
 
-- titulo: "Onde estão os votos? Distribuição territorial de candidaturas no Piauí"
+- titulo: Onde estão os votos? Distribuição territorial de candidaturas no Piauí
   ano: 2026
-  veiculo: Projeto Eleições no Piauí (dados do TSE e do IBGE)
+  veiculo: Eleições no Piauí · dados do TSE e do IBGE
   tipo: exploratorio
   acesso: aberto
   link: https://cajazeiraalexandre.github.io/eleicoes/onde-estao-os-votos/
-  descricao: >-
-    Painel exploratório com os votos de cada candidatura do município ao local de votação (2018, 2022 e
-    2026), comparação entre eleições e correlação com outros cargos. Código e dados abertos.
-- titulo: "Forças políticas no Piauí: PT, PSD, MDB e os demais (2018–2026)"
+  descricao: Painel exploratório com os votos de cada candidatura do município ao local de votação (2018, 2022 e 2026), comparação
+    entre eleições e correlação com outros cargos. Código e dados abertos.
+  selo: Projeto pessoal
+  codigo: https://github.com/CajazeiraAlexandre/eleicoes
+- titulo: 'Forças políticas no Piauí: PT, PSD, MDB e os demais (2018–2026)'
   ano: 2026
-  veiculo: Projeto Eleições no Piauí (dados do TSE e do IBGE)
+  veiculo: Eleições no Piauí · dados do TSE e do IBGE
   tipo: narrativa
   acesso: aberto
   link: https://cajazeiraalexandre.github.io/eleicoes/forcas-politicas/
-  descricao: >-
-    Composição, evolução, consistência entre cargos e viradas dos grandes grupos políticos nas eleições
-    gerais e municipais, por município e região. Código e dados abertos.
+  descricao: Composição, evolução, consistência entre cargos e viradas dos grandes grupos políticos nas eleições gerais e
+    municipais, por município e região. Código e dados abertos.
+  selo: Projeto pessoal
+  codigo: https://github.com/CajazeiraAlexandre/eleicoes
 - titulo: Agregador de pesquisas eleitorais O POVO
   ano: 2022
   veiculo: O POVO / DATADOC
@@ -32,6 +35,8 @@
   link: https://mais.opovo.com.br/interativos/agregador/index.php
   temas:
   - eleicoes
+  descricao: Painel interativo da Central de Jornalismo de Dados (DATADOC) do O POVO que reúne as pesquisas eleitorais registradas,
+    com médias simples, ponderada e móvel de 15 dias, download dos dados e perguntas frequentes sobre o método.
 - titulo: Malha cicloviária para quem?
   ano: 2023
   veiculo: O POVO / DATADOC
@@ -42,6 +47,8 @@
   - territorio
   - mobilidade
   - desigualdade
+  descricao: Reportagem de dados do O POVO em narrativa com mapas (scrollytelling), em episódios, que cruza IDH e infraestrutura
+    cicloviária em Fortaleza; metodologia e dados publicados no GitHub.
 - titulo: 'Ceará versus Piauí: o mapa da discórdia'
   ano: 2024
   veiculo: O POVO / DATADOC
@@ -51,6 +58,8 @@
   temas:
   - territorio
   - piaui
+  descricao: Reportagem de dados do O POVO sobre o litígio territorial entre os dois estados, com mapas históricos de limites
+    (1872, 1911 e 1940) e dados do IBGE.
 - titulo: Estabelecimentos mapeados pelo IBGE em 2022 na área do litígio PI/CE
   ano: 2024
   veiculo: O POVO / DATADOC (Flourish)
@@ -60,6 +69,8 @@
   temas:
   - territorio
   - piaui
+  descricao: 'Visualização interativa (Flourish) para o O POVO: estabelecimentos do cadastro do IBGE de 2022 na área em litígio
+    entre Piauí e Ceará.'
 - titulo: 'Itarema e Amontada: estradas construídas ilegalmente degradam mangue'
   ano: 2023
   veiculo: O POVO / DATADOC
@@ -71,6 +82,8 @@
   temas:
   - territorio
   - meio-ambiente
+  descricao: Reportagem de dados do O POVO com análise geoespacial (imóveis × assentamentos do INCRA) e mapas interativos,
+    validada com especialista.
 - titulo: 'A cor da dor: violência doméstica e o registro de raça no Ceará'
   ano: 2023
   veiculo: O POVO / DATADOC
@@ -83,6 +96,8 @@
   - seguranca
   - genero
   - raca
+  descricao: Reportagem de dados do O POVO com levantamento exclusivo e análise da completude do registro de raça nos casos
+    de violência doméstica.
 - titulo: 'Cidade sob encomenda: como a especulação imobiliária redesenhou Fortaleza'
   ano: 2023
   veiculo: O POVO / DATADOC
@@ -94,6 +109,7 @@
   temas:
   - territorio
   - urbanismo
+  descricao: Reportagem de dados do O POVO sobre como a especulação imobiliária redesenhou Fortaleza.
 - titulo: Veja como a população de sua cidade mudou no Censo IBGE 2022
   ano: 2023
   veiculo: O POVO / DATADOC (Flourish)
@@ -102,6 +118,7 @@
   link: https://public.flourish.studio/story/1964574/
   temas:
   - populacao
+  descricao: Painel interativo (Flourish) do O POVO para consultar a variação da população de cada município no Censo 2022.
 - titulo: 'Alinhamento ao governo no Congresso: votações das bancadas BBB'
   ano: 2024
   veiculo: O POVO / DATADOC (Flourish)
@@ -110,6 +127,8 @@
   link: https://public.flourish.studio/story/2141280/
   temas:
   - legislativo
+  descricao: Visualização interativa (Flourish) do O POVO com as votações das bancadas na Câmara dos Deputados, coletadas
+    pela API da Câmara.
 - titulo: LOA 2024 — funções e subfunções (Transporte e o Novo PAC)
   ano: 2023
   veiculo: O POVO / DATADOC (Flourish)
@@ -118,6 +137,8 @@
   link: https://public.flourish.studio/story/2037086/
   temas:
   - financas-publicas
+  descricao: Visualização interativa (Flourish) do O POVO com a hierarquia do orçamento federal de 2024 (funções e subfunções),
+    com destaque para transporte e o Novo PAC.
 - titulo: A atual divisão da Cisjordânia
   ano: 2023
   veiculo: O POVO / DATADOC (Flourish)
@@ -126,12 +147,15 @@
   link: https://public.flourish.studio/story/2065299/
   temas:
   - internacional
+  descricao: Mapa interativo em 3D (Flourish) feito para o O POVO.
 - titulo: Principais gráficos (coleção DATADOC 2021–2022)
   ano: 2022
   veiculo: O POVO / DATADOC (Flourish)
   tipo: visualizacao
   acesso: aberto
   link: https://public.flourish.studio/story/1625709/
+  descricao: Coleção de gráficos interativos (Flourish) produzidos na Central de Jornalismo de Dados do O POVO entre 2021
+    e 2022.
 - titulo: Coleção de notebooks Observable — DATADOC
   ano: 2021
   veiculo: Observable
@@ -143,6 +167,8 @@
   - seguranca
   - genero
   - meio-ambiente
+  descricao: 'Notebooks interativos (Observable) com explorações de dados para reportagens do O POVO: dados da SEFIN e da
+    Receita, focos de incêndio do INPE, mulheres no poder e outros.'
 - titulo: Padrão de dados da Política Nacional Aldir Blanc (Ciclo 2)
   ano: 2025
   veiculo: Ministério da Cultura (consultoria OEI/MinC)
@@ -152,6 +178,8 @@
   temas:
   - cultura
   - politicas-publicas
+  descricao: 'Repositório público do padrão de dados da PNAB: dicionários por fase, listas de valores controladas, modelo
+    entidade-relacionamento e guias de adoção por cenário.'
 - titulo: Guia prático de adoção do padrão de dados da PNAB — Ciclo 2
   ano: 2025
   veiculo: Ministério da Cultura
@@ -162,6 +190,7 @@
   nota: Página oficial temporariamente fora do ar (período eleitoral).
   temas:
   - cultura
+  descricao: Guia do Ministério da Cultura para estados e municípios adotarem o padrão de dados da PNAB.
 - titulo: Visão geral dos resultados de Docentes (CPA IFPI/SRN 2024)
   ano: 2024
   veiculo: IFPI campus São Raimundo Nonato (Flourish)
@@ -171,6 +200,8 @@
   temas:
   - avaliacao-institucional
   - educacao
+  descricao: Visualização interativa (Flourish) da avaliação de docentes feita pela Comissão Própria de Avaliação do IFPI
+    campus São Raimundo Nonato.
 - titulo: Percentual de votos por campi (consulta UFPI)
   ano: 2024
   veiculo: UFPI/CSHNB (Flourish)
@@ -180,6 +211,7 @@
   temas:
   - eleicoes
   - universidade
+  descricao: Visualização interativa (Flourish) com o percentual de votos por campus na consulta à comunidade da UFPI.
 - titulo: Fortaleza 05/10 — Tendências do Agregador
   ano: 2024
   veiculo: O POVO / OP+ (Flourish story)
@@ -189,6 +221,8 @@
   temas:
   - eleicoes
   - pesquisas
+  descricao: História interativa em slides (Flourish) do O POVO+ com as tendências do agregador de pesquisas na eleição para
+    a prefeitura de Fortaleza.
 - titulo: Qual é a diferença de votos entre os candidatos em cada bairro de Fortaleza no 2º turno?
   ano: 2024
   veiculo: O POVO / OP+ (Flourish story)
@@ -198,6 +232,8 @@
   temas:
   - eleicoes
   - territorio
+  descricao: Visualização interativa (Flourish) do O POVO+ com a diferença de votos entre os candidatos em cada bairro de
+    Fortaleza, com busca pelo seu bairro.
 - titulo: Quem ganhou em cada bairro de Fortaleza?
   ano: 2024
   veiculo: O POVO / OP+ (Flourish story)
@@ -207,6 +243,7 @@
   temas:
   - eleicoes
   - territorio
+  descricao: Mapa interativo (Flourish) do O POVO+ com o candidato mais votado em cada bairro de Fortaleza.
 - titulo: Plataforma web do Grupo de Pesquisa em Saúde Coletiva (GPeSC/UFPI/CNPq)
   ano: 2022–2024
   veiculo: Cerebrum Informática para o GPeSC/UFPI
@@ -214,36 +251,42 @@
   secao: sistemas
   acesso: aberto
   link: https://saudecoletivapicos.com.br/pt-br/about/
-  descricao: >-
-    Coordenação técnica da aplicação que apoia pesquisa, extensão e formação do grupo: gestão de eventos
-    científicos (Congresso Regional de Saúde Coletiva — inscrições, programação e certificados), submissão
-    e avaliação cega por pares configurável e painel administrativo para usuários não técnicos.
-  temas: [saude, ciencia]
+  descricao: 'Coordenação técnica da aplicação que apoia pesquisa, extensão e formação do grupo: gestão de eventos científicos
+    (Congresso Regional de Saúde Coletiva — inscrições, programação e certificados), submissão e avaliação cega por pares
+    configurável e painel administrativo para usuários não técnicos.'
+  temas:
+  - saude
+  - ciencia
 - titulo: Os dilemas em torno da saúde mental
   ano: 2023
   veiculo: O POVO+ (reportagem especial)
   tipo: narrativa
   acesso: assinantes
   link: https://mais.opovo.com.br/reportagens-especiais/dilemas-saude-mental
-  premios: [Prêmio Gandhi de Comunicação 2023]
+  premios:
+  - Prêmio Gandhi de Comunicação 2023
   descricao: Análise estatística dos dados da série.
-  temas: [saude]
-- titulo: "Fies e Prouni: o que dizem os dados sobre o financiamento do ensino superior em 10 anos"
+  temas:
+  - saude
+- titulo: 'Fies e Prouni: o que dizem os dados sobre o financiamento do ensino superior em 10 anos'
   ano: 2023
   veiculo: O POVO
   tipo: narrativa
   acesso: assinantes
   link: https://mais.opovo.com.br/jornal/reportagem/2023/04/26/fies-e-prouni-o-que-dizem-os-dados-sobre-o-financiamento-do-ensino-superior-em-10-anos.html
-  premios: [Prêmio Gandhi de Comunicação 2023]
+  premios:
+  - Prêmio Gandhi de Comunicação 2023
   descricao: Análise dos dados do Inep (2011–2021).
-  temas: [educacao]
+  temas:
+  - educacao
 - titulo: Arquitetura, modelo e dicionários de dados da Política Nacional Aldir Blanc
   ano: 2024
   veiculo: Ministério da Cultura (TED com a UFPR)
   tipo: padrao-de-dados
   acesso: aberto
-  descricao: >-
-    Coordenação da equipe de dados: arquitetura de dados para interoperabilidade entre os entes, modelo de dados
-    para a plataforma Mapas Culturais, modelo entidade-relacionamento da política, dicionários de dados e
-    painéis de BI no Metabase.
-  temas: [cultura, politicas-publicas]
+  descricao: 'Coordenação da equipe de dados: arquitetura de dados para interoperabilidade entre os entes, modelo de dados
+    para a plataforma Mapas Culturais, modelo entidade-relacionamento da política, dicionários de dados e painéis de BI no
+    Metabase.'
+  temas:
+  - cultura
+  - politicas-publicas

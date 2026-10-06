@@ -40,9 +40,13 @@
   .card p{margin:0;font-size:14px;color:var(--cor-texto-secundario,#555)}
   .meta{font-size:12px;color:var(--cor-texto-suave,#6b6b6b)}
   .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:auto;padding-top:4px}
+  .card .tags + .acoes{margin-top:4px} .card p + .acoes{margin-top:auto}
   .tag{font-size:11px;padding:1px 8px;border-radius:999px;border:1px solid var(--cor-borda,#ccc);color:var(--cor-texto-secundario,#555)}
   .tag.premio{border-color:var(--cor-cat-4,#eda100)}
   .tag.fechado{border-style:dashed}
+  .tag.selo{background:var(--cor-destaque,#2a78d6);border-color:var(--cor-destaque,#2a78d6);color:var(--cor-superficie,#fff);font-weight:600}
+  .acoes{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13px;font-weight:600;padding-top:2px}
+  .acoes a{text-decoration:none} .acoes a:hover{text-decoration:underline}
   .filtros{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
   .filtros button{font:inherit;font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid var(--cor-borda,#ccc);
                   background:var(--cor-superficie,#fff);color:var(--cor-texto,#111);cursor:pointer}
@@ -94,10 +98,12 @@ el("rodape").textContent = `${P.nome_curto || P.nome || ""} · atualizado em ${n
 
 const secoes = [];
 function secao(id, titulo, intro, html) { secoes.push([id, titulo]); return `<section id="${id}"><h2>${titulo}</h2>${intro ? `<p class="intro">${intro}</p>` : ""}${html}</section>`; }
-function card({ titulo, link, meta, texto, tags = [] }) {
-  const t = link ? `<a href="${esc(link)}" ${/^https?:/.test(link) ? 'target="_blank" rel="noopener"' : ""}>${esc(titulo)}</a>` : esc(titulo);
+const alvo = (link) => (/^https?:/.test(link) ? 'target="_blank" rel="noopener"' : "");
+function card({ titulo, link, meta, texto, tags = [], acoes = [] }) {
+  const t = link ? `<a href="${esc(link)}" ${alvo(link)}>${esc(titulo)}</a>` : esc(titulo);
   return `<article class="card"><div class="meta">${meta || ""}</div><h3>${t}</h3>${texto ? `<p>${esc(texto)}</p>` : ""}
-    ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}</article>`;
+    ${tags.length ? `<div class="tags">${tags.join("")}</div>` : ""}
+    ${acoes.length ? `<div class="acoes">${acoes.map(([href, rot]) => `<a href="${esc(href)}" ${alvo(href)}>${esc(rot)}</a>`).join("")}</div>` : ""}</article>`;
 }
 const tag = (t, cls = "") => `<span class="tag ${cls}">${esc(t)}</span>`;
 const itens = (lst) => `<div class="cards">${lst.map((i) => card({ titulo: i.titulo, link: i.link, meta: esc(i.periodo || i.evento || ""), texto: i.descricao })).join("")}</div>`;
@@ -108,7 +114,8 @@ let html = "";
 // cartão de trabalho: veículo · ano, descrição e selos (prêmios, assinantes) — sem rótulo de tipo
 const cartaoTrabalho = (r) => card({ titulo: r.titulo, link: r.link, meta: `${esc(r.veiculo || "")} · ${esc(r.ano || "")}`,
   texto: [r.descricao, r.nota].filter(Boolean).join(" "),
-  tags: [...(r.premios || []).map((p) => tag("★ " + p, "premio")), r.acesso === "assinantes" ? tag("assinantes", "fechado") : ""].filter(Boolean) });
+  tags: [r.selo ? tag(r.selo, "selo") : "", ...(r.premios || []).map((p) => tag("★ " + p, "premio")), r.acesso === "assinantes" ? tag("assinantes", "fechado") : ""].filter(Boolean),
+  acoes: [r.link ? [r.link, "Ver o trabalho ↗"] : null, r.codigo ? [r.codigo, "Código no GitHub ↗"] : null].filter(Boolean) });
 const daSecao = (s) => D.trabalhos.filter((r) => (r.secao || "projetos") === s);
 html += secao("projetos", "Projetos e trabalhos com dados",
   "Reportagens de dados, visualizações e padrões de dados. Alguns conteúdos jornalísticos são exclusivos para assinantes.",
