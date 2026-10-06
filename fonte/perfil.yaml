@@ -21,7 +21,8 @@ links:
 url: https://cajazeiraalexandre.github.io/
 
 # E-mails públicos (aparecem no topo da página). Ex.: {endereco: nome@ifpi.edu.br, rotulo: IFPI}
-emails: []
+emails:
+  - {endereco: alexandre.cajazeira@ifpi.edu.br, rotulo: IFPI}
 
 formacao:
   - {nivel: RSC III, curso: "Reconhecimento de Saberes e Competências (RSC III)", instituicao: IFPI, trabalho: "Concedido a partir de 21/11/2024 pela Portaria nº 1440/2026 - GAB/REI/IFPI; somado ao título de mestre, equivale a doutorado (Lei nº 12.772/2012)."}
