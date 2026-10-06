@@ -1,4 +1,4 @@
-# Trabalhos anteriores — alimenta a seção "Trabalhos anteriores" do portfólio.
+# Projetos e trabalhos com dados — alimenta a seção de mesmo nome do portfólio.
 # Campos: titulo, ano, veiculo, tipo (painel | narrativa | visualizacao | exploratorio | padrao-de-dados | nota-tecnica | sistema-web),
 # link, acesso (aberto | assinantes), premios, temas, descricao (texto curto no cartão).
 # link_suspenso: link oficial guardado enquanto a página está fora do ar (ex.: gov.br no período eleitoral);

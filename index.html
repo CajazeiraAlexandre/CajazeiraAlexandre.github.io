@@ -107,12 +107,12 @@ const itens = (lst) => `<div class="cards">${lst.map((i) => card({ titulo: i.tit
 const seTiver = (lst, id, titulo, intro = "") => (lst && lst.length ? secao(id, titulo, intro, itens(lst)) : "");
 
 let html = "";
-html += seTiver(P.pesquisa, "pesquisa", "Pesquisa");
 const temas = [...new Set(D.trabalhos.map((r) => TIPOS[r.tipo] || r.tipo))];
-html += secao("trabalhos", "Trabalhos anteriores",
-  "Reportagens de dados, visualizações, padrões de dados e sistemas web desenvolvidos em outras instituições. Alguns conteúdos jornalísticos são exclusivos para assinantes.",
+html += secao("projetos", "Projetos e trabalhos com dados",
+  "Reportagens de dados, visualizações, padrões de dados e sistemas web. Alguns conteúdos jornalísticos são exclusivos para assinantes.",
   `<div class="filtros" id="f-ref" role="group" aria-label="Filtrar por tipo"><button type="button" aria-pressed="true" data-t="">Todos</button>${temas.map((t) => `<button type="button" aria-pressed="false" data-t="${esc(t)}">${esc(t)}</button>`).join("")}</div><div class="cards" id="refs"></div>`);
 html += seTiver(P.palestras, "palestras", "Palestras e oficinas");
+html += seTiver(P.pesquisa, "pesquisa", "Pesquisa");
 html += seTiver(P.extensao, "extensao", "Extensão");
 html += seTiver(P.ensino, "ensino", "Ensino");
 html += seTiver(P.gestao, "gestao", "Gestão");

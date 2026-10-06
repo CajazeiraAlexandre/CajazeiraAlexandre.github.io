@@ -8,7 +8,7 @@ Página pessoal publicada em <https://cajazeiraalexandre.github.io/> (GitHub Pag
 |---|---|
 | `index.html` | a página (gerada — não editar à mão) |
 | `fonte/perfil.yaml` | dados públicos, seções (pesquisa, palestras, extensão…), trajetória e formação |
-| `fonte/trabalhos.yaml` | trabalhos anteriores (reportagens, visualizações, padrões de dados) |
+| `fonte/trabalhos.yaml` | seção "Projetos e trabalhos com dados" (reportagens, visualizações, padrões de dados, sistemas web) |
 | `fonte/template.html` | layout da página |
 | `gerar.py` | monta `index.html` a partir de `fonte/` |
 | `assets/` | foto e `tokens.css` (cores, fontes e tamanhos) |
