@@ -81,15 +81,17 @@ const P = D.perfil || {};
 const el = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const TIPOS = { narrativa: "Narrativa", painel: "Painel", visualizacao: "Visualização", exploratorio: "Exploratório",
-  "nota-tecnica": "Nota técnica", "padrao-de-dados": "Padrão de dados" };
+  "nota-tecnica": "Nota técnica", "padrao-de-dados": "Padrão de dados", "sistema-web": "Sistema web" };
 
 el("nome").textContent = P.nome || "";
 el("papel").textContent = [P.cargo, P.instituicao].filter(Boolean).join(" · ");
 el("resumo").textContent = P.resumo || "";
 if (P.foto) { el("foto").src = P.foto; el("foto").alt = `Foto de ${P.nome_curto || P.nome}`; } else el("foto").remove();
 const L = P.links || {};
-el("links").innerHTML = [["lattes", "Currículo Lattes"], ["github", "GitHub"], ["observable", "Observable"], ["flourish", "Flourish"], ["email", "E-mail"]]
-  .filter(([k]) => L[k]).map(([k, n]) => `<a href="${k === "email" ? "mailto:" + esc(L[k]) : esc(L[k])}" target="_blank" rel="noopener">${n}</a>`).join("");
+el("links").innerHTML = [["lattes", "Currículo Lattes"], ["github", "GitHub"], ["observable", "Observable"], ["flourish", "Flourish"]]
+  .filter(([k]) => L[k]).map(([k, n]) => `<a href="${esc(L[k])}" target="_blank" rel="noopener">${n}</a>`).join("")
+  // e-mails: lista {endereco, rotulo}; o endereço aparece por extenso para quem quiser copiar
+  + (P.emails || []).map((m) => `<a href="mailto:${esc(m.endereco)}">${esc(m.rotulo ? `${m.rotulo}: ` : "")}${esc(m.endereco)}</a>`).join("");
 el("rodape").textContent = `${P.nome_curto || P.nome || ""} · atualizado em ${new Date(D.gerado_em + "T12:00").toLocaleDateString("pt-BR")}`;
 
 const secoes = [];
@@ -108,7 +110,7 @@ let html = "";
 html += seTiver(P.pesquisa, "pesquisa", "Pesquisa");
 const temas = [...new Set(D.trabalhos.map((r) => TIPOS[r.tipo] || r.tipo))];
 html += secao("trabalhos", "Trabalhos anteriores",
-  "Reportagens de dados, visualizações e padrões de dados desenvolvidos em outras instituições. Alguns conteúdos jornalísticos são exclusivos para assinantes.",
+  "Reportagens de dados, visualizações, padrões de dados e sistemas web desenvolvidos em outras instituições. Alguns conteúdos jornalísticos são exclusivos para assinantes.",
   `<div class="filtros" id="f-ref" role="group" aria-label="Filtrar por tipo"><button type="button" aria-pressed="true" data-t="">Todos</button>${temas.map((t) => `<button type="button" aria-pressed="false" data-t="${esc(t)}">${esc(t)}</button>`).join("")}</div><div class="cards" id="refs"></div>`);
 html += seTiver(P.palestras, "palestras", "Palestras e oficinas");
 html += seTiver(P.extensao, "extensao", "Extensão");
@@ -122,7 +124,7 @@ el("nav").innerHTML = secoes.map(([id, t]) => `<a href="#${id}">${t}</a>`).join(
 
 function refs(filtro) {
   el("refs").innerHTML = D.trabalhos.filter((r) => !filtro || (TIPOS[r.tipo] || r.tipo) === filtro).map((r) => card({
-    titulo: r.titulo, link: r.link, meta: `${esc(r.veiculo || "")} · ${esc(r.ano || "")}`, texto: r.nota,
+    titulo: r.titulo, link: r.link, meta: `${esc(r.veiculo || "")} · ${esc(r.ano || "")}`, texto: [r.descricao, r.nota].filter(Boolean).join(" "),
     tags: [tag(TIPOS[r.tipo] || r.tipo), ...(r.premios || []).map((p) => tag("★ " + p, "premio")),
            r.acesso === "assinantes" ? tag("assinantes", "fechado") : ""] })).join("");
 }

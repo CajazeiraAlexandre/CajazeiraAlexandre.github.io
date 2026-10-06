@@ -17,11 +17,14 @@ links:
   github: https://github.com/CajazeiraAlexandre
   observable: https://observablehq.com/@cajazeiraramos
   flourish: https://app.flourish.studio/@alexandre.cajazeira
-  email: null           # preencha só se quiser e-mail público
 
 url: https://cajazeiraalexandre.github.io/
 
+# E-mails públicos (aparecem no topo da página). Ex.: {endereco: nome@ifpi.edu.br, rotulo: IFPI}
+emails: []
+
 formacao:
+  - {nivel: RSC III, curso: "Reconhecimento de Saberes e Competências (RSC III)", instituicao: IFPI, trabalho: "Concedido a partir de 21/11/2024 pela Portaria nº 1440/2026 - GAB/REI/IFPI; somado ao título de mestre, equivale a doutorado (Lei nº 12.772/2012)."}
   - {nivel: Mestrado, curso: Ciência da Computação, instituicao: UFC, trabalho: "Uma abordagem de partição e interpolação de polígonos para visualização temporal e interativa de mapas de crimes"}
   - {nivel: Especialização, curso: Gestão de Tecnologia da Informação, instituicao: UCAM, trabalho: "Política Nacional de Informação e Informática em Saúde: diretrizes e perspectivas atuais no âmbito do SUS"}
   - {nivel: Graduação, curso: Sistemas de Informação, instituicao: UFPI/CSHNB, trabalho: "Desenvolvimento de descritores de forma para a redução de falsos positivos na detecção automática de nódulos pulmonares"}
@@ -46,8 +49,11 @@ pesquisa:
 ensino: []
 extensao:
   - {titulo: "Mapa Cultural de São Raimundo Nonato", periodo: "2023", descricao: "Cooperação técnica na elaboração e análise do mapeamento cultural municipal (projeto Formação de Facilitadores para Mapeamento Cultural, IFPI-SRN).", link: "https://docs.google.com/presentation/d/1OI1v-On7KHdizaA2URgTREIuU4YBed_g7y58BVr3y14/edit?usp=sharing"}
-  - {titulo: "Fique em casa e garanta a feira", periodo: "2020–", descricao: "Comercialização de produtos da agricultura familiar na pandemia (UFPI). Desenvolvedor full-stack.", link: "https://feira.picos.ufpi.br/"}
-gestao: []
+  - {titulo: "Fique em casa e garanta a feira", periodo: "2020–", descricao: "Comercialização de produtos da agricultura familiar na pandemia (UFPI). Desenvolvedor full-stack.", link: "https://feiracshnb.cerebrumdev.com/produtos/"}
+gestao:
+  - titulo: "Coordenação de Pesquisa e Inovação — IFPI campus São Raimundo Nonato"
+    periodo: "2026–atual"
+    descricao: "Coordenador de Pesquisa e Inovação do campus (função FG-2), designado pela Portaria nº 2887/2026 - GAB/REI/IFPI, de 20 de agosto de 2026."
 palestras:
   - titulo: "Padronização e interoperabilidade entre sistemas: padrões de dados em políticas públicas descentralizadas — a experiência da Política Nacional Aldir Blanc"
     evento: "ENSP/Fiocruz e Ministério do Desenvolvimento e Assistência Social · Qualificação de dados abertos (módulo 4) · 30/09/2026"

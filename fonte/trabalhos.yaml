@@ -1,6 +1,6 @@
 # Trabalhos anteriores — alimenta a seção "Trabalhos anteriores" do portfólio.
-# Campos: titulo, ano, veiculo, tipo (painel | narrativa | visualizacao | exploratorio | padrao-de-dados | nota-tecnica),
-# link, acesso (aberto | assinantes), premios, temas.
+# Campos: titulo, ano, veiculo, tipo (painel | narrativa | visualizacao | exploratorio | padrao-de-dados | nota-tecnica | sistema-web),
+# link, acesso (aberto | assinantes), premios, temas, descricao (texto curto no cartão).
 # link_suspenso: link oficial guardado enquanto a página está fora do ar (ex.: gov.br no período eleitoral);
 # quando voltar, troque link_suspenso por link e apague a nota.
 
@@ -186,3 +186,14 @@
   temas:
   - eleicoes
   - territorio
+- titulo: Plataforma web do Grupo de Pesquisa em Saúde Coletiva (GPeSC/UFPI/CNPq)
+  ano: 2022–2024
+  veiculo: Cerebrum Informática para o GPeSC/UFPI
+  tipo: sistema-web
+  acesso: aberto
+  link: https://saudecoletivapicos.com.br/pt-br/about/
+  descricao: >-
+    Coordenação técnica da aplicação que apoia pesquisa, extensão e formação do grupo: gestão de eventos
+    científicos (Congresso Regional de Saúde Coletiva — inscrições, programação e certificados), submissão
+    e avaliação cega por pares configurável e painel administrativo para usuários não técnicos.
+  temas: [saude, ciencia]
