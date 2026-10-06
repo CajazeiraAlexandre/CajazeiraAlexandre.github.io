@@ -197,3 +197,31 @@
     científicos (Congresso Regional de Saúde Coletiva — inscrições, programação e certificados), submissão
     e avaliação cega por pares configurável e painel administrativo para usuários não técnicos.
   temas: [saude, ciencia]
+- titulo: Os dilemas em torno da saúde mental
+  ano: 2023
+  veiculo: O POVO+ (reportagem especial)
+  tipo: narrativa
+  acesso: assinantes
+  link: https://mais.opovo.com.br/reportagens-especiais/dilemas-saude-mental
+  premios: [Prêmio Gandhi de Comunicação 2023]
+  descricao: Análise estatística dos dados da série.
+  temas: [saude]
+- titulo: "Fies e Prouni: o que dizem os dados sobre o financiamento do ensino superior em 10 anos"
+  ano: 2023
+  veiculo: O POVO
+  tipo: narrativa
+  acesso: assinantes
+  link: https://mais.opovo.com.br/jornal/reportagem/2023/04/26/fies-e-prouni-o-que-dizem-os-dados-sobre-o-financiamento-do-ensino-superior-em-10-anos.html
+  premios: [Prêmio Gandhi de Comunicação 2023]
+  descricao: Análise dos dados do Inep (2011–2021).
+  temas: [educacao]
+- titulo: Arquitetura, modelo e dicionários de dados da Política Nacional Aldir Blanc
+  ano: 2024
+  veiculo: Ministério da Cultura (TED com a UFPR)
+  tipo: padrao-de-dados
+  acesso: aberto
+  descricao: >-
+    Coordenação da equipe de dados: arquitetura de dados para interoperabilidade entre os entes, modelo de dados
+    para a plataforma Mapas Culturais, modelo entidade-relacionamento da política, dicionários de dados e
+    painéis de BI no Metabase.
+  temas: [cultura, politicas-publicas]

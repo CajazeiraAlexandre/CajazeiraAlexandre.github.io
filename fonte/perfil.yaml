@@ -32,6 +32,7 @@ formacao:
 trajetoria:
   - {periodo: "2024–atual", funcao: Professor EBTT efetivo, onde: IFPI campus São Raimundo Nonato}
   - {periodo: "2025–2026", funcao: Consultoria técnica em dados da gestão pública da cultura, onde: OEI em cooperação com o Ministério da Cultura}
+  - {periodo: "2024", funcao: Coordenador da equipe de dados, onde: "TED Ministério da Cultura / UFPR (FUNPAR) — Política Nacional Aldir Blanc"}
   - {periodo: "2021–2024", funcao: Cientista de dados, onde: "Central de Jornalismo de Dados do jornal O POVO (DATADOC)"}
   - {periodo: "2024", funcao: Professor substituto, onde: UFPI/CSHNB}
   - {periodo: "2019–2020; 2022–2023", funcao: Professor substituto, onde: IFPI campus São Raimundo Nonato}
@@ -46,14 +47,36 @@ pesquisa:
       federados. Integrei a equipe de cientistas de dados. Página oficial temporariamente fora do ar
       (período eleitoral).
     # link: incluir o endereço oficial no gov.br quando a página voltar
-ensino: []
+  - titulo: "A partition approach to interpolate polygon sets for animation"
+    periodo: "SIBGRAPI 2019 (IEEE)"
+    descricao: "Com Emanuele Santos e Joaquim Bento Cavalcante Neto. Interpolação de conjuntos de polígonos para animar mapas no tempo — base da dissertação de mestrado (UFC)."
+    link: https://ieeexplore.ieee.org/document/8919908
+  - titulo: "Shape Analysis 3D to false positive reduction"
+    periodo: "Journal of Health Informatics, v. 9, n. 4, 2017"
+    descricao: "Com Antonino Calisto dos Santos Neto e Antonio Oseas de Carvalho Filho. Descritores de forma para reduzir falsos positivos na detecção de nódulos pulmonares."
+    link: https://jhi.sbis.org.br/index.php/jhi-sbis/article/view/533
+  - titulo: "COVID-19: aquisição, tratamento e visualizações interativas de dados do Ministério da Saúde"
+    periodo: "Capítulo · Livro de minicursos da 8ª ERCEMAPI, 2020"
+ensino:
+  - titulo: "Educação profissional técnica de nível médio — IFPI campus São Raimundo Nonato"
+    periodo: "2019–2023 (substituto) · 2024–atual"
+    descricao: "Algoritmos e lógica de programação, redes e segurança da informação, banco de dados, implementação e administração de serviços web e programação web."
+  - titulo: "Bacharelado em Sistemas de Informação — UFPI/CSHNB"
+    periodo: "2024"
+    descricao: "Professor substituto nos períodos 2024.1 e 2024.2."
 extensao:
   - {titulo: "Mapa Cultural de São Raimundo Nonato", periodo: "2023", descricao: "Cooperação técnica na elaboração e análise do mapeamento cultural municipal (projeto Formação de Facilitadores para Mapeamento Cultural, IFPI-SRN).", link: "https://docs.google.com/presentation/d/1OI1v-On7KHdizaA2URgTREIuU4YBed_g7y58BVr3y14/edit?usp=sharing"}
-  - {titulo: "Fique em casa e garanta a feira", periodo: "2020–", descricao: "Comercialização de produtos da agricultura familiar na pandemia (UFPI). Desenvolvedor full-stack.", link: "https://feiracshnb.cerebrumdev.com/produtos/"}
+  - {titulo: "A Feira É Livre no Espaço Universitário (UFPI/CSHNB)", periodo: "2020–2024", descricao: "Colaborador e executor em ciclos do projeto que aproxima a agricultura familiar da comunidade acadêmica; formulação e desenvolvimento do sistema web de compra e venda (“Fique em casa e garanta a feira”).", link: "https://feiracshnb.cerebrumdev.com/produtos/"}
+  - {titulo: "Viva o Cinema Nacional: um convite à produção audiovisual brasileira", periodo: "2019 · IFPI", descricao: "Coordenador do projeto de extensão (Edital de fluxo contínuo nº 01/2019 - PROEX/IFPI)."}
+  - {titulo: "I Simpósio de Informática da Serra da Capivara (SInCap)", periodo: "2019 · IFPI", descricao: "Coordenador do evento (Edital de fluxo contínuo para eventos nº 003/2019 - PROEX/IFPI)."}
+  - {titulo: "Inclusão digital e educação na UFPI", periodo: "2015–2017", descricao: "Suporte tecnológico no projeto Envelhecimento Ativo (NETI), curso de extensão em Arduino e Pré-ENEM Paulo Freire."}
 gestao:
   - titulo: "Coordenação de Pesquisa e Inovação — IFPI campus São Raimundo Nonato"
     periodo: "2026–atual"
     descricao: "Coordenador de Pesquisa e Inovação do campus (função FG-2), designado pela Portaria nº 2887/2026 - GAB/REI/IFPI, de 20 de agosto de 2026."
+  - {titulo: "Comitê de Ética em Pesquisa — UFPI/CSHNB", periodo: "2019–2021", descricao: "Membro titular do CEP com seres humanos do campus Senador Helvídio Nunes de Barros."}
+  - {titulo: "Simpósio de Sistemas de Informação (SINFO 2016) — UFPI", periodo: "2016", descricao: "Coordenador geral do evento."}
+  - {titulo: "Representação estudantil — UFPI/CSHNB", periodo: "graduação", descricao: "Diretório Central dos Estudantes (diretorias de cultura e esportes e de finanças) e Conselho de Campus."}
 palestras:
   - titulo: "Padronização e interoperabilidade entre sistemas: padrões de dados em políticas públicas descentralizadas — a experiência da Política Nacional Aldir Blanc"
     evento: "ENSP/Fiocruz e Ministério do Desenvolvimento e Assistência Social · Qualificação de dados abertos (módulo 4) · 30/09/2026"
