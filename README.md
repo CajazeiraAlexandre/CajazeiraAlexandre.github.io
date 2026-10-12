@@ -13,6 +13,7 @@ Página pessoal publicada em <https://cajazeiraalexandre.github.io/> (GitHub Pag
 | `gerar.py` | monta `index.html` a partir de `fonte/` |
 | `assets/` | foto e `tokens.css` (cores, fontes e tamanhos) |
 | `palestras/` | slides de palestras em HTML |
+| `pilotos/` | ambiente de pilotos e testes de produtos de dados (<https://cajazeiraalexandre.github.io/pilotos/>), gerado pelo laboratório (`ferramentas/publicar_pilotos.py`) — não editar à mão; `gerar.py` não toca nesta pasta |
 
 ## Atualizar
 
