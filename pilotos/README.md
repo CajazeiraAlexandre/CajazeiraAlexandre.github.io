@@ -12,6 +12,7 @@ um produto (index.html, prévia do link, dados que a página carrega e README). 
 | [Onde o 2º turno para presidente pode ser decidido em sua cidade?](https://cajazeiraalexandre.github.io/pilotos/2-turno-na-sua-cidade/) | story | rascunho (piloto) | `projetos/eleicoes/produtos/2026-10_2-turno-na-sua-cidade` | 29.6 MB |
 | [A nova Assembleia do Piauí](https://cajazeiraalexandre.github.io/pilotos/assembleia-pi-2026/) | story | rascunho (piloto) | `projetos/eleicoes/produtos/2026-10_assembleia-pi-2026` | 0.5 MB |
 | [O Brasil no fim de cada governo](https://cajazeiraalexandre.github.io/pilotos/brasil-fim-de-cada-governo/) | story | rascunho (piloto) | `projetos/eleicoes/produtos/2026-10_brasil-fim-de-cada-governo` | 0.6 MB |
+| [Onde estão os votos no Piauí](https://cajazeiraalexandre.github.io/pilotos/onde-estao-os-votos-pi/) | story | rascunho (piloto) | `projetos/eleicoes/produtos/2026-10_onde-estao-os-votos-story` | 1.0 MB |
 | [Onde se vota no Piauí](https://cajazeiraalexandre.github.io/pilotos/onde-se-vota-pi/) | visualizacao | rascunho (piloto) | `projetos/eleicoes/produtos/2026-10_onde-se-vota-pi` | 0.9 MB |
 | [Quem lidera o voto no Piauí](https://cajazeiraalexandre.github.io/pilotos/quem-lidera-o-voto-pi/) | story | rascunho (piloto) | `projetos/eleicoes/produtos/2026-10_quem-lidera-o-voto-pi` | 0.9 MB |
 | [Onde Lula perdeu espaço e há mais votos em disputa](https://cajazeiraalexandre.github.io/pilotos/votos-em-disputa/) | visualizacao | publicado | `projetos/eleicoes/produtos/2026-10_votos-em-disputa` | 22.8 MB |
