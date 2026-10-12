@@ -1,7 +1,7 @@
 # Onde Lula perdeu espaço e há mais votos em disputa
 
 **Tipo:** visualização (piloto do tipo declarativo, L0007–L0013) · **Projeto:** eleicoes · **Status:** rascunho, em teste
-sem divulgação · **Origem:** `eleicoes/2026-10_locais-de-votacao@1.1#disputa` (promoção com linhagem, L0009)
+sem divulgação · **Origem:** `eleicoes/2026-10_locais-de-votacao@1.2#disputa` (promoção com linhagem, L0009)
 
 ## Pergunta
 Em cada local de votação da cidade escolhida, onde Lula perdeu participação desde 2022 e onde há mais votos em
@@ -10,7 +10,7 @@ disputa (abstenções, brancos e nulos e votos fora da disputa principal) no 1º
 ## Dados
 | Origem | Uso |
 |---|---|
-| `2026-10_locais-de-votacao` (versão 1.1), `data/locais/<IBGE>.js` | totais por local em 2026 e 2022, turnos de 2022, coordenadas e contorno, já conferidos com o TSE |
+| `2026-10_locais-de-votacao` (versão 1.2), `data/locais/<IBGE>.js` | totais por local em 2026 e 2022, turnos de 2022, coordenadas e contorno, já conferidos com o TSE |
 | Bases herdadas (ver `produto.yaml › datasets`) | as do produto de origem; a peça não lê bruto novo |
 
 Saída: `data/locais/<IBGE>.js` (uma cidade por arquivo, carregada ao escolher a cidade), `data/municipios.json`
@@ -18,7 +18,7 @@ Saída: `data/locais/<IBGE>.js` (uma cidade por arquivo, carregada ao escolher a
 comparáveis; 34 cidades sem local comparável; votos em disputa = soma das partes em todos os locais).
 
 ## Método e decisões
-- EL0009 (mesmo local), EL0003 (válidos), EL0008 (grupos de 2026 aplicados a 2022), EL0002/L0001 (municípios).
+- EL0009 (mesmo local), EL0003 (válidos), EL0010 (Presidente: em 2022, a candidatura do partido), EL0002/L0001 (municípios).
 - Contas iguais às do produto de origem (`votos_em_disputa`, `saldo_entre_turnos`); destaque = variação de Lula < 0 e
   votos em disputa ≥ mediana dos locais da cidade (quantil tipo 7).
 - Forma: especificação `viz.yaml`, validada (`labdados.viz`) e desenhada pelos componentes do DS (`lab-viz.js`);

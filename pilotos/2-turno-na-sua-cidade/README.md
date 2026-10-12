@@ -17,8 +17,8 @@ série, bairros e textos de cada cartão), `data/municipios.json` e `analise/rel
 (83.514 locais comparáveis, 42.364 em destaque, iguais ao piloto; soma dos bairros = soma dos destacados em todas as cidades).
 
 ## Método e decisões
-- EL0009 (mesmo local), EL0003 (válidos), EL0008 (grupos de 2026 aplicados a 2018 e 2022), EL0002/L0001 (municípios).
-- Resumo: % dos válidos de Lula (2026) e do grupo de Lula (2022); estado e Brasil = soma dos municípios.
+- EL0009 (mesmo local), EL0003 (válidos), EL0010 (Presidente: em 2018 e 2022, a candidatura do partido), EL0002/L0001 (municípios).
+- Resumo: % dos válidos de Lula (2026) e de Lula, PT (2022); estado e Brasil = soma dos municípios.
 - Decisões locais (pesquisador, 2026-10-11): só Lula; bairro como consta no cadastro do TSE, agrupado só sem diferença
   de maiúsculas, acentos e espaços; medida = votos em disputa dos locais em destaque; 10 maiores; cartão só com 3 ou mais
   bairros com destaque; cor só do destaque (sem a escala do 2º turno de 2022).
