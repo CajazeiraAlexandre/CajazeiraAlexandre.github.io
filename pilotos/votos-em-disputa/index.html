@@ -565,7 +565,18 @@ body.viz-embed .viz{border:0;border-radius:0}
 .story-progresso span.lido{background:var(--cor-texto-secundario)}
 .story-progresso span.atual{background:var(--cor-texto)}
 .viz.story .viz-titulo{font-size:20px}
-.viz.story.capa .viz-titulo{font-size:28px;line-height:1.15;margin-top:18px}
+.viz.story.capa .viz-titulo{font-size:34px;line-height:1.1;margin-top:6px;letter-spacing:-.01em}
+.viz.story.capa .story-texto{font-size:18px;line-height:1.45}
+/* capa e cartões só de texto (pesquisador, 2026-10-12: "fonte ampliada e design mais atraente"): texto centrado na
+   altura, traço de destaque acima do título; capa com `imagem`: o gráfico principal, estático, esmaecendo para baixo */
+.viz.story .story-vao.antes{flex:1 1 0;min-height:12px}
+.viz.story.so-texto .story-vao:not(.antes),.viz.story.capa:not(.com-imagem) .story-vao:not(.antes){flex:1.4 1 0}
+.viz.story.so-texto .viz-titulo{font-size:26px;line-height:1.2}
+.viz.story.so-texto .story-texto{font-size:18px;line-height:1.5}
+.viz.story.so-texto .viz-titulo::before,.viz.story.capa .viz-titulo::before{content:"";display:block;width:44px;height:4px;border-radius:2px;background:var(--cor-texto);margin-bottom:14px}
+.viz.story .capa-imagem{flex:1 1 auto;min-height:140px;position:relative;overflow:hidden;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent);mask-image:linear-gradient(to bottom,#000 55%,transparent);opacity:.92}
+.viz.story .capa-imagem .viz-palco{position:absolute;inset:0}
 .viz.story .story-texto{font-size:15px;line-height:1.45;color:var(--cor-texto)}
 .viz.story .story-texto b{font-weight:700}
 .story-vao{flex:1 1 auto;min-height:80px}
@@ -593,6 +604,9 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
 .story-nota{margin:2px 0 0;font-size:11.5px;line-height:1.35;color:var(--cor-texto-secundario)}
 .viz-palco.pilha{display:flex;flex-direction:column;gap:6px}
 .viz-palco-pilha{position:relative;min-height:0}
+.viz-palco-pilha.com-rotulo{display:flex;flex-direction:column}
+.pilha-rotulo{margin:0 0 2px;font-size:12px;font-weight:700;color:var(--cor-texto-secundario)}
+.pilha-alvo{flex:1 1 0;min-height:0;position:relative}
 /* mapa no palco do story: preenche o palco (a altura muda entre cartões quando o mesmo mapa segue de um para o outro) */
 .viz-palco{position:relative}
 .viz-palco>.bloco-mapa.compacto{position:absolute;inset:0;height:auto}
@@ -1310,7 +1324,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
         // compacto: "Aproximar" leva a câmera até a unidade (⟲ volta ao enquadramento do cartão)
         const aproximar = compacto && est.zoom ? el("button", { type: "button", class: "voltar", text: "⊕ Aproximar", onclick: () => {
           painel.classList.remove("topo");   // o card fica no pé; a unidade, na faixa livre acima dele
-          api.camera({ foco: u, contexto: 1.6, margens: [0, (painel.offsetHeight + 12) * (W / (est.svg.clientWidth || W))] });
+          api.camera({ foco: u, contexto: 1.6, margens: [0, (painel.offsetHeight + 12) * (W / (est.svg.clientWidth || W))] }, true, { base: false });
         } }) : null;
         Lab.conteudoPainel(painel, { u, nome: nome(u), linhas: opts.dica(u), abrir: opts.abrir, rotuloAbrir: opts.rotuloAbrir, esc, acoes: [aproximar] });
         requestAnimationFrame(posicionarPainel);
@@ -1435,10 +1449,11 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
 
     const api = {
       /** Move a câmera ("estado" | {foco, contexto} | {centro, zoom}); animada, salvo prefers-reduced-motion. */
-      camera(camera, animar = true) {
-        est.camera = camera || "estado";
+      camera(camera, animar = true, { base = true } = {}) {
+        // base: a câmera do cartão (para onde o ⟲ volta); "Aproximar" move sem trocar a base
+        if (base) est.camera = camera || "estado";
         if (!est.geo) return;
-        const t = transformacaoCamera(est.camera, est.geo);
+        const t = transformacaoCamera(camera || "estado", est.geo);
         if (!est.zoom) { est.transform = t; desenhar(null); return; }
         const s = d3.select(est.svg);
         (animar && !Lab.semMovimento() ? s.transition().duration(DURACAO).ease(d3.easeCubicInOut) : s).call(est.zoom.transform, t);
@@ -1703,7 +1718,8 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
     function molduraStory({ fmt, rep, hostQ, fixo = false, tamanho = null, largura = null }) {
       const ks = cartoesVisiveis(), K = cartaoAtual(), i = ks.indexOf(K), interativa = rep === "interativa";
       est.cartao = K.id;
-      const f = el("article", { class: `viz story fmt-${fmt} rep-${rep} host-${hostQ}${fixo ? " fixo" : ""}${K.capa ? " capa" : ""}${K.fim ? " fim" : ""}`, tabindex: "0",
+      const soTexto = !K.capa && !K.fim && !(K.vista || K.componente || K.componentes);   // cartão só de texto: tipografia maior (pesquisador, 2026-10-12)
+      const f = el("article", { class: `viz story fmt-${fmt} rep-${rep} host-${hostQ}${fixo ? " fixo" : ""}${K.capa ? " capa" : ""}${K.fim ? " fim" : ""}${soTexto ? " so-texto" : ""}${K.capa && K.imagem ? " com-imagem" : ""}`, tabindex: "0",
         "aria-label": `${semMarcas(textoPlano(K.titulo))} — cartão ${i + 1} de ${ks.length}` });
       if (fixo) { f.style.setProperty("--w", `${tamanho.w}px`); f.style.setProperty("--h", `${tamanho.h}px`); }
       if (!fixo && largura) f.style.maxWidth = `${largura}px`;
@@ -1712,6 +1728,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
       f.append(el("div", { class: "story-progresso", "aria-hidden": "true" }, ...ks.map((k, j) => el("span", { class: j < i ? "lido" : j === i ? "atual" : "" }))));
       const chapeu = K.capitulo || P.chapeu;   // o capítulo do cartão, quando houver, faz as vezes do chapéu
       if (chapeu) f.append(el("div", { class: "viz-topo" }, el("p", { class: "viz-chapeu" }, ...textoComControles(chapeu, interativa, f))));
+      if (soTexto || (K.capa && !K.imagem)) f.append(el("div", { class: "story-vao antes" }));   // centra o texto na altura
       f.append(el(K.capa ? "h2" : "h3", { class: "viz-titulo" }, ...textoComControles(K.titulo, interativa, f).flatMap((x) => (typeof x === "string" ? negrito(x) : [x]))));
       const tx = resolver(K.texto, e);
       if (tx) f.append(el("p", { class: "viz-sub story-texto" }, ...textoComControles(tx, interativa, f).flatMap((x) => (typeof x === "string" ? negrito(x) : [x]))));
@@ -1720,7 +1737,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
       const nota = resolver(K.nota, e);
       if (temPalco) f.append(el("div", { class: "viz-corpo" }, palco), el("p", { class: "viz-n" }), el("ol", { class: "viz-anot-lista", hidden: "" }), el("div", { class: "viz-legenda" }),
         ...(nota ? [el("p", { class: "story-nota" }, ...negrito(nota))] : []));
-      else f.append(el("div", { class: "story-vao" }), ...(nota ? [el("p", { class: "story-nota" }, ...negrito(nota))] : []));
+      else f.append(K.capa && K.imagem ? el("div", { class: "capa-imagem", "aria-hidden": "true" }) : el("div", { class: "story-vao" }), ...(nota ? [el("p", { class: "story-nota" }, ...negrito(nota))] : []));
       if (K.fim) f.append(el("div", { class: "story-fim" }, ...(K.links || []).map((l) => el("a", { href: resolver(l.href, e), target: "_blank", rel: "noopener" }, `${resolver(l.rotulo, e)} ↗`)),
         interativa && fatiador ? el("button", { type: "button", onclick: () => abrirBusca(f, fatiador) }, "Trocar de cidade") : null,
         interativa ? el("button", { type: "button", onclick: () => irCartao(0) }, "↺ Ver de novo") : null));
@@ -2102,7 +2119,13 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
         }
         reuso = null;
         const alvos = pilha.length === 1 ? [frame._palco] : pilha.map((it) => {
-          const a = el("div", { class: "viz-palco-pilha" }); a.style.flex = `${it.altura || 1} 1 0`; frame._palco.append(a); return a;
+          const a = el("div", { class: "viz-palco-pilha" }); a.style.flex = `${it.altura || 1} 1 0`; frame._palco.append(a);
+          if (!it.rotulo) return a;
+          // rótulo do gráfico na pilha (ex.: "2022" e "2026"): sem ele, dois gráficos iguais só se distinguem pela legenda
+          const dentro = el("div", { class: "pilha-alvo" });
+          a.classList.add("com-rotulo");
+          a.append(el("p", { class: "pilha-rotulo", text: semMarcas(textoPlano(it.rotulo)) }), dentro);
+          return dentro;
         });
         if (pilha.length > 1) frame._palco.classList.add("pilha");
         let r = null;
@@ -2158,8 +2181,15 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
       // anotações do componente principal (âncoras que o adaptador sabe posicionar)
       const anots = anotacoesVisiveis();
       if (principal?.posicao && (vista === "principal" || K) && !naImagem) {
-        const obst = principal.obstaculos ? principal.obstaculos() : [];
-        anotar(frame, palco, anots.map((a) => { const p = principal.posicao(a.alvo); return p && { ...a, a: { x: p[0] - 4, y: p[1] - 4, w: 8, h: 8 } }; }).filter(Boolean), obst);
+        const desenharAnots = () => {   // o mapa avisa quando o zoom muda: a anotação acompanha o ponto
+          palco.querySelector(":scope > .viz-anot")?.remove();
+          const ol = frame.querySelector(".viz-anot-lista");
+          if (ol) { ol.replaceChildren(); ol.hidden = true; }
+          const obst = principal.obstaculos ? principal.obstaculos() : [];
+          anotar(frame, palco, anots.map((a) => { const p = principal.posicao(a.alvo); return p && { ...a, a: { x: p[0] - 4, y: p[1] - 4, w: 8, h: 8 } }; }).filter(Boolean), obst);
+        };
+        desenharAnots();
+        principal.aoZoom?.(desenharAnots);
       }
       if (interativa && est.sel) requestAnimationFrame(() => palco.querySelector(`circle[data-id="${CSS.escape(est.sel)}"]`)?.dispatchEvent(new MouseEvent("click", { bubbles: true })));
       return principal;
@@ -2508,23 +2538,41 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
       escreverAssinatura(svg, ass, pad, yRod + rod.length * 13 + 10);
       // textos do cartão
       let y = pad - 2;
-      if (P.chapeu) y = escrever([semMarcas(textoPlano(P.chapeu))], pad, y, 11.5, { peso: 600, cor: "cor-texto-secundario" }) + 6;
+      // chapéu: recorte do story, ou o nome dele, e o capítulo — a imagem circula sem os outros cartões (pesquisador, 2026-10-12)
+      const chapeuImg = [P.chapeu ? textoPlano(P.chapeu) : K.capa ? null : textoPlano(P.titulo), K.capa ? null : K.capitulo].filter(Boolean).map(semMarcas).join(" · ");
+      if (chapeuImg) y = escrever(quebrar(chapeuImg, 11.5, colW, 600).slice(0, 2), pad, y, 11.5, { peso: 600, cor: "cor-texto-secundario" }) + 6;
       const tt = K.capa ? 26 : paisagem ? 18 : 20;
       y = escrever(quebrar(semMarcas(textoPlano(K.titulo)), tt, colW, 700), pad, y, tt, { peso: 700, lh: 1.18 }) + 6;
       const tx = textoPlano(K.texto);
       if (tx) y = escrever(quebrar(semMarcas(tx), paisagem ? 12.5 : 13.5, colW), pad, y, paisagem ? 12.5 : 13.5, { cor: "cor-texto-secundario", lh: 1.38 }) + 8;
+      // item escolhido pelo leitor (ponto tocado): entra como "em foco", com os números do card — o título narrativo
+      // sozinho deixava de explicar a imagem (pesquisador, 2026-10-12)
+      const lSelImg = est.sel && K.vista ? linhas.find((l) => l.id === est.sel) : null;
+      if (lSelImg) {
+        const [nm, ctx, ls] = linhasDetalhe(lSelImg), px = paisagem ? 11.5 : 12;
+        const corpo = [ctx, ...ls.filter(Boolean).slice(0, 2)].filter(Boolean).flatMap((t) => quebrar(t, px - 1, colW - 10));
+        const y0 = y;
+        y = escrever(quebrar(`Em foco: ${nm}`, px, colW - 10, 700), pad + 10, y, px, { peso: 700 });
+        y = escrever(corpo, pad + 10, y + 1, px - 1, { cor: "cor-texto-secundario", lh: 1.32 }) + 4;
+        svg.append("rect").attr("x", pad).attr("y", y0 + 1).attr("width", 3).attr("height", y - y0 - 4).attr("rx", 1.5).attr("fill", tok("cor-texto"));
+        y += 4;
+      }
       if (K.fim) for (const l of K.links || []) y = escrever(quebrar(`→ ${resolver(l.rotulo, e)}`, 12.5, colW, 600), pad, y + 4, 12.5, { peso: 600 }) + 4;
       if (temPalco) {
         // legenda curta: destaque (gráfico e mapa) e área (mapa)
         const legs = K.vista && K.destaque !== false && P.grafico.destaque ? [[tok(P.grafico.opcoes?.cor || "cor-cat-1"), P.grafico.destaque.rotulo_dentro || "em destaque"], [tok("cor-grade"), P.grafico.destaque.rotulo || "fora do destaque"]] : [];
         if (K.vista === "mapa" && P.grafico.companheiro?.ligacoes?.tamanho) legs.push([null, `área ∝ ${col(P.grafico.companheiro.ligacoes.tamanho).rotulo_tamanho || "valor"}`]);
-        const yLeg = yRod - 16 - (legs.length ? 14 : 0);
-        let xl = paisagem ? pad + colW + 16 : pad;
-        for (const [cor, rot] of legs) {
-          if (cor) { svg.append("circle").attr("cx", xl + 5).attr("cy", yLeg + 6).attr("r", 4.5).attr("fill", cor); xl += 13; }
-          svg.append("text").attr("x", xl).attr("y", yLeg + 10).attr("font-size", 10.5).attr("fill", tok("cor-texto-secundario")).text(rot);
-          xl += medir(rot, 10.5) + 14;
-        }
+        // legenda curta em linhas (o que não cabe desce), acima do rodapé
+        const x0L = paisagem ? pad + colW + 16 : pad, linhasLeg = [[]];
+        let xw = 0;
+        for (const [cor, rot] of legs) { const w = (cor ? 13 : 0) + medir(rot, 10.5) + 14; if (xw + w > W - pad - x0L && linhasLeg.at(-1).length) { linhasLeg.push([]); xw = 0; } linhasLeg.at(-1).push([cor, rot, xw]); xw += w; }
+        const yLeg = yRod - 16 - (legs.length ? 14 * linhasLeg.length : 0);
+        linhasLeg.forEach((ln, r) => ln.forEach(([cor, rot, dx]) => {
+          let xl = x0L + dx;
+          const yy = yLeg + r * 14;
+          if (cor) { svg.append("circle").attr("cx", xl + 5).attr("cy", yy + 6).attr("r", 4.5).attr("fill", cor); xl += 13; }
+          svg.append("text").attr("x", xl).attr("y", yy + 10).attr("font-size", 10.5).attr("fill", tok("cor-texto-secundario")).text(rot);
+        }));
         const gx = paisagem ? pad + colW + 16 : pad, gy = paisagem ? pad : y + 2, gw = W - pad - gx;
         const desenharEm = (gh) => {
           const fora = el("div", { style: "position:fixed;left:-10000px;top:0" });
@@ -2559,16 +2607,21 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
         for (const sub of K.componentes ? [...pal.querySelectorAll(".viz-palco-pilha")].slice(1) : []) {
           const s2 = sub.querySelector("svg");
           if (!s2) continue;
-          const r2 = sub.getBoundingClientRect(), c2 = s2.cloneNode(true);
+          const r2 = s2.getBoundingClientRect(), c2 = s2.cloneNode(true);
           c2.setAttribute("x", gx + r2.left - pr0.left); c2.setAttribute("y", gy + r2.top - pr0.top);
           if (!c2.getAttribute("width")) c2.setAttribute("width", r2.width);
           await embutirImagens(c2);
           svg.node().append(c2);
         }
+        for (const rl of K.componentes ? pal.querySelectorAll(".pilha-rotulo") : []) {   // rótulos da pilha
+          const r = rl.getBoundingClientRect();
+          svg.append("text").attr("x", gx + r.left - pr0.left).attr("y", gy + r.top - pr0.top + 11).attr("font-size", 11).attr("font-weight", 700)
+            .attr("fill", tok("cor-texto-secundario")).text(rl.textContent);
+        }
         const sv = pal.querySelector("svg");
         if (sv) {
           const pr = pal.getBoundingClientRect();
-          const r1 = (sv.closest(".viz-palco-pilha") || pal).getBoundingClientRect();
+          const r1 = (sv.closest(".pilha-alvo") || sv.closest(".viz-palco-pilha") || pal).getBoundingClientRect();
           const copia = sv.cloneNode(true); copia.setAttribute("x", gx + r1.left - pr.left); copia.setAttribute("y", gy + r1.top - pr.top);
           if (!copia.getAttribute("viewBox") && !copia.getAttribute("width")) copia.setAttribute("width", gw);
           await embutirImagens(copia);
@@ -2578,6 +2631,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
             const no = sv.querySelector(`circle[data-id="${CSS.escape(an.alvo)}"]`);
             if (!no) continue;
             const r = no.getBoundingClientRect(), cx = gx + r.left - pr.left + r.width / 2, cy = gy + r.top - pr.top + r.height / 2;
+            if (cx < gx || cx > gx + gw || cy < gy || cy > gy + gh) continue;   // fora do quadro da imagem: sem anel nem rótulo
             const obst = [...sv.querySelectorAll("text")].map((nn) => { const q = nn.getBoundingClientRect(); return { x: gx + q.left - pr.left, y: gy + q.top - pr.top, w: q.width, h: q.height }; });
             const bw = medir(an.texto, 11, 700) + 4;
             const lugar = buscarLugar({ W: gx + gw, H: gy + gh, cx, cy, bw, bh: 15, obst: [...obst, { x: 0, y: 0, w: W, h: gy }] }) || { x: Math.max(gx, Math.min(gx + gw - bw, cx - bw / 2)), y: Math.max(gy, cy - 30), lx: cx, ly: cy - 15 };
@@ -2644,6 +2698,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
         const f = moldura({ fmt: "retrato", rep: "interativa", hostQ: "pagina", largura });
         alvo.replaceChildren(f);
         f._inst = desenharPalco(f);   // altura: o cartão ocupa a tela e o palco, o que sobra (lab-viz.css)
+        capaImagem(f);
         return;
       }
       const fmt = formatoFluido(largura);
@@ -2651,6 +2706,21 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
       alvo.replaceChildren(f);
       f.querySelector(".viz-corpo").style.height = `${Math.round(largura * ALTURA_GRAFICO[fmt])}px`;
       desenharPalco(f);
+    }
+    /** Capa com `imagem: <id de cartão>`: o gráfico daquele cartão, estático e esmaecido, ilustra a capa (proposta,
+     *  pesquisador 2026-10-12: "capa atraente, instigante; pode ter uma imagem que remeta à visualização principal"). */
+    function capaImagem(f) {
+      const alvoI = f.querySelector(".capa-imagem"), K = cartaoAtual(), ref = K?.imagem && P.cartoes.find((k) => k.id === K.imagem);
+      if (!alvoI || !ref) return;
+      const w = alvoI.clientWidth, h = alvoI.clientHeight;
+      if (w < 60 || h < 60) return;
+      const ff = el("div"); Object.assign(ff.dataset, { fmt: "retrato", rep: "estatica", host: "imagem" });
+      const pal = el("div", { class: "viz-palco", style: `width:${w}px;height:${h}px;position:relative` });
+      ff._palco = pal; ff._palcoCompa = null; ff._lado = false;
+      ff.append(pal); alvoI.append(ff);
+      const antes = est.cartao;
+      est.cartao = ref.id;
+      try { desenharPalco(ff); } catch (erro) { alvoI.replaceChildren(); } finally { est.cartao = antes; }
     }
     function falhou(erro) {
       alvo.replaceChildren(el("p", { class: "viz-vazio", text: `Não foi possível carregar os dados desta escolha (${erro.message || erro}).` }));
@@ -2768,7 +2838,12 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
     const pts = cena.append("g").selectAll("circle").data(com).join("circle")
       .attr("data-id", (l) => l.id).attr("data-chave", C.chave).attr("cx", (l) => porId.get(l.id).x).attr("cy", (l) => porId.get(l.id).y).attr("r", (l) => porId.get(l.id).r)
       .attr("fill", (l) => C.cor(l) ?? "none").attr("stroke", comOSM ? tok("cor-texto") : tok("cor-superficie")).attr("stroke-width", comOSM ? 0.8 : 0.6).attr("vector-effect", "non-scaling-stroke");
-    const aplicarT = (t) => { cena.attr("transform", t); pts.attr("r", (l) => porId.get(l.id).r / Math.sqrt(t.k)); desenharRuas(t); };
+    let tAtual = d3.zoomIdentity, rafZoom = 0;
+    const aoZoom = [];   // quem acompanha o zoom (anotações presas aos pontos)
+    const aplicarT = (t) => {
+      tAtual = t; cena.attr("transform", t); pts.attr("r", (l) => porId.get(l.id).r / Math.sqrt(t.k)); desenharRuas(t);
+      if (aoZoom.length && !rafZoom) rafZoom = requestAnimationFrame(() => { rafZoom = 0; aoZoom.forEach((f) => f()); });
+    };
     if (C.interativa) {
       C.ligar(pts);
       const aviso = el("div", { class: "aviso-roda", hidden: "" });
@@ -2804,10 +2879,19 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
         el("span", { class: "rot-mini", text: `${cTam.rotulo || "Tamanho"}:` }),
         ...Object.entries(cTam.valores).map(([v, r]) => el("button", { type: "button", "aria-pressed": forma === v, onclick: () => C.trocar(() => { est[cTam.id] = v; }) }, r))));   // vale também para o gráfico
       if (!est.cam) desenharRuas(d3.zoomIdentity);
-    } else aplicarT(est.cam ? camT(est.cam) : d3.zoomIdentity);   // a imagem sai com o enquadramento do momento
+    } else {   // a imagem sai com o enquadramento do momento; com um local escolhido, centrada nele (o recorte da imagem é outro)
+      const nSel = est.cam && est.sel ? porId.get(est.sel) : null;
+      aplicarT(est.cam ? camT(nSel ? { centro: proj.invert([nSel.x, nSel.y]), k: est.cam.k } : est.cam) : d3.zoomIdentity);
+    }
     if (C.naImagem && comOSM) svg0.append("text").attr("x", W - 4).attr("y", H - 4).attr("text-anchor", "end").attr("font-size", 9).attr("fill", tok("cor-texto-secundario"))
       .attr("paint-order", "stroke").attr("stroke", tok("cor-superficie")).attr("stroke-width", 3).text("© colaboradores do OpenStreetMap");
-    return { posicao: (id) => { const n = porId.get(id); return n ? [n.x, n.y] : null; },
+    return { posicao: (id) => {   // na tela, com o zoom do momento; fora do quadro, sem anotação
+        const n = porId.get(id);
+        if (!n) return null;
+        const [x, y] = tAtual.apply([n.x, n.y]);
+        return x < 0 || y < 0 || x > W || y > H ? null : [x, y];
+      },
+      aoZoom: (f) => aoZoom.push(f),
       tamanho: bolhas ? { sc: escTam(est.cam?.k || 1), rotulo: rotTam } : null };
   };
 
@@ -2928,11 +3012,15 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
    *  `cor` de cada item, ex.: a cor do grupo), formato (int | pct | pp | brl | dec1), destaque (rótulo em destaque: os
    *  demais esmaecem), valor_ref + rotulo_ref (barra fina de comparação, ex.: 2022). */
   adaptadores.barras = (C) => {
-    const { alvo, opc } = C, L = (C.dados || []).filter(Boolean);
+    const { alvo, opc } = C, kR = opc.rotulo || "rotulo", kV = opc.valor || "valor", kN = opc.nota_valor, kRef = opc.valor_ref;
+    // ordem (pesquisador, 2026-10-12): da maior para a menor por padrão; `ordem: crescente`, ou `dados` (a ordem do Python)
+    const L0 = (C.dados || []).filter(Boolean), ordem = opc.ordem || "decrescente";
+    const L = ordem === "dados" ? L0 : [...L0].sort((a, b) => (ordem === "crescente" ? 1 : -1) * ((a[kV] ?? -Infinity) - (b[kV] ?? -Infinity)));
     if (!L.length) { alvo.append(el("div", { class: "viz-vazio", text: "Sem dados para esta escolha." })); return null; }
-    const W = alvo.clientWidth, H = Math.max(160, alvo.clientHeight), kR = opc.rotulo || "rotulo", kV = opc.valor || "valor", kN = opc.nota_valor, kRef = opc.valor_ref;
-    const fmt = fmtNum(opc.formato), passo = Math.min(kRef ? 44 : 40, (H - (opc.titulo_valor ? 18 : 2) - 4) / L.length), bh = Math.max(6, Math.min(26, passo * (kRef ? 0.5 : 0.62)));
-    const topo = Math.max(opc.titulo_valor ? 18 : 2, (H - L.length * passo) / 2);   // poucas barras: bloco no meio do palco
+    const comEixo = opc.eixo !== false, hEixo = comEixo ? 22 : 0;   // eixo dos valores no pé, por padrão (`eixo: false` tira)
+    const W = alvo.clientWidth, H = Math.max(160, alvo.clientHeight);
+    const fmt = fmtNum(opc.formato), passo = Math.min(kRef ? 44 : 40, (H - (opc.titulo_valor ? 18 : 2) - 4 - hEixo) / L.length), bh = Math.max(6, Math.min(26, passo * (kRef ? 0.5 : 0.62)));
+    const topo = Math.max(opc.titulo_valor ? 18 : 2, (H - hEixo - L.length * passo) / 2);   // poucas barras: bloco no meio do palco
     const xl = Math.min(140, W * 0.38), dirTxt = kN ? 92 : kRef ? 78 : 52;
     const max = d3.max(L, (d) => Math.max(d[kV] || 0, kRef ? d[kRef] || 0 : 0)) || 1;
     const sx = d3.scaleLinear().domain([0, max]).range([0, Math.max(30, W - xl - 8 - dirTxt)]);
@@ -2940,6 +3028,14 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
     const dest = opc.destaque != null ? String(opc.destaque) : null, apagado = (d) => dest !== null && String(d[kR]) !== dest && String(d.id) !== dest;
     const svg = svgDe(C, W, H, `${opc.titulo_valor || "Barras"}: ${L.map((d) => `${d[kR]} ${fmt(d[kV])}${kRef && d[kRef] != null ? ` (${opc.rotulo_ref || "antes"}: ${fmt(d[kRef])})` : ""}${kN ? ` (${d[kN]} ${opc.nota_rotulo || ""})` : ""}`).join("; ")}.`);
     if (opc.titulo_valor) svg.append("text").attr("x", 0).attr("y", topo - 7).attr("font-size", 10.5).attr("fill", tok("cor-texto-secundario")).text(opc.titulo_valor);
+    if (comEixo) {   // grade leve atrás das barras e números no pé
+      const yb = topo + L.length * passo, ge = svg.append("g").attr("class", "eixo-barras");
+      for (const t of sx.ticks(W < 360 ? 3 : 4)) {
+        ge.append("line").attr("x1", xl + sx(t)).attr("x2", xl + sx(t)).attr("y1", topo - 2).attr("y2", yb + 2).attr("stroke", tok("cor-grade"));
+        ge.append("text").attr("x", xl + sx(t)).attr("y", yb + 14).attr("text-anchor", "middle").attr("font-size", 10.5).attr("fill", tok("cor-texto-secundario")).text(fmtEixo(opc.formato)(t));
+      }
+      ge.append("line").attr("x1", xl).attr("x2", xl).attr("y1", topo - 2).attr("y2", yb + 2).attr("stroke", tok("cor-eixo"));
+    }
     L.forEach((d, i) => {
       const y = topo + i * passo + (passo - bh - (kRef ? 6 : 0)) / 2, cy = y + bh / 2 + 4, c = corDo(d), op = apagado(d) ? 0.35 : 1;
       const k = String(d.id ?? d[kR]);
@@ -3511,7 +3607,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
     const linhas = T.map((t, i) => Object.fromEntries([["t", t], ...S.map((s) => [s.id, s.valores[i] ?? 0])]));
     const pilhaDe = (b) => { const ks = S.map((s) => s.id); return d3.stack().keys(b ? [b, ...ks.filter((k) => k !== b)] : ks)(linhas); };
     const maxSob = d3.max(S.flatMap((s) => s.valores.filter((v) => v != null))), maxEmp = multi ? d3.max(pilhaDe(null).at(-1), (d) => d[1]) : maxSob;
-    const larguraRot = multi ? 10 + 6.6 * d3.max(S, (s) => fmt(s.valores.at(-1) ?? 0).length) : 12;
+    const larguraRot = 10 + 6.6 * d3.max(S, (s) => fmt(s.valores.at(-1) ?? 0).length);   // o rótulo do fim cabe (também com uma série)
     const m = { t: alternar ? 32 : 10, b: 20, l: margemEixo(Math.max(maxSob, emp || alternar ? maxEmp : 0), D.formato), r: larguraRot };
     const sx = d3.scalePoint().domain(T).range([m.l, W - m.r]);
     const sy = d3.scaleLinear().range([H - m.b, m.t]);
@@ -3590,8 +3686,10 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
         .attr("fill", Lab.tinta(c)).style("fill", Lab.tinta(c)).style("font-size", "10px").attr("pointer-events", "none");
       segs.push({ i, s, r, t });
     }));
+    const cabeTot = sx.step() >= 6.4 * d3.max(tot, (t) => compacto(t).length) + 4;   // colunas estreitas: só o 1º e o último total
     const totais = Gs.map((g, i) => svg.append("text").attr("x", sx(g) + sx.bandwidth() / 2).attr("text-anchor", "middle").attr("font-size", 10.5).attr("font-weight", 700)
-      .attr("fill", tok("cor-texto")).style("fill", tok("cor-texto")).style("font-size", "10.5px").attr("pointer-events", "none").text(compacto(tot[i])));
+      .attr("fill", tok("cor-texto")).style("fill", tok("cor-texto")).style("font-size", "10.5px").attr("pointer-events", "none")
+      .attr("display", cabeTot || i === 0 || i === Gs.length - 1 ? null : "none").text(compacto(tot[i])));
     const meio = svg.append("line").attr("x1", m.l).attr("x2", W - m.r).attr("stroke", tok("cor-texto")).attr("stroke-dasharray", "2 3").attr("pointer-events", "none");
     const desenhar = (animar) => {
       sy.domain([0, prop ? 100 : d3.max(tot) || 1]).nice();
@@ -3637,9 +3735,13 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
     const m = { l: largRot + 8 + 6.2 * fmt(d3.min(todos)).length, r: 14 + 6.2 * fmt(d3.max(todos)).length, t: 6, b: 30 };
     const sx = d3.scaleLinear().domain(d3.extent(todos.filter((v) => v != null))).nice().range([m.l, W - m.r]);
     const passo = Math.min(46, (H - m.t - m.b) / L.length);
+    // poucas linhas: o bloco fica no meio do palco e o eixo logo abaixo dele (não no rodapé, com um vão no meio)
+    const sobraV = Math.max(0, H - (m.t + passo * L.length + m.b));
+    m.t += sobraV / 2;
+    const Hb = H - sobraV / 2;
     const svg = svgDe(C, W, H, (D.eixo || "Pontos conectados") + ": " + L.map((l) => faixa ? `${l.rotulo} de ${fmt(l.min)} a ${fmt(l.max)}, ${D.marcador_rotulo || "marcador"} ${fmt(l.marcador)}`
       : `${l.rotulo}: ${(D.pontos || []).map((p) => `${p.rotulo} ${fmt(l.valores[p.id])}`).join(", ")}`).join("; "));
-    eixoX(svg, sx, W, H, m, D.eixo);
+    eixoX(svg, sx, W, Hb, m, D.eixo);
     L.forEach((l, i) => {
       const y = m.t + passo * i + passo / 2;
       svg.append("text").attr("x", 0).attr("y", y + 4).attr("font-size", 11.5).attr("font-weight", 600).attr("fill", tok("cor-texto")).text(curto(l.rotulo, Math.floor(largRot / 7.2)));
@@ -3698,7 +3800,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
     const rotulos = (gg, x0, y0, w, h, t1, t2, cor, px = 10.5) => {
       if (w > 34 && h > 16) gg.append("text").attr("x", x0 + 4).attr("y", y0 + 13).attr("font-size", px).attr("font-weight", 600).attr("fill", Lab.tinta(cor)).attr("pointer-events", "none")
         .text(curto(t1, Math.floor((w - 6) / (px * 0.6))));
-      if (t2 && w > 44 && h > 30) gg.append("text").attr("x", x0 + 4).attr("y", y0 + 26).attr("font-size", 10).attr("fill", Lab.tinta(cor)).attr("pointer-events", "none").text(t2);
+      if (t2 && w > 44 && h > 30) gg.append("text").attr("x", x0 + 4).attr("y", y0 + 26).attr("font-size", 10).attr("fill", Lab.tinta(cor)).attr("pointer-events", "none").text(curto(t2, Math.floor((w - 6) / 6)));
     };
     // nível de cima: blocos dos grupos (cabeçalho com nome e total) e os itens dentro
     const topo = () => {
@@ -3832,7 +3934,8 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
     const temValor = NV[0].soma.some((v) => v > 0);
     let modo = est[`${chave}:tam`] || (C.opc.tamanho === "valor" && temValor ? "valor" : "n");
     const ult = NV[Z];
-    const proj = d3.geoMercator().fitExtent([[16, 16], [W - 16, H - 16]], { type: "MultiPoint", coordinates: ult.lon.map((x, i) => [x, ult.lat[i]]) });
+    const topoCtl = C.opc.alternar && C.interativa && !C.naImagem ? 44 : 16;   // o controle de tamanho não cobre os grupos do alto
+    const proj = d3.geoMercator().fitExtent([[16, topoCtl], [W - 16, H - 16]], { type: "MultiPoint", coordinates: ult.lon.map((x, i) => [x, ult.lat[i]]) });
     const P = NV.map((nv) => nv.lon.map((x, i) => proj([x, nv.lat[i]])));
     // caixa de cada grupo (para ampliar até ele): dos grupos do último nível para cima
     const caixa = NV.map((nv) => nv.n.map(() => [Infinity, Infinity, -Infinity, -Infinity]));

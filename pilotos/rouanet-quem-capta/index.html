@@ -572,7 +572,18 @@ body.viz-embed .viz{border:0;border-radius:0}
 .story-progresso span.lido{background:var(--cor-texto-secundario)}
 .story-progresso span.atual{background:var(--cor-texto)}
 .viz.story .viz-titulo{font-size:20px}
-.viz.story.capa .viz-titulo{font-size:28px;line-height:1.15;margin-top:18px}
+.viz.story.capa .viz-titulo{font-size:34px;line-height:1.1;margin-top:6px;letter-spacing:-.01em}
+.viz.story.capa .story-texto{font-size:18px;line-height:1.45}
+/* capa e cartões só de texto (pesquisador, 2026-10-12: "fonte ampliada e design mais atraente"): texto centrado na
+   altura, traço de destaque acima do título; capa com `imagem`: o gráfico principal, estático, esmaecendo para baixo */
+.viz.story .story-vao.antes{flex:1 1 0;min-height:12px}
+.viz.story.so-texto .story-vao:not(.antes),.viz.story.capa:not(.com-imagem) .story-vao:not(.antes){flex:1.4 1 0}
+.viz.story.so-texto .viz-titulo{font-size:26px;line-height:1.2}
+.viz.story.so-texto .story-texto{font-size:18px;line-height:1.5}
+.viz.story.so-texto .viz-titulo::before,.viz.story.capa .viz-titulo::before{content:"";display:block;width:44px;height:4px;border-radius:2px;background:var(--cor-texto);margin-bottom:14px}
+.viz.story .capa-imagem{flex:1 1 auto;min-height:140px;position:relative;overflow:hidden;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent);mask-image:linear-gradient(to bottom,#000 55%,transparent);opacity:.92}
+.viz.story .capa-imagem .viz-palco{position:absolute;inset:0}
 .viz.story .story-texto{font-size:15px;line-height:1.45;color:var(--cor-texto)}
 .viz.story .story-texto b{font-weight:700}
 .story-vao{flex:1 1 auto;min-height:80px}
@@ -600,6 +611,9 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
 .story-nota{margin:2px 0 0;font-size:11.5px;line-height:1.35;color:var(--cor-texto-secundario)}
 .viz-palco.pilha{display:flex;flex-direction:column;gap:6px}
 .viz-palco-pilha{position:relative;min-height:0}
+.viz-palco-pilha.com-rotulo{display:flex;flex-direction:column}
+.pilha-rotulo{margin:0 0 2px;font-size:12px;font-weight:700;color:var(--cor-texto-secundario)}
+.pilha-alvo{flex:1 1 0;min-height:0;position:relative}
 /* mapa no palco do story: preenche o palco (a altura muda entre cartões quando o mesmo mapa segue de um para o outro) */
 .viz-palco{position:relative}
 .viz-palco>.bloco-mapa.compacto{position:absolute;inset:0;height:auto}
@@ -621,7 +635,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
   <div id="viz"><p class="viz-vazio">Carregando…</p></div>
 </main>
 <div class="dica" id="dica" role="status" aria-live="polite"></div>
-<script id="plano" type="text/plain">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</script>
+<script id="plano" type="text/plain">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</script>
 <script>
 /* ==== web/componentes/lab-nucleo.js ==== */
 /* lab-nucleo.js — núcleo dos componentes de interface do Laboratório de Dados Públicos.
@@ -1313,7 +1327,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
         // compacto: "Aproximar" leva a câmera até a unidade (⟲ volta ao enquadramento do cartão)
         const aproximar = compacto && est.zoom ? el("button", { type: "button", class: "voltar", text: "⊕ Aproximar", onclick: () => {
           painel.classList.remove("topo");   // o card fica no pé; a unidade, na faixa livre acima dele
-          api.camera({ foco: u, contexto: 1.6, margens: [0, (painel.offsetHeight + 12) * (W / (est.svg.clientWidth || W))] });
+          api.camera({ foco: u, contexto: 1.6, margens: [0, (painel.offsetHeight + 12) * (W / (est.svg.clientWidth || W))] }, true, { base: false });
         } }) : null;
         Lab.conteudoPainel(painel, { u, nome: nome(u), linhas: opts.dica(u), abrir: opts.abrir, rotuloAbrir: opts.rotuloAbrir, esc, acoes: [aproximar] });
         requestAnimationFrame(posicionarPainel);
@@ -1438,10 +1452,11 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
 
     const api = {
       /** Move a câmera ("estado" | {foco, contexto} | {centro, zoom}); animada, salvo prefers-reduced-motion. */
-      camera(camera, animar = true) {
-        est.camera = camera || "estado";
+      camera(camera, animar = true, { base = true } = {}) {
+        // base: a câmera do cartão (para onde o ⟲ volta); "Aproximar" move sem trocar a base
+        if (base) est.camera = camera || "estado";
         if (!est.geo) return;
-        const t = transformacaoCamera(est.camera, est.geo);
+        const t = transformacaoCamera(camera || "estado", est.geo);
         if (!est.zoom) { est.transform = t; desenhar(null); return; }
         const s = d3.select(est.svg);
         (animar && !Lab.semMovimento() ? s.transition().duration(DURACAO).ease(d3.easeCubicInOut) : s).call(est.zoom.transform, t);
@@ -1706,7 +1721,8 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
     function molduraStory({ fmt, rep, hostQ, fixo = false, tamanho = null, largura = null }) {
       const ks = cartoesVisiveis(), K = cartaoAtual(), i = ks.indexOf(K), interativa = rep === "interativa";
       est.cartao = K.id;
-      const f = el("article", { class: `viz story fmt-${fmt} rep-${rep} host-${hostQ}${fixo ? " fixo" : ""}${K.capa ? " capa" : ""}${K.fim ? " fim" : ""}`, tabindex: "0",
+      const soTexto = !K.capa && !K.fim && !(K.vista || K.componente || K.componentes);   // cartão só de texto: tipografia maior (pesquisador, 2026-10-12)
+      const f = el("article", { class: `viz story fmt-${fmt} rep-${rep} host-${hostQ}${fixo ? " fixo" : ""}${K.capa ? " capa" : ""}${K.fim ? " fim" : ""}${soTexto ? " so-texto" : ""}${K.capa && K.imagem ? " com-imagem" : ""}`, tabindex: "0",
         "aria-label": `${semMarcas(textoPlano(K.titulo))} — cartão ${i + 1} de ${ks.length}` });
       if (fixo) { f.style.setProperty("--w", `${tamanho.w}px`); f.style.setProperty("--h", `${tamanho.h}px`); }
       if (!fixo && largura) f.style.maxWidth = `${largura}px`;
@@ -1715,6 +1731,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
       f.append(el("div", { class: "story-progresso", "aria-hidden": "true" }, ...ks.map((k, j) => el("span", { class: j < i ? "lido" : j === i ? "atual" : "" }))));
       const chapeu = K.capitulo || P.chapeu;   // o capítulo do cartão, quando houver, faz as vezes do chapéu
       if (chapeu) f.append(el("div", { class: "viz-topo" }, el("p", { class: "viz-chapeu" }, ...textoComControles(chapeu, interativa, f))));
+      if (soTexto || (K.capa && !K.imagem)) f.append(el("div", { class: "story-vao antes" }));   // centra o texto na altura
       f.append(el(K.capa ? "h2" : "h3", { class: "viz-titulo" }, ...textoComControles(K.titulo, interativa, f).flatMap((x) => (typeof x === "string" ? negrito(x) : [x]))));
       const tx = resolver(K.texto, e);
       if (tx) f.append(el("p", { class: "viz-sub story-texto" }, ...textoComControles(tx, interativa, f).flatMap((x) => (typeof x === "string" ? negrito(x) : [x]))));
@@ -1723,7 +1740,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
       const nota = resolver(K.nota, e);
       if (temPalco) f.append(el("div", { class: "viz-corpo" }, palco), el("p", { class: "viz-n" }), el("ol", { class: "viz-anot-lista", hidden: "" }), el("div", { class: "viz-legenda" }),
         ...(nota ? [el("p", { class: "story-nota" }, ...negrito(nota))] : []));
-      else f.append(el("div", { class: "story-vao" }), ...(nota ? [el("p", { class: "story-nota" }, ...negrito(nota))] : []));
+      else f.append(K.capa && K.imagem ? el("div", { class: "capa-imagem", "aria-hidden": "true" }) : el("div", { class: "story-vao" }), ...(nota ? [el("p", { class: "story-nota" }, ...negrito(nota))] : []));
       if (K.fim) f.append(el("div", { class: "story-fim" }, ...(K.links || []).map((l) => el("a", { href: resolver(l.href, e), target: "_blank", rel: "noopener" }, `${resolver(l.rotulo, e)} ↗`)),
         interativa && fatiador ? el("button", { type: "button", onclick: () => abrirBusca(f, fatiador) }, "Trocar de cidade") : null,
         interativa ? el("button", { type: "button", onclick: () => irCartao(0) }, "↺ Ver de novo") : null));
@@ -2105,7 +2122,13 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
         }
         reuso = null;
         const alvos = pilha.length === 1 ? [frame._palco] : pilha.map((it) => {
-          const a = el("div", { class: "viz-palco-pilha" }); a.style.flex = `${it.altura || 1} 1 0`; frame._palco.append(a); return a;
+          const a = el("div", { class: "viz-palco-pilha" }); a.style.flex = `${it.altura || 1} 1 0`; frame._palco.append(a);
+          if (!it.rotulo) return a;
+          // rótulo do gráfico na pilha (ex.: "2022" e "2026"): sem ele, dois gráficos iguais só se distinguem pela legenda
+          const dentro = el("div", { class: "pilha-alvo" });
+          a.classList.add("com-rotulo");
+          a.append(el("p", { class: "pilha-rotulo", text: semMarcas(textoPlano(it.rotulo)) }), dentro);
+          return dentro;
         });
         if (pilha.length > 1) frame._palco.classList.add("pilha");
         let r = null;
@@ -2161,8 +2184,15 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
       // anotações do componente principal (âncoras que o adaptador sabe posicionar)
       const anots = anotacoesVisiveis();
       if (principal?.posicao && (vista === "principal" || K) && !naImagem) {
-        const obst = principal.obstaculos ? principal.obstaculos() : [];
-        anotar(frame, palco, anots.map((a) => { const p = principal.posicao(a.alvo); return p && { ...a, a: { x: p[0] - 4, y: p[1] - 4, w: 8, h: 8 } }; }).filter(Boolean), obst);
+        const desenharAnots = () => {   // o mapa avisa quando o zoom muda: a anotação acompanha o ponto
+          palco.querySelector(":scope > .viz-anot")?.remove();
+          const ol = frame.querySelector(".viz-anot-lista");
+          if (ol) { ol.replaceChildren(); ol.hidden = true; }
+          const obst = principal.obstaculos ? principal.obstaculos() : [];
+          anotar(frame, palco, anots.map((a) => { const p = principal.posicao(a.alvo); return p && { ...a, a: { x: p[0] - 4, y: p[1] - 4, w: 8, h: 8 } }; }).filter(Boolean), obst);
+        };
+        desenharAnots();
+        principal.aoZoom?.(desenharAnots);
       }
       if (interativa && est.sel) requestAnimationFrame(() => palco.querySelector(`circle[data-id="${CSS.escape(est.sel)}"]`)?.dispatchEvent(new MouseEvent("click", { bubbles: true })));
       return principal;
@@ -2511,23 +2541,41 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
       escreverAssinatura(svg, ass, pad, yRod + rod.length * 13 + 10);
       // textos do cartão
       let y = pad - 2;
-      if (P.chapeu) y = escrever([semMarcas(textoPlano(P.chapeu))], pad, y, 11.5, { peso: 600, cor: "cor-texto-secundario" }) + 6;
+      // chapéu: recorte do story, ou o nome dele, e o capítulo — a imagem circula sem os outros cartões (pesquisador, 2026-10-12)
+      const chapeuImg = [P.chapeu ? textoPlano(P.chapeu) : K.capa ? null : textoPlano(P.titulo), K.capa ? null : K.capitulo].filter(Boolean).map(semMarcas).join(" · ");
+      if (chapeuImg) y = escrever(quebrar(chapeuImg, 11.5, colW, 600).slice(0, 2), pad, y, 11.5, { peso: 600, cor: "cor-texto-secundario" }) + 6;
       const tt = K.capa ? 26 : paisagem ? 18 : 20;
       y = escrever(quebrar(semMarcas(textoPlano(K.titulo)), tt, colW, 700), pad, y, tt, { peso: 700, lh: 1.18 }) + 6;
       const tx = textoPlano(K.texto);
       if (tx) y = escrever(quebrar(semMarcas(tx), paisagem ? 12.5 : 13.5, colW), pad, y, paisagem ? 12.5 : 13.5, { cor: "cor-texto-secundario", lh: 1.38 }) + 8;
+      // item escolhido pelo leitor (ponto tocado): entra como "em foco", com os números do card — o título narrativo
+      // sozinho deixava de explicar a imagem (pesquisador, 2026-10-12)
+      const lSelImg = est.sel && K.vista ? linhas.find((l) => l.id === est.sel) : null;
+      if (lSelImg) {
+        const [nm, ctx, ls] = linhasDetalhe(lSelImg), px = paisagem ? 11.5 : 12;
+        const corpo = [ctx, ...ls.filter(Boolean).slice(0, 2)].filter(Boolean).flatMap((t) => quebrar(t, px - 1, colW - 10));
+        const y0 = y;
+        y = escrever(quebrar(`Em foco: ${nm}`, px, colW - 10, 700), pad + 10, y, px, { peso: 700 });
+        y = escrever(corpo, pad + 10, y + 1, px - 1, { cor: "cor-texto-secundario", lh: 1.32 }) + 4;
+        svg.append("rect").attr("x", pad).attr("y", y0 + 1).attr("width", 3).attr("height", y - y0 - 4).attr("rx", 1.5).attr("fill", tok("cor-texto"));
+        y += 4;
+      }
       if (K.fim) for (const l of K.links || []) y = escrever(quebrar(`→ ${resolver(l.rotulo, e)}`, 12.5, colW, 600), pad, y + 4, 12.5, { peso: 600 }) + 4;
       if (temPalco) {
         // legenda curta: destaque (gráfico e mapa) e área (mapa)
         const legs = K.vista && K.destaque !== false && P.grafico.destaque ? [[tok(P.grafico.opcoes?.cor || "cor-cat-1"), P.grafico.destaque.rotulo_dentro || "em destaque"], [tok("cor-grade"), P.grafico.destaque.rotulo || "fora do destaque"]] : [];
         if (K.vista === "mapa" && P.grafico.companheiro?.ligacoes?.tamanho) legs.push([null, `área ∝ ${col(P.grafico.companheiro.ligacoes.tamanho).rotulo_tamanho || "valor"}`]);
-        const yLeg = yRod - 16 - (legs.length ? 14 : 0);
-        let xl = paisagem ? pad + colW + 16 : pad;
-        for (const [cor, rot] of legs) {
-          if (cor) { svg.append("circle").attr("cx", xl + 5).attr("cy", yLeg + 6).attr("r", 4.5).attr("fill", cor); xl += 13; }
-          svg.append("text").attr("x", xl).attr("y", yLeg + 10).attr("font-size", 10.5).attr("fill", tok("cor-texto-secundario")).text(rot);
-          xl += medir(rot, 10.5) + 14;
-        }
+        // legenda curta em linhas (o que não cabe desce), acima do rodapé
+        const x0L = paisagem ? pad + colW + 16 : pad, linhasLeg = [[]];
+        let xw = 0;
+        for (const [cor, rot] of legs) { const w = (cor ? 13 : 0) + medir(rot, 10.5) + 14; if (xw + w > W - pad - x0L && linhasLeg.at(-1).length) { linhasLeg.push([]); xw = 0; } linhasLeg.at(-1).push([cor, rot, xw]); xw += w; }
+        const yLeg = yRod - 16 - (legs.length ? 14 * linhasLeg.length : 0);
+        linhasLeg.forEach((ln, r) => ln.forEach(([cor, rot, dx]) => {
+          let xl = x0L + dx;
+          const yy = yLeg + r * 14;
+          if (cor) { svg.append("circle").attr("cx", xl + 5).attr("cy", yy + 6).attr("r", 4.5).attr("fill", cor); xl += 13; }
+          svg.append("text").attr("x", xl).attr("y", yy + 10).attr("font-size", 10.5).attr("fill", tok("cor-texto-secundario")).text(rot);
+        }));
         const gx = paisagem ? pad + colW + 16 : pad, gy = paisagem ? pad : y + 2, gw = W - pad - gx;
         const desenharEm = (gh) => {
           const fora = el("div", { style: "position:fixed;left:-10000px;top:0" });
@@ -2562,16 +2610,21 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
         for (const sub of K.componentes ? [...pal.querySelectorAll(".viz-palco-pilha")].slice(1) : []) {
           const s2 = sub.querySelector("svg");
           if (!s2) continue;
-          const r2 = sub.getBoundingClientRect(), c2 = s2.cloneNode(true);
+          const r2 = s2.getBoundingClientRect(), c2 = s2.cloneNode(true);
           c2.setAttribute("x", gx + r2.left - pr0.left); c2.setAttribute("y", gy + r2.top - pr0.top);
           if (!c2.getAttribute("width")) c2.setAttribute("width", r2.width);
           await embutirImagens(c2);
           svg.node().append(c2);
         }
+        for (const rl of K.componentes ? pal.querySelectorAll(".pilha-rotulo") : []) {   // rótulos da pilha
+          const r = rl.getBoundingClientRect();
+          svg.append("text").attr("x", gx + r.left - pr0.left).attr("y", gy + r.top - pr0.top + 11).attr("font-size", 11).attr("font-weight", 700)
+            .attr("fill", tok("cor-texto-secundario")).text(rl.textContent);
+        }
         const sv = pal.querySelector("svg");
         if (sv) {
           const pr = pal.getBoundingClientRect();
-          const r1 = (sv.closest(".viz-palco-pilha") || pal).getBoundingClientRect();
+          const r1 = (sv.closest(".pilha-alvo") || sv.closest(".viz-palco-pilha") || pal).getBoundingClientRect();
           const copia = sv.cloneNode(true); copia.setAttribute("x", gx + r1.left - pr.left); copia.setAttribute("y", gy + r1.top - pr.top);
           if (!copia.getAttribute("viewBox") && !copia.getAttribute("width")) copia.setAttribute("width", gw);
           await embutirImagens(copia);
@@ -2581,6 +2634,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
             const no = sv.querySelector(`circle[data-id="${CSS.escape(an.alvo)}"]`);
             if (!no) continue;
             const r = no.getBoundingClientRect(), cx = gx + r.left - pr.left + r.width / 2, cy = gy + r.top - pr.top + r.height / 2;
+            if (cx < gx || cx > gx + gw || cy < gy || cy > gy + gh) continue;   // fora do quadro da imagem: sem anel nem rótulo
             const obst = [...sv.querySelectorAll("text")].map((nn) => { const q = nn.getBoundingClientRect(); return { x: gx + q.left - pr.left, y: gy + q.top - pr.top, w: q.width, h: q.height }; });
             const bw = medir(an.texto, 11, 700) + 4;
             const lugar = buscarLugar({ W: gx + gw, H: gy + gh, cx, cy, bw, bh: 15, obst: [...obst, { x: 0, y: 0, w: W, h: gy }] }) || { x: Math.max(gx, Math.min(gx + gw - bw, cx - bw / 2)), y: Math.max(gy, cy - 30), lx: cx, ly: cy - 15 };
@@ -2647,6 +2701,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
         const f = moldura({ fmt: "retrato", rep: "interativa", hostQ: "pagina", largura });
         alvo.replaceChildren(f);
         f._inst = desenharPalco(f);   // altura: o cartão ocupa a tela e o palco, o que sobra (lab-viz.css)
+        capaImagem(f);
         return;
       }
       const fmt = formatoFluido(largura);
@@ -2654,6 +2709,21 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
       alvo.replaceChildren(f);
       f.querySelector(".viz-corpo").style.height = `${Math.round(largura * ALTURA_GRAFICO[fmt])}px`;
       desenharPalco(f);
+    }
+    /** Capa com `imagem: <id de cartão>`: o gráfico daquele cartão, estático e esmaecido, ilustra a capa (proposta,
+     *  pesquisador 2026-10-12: "capa atraente, instigante; pode ter uma imagem que remeta à visualização principal"). */
+    function capaImagem(f) {
+      const alvoI = f.querySelector(".capa-imagem"), K = cartaoAtual(), ref = K?.imagem && P.cartoes.find((k) => k.id === K.imagem);
+      if (!alvoI || !ref) return;
+      const w = alvoI.clientWidth, h = alvoI.clientHeight;
+      if (w < 60 || h < 60) return;
+      const ff = el("div"); Object.assign(ff.dataset, { fmt: "retrato", rep: "estatica", host: "imagem" });
+      const pal = el("div", { class: "viz-palco", style: `width:${w}px;height:${h}px;position:relative` });
+      ff._palco = pal; ff._palcoCompa = null; ff._lado = false;
+      ff.append(pal); alvoI.append(ff);
+      const antes = est.cartao;
+      est.cartao = ref.id;
+      try { desenharPalco(ff); } catch (erro) { alvoI.replaceChildren(); } finally { est.cartao = antes; }
     }
     function falhou(erro) {
       alvo.replaceChildren(el("p", { class: "viz-vazio", text: `Não foi possível carregar os dados desta escolha (${erro.message || erro}).` }));
@@ -2771,7 +2841,12 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
     const pts = cena.append("g").selectAll("circle").data(com).join("circle")
       .attr("data-id", (l) => l.id).attr("data-chave", C.chave).attr("cx", (l) => porId.get(l.id).x).attr("cy", (l) => porId.get(l.id).y).attr("r", (l) => porId.get(l.id).r)
       .attr("fill", (l) => C.cor(l) ?? "none").attr("stroke", comOSM ? tok("cor-texto") : tok("cor-superficie")).attr("stroke-width", comOSM ? 0.8 : 0.6).attr("vector-effect", "non-scaling-stroke");
-    const aplicarT = (t) => { cena.attr("transform", t); pts.attr("r", (l) => porId.get(l.id).r / Math.sqrt(t.k)); desenharRuas(t); };
+    let tAtual = d3.zoomIdentity, rafZoom = 0;
+    const aoZoom = [];   // quem acompanha o zoom (anotações presas aos pontos)
+    const aplicarT = (t) => {
+      tAtual = t; cena.attr("transform", t); pts.attr("r", (l) => porId.get(l.id).r / Math.sqrt(t.k)); desenharRuas(t);
+      if (aoZoom.length && !rafZoom) rafZoom = requestAnimationFrame(() => { rafZoom = 0; aoZoom.forEach((f) => f()); });
+    };
     if (C.interativa) {
       C.ligar(pts);
       const aviso = el("div", { class: "aviso-roda", hidden: "" });
@@ -2807,10 +2882,19 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
         el("span", { class: "rot-mini", text: `${cTam.rotulo || "Tamanho"}:` }),
         ...Object.entries(cTam.valores).map(([v, r]) => el("button", { type: "button", "aria-pressed": forma === v, onclick: () => C.trocar(() => { est[cTam.id] = v; }) }, r))));   // vale também para o gráfico
       if (!est.cam) desenharRuas(d3.zoomIdentity);
-    } else aplicarT(est.cam ? camT(est.cam) : d3.zoomIdentity);   // a imagem sai com o enquadramento do momento
+    } else {   // a imagem sai com o enquadramento do momento; com um local escolhido, centrada nele (o recorte da imagem é outro)
+      const nSel = est.cam && est.sel ? porId.get(est.sel) : null;
+      aplicarT(est.cam ? camT(nSel ? { centro: proj.invert([nSel.x, nSel.y]), k: est.cam.k } : est.cam) : d3.zoomIdentity);
+    }
     if (C.naImagem && comOSM) svg0.append("text").attr("x", W - 4).attr("y", H - 4).attr("text-anchor", "end").attr("font-size", 9).attr("fill", tok("cor-texto-secundario"))
       .attr("paint-order", "stroke").attr("stroke", tok("cor-superficie")).attr("stroke-width", 3).text("© colaboradores do OpenStreetMap");
-    return { posicao: (id) => { const n = porId.get(id); return n ? [n.x, n.y] : null; },
+    return { posicao: (id) => {   // na tela, com o zoom do momento; fora do quadro, sem anotação
+        const n = porId.get(id);
+        if (!n) return null;
+        const [x, y] = tAtual.apply([n.x, n.y]);
+        return x < 0 || y < 0 || x > W || y > H ? null : [x, y];
+      },
+      aoZoom: (f) => aoZoom.push(f),
       tamanho: bolhas ? { sc: escTam(est.cam?.k || 1), rotulo: rotTam } : null };
   };
 
@@ -2931,11 +3015,15 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
    *  `cor` de cada item, ex.: a cor do grupo), formato (int | pct | pp | brl | dec1), destaque (rótulo em destaque: os
    *  demais esmaecem), valor_ref + rotulo_ref (barra fina de comparação, ex.: 2022). */
   adaptadores.barras = (C) => {
-    const { alvo, opc } = C, L = (C.dados || []).filter(Boolean);
+    const { alvo, opc } = C, kR = opc.rotulo || "rotulo", kV = opc.valor || "valor", kN = opc.nota_valor, kRef = opc.valor_ref;
+    // ordem (pesquisador, 2026-10-12): da maior para a menor por padrão; `ordem: crescente`, ou `dados` (a ordem do Python)
+    const L0 = (C.dados || []).filter(Boolean), ordem = opc.ordem || "decrescente";
+    const L = ordem === "dados" ? L0 : [...L0].sort((a, b) => (ordem === "crescente" ? 1 : -1) * ((a[kV] ?? -Infinity) - (b[kV] ?? -Infinity)));
     if (!L.length) { alvo.append(el("div", { class: "viz-vazio", text: "Sem dados para esta escolha." })); return null; }
-    const W = alvo.clientWidth, H = Math.max(160, alvo.clientHeight), kR = opc.rotulo || "rotulo", kV = opc.valor || "valor", kN = opc.nota_valor, kRef = opc.valor_ref;
-    const fmt = fmtNum(opc.formato), passo = Math.min(kRef ? 44 : 40, (H - (opc.titulo_valor ? 18 : 2) - 4) / L.length), bh = Math.max(6, Math.min(26, passo * (kRef ? 0.5 : 0.62)));
-    const topo = Math.max(opc.titulo_valor ? 18 : 2, (H - L.length * passo) / 2);   // poucas barras: bloco no meio do palco
+    const comEixo = opc.eixo !== false, hEixo = comEixo ? 22 : 0;   // eixo dos valores no pé, por padrão (`eixo: false` tira)
+    const W = alvo.clientWidth, H = Math.max(160, alvo.clientHeight);
+    const fmt = fmtNum(opc.formato), passo = Math.min(kRef ? 44 : 40, (H - (opc.titulo_valor ? 18 : 2) - 4 - hEixo) / L.length), bh = Math.max(6, Math.min(26, passo * (kRef ? 0.5 : 0.62)));
+    const topo = Math.max(opc.titulo_valor ? 18 : 2, (H - hEixo - L.length * passo) / 2);   // poucas barras: bloco no meio do palco
     const xl = Math.min(140, W * 0.38), dirTxt = kN ? 92 : kRef ? 78 : 52;
     const max = d3.max(L, (d) => Math.max(d[kV] || 0, kRef ? d[kRef] || 0 : 0)) || 1;
     const sx = d3.scaleLinear().domain([0, max]).range([0, Math.max(30, W - xl - 8 - dirTxt)]);
@@ -2943,6 +3031,14 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
     const dest = opc.destaque != null ? String(opc.destaque) : null, apagado = (d) => dest !== null && String(d[kR]) !== dest && String(d.id) !== dest;
     const svg = svgDe(C, W, H, `${opc.titulo_valor || "Barras"}: ${L.map((d) => `${d[kR]} ${fmt(d[kV])}${kRef && d[kRef] != null ? ` (${opc.rotulo_ref || "antes"}: ${fmt(d[kRef])})` : ""}${kN ? ` (${d[kN]} ${opc.nota_rotulo || ""})` : ""}`).join("; ")}.`);
     if (opc.titulo_valor) svg.append("text").attr("x", 0).attr("y", topo - 7).attr("font-size", 10.5).attr("fill", tok("cor-texto-secundario")).text(opc.titulo_valor);
+    if (comEixo) {   // grade leve atrás das barras e números no pé
+      const yb = topo + L.length * passo, ge = svg.append("g").attr("class", "eixo-barras");
+      for (const t of sx.ticks(W < 360 ? 3 : 4)) {
+        ge.append("line").attr("x1", xl + sx(t)).attr("x2", xl + sx(t)).attr("y1", topo - 2).attr("y2", yb + 2).attr("stroke", tok("cor-grade"));
+        ge.append("text").attr("x", xl + sx(t)).attr("y", yb + 14).attr("text-anchor", "middle").attr("font-size", 10.5).attr("fill", tok("cor-texto-secundario")).text(fmtEixo(opc.formato)(t));
+      }
+      ge.append("line").attr("x1", xl).attr("x2", xl).attr("y1", topo - 2).attr("y2", yb + 2).attr("stroke", tok("cor-eixo"));
+    }
     L.forEach((d, i) => {
       const y = topo + i * passo + (passo - bh - (kRef ? 6 : 0)) / 2, cy = y + bh / 2 + 4, c = corDo(d), op = apagado(d) ? 0.35 : 1;
       const k = String(d.id ?? d[kR]);
@@ -3514,7 +3610,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
     const linhas = T.map((t, i) => Object.fromEntries([["t", t], ...S.map((s) => [s.id, s.valores[i] ?? 0])]));
     const pilhaDe = (b) => { const ks = S.map((s) => s.id); return d3.stack().keys(b ? [b, ...ks.filter((k) => k !== b)] : ks)(linhas); };
     const maxSob = d3.max(S.flatMap((s) => s.valores.filter((v) => v != null))), maxEmp = multi ? d3.max(pilhaDe(null).at(-1), (d) => d[1]) : maxSob;
-    const larguraRot = multi ? 10 + 6.6 * d3.max(S, (s) => fmt(s.valores.at(-1) ?? 0).length) : 12;
+    const larguraRot = 10 + 6.6 * d3.max(S, (s) => fmt(s.valores.at(-1) ?? 0).length);   // o rótulo do fim cabe (também com uma série)
     const m = { t: alternar ? 32 : 10, b: 20, l: margemEixo(Math.max(maxSob, emp || alternar ? maxEmp : 0), D.formato), r: larguraRot };
     const sx = d3.scalePoint().domain(T).range([m.l, W - m.r]);
     const sy = d3.scaleLinear().range([H - m.b, m.t]);
@@ -3593,8 +3689,10 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
         .attr("fill", Lab.tinta(c)).style("fill", Lab.tinta(c)).style("font-size", "10px").attr("pointer-events", "none");
       segs.push({ i, s, r, t });
     }));
+    const cabeTot = sx.step() >= 6.4 * d3.max(tot, (t) => compacto(t).length) + 4;   // colunas estreitas: só o 1º e o último total
     const totais = Gs.map((g, i) => svg.append("text").attr("x", sx(g) + sx.bandwidth() / 2).attr("text-anchor", "middle").attr("font-size", 10.5).attr("font-weight", 700)
-      .attr("fill", tok("cor-texto")).style("fill", tok("cor-texto")).style("font-size", "10.5px").attr("pointer-events", "none").text(compacto(tot[i])));
+      .attr("fill", tok("cor-texto")).style("fill", tok("cor-texto")).style("font-size", "10.5px").attr("pointer-events", "none")
+      .attr("display", cabeTot || i === 0 || i === Gs.length - 1 ? null : "none").text(compacto(tot[i])));
     const meio = svg.append("line").attr("x1", m.l).attr("x2", W - m.r).attr("stroke", tok("cor-texto")).attr("stroke-dasharray", "2 3").attr("pointer-events", "none");
     const desenhar = (animar) => {
       sy.domain([0, prop ? 100 : d3.max(tot) || 1]).nice();
@@ -3640,9 +3738,14 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
     const m = { l: largRot + 8 + 6.2 * fmt(d3.min(todos)).length, r: 14 + 6.2 * fmt(d3.max(todos)).length, t: 6, b: 30 };
     const sx = d3.scaleLinear().domain(d3.extent(todos.filter((v) => v != null))).nice().range([m.l, W - m.r]);
     const passo = Math.min(46, (H - m.t - m.b) / L.length);
+    // poucas linhas: o bloco fica no meio do palco e o eixo logo abaixo dele (não no rodapé, com um vão no meio)
+    const folgaEixo = D.eixo ? 16 : 4;   // o nome do eixo fica entre a última linha e o eixo
+    const sobraV = Math.max(0, H - (m.t + passo * L.length + m.b + folgaEixo));
+    m.t += sobraV / 2;
+    const Hb = m.t + passo * L.length + m.b + folgaEixo;
     const svg = svgDe(C, W, H, (D.eixo || "Pontos conectados") + ": " + L.map((l) => faixa ? `${l.rotulo} de ${fmt(l.min)} a ${fmt(l.max)}, ${D.marcador_rotulo || "marcador"} ${fmt(l.marcador)}`
       : `${l.rotulo}: ${(D.pontos || []).map((p) => `${p.rotulo} ${fmt(l.valores[p.id])}`).join(", ")}`).join("; "));
-    eixoX(svg, sx, W, H, m, D.eixo);
+    eixoX(svg, sx, W, Hb, m, D.eixo);
     L.forEach((l, i) => {
       const y = m.t + passo * i + passo / 2;
       svg.append("text").attr("x", 0).attr("y", y + 4).attr("font-size", 11.5).attr("font-weight", 600).attr("fill", tok("cor-texto")).text(curto(l.rotulo, Math.floor(largRot / 7.2)));
@@ -3701,7 +3804,7 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
     const rotulos = (gg, x0, y0, w, h, t1, t2, cor, px = 10.5) => {
       if (w > 34 && h > 16) gg.append("text").attr("x", x0 + 4).attr("y", y0 + 13).attr("font-size", px).attr("font-weight", 600).attr("fill", Lab.tinta(cor)).attr("pointer-events", "none")
         .text(curto(t1, Math.floor((w - 6) / (px * 0.6))));
-      if (t2 && w > 44 && h > 30) gg.append("text").attr("x", x0 + 4).attr("y", y0 + 26).attr("font-size", 10).attr("fill", Lab.tinta(cor)).attr("pointer-events", "none").text(t2);
+      if (t2 && w > 44 && h > 30) gg.append("text").attr("x", x0 + 4).attr("y", y0 + 26).attr("font-size", 10).attr("fill", Lab.tinta(cor)).attr("pointer-events", "none").text(curto(t2, Math.floor((w - 6) / 6)));
     };
     // nível de cima: blocos dos grupos (cabeçalho com nome e total) e os itens dentro
     const topo = () => {
@@ -3835,7 +3938,8 @@ button.item-leg.ativo{border-color:var(--cor-borda);color:var(--cor-texto)}
     const temValor = NV[0].soma.some((v) => v > 0);
     let modo = est[`${chave}:tam`] || (C.opc.tamanho === "valor" && temValor ? "valor" : "n");
     const ult = NV[Z];
-    const proj = d3.geoMercator().fitExtent([[16, 16], [W - 16, H - 16]], { type: "MultiPoint", coordinates: ult.lon.map((x, i) => [x, ult.lat[i]]) });
+    const topoCtl = C.opc.alternar && C.interativa && !C.naImagem ? 44 : 16;   // o controle de tamanho não cobre os grupos do alto
+    const proj = d3.geoMercator().fitExtent([[16, topoCtl], [W - 16, H - 16]], { type: "MultiPoint", coordinates: ult.lon.map((x, i) => [x, ult.lat[i]]) });
     const P = NV.map((nv) => nv.lon.map((x, i) => proj([x, nv.lat[i]])));
     // caixa de cada grupo (para ampliar até ele): dos grupos do último nível para cima
     const caixa = NV.map((nv) => nv.n.map(() => [Infinity, Infinity, -Infinity, -Infinity]));
