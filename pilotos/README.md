@@ -18,5 +18,6 @@ um produto (index.html, prévia do link, dados que a página carrega e README). 
 | [Quem lidera o voto no Piauí](https://cajazeiraalexandre.github.io/pilotos/quem-lidera-o-voto-pi/) | story | rascunho (piloto) | `projetos/eleicoes/produtos/2026-10_quem-lidera-o-voto-pi` | 0.9 MB |
 | [Onde Lula perdeu espaço e há mais votos em disputa](https://cajazeiraalexandre.github.io/pilotos/votos-em-disputa/) | visualizacao | publicado | `projetos/eleicoes/produtos/2026-10_votos-em-disputa` | 22.8 MB |
 
-Páginas de piloto ficam fora dos buscadores (`noindex`) e trazem o selo "Versão de teste". O código que refaz cada
+Páginas de piloto ficam fora dos buscadores (`noindex`), trazem o selo "Versão de teste" e contam visitas com o
+GoatCounter (sem cookies nem dados pessoais). O código que refaz cada
 número fica no laboratório; produtos que passarem a definitivos vão para o repositório do projeto (ex.: eleicoes).
