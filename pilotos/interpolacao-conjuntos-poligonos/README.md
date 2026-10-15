@@ -14,7 +14,7 @@ e a opção de testar com shapefiles ou GeoJSON próprios.
 | — (casos sintéticos) | `data/casos.json`, gerado por `analise/casos_sinteticos.py` (seeds fixas) | formas desenhadas para reproduzir a situação das Figs. 7, 9, 10 e 11 do artigo |
 | `geobr.municipios_historicos` | malhas simplificadas 1991, 2000, 2010, 2022 (manifesto) | Ipea/geobr, a partir do IBGE |
 | `pi.territorios_desenvolvimento` | 2017 | Lei 6.967/2017 (lista da Wikipédia, revisão fixada) |
-| `mapbiomas.alerta_desmatamento` | consulta de 2026-10-15 (base inteira em download; recorte do território já baixado) | MapBiomas Alerta, CC BY 4.0 |
+| `mapbiomas.alerta_desmatamento` | consulta de 2026-10-15 (base inteira: 542.543 alertas, padronizada) | MapBiomas Alerta, CC BY 4.0 |
 
 Caso real (seção 7): Território Serra da Capivara, 1991 → 2000 e 2010 → 2022 (controle), gerado por
 `analise/caso_municipios.py`. Limites estaduais dos EUA (Fig. 9 real): não confirmados.
