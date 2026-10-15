@@ -1,6 +1,6 @@
 # Interpolação entre conjuntos de polígonos
 
-**Tipo:** nota-tecnica (variante interativa) · **Projeto:** metodos-e-recursos · **Status:** rascunho 0.2 (protótipo em avaliação; 0.1 nos pilotos)
+**Tipo:** nota-tecnica (variante interativa) · **Projeto:** metodos-e-recursos · **Status:** rascunho 0.3 (piloto em avaliação, nos pilotos desde 2026-10-15)
 
 ## Pergunta
 Como animar, de forma automática e suave, a passagem entre dois mapas compostos por vários polígonos que se dividem, se
