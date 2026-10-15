@@ -35,8 +35,10 @@ PYTHONPATH=nucleo:. python -m labdados.viz og projetos/educacao/produtos/2026-10
 |---|---|---|---|
 | Propostas de roteiro | Claude (Claude Code, Anthropic) | cinco propostas (L0018) | escolha do pesquisador (1 e 4), 2026-10-14 |
 | Dados e textos | Claude (Claude Code) | preparo dos cartões e textos da primeira versão | pendente |
+| Ajustes de 2026-10-15 | Claude (Claude Code) | salário no topo da carreira, governos em faixas coloridas nas séries, início em 2002, cores por governo, aviso de teste | revisão do pesquisador pendente |
 
 ## Pendências
+- Validar os ajustes de 2026-10-15 (produto.yaml › ajustes_2026_10_15), em especial a paleta por governo e o recorte padrão (região imediata).
 - Roteiro detalhado e prancha (L0018, portão 2).
 - Validar as escolhas provisórias do salário: GED na pontuação máxima até 2005; mês de referência (posição da edição até 2012; dezembro desde 2013); 2009 pela edição nº 48.
 - Docentes da rede profissional antes de 2013.

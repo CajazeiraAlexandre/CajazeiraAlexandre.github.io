@@ -37,8 +37,10 @@ PYTHONPATH=nucleo:. python -m labdados.viz og projetos/educacao/produtos/2026-10
 | Proposta e qualidade | Claude (Claude Code, Anthropic) | propor método, levantar fontes e achados (máscara de 2000–2007, desmembramentos, intermitência) | decisões do pesquisador, 2026-10-14 |
 | Dados | Claude (Claude Code) | escrever os pipelines (escolaridade, novos campi) e o preparo | relatório de qualidade validado; conferência dos números pendente |
 | Página | Claude (Claude Code) | escrever o componente de animação e os textos | teste de papel aprovado; revisão final pendente |
+| Ajustes de 2026-10-15 | Claude (Claude Code) | recortes do mapa, ▶ desde 2002, imagem fiel à tela, cores por governo (validadas com o script da skill dataviz), aviso de teste | revisão do pesquisador pendente |
 
 ## Pendências
+- Validar os ajustes de 2026-10-15 (produto.yaml › ajustes_2026_10_15), em especial a paleta por governo e o recorte padrão (região imediata).
 - Retratos dos presidentes (só com licença conferida, foto a foto; hoje as iniciais).
 - Situação de cada novo campus (anunciado × autorizado a funcionar), pelas portarias do MEC.
 
