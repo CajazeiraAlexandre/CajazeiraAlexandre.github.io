@@ -16,6 +16,12 @@ território e município (mapa realçado + barras de 2026 com a fina de 2022). `
 Versão 0.1 (10/10/2026): página escrita à mão (`src/legado/`), substituída em 12/10/2026 pela migração para o
 declarativo, por decisão do pesquisador; o roteiro validado (v5) não mudou.
 
+Versão 0.3 (14/10/2026): regerada com os componentes atuais do laboratório e revista — roteiro v6 (cartões
+autossuficientes, Q-082: título com lugar, ano e cargo), card do mapa com contexto (Q-087), barras ordenadas e com eixo
+(Q-085), capa com o mapa do c1-3 (Q-084), chapéu e "Em foco" na imagem do cartão (Q-083) e, **em teste** (Q-093,
+aberta), o voo da câmera entre cartões com mapa (c1-3 → c1-4 → c2-1, c4-1 → c4-2 e c5-1 → c5-2 → c5-3). A conferência
+das frases da v6 na prancha (`roteiro.html`) segue pendente.
+
 ## Dados
 Mesma base do produto de origem (`../2026-10_forcas-politicas-pi/data/base_forcas_pi.json.gz`, gerada por
 `analise/forcas_pi.py`) e os contornos da malha municipal do IBGE 2022 (`analise/html_forcas_pi.contornos`). Datasets:
@@ -37,9 +43,13 @@ PT/PV/PCdoB, PSD, MDB, União Progressista (PP + União Brasil) e Outros.
   OpenStreetMap, bloqueado em páginas abertas por arquivo.
 - *Bolhas em escala fiel* no cartão c1-4 (`escala_bolhas: fiel`, exceção prevista na L0006): a área é sempre
   proporcional aos votos, inclusive Teresina — o cartão fala justamente do peso de Teresina (21,8% dos votos).
-- *Palcos de barras e Sankey* desenhados no `app.js` (estados e transições entre cartões); o motor do story é o mesmo
-  do piloto (`projetos/cultura/produtos/2026-10_rouanet-onde-acontece`); a promoção para `web/componentes/` fica para
-  depois, com ADR.
+- *Componentes comuns:* barras, mapa, quadros e Sankey vêm do renderizador do laboratório (`lab-viz.js`, L0015/L0016),
+  com estado entre cartões; o desenho próprio da versão 0.1 (`src/legado/app.js`) ficou só como histórico.
+- *Card do mapa com contexto* (regra do DS, `design.yaml › padroes.dicas`, Q-087): o líder com cargo e ano, o 2º
+  colocado e a margem, quem liderava em 2022 e o peso da unidade nos válidos do estado; no mapa de prefeitos, se o
+  prefeito é do grupo mais votado para deputado estadual; nas perdas, o % do grupo nas duas eleições. Linhas prontas
+  em `src/preparar_story.py › camadas` (L0002). Percentuais e margem são arredondados separadamente: a margem pode
+  diferir em 0,1 p.p. da subtração dos dois percentuais exibidos.
 - *Perdas por grupo:* o Explorar começa pelo PT/PV/PCdoB e segue a ordem fixa do EL0006 (não o ranking de perdas).
 - *Prefeito:* nome de urna como registrado no TSE (em maiúsculas).
 
@@ -57,6 +67,7 @@ PYTHONPATH=nucleo:. python -m labdados.viz og projetos/eleicoes/produtos/2026-10
 | Roteiro | Claude Code (Claude Opus 5.5, Anthropic) | rascunho dos capítulos e frases a partir do "Forças políticas no Piauí" | cinco rodadas de comentários; validado pelo pesquisador (10/10/2026) |
 | Código | Claude Code | `prancha.py`, `preparar.py`, `app.js`, modelo HTML | revisão do produto pelo pesquisador (pendente) |
 | Migração (12/10/2026) | Claude Code | `preparar_story.py`, `viz.yaml` e extensões do renderizador comum (mapa e Sankey em estado entre cartões, pilha mapa + barras) | revisão do story no celular pelo pesquisador (pendente) |
+| Revisão (14/10/2026) | Claude Code | títulos completados (Q-082), linhas do card do mapa (Q-087), regeneração com os componentes atuais | 19 cartões percorridos no navegador sem erro; conferência das frases e do voo da câmera no celular pelo pesquisador (pendente) |
 | Números | — | nenhum número digitado: frases, tabelas e contagens preenchidas por código a partir da base | conferência na prancha (tabela de marcadores) |
 
 Portaria CNPq nº 2.664/2026. A responsabilidade pelo conteúdo é do pesquisador; a IA não é autora.

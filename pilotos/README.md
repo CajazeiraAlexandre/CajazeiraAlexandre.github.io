@@ -15,7 +15,7 @@ um produto (index.html, prévia do link, dados que a página carrega e README). 
 | [Mais perto ou mais longe? As regiões do Brasil desde 2002](https://cajazeiraalexandre.github.io/pilotos/brasil-fim-de-cada-governo/) | story | rascunho (piloto) | `projetos/eleicoes/produtos/2026-10_brasil-fim-de-cada-governo` | 0.7 MB |
 | [Onde estão os votos no Piauí](https://cajazeiraalexandre.github.io/pilotos/onde-estao-os-votos-pi/) | story | rascunho (piloto) | `projetos/eleicoes/produtos/2026-10_onde-estao-os-votos-story` | 1.0 MB |
 | [Onde se vota no Piauí](https://cajazeiraalexandre.github.io/pilotos/onde-se-vota-pi/) | visualizacao | rascunho (piloto) | `projetos/eleicoes/produtos/2026-10_onde-se-vota-pi` | 0.9 MB |
-| [Quem lidera o voto no Piauí](https://cajazeiraalexandre.github.io/pilotos/quem-lidera-o-voto-pi/) | story | rascunho (piloto) | `projetos/eleicoes/produtos/2026-10_quem-lidera-o-voto-pi` | 0.9 MB |
+| [Quem lidera o voto no Piauí](https://cajazeiraalexandre.github.io/pilotos/quem-lidera-o-voto-pi/) | story | rascunho (piloto) | `projetos/eleicoes/produtos/2026-10_quem-lidera-o-voto-pi` | 1.0 MB |
 | [Onde Lula perdeu espaço e há mais votos em disputa](https://cajazeiraalexandre.github.io/pilotos/votos-em-disputa/) | visualizacao | publicado | `projetos/eleicoes/produtos/2026-10_votos-em-disputa` | 22.8 MB |
 
 Páginas de piloto ficam fora dos buscadores (`noindex`), trazem o selo "Versão de teste" e contam visitas com o
