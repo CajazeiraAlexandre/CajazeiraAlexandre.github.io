@@ -18,14 +18,12 @@ Proposta 1 (a rede que foi para o interior) + segundo ato da proposta 4 (as pess
 | `inep.censo_educacao_superior` | docentes em exercício (Sinopses 2001–2008, microdados 2009–2024) |
 | `tesouro.despesas_mensais_uniao` | assistência estudantil 2008–2013 (`analise/tesouro_acoes_educacao.py`) |
 | `transparencia.despesa_funcional_educacao` | assistência estudantil 2014–2025 |
-| `ibge.ipca_mensal`, `ibge.inpc_mensal` | correção monetária: IPCA no gasto, INPC no salário (L0019) |
-| `mgi.tabela_remuneracao` | salário docente: Tabela de Remuneração (2002–2012) e anexos da Lei 12.772 (2013–2024) — `fontes/mgi/baixar_tabela_remuneracao.py` |
+| `ibge.ipca_mensal` | correção monetária: IPCA no gasto (L0019) |
 
 ## Como reproduzir
 ```bash
 python projetos/educacao/analise/preparar_evolucao_rede_federal.py
 python projetos/educacao/analise/tesouro_acoes_educacao.py
-PYTHONPATH=nucleo:. python fontes/mgi/baixar_tabela_remuneracao.py
 python projetos/educacao/produtos/2026-10_governos-e-rede-federal/src/preparar_story.py
 PYTHONPATH=nucleo:. python -m labdados.viz og projetos/educacao/produtos/2026-10_governos-e-rede-federal
 ```
@@ -36,11 +34,13 @@ PYTHONPATH=nucleo:. python -m labdados.viz og projetos/educacao/produtos/2026-10
 | Propostas de roteiro | Claude (Claude Code, Anthropic) | cinco propostas (L0018) | escolha do pesquisador (1 e 4), 2026-10-14 |
 | Dados e textos | Claude (Claude Code) | preparo dos cartões e textos da primeira versão | pendente |
 | Ajustes de 2026-10-15 | Claude (Claude Code) | salário no topo da carreira, governos em faixas coloridas nas séries, início em 2002, cores por governo, aviso de teste | revisão do pesquisador pendente |
+| Ampliação e áreas (2026-10-15) | Claude (Claude Code) | proposta (src/proposta-ampliacao-e-areas.md), medidas por governo, mapa de ampliação, áreas CINE, cartões de Picos | decisões do pesquisador Q1–Q6; conferência dos números pendente |
 
 ## Pendências
+- Validar as escolhas de implementação da ampliação (quebra de fonte dos cursos em 2009; classes por quartis absolutos) — src/proposta-ampliacao-e-areas.md da Visualização.
+- Salário docente retirado do story em 2026-10-15 (pedido do pesquisador).
 - Validar os ajustes de 2026-10-15 (produto.yaml › ajustes_2026_10_15), em especial a paleta por governo e o recorte padrão (região imediata).
 - Roteiro detalhado e prancha (L0018, portão 2).
-- Validar as escolhas provisórias do salário: GED na pontuação máxima até 2005; mês de referência (posição da edição até 2012; dezembro desde 2013); 2009 pela edição nº 48.
 - Docentes da rede profissional antes de 2013.
 
 ## Licença
