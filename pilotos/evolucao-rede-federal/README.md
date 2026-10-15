@@ -1,6 +1,6 @@
 # A evolução da rede federal de ensino
 
-**Tipo:** visualização · **Projeto:** educacao · **Status:** rascunho (piloto)
+**Tipo:** visualização · **Projeto:** educacao · **Status:** rascunho · **Versão:** 0.1 (2026-10-15), fechada para o ambiente de pilotos
 
 ## Pergunta
 Como a rede federal de ensino (institutos e universidades) se espalhou pelo território entre 2000 e 2024, e em cada

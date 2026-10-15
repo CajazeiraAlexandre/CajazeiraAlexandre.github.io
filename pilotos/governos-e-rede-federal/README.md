@@ -1,6 +1,6 @@
 # O que cada governo fez pela rede federal de ensino
 
-**Tipo:** story · **Projeto:** educacao · **Status:** rascunho (primeira versão para avaliação, 2026-10-14)
+**Tipo:** story · **Projeto:** educacao · **Status:** rascunho · **Versão:** 0.1 (2026-10-15), fechada para o ambiente de pilotos
 
 ## Pergunta
 Pergunta central do pesquisador: quem valoriza e interioriza a rede federal de ensino? O story descreve, governo a
