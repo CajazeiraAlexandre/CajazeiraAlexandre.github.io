@@ -15,6 +15,7 @@ e a opção de testar com shapefiles ou GeoJSON próprios.
 | `geobr.municipios_historicos` | malhas simplificadas 1991, 2000, 2010, 2022 (manifesto) | Ipea/geobr, a partir do IBGE |
 | `pi.territorios_desenvolvimento` | 2017 | Lei 6.967/2017 (lista da Wikipédia, revisão fixada) |
 | `mapbiomas.alerta_desmatamento` | consulta de 2026-10-15 (base inteira: 542.543 alertas, padronizada) | MapBiomas Alerta, CC BY 4.0 |
+| `mapbiomas.cobertura_col9` | Coleção 9, recortes de Teresina–Timon e Uruçuí, 1985–2023 | MapBiomas, CC BY 4.0 |
 
 Caso real (seção 7): Território Serra da Capivara, 1991 → 2000 e 2010 → 2022 (controle), gerado por
 `analise/caso_municipios.py`. Limites estaduais dos EUA (Fig. 9 real): não confirmados.
