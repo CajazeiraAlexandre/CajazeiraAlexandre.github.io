@@ -27,6 +27,46 @@
     municipais, por município e região. Código e dados abertos.
   selo: Projeto pessoal
   codigo: https://github.com/CajazeiraAlexandre/eleicoes
+- titulo: 'Onde o 2º turno pode ser decidido em sua cidade: locais de votação, Presidente 2026'
+  ano: 2026
+  veiculo: Eleições 2026 · dados do TSE
+  tipo: painel
+  acesso: aberto
+  link: https://cajazeiraalexandre.github.io/eleicoes/onde-o-2-turno-se-decide/
+  descricao: Em cada local de votação da cidade escolhida, eleitores aptos, votos dos candidatos a presidente no 1º turno
+    de 2026, abstenção e a variação em relação a 2022. Código e dados abertos.
+  selo: Projeto pessoal
+  codigo: https://github.com/CajazeiraAlexandre/eleicoes
+- titulo: Onde o 2º turno para presidente pode ser decidido em sua cidade?
+  ano: 2026
+  veiculo: Eleições 2026 · dados do TSE
+  tipo: story
+  acesso: aberto
+  link: https://cajazeiraalexandre.github.io/eleicoes/2-turno-na-sua-cidade/
+  descricao: Story, cidade a cidade, sobre os lugares em que estão os votos que ainda podem decidir o 2º turno. Código e
+    dados abertos.
+  selo: Projeto pessoal
+  codigo: https://github.com/CajazeiraAlexandre/eleicoes
+- titulo: Onde estão os votos no Piauí
+  ano: 2026
+  veiculo: Eleições no Piauí · dados do TSE e do IBGE
+  tipo: story
+  acesso: aberto
+  link: https://cajazeiraalexandre.github.io/eleicoes/onde-estao-os-votos-pi/
+  descricao: Story sobre onde estão os votos das candidaturas mais votadas no Piauí em 2026 — espalhados pelo estado ou
+    concentrados em poucos municípios — e quais mapas de votos andam juntos. Código e dados abertos.
+  selo: Projeto pessoal
+  codigo: https://github.com/CajazeiraAlexandre/eleicoes
+- titulo: Quem lidera o voto no Piauí
+  ano: 2026
+  veiculo: Eleições no Piauí · dados do TSE e do IBGE
+  tipo: story
+  acesso: aberto
+  link: https://cajazeiraalexandre.github.io/eleicoes/quem-lidera-o-voto-pi/
+  descricao: Quem lidera o voto no Piauí em 2026, como isso se compara às prefeituras de 2024 e o que mudou desde 2022 —
+    o essencial de "Forças políticas no Piauí", em story. Código e dados abertos.
+  selo: Projeto pessoal
+  codigo: https://github.com/CajazeiraAlexandre/eleicoes
 - titulo: Agregador de pesquisas eleitorais O POVO
   ano: 2022
   veiculo: O POVO / DATADOC
