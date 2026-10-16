@@ -43,6 +43,7 @@ PYTHONPATH=nucleo:. python -m labdados.viz og projetos/ciencia-e-tecnologia/prod
 | Roteiro | Claude (Claude Code) | propostas 1–6, roteiro e prancha | proposta 6 e roteiro v2 validados pelo pesquisador, 2026-10-15 |
 | Dados e página | Claude (Claude Code) | analise/series_ct.py (com testes), preparo do story, textos | conferência dos números pendente |
 | Revisão visual (2026-10-16) | Claude (Claude Code) | nomes nas pontas das séries, série tracejada, faixas com variação, sinais nas barras, quadro com cor no sinal (lab-viz.js, componentes.yaml) | avaliação do pesquisador no celular pendente |
+| Ajustes de 2026-10-16 | Claude (Claude Code) | séries em cor (sem cinza), total na área empilhada, c1-4 só CNPq (FNDCT opcional), legenda do mapa recolhida, nota do c1-4 removida | pedidos do pesquisador; avaliação no celular pendente |
 
 ## Pendências
 - Mapa: o roteiro promete bolsas da CAPES por instituição e cidade e programas por cidade; esta versão tem só regiões e estados.
