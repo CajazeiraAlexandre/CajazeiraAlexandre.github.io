@@ -1,6 +1,6 @@
 # Ciência e pós-graduação no Brasil, governo a governo
 
-**Tipo:** story · **Projeto:** ciencia-e-tecnologia · **Status:** rascunho · **Versão:** 0.1 (2026-10-15), no ambiente de pilotos
+**Tipo:** story · **Projeto:** ciencia-e-tecnologia · **Status:** publicado · **Versão:** 1.0 (2026-10-16), em https://cajazeiraalexandre.github.io/pilotos/ciencia-e-pos-graduacao/
 
 ## Pergunta
 O investimento público federal em pesquisa, ciência e tecnologia cresceu ao longo do tempo — em quais governos? Além
@@ -44,6 +44,7 @@ PYTHONPATH=nucleo:. python -m labdados.viz og projetos/ciencia-e-tecnologia/prod
 | Dados e página | Claude (Claude Code) | analise/series_ct.py (com testes), preparo do story, textos | conferência dos números pendente |
 | Revisão visual (2026-10-16) | Claude (Claude Code) | nomes nas pontas das séries, série tracejada, faixas com variação, sinais nas barras, quadro com cor no sinal (lab-viz.js, componentes.yaml) | avaliação do pesquisador no celular pendente |
 | Ajustes de 2026-10-16 | Claude (Claude Code) | séries em cor (sem cinza), total na área empilhada, c1-4 só CNPq (FNDCT opcional), legenda do mapa recolhida, nota do c1-4 removida | pedidos do pesquisador; avaliação no celular pendente |
+| Publicação 1.0 (2026-10-16) | Claude (Claude Code) | Como ler de cada cartão, correção da folha Notas e fontes, conferência externa dos montantes (src/conferencia-externa.md), retirada do selo de teste | publicação aprovada pelo pesquisador |
 
 ## Pendências
 - Mapa: o roteiro promete bolsas da CAPES por instituição e cidade e programas por cidade; esta versão tem só regiões e estados.
