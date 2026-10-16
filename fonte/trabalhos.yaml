@@ -67,6 +67,15 @@
     o essencial de "Forças políticas no Piauí", em story. Código e dados abertos.
   selo: Projeto pessoal
   codigo: https://github.com/CajazeiraAlexandre/eleicoes
+- titulo: Ciência e pós-graduação no Brasil, governo a governo
+  ano: 2026
+  veiculo: Ciência, tecnologia e pós-graduação · dados do MCTI, da CAPES e do Portal da Transparência
+  tipo: story
+  acesso: aberto
+  link: https://cajazeiraalexandre.github.io/pilotos/ciencia-e-pos-graduacao/
+  descricao: O investimento federal em ciência e tecnologia, as bolsas do CNPq e da CAPES e a pós-graduação (programas,
+    alunos e titulados) de 2000 a 2024, governo a governo, com o mapa por estado.
+  selo: Projeto pessoal
 - titulo: Agregador de pesquisas eleitorais O POVO
   ano: 2022
   veiculo: O POVO / DATADOC
