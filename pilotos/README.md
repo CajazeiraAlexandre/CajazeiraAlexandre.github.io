@@ -4,6 +4,7 @@ Ambiente de avaliação de produtos de dados do laboratório (ADR L0017), public
 Gerado por `ferramentas/publicar_pilotos.py` no laboratório — **não editar à mão**: cada pasta é a cópia da página de
 um produto (index.html, prévia do link, dados que a página carrega e README). O resto deste repositório (portfólio,
 `gerar.py`) não é tocado pelo publicador.
+Subpasta `cultura/` (Cultura: fomento e políticas culturais): página própria em <https://cajazeiraalexandre.github.io/pilotos/cultura/>, com a apresentação declarada em `projeto.yaml › pilotos_subpasta`.
 
 | Produto | Tipo | Situação | Origem no laboratório | Tamanho |
 |---|---|---|---|---|
