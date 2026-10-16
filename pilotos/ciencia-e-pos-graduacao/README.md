@@ -42,6 +42,7 @@ PYTHONPATH=nucleo:. python -m labdados.viz og projetos/ciencia-e-tecnologia/prod
 | Fontes | Claude (Claude Code, Anthropic) | levantamento (proposta-fontes.md) e relatório de cobertura | decisões F1–F5, D1–D5 do pesquisador, 2026-10-15 |
 | Roteiro | Claude (Claude Code) | propostas 1–6, roteiro e prancha | proposta 6 e roteiro v2 validados pelo pesquisador, 2026-10-15 |
 | Dados e página | Claude (Claude Code) | analise/series_ct.py (com testes), preparo do story, textos | conferência dos números pendente |
+| Revisão visual (2026-10-16) | Claude (Claude Code) | nomes nas pontas das séries, série tracejada, faixas com variação, sinais nas barras, quadro com cor no sinal (lab-viz.js, componentes.yaml) | avaliação do pesquisador no celular pendente |
 
 ## Pendências
 - Mapa: o roteiro promete bolsas da CAPES por instituição e cidade e programas por cidade; esta versão tem só regiões e estados.

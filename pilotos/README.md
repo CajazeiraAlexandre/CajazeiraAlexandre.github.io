@@ -7,7 +7,7 @@ um produto (index.html, prévia do link, dados que a página carrega e README). 
 
 | Produto | Tipo | Situação | Origem no laboratório | Tamanho |
 |---|---|---|---|---|
-| [Ciência e pós-graduação no Brasil, governo a governo](https://cajazeiraalexandre.github.io/pilotos/ciencia-e-pos-graduacao/) | story | rascunho (piloto) | `projetos/ciencia-e-tecnologia/produtos/2026-10_ciencia-e-pos-graduacao` | 0.8 MB |
+| [Ciência e pós-graduação no Brasil, governo a governo](https://cajazeiraalexandre.github.io/pilotos/ciencia-e-pos-graduacao/) | story | rascunho (piloto) | `projetos/ciencia-e-tecnologia/produtos/2026-10_ciencia-e-pos-graduacao` | 0.9 MB |
 | [Laboratório de hipóteses: estatística descritiva e análise exploratória de dados](https://cajazeiraalexandre.github.io/pilotos/laboratorio-de-hipoteses/) | didatico | rascunho (piloto) | `projetos/dataviz-didatico/produtos/2026-10_laboratorio-de-hipoteses` | 1.0 MB |
 | [A evolução da rede federal de ensino](https://cajazeiraalexandre.github.io/pilotos/evolucao-rede-federal/) | visualizacao | rascunho (piloto) | `projetos/educacao/produtos/2026-10_evolucao-rede-federal` | 1.9 MB |
 | [O que cada governo fez pela rede federal de ensino](https://cajazeiraalexandre.github.io/pilotos/governos-e-rede-federal/) | story | rascunho (piloto) | `projetos/educacao/produtos/2026-10_governos-e-rede-federal` | 2.3 MB |
