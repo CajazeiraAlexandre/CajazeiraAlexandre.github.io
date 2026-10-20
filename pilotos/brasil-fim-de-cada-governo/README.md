@@ -35,6 +35,8 @@ PYTHONPATH=nucleo:. python -m labdados.viz og projetos/eleicoes/produtos/2026-10
 ```
 
 ## Uso de IA
+O desenho do produto é do pesquisador — pergunta, briefing, recortes, decisões de método e validações —, assim como os modelos e as especificações do laboratório em que o assistente trabalha (CLAUDE.md, modelos e ADRs), amadurecidos por ele com apoio dos agentes. A tabela registra o que a IA executou dentro desse quadro (Portaria CNPq nº 2.664/2026; a responsabilidade pelo conteúdo é do pesquisador e a IA não é autora).
+
 | Etapa | Ferramenta | Finalidade | Revisão humana |
 |---|---|---|---|
 | Mapeamento, pipelines, contas, frases e página (2026-10-12) | Claude (Claude Code) | revisão regional pedida pelo pesquisador | narrativa e decisões de método do pesquisador; conferências automáticas sem divergência (salário mínimo × Ipea, PIB, homicídios × Atlas); revisão dos números pendente |

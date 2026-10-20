@@ -37,6 +37,8 @@ PYTHONPATH=nucleo:. python -m labdados.viz og projetos/ciencia-e-tecnologia/prod
 - Mapa: classes em relação à média do Brasil no mesmo ano, escala marrom ↔ verde-azulado (vermelho e azul são cores de governo).
 
 ## Uso de IA
+O desenho do produto é do pesquisador — pergunta, briefing, recortes, decisões de método e validações —, assim como os modelos e as especificações do laboratório em que o assistente trabalha (CLAUDE.md, modelos e ADRs), amadurecidos por ele com apoio dos agentes. A tabela registra o que a IA executou dentro desse quadro (Portaria CNPq nº 2.664/2026; a responsabilidade pelo conteúdo é do pesquisador e a IA não é autora).
+
 | Etapa | Ferramenta | Finalidade | Revisão humana |
 |---|---|---|---|
 | Fontes | Claude (Claude Code, Anthropic) | levantamento (proposta-fontes.md) e relatório de cobertura | decisões F1–F5, D1–D5 do pesquisador, 2026-10-15 |

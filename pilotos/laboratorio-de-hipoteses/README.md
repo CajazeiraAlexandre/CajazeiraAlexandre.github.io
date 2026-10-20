@@ -45,6 +45,8 @@ pytest tests/test_dataviz_didatico_metricas.py tests/test_dataviz_didatico_parid
 ```
 
 ## Uso de IA
+O desenho do produto é do pesquisador — pergunta, briefing, recortes, decisões de método e validações —, assim como os modelos e as especificações do laboratório em que o assistente trabalha (CLAUDE.md, modelos e ADRs), amadurecidos por ele com apoio dos agentes. A tabela registra o que a IA executou dentro desse quadro (Portaria CNPq nº 2.664/2026; a responsabilidade pelo conteúdo é do pesquisador e a IA não é autora).
+
 | Etapa | Ferramenta | Finalidade | Revisão humana |
 |---|---|---|---|
 | Proposta e briefing | Claude (Claude Code, Anthropic) | redigir a proposta, levantar as bases e os campos da API do MDS | decisões do pesquisador em 2026-10-13 (proposta v1–v3) |

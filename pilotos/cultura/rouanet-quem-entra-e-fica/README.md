@@ -44,11 +44,13 @@ PYTHONPATH=nucleo:. python -m labdados.viz og projetos/cultura/produtos/2026-10_
 ```
 
 ## Uso de IA
+O desenho do produto é do pesquisador — pergunta, briefing, recortes, decisões de método e validações —, assim como os modelos e as especificações do laboratório em que o assistente trabalha (CLAUDE.md, modelos e ADRs), amadurecidos por ele com apoio dos agentes. A tabela registra o que a IA executou dentro desse quadro (Portaria CNPq nº 2.664/2026; a responsabilidade pelo conteúdo é do pesquisador e a IA não é autora).
+
 | Etapa | Ferramenta | Finalidade | Revisão humana |
 |---|---|---|---|
-| Propostas de roteiro | Claude Code (Anthropic) | cinco ideias de narrativa a partir do exploratório | pesquisador escolheu base e enxertos |
-| Roteiro e prancha | Claude Code (Anthropic) | redação das frases (com marcadores) e esboços | pesquisador validou cartão a cartão |
-| Números e página | Claude Code (Anthropic) | código dos marcadores, dos dados dos cartões e da página | números conferidos contra o exploratório; revisão final pendente |
+| Propostas de roteiro | Claude Code (Anthropic) | ampliar o briefing e o exploratório do pesquisador em cinco caminhos de narrativa, no modelo do laboratório (L0018) | pesquisador escolheu base e enxertos |
+| Roteiro e prancha | Claude Code (Anthropic) | redigir as frases (com marcadores) e os esboços da proposta escolhida | maturação conduzida pelo pesquisador: validação cartão a cartão, em rodadas, com os retrabalhos pedidos |
+| Números e página | Claude Code (Anthropic) | código dos marcadores, dos dados dos cartões e da página, nos componentes do laboratório | números conferidos contra o exploratório; revisão final pendente |
 
 ## Licença
 Código: MIT · Dados derivados: CC BY 4.0

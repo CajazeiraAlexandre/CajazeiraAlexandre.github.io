@@ -68,6 +68,8 @@ PYTHONPATH=nucleo:. python -m labdados.viz og projetos/cultura/produtos/2026-10_
 A base de origem é gerada por `projetos/cultura/analise/preparar_salic.py` (ver o README do produto SALIC).
 
 ## Uso de IA
+O desenho do produto é do pesquisador — pergunta, briefing, recortes, decisões de método e validações —, assim como os modelos e as especificações do laboratório em que o assistente trabalha (CLAUDE.md, modelos e ADRs), amadurecidos por ele com apoio dos agentes. A tabela registra o que a IA executou dentro desse quadro (Portaria CNPq nº 2.664/2026; a responsabilidade pelo conteúdo é do pesquisador e a IA não é autora).
+
 | Etapa | Ferramenta | Finalidade | Revisão humana |
 |---|---|---|---|
 | Proposta do formato | Claude Code (Claude Opus 5.5, Anthropic) | estrutura de design e interação do tipo story | duas rodadas de comentários; aprovada pelo pesquisador (10/10/2026) |
