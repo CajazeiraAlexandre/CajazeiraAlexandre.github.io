@@ -25,7 +25,7 @@ ADRs: L0002, L0004, L0015, L0018, CN0007, CN0009. Roteiro validado em 2026-10-15
 prancha de leitura em `roteiro.html`). Nenhum número é escrito à mão: as frases usam marcadores preenchidos por
 `src/dados_story.py`, os mesmos da prancha.
 
-Decisões locais: médias das coortes de 2016 a 2020 ponderadas pelos novos de cada coorte; no Explorar, anos alternados da série; caminhos suprimidos (1 a 4 proponentes) fora das somas das trajetórias, como no exploratório.
+Decisões locais: médias das coortes de 2006 a 2020 ponderadas pelos novos de cada coorte; no Explorar, anos alternados da série; caminhos suprimidos (1 a 4 proponentes) fora das somas das trajetórias, como no exploratório.
 
 Versão 2 do roteiro (2026-10-15, propostas aprovadas pelo pesquisador): valor captado pelos novos (conta nova, `analise/salic_indicadores.valor_por_entrada`, com supressão de situações com 1 a 4 proponentes no ano; os totais por ano conferem com os do exploratório) e nota sobre o bloco cinza do Sankey.
 

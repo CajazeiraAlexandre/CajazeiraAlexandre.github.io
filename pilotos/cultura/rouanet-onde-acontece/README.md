@@ -7,7 +7,7 @@ Comunicação visual revista nos quatro stories do projeto (2026-10-16): popups 
 
 ## Versão 0.3 (2026-10-15)
 Roteiro v4, validado pelo pesquisador em 15/10/2026 (`src/roteiro.yaml`; prancha em `roteiro.html`): a concentração em
-cada etapa — a régua e a série 2016–2025, do aprovado ao captado (com o Sankey do funil), quem capta, **dentro das
+cada etapa — a régua e a série 2006–2025, do aprovado ao captado (com o Sankey do funil), quem capta, **dentro das
 cidades** (setores censitários, favelas e comunidades urbanas, periferias metropolitanas e as limitações), onde acontece
 (Sankeys da sede para a execução, por tipo de município e por região) e o que acompanhar (Meta 2). Execução 2019–2025.
 Pergunta: em que etapas o recurso da Lei Rouanet se concentra — e em qual ele começa a se espalhar?
