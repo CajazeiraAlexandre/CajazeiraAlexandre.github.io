@@ -22,6 +22,7 @@ Subpasta `cultura/` (Cultura: fomento e políticas culturais): página própria 
 | [Onde se vota no Piauí](https://cajazeiraalexandre.github.io/pilotos/onde-se-vota-pi/) | visualizacao | rascunho (piloto) | `projetos/eleicoes/produtos/2026-10_onde-se-vota-pi` | 1.0 MB |
 | [Desmatamento no Brasil, governo a governo](https://cajazeiraalexandre.github.io/pilotos/desmatamento-governo-a-governo/) | story | revisao (piloto) | `projetos/meio-ambiente/produtos/2026-10_desmatamento-biomas-governo` | 0.7 MB |
 | [Interpolação entre conjuntos de polígonos](https://cajazeiraalexandre.github.io/pilotos/interpolacao-conjuntos-poligonos/) | nota-tecnica | rascunho (piloto) | `projetos/metodos-e-recursos/produtos/2026-10_interpolacao-conjuntos-poligonos` | 0.9 MB |
+| [HTML e CSS para layout: caderno de estudos e práticas](https://cajazeiraalexandre.github.io/pilotos/caderno-html-css/) | didatico | rascunho (piloto) | `projetos/programacao-web-didatico/produtos/2026-10_caderno-html-css` | 0.2 MB |
 
 Páginas de piloto ficam fora dos buscadores (`noindex`), trazem o selo "Versão de teste" e contam visitas com o
 GoatCounter (sem cookies nem dados pessoais). O código que refaz cada
