@@ -13,7 +13,9 @@ sem inferência estatística. Público: graduação (disciplina de visualizaçã
 - **Parte III · Desafios** (`src/app.js › DESAFIOS`, 2026-10-27): a continuação das cinco expedições do material
   *Antes de analisar* — as quinze hipóteses de trabalho (três por expedição) examinadas com o roteiro da Aplicação 6
   (hipótese, operacionalização, previsão, critério declarado antes, operações, resultado, "contra a hipótese",
-  limites, leitura guiada, código em pandas) e, ao fim, o bloco "Agora você" com os CSVs e o modelo de ficha.
+  limites, leitura guiada, código em pandas) e, ao fim, o bloco "Agora você: novos horizontes" (2026-11-03): o
+  trabalho prático pede hipóteses próprias — outra pergunta sobre os mesmos dados, cruzamento de bases do material ou
+  outra fonte —, com os CSVs e o modelo de ficha; refazer um desafio é possível, mas menos recomendado.
   Dados da Parte III em `analise/preparar_desafios.py` (seções do Piauí, despesa por ação, matrículas do INEP).
 - **Referências e dados** (`src/referencias.yaml`): apresentação (autoria, IA), slides, referências com links, bases (onde e como baixar) e os CSVs do material.
 
