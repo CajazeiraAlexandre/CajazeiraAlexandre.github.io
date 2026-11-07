@@ -1,6 +1,6 @@
 # Onde o fogo se concentra no Território Serra da Capivara
 
-**Tipo:** visualizacao · **Projeto:** rio-piaui · **Status:** rascunho (v0.3, 2026-11-07)
+**Tipo:** visualizacao · **Projeto:** rio-piaui · **Status:** rascunho (v0.4, 2026-11-07)
 
 ## Pergunta
 Onde os focos de calor se concentram no Território Serra da Capivara em cada ano de 2003 a 2025, e como essas manchas
@@ -32,7 +32,8 @@ ajustes e Campos de distância.
   O pesquisador os aprovou em 2026-11-07: raio de 5 km, células de 250 m, margem de 5 km e percentis 80/90/95 com
   limites comuns aos 23 anos. Referência: Queiroz Neto, Santos e Vidal, SIBGRAPI 2016, DOI 10.1109/SIBGRAPI.2016.049.
 - **MR0001 (interpolação):** recurso do artigo de Ramos, Santos e Cavalcante Neto (SIBGRAPI 2019, DOI
-  10.1109/SIBGRAPI.2019.00027). Roda no navegador, como na página do recurso (D6), e entra na página sem cópia à mão:
+  10.1109/SIBGRAPI.2019.00027). Roda no navegador, como na página do recurso (D6), calculada para a área que o mapa
+  mostra (pesquisador, 2026-11-07: "ajustar à vista + teto"; zoom até 11), e entra na página sem cópia à mão:
   `analise/gerar_focos_mskde.py` monta `src/extensao.js`. Buracos ficam fora da animação (D4, em aberto).
 - **Alternativas do MSKDE (pesquisador, 2026-11-07, "Raio e escopo"):** 8 variantes calculadas em Python
   (`analise/mskde_focos_variantes.py`), com o porquê de cada valor em `analise/mskde_focos_variantes.yaml`. A de
@@ -54,7 +55,9 @@ ajustes e Campos de distância.
   - a imagem do ↗ Baixar sai sem fundo;
   - ano inicial 2025;
   - ritmo da animação: 1,5 s de transição e 0,5 s de parada por ano;
-  - contornos simplificados em 125 m, só no desenho.
+  - contornos simplificados em 125 m, só no desenho;
+  - celular (v0.4): mapa com 60% da altura da tela, aberto com +0,35 de zoom; legenda e variante atrás do botão
+    "Legenda"; versão da animação num seletor; botão ⛶ de tela cheia.
 
 ## Como reproduzir
 ```bash
