@@ -1,7 +1,7 @@
 # Projeto final: o seu site com várias páginas
 
 **Tipo:** didatico · **Projeto:** programacao-web-didatico · **Status:** rascunho (piloto 0.5) ·
-**Endereço:** <https://cajazeiraalexandre.github.io/pilotos/projeto-final-web/>
+**Endereço:** <https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-web/>
 
 ## Pergunta
 O que é o projeto final do 4º bimestre de Desenvolvimento Web Front-End (1º ano integrado, IFPI/SRN), como as aulas

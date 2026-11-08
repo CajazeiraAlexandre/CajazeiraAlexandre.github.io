@@ -1,6 +1,6 @@
 # Laboratório de hipóteses: estatística descritiva e análise exploratória de dados
 
-**Tipo:** material didático · **Versão:** 1.1 (piloto, outubro de 2026; Parte III em 2026-10-27) · **Página:** https://cajazeiraalexandre.github.io/pilotos/laboratorio-de-hipoteses/
+**Tipo:** material didático · **Versão:** 1.1 (piloto, outubro de 2026; Parte III em 2026-10-27) · **Página:** https://cajazeiraalexandre.github.io/ifpi-2026-2/laboratorio-de-hipoteses/
 
 ## Pergunta
 Como média, mediana, desvio padrão, coeficiente de variação, quartis e intervalo interquartil (e a correlação)

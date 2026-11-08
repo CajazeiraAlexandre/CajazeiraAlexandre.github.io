@@ -1,6 +1,6 @@
 # Antes de analisar: definir, obter e checar com dados abertos brasileiros
 
-**Tipo:** didatico · **Projeto:** dataviz-didatico · **Status:** rascunho (piloto 0.2 em validação) · **Página (pilotos):** https://cajazeiraalexandre.github.io/pilotos/dados-abertos-brasileiros/
+**Tipo:** didatico · **Projeto:** dataviz-didatico · **Status:** rascunho (piloto 0.2 em validação) · **Página (IFPI 2026.2):** https://cajazeiraalexandre.github.io/ifpi-2026-2/dados-abertos-brasileiros/
 
 ## Pergunta
 Onde estão os dados abertos brasileiros úteis para diferentes frentes, que problemas cada base permite formular e como
