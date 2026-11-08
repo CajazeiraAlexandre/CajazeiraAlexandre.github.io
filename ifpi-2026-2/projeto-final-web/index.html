@@ -6,7 +6,7 @@
 <title>Projeto final: o seu site com várias páginas</title>
 <meta name="description" content="Orientações do projeto final de Desenvolvimento Web Front-End (1º ano integrado, IFPI/SRN): o que é, calendário do 4º bimestre, lista de requisitos que vale a nota, o que não pode e como entregar.">
 <meta name="robots" content="noindex">
-<!-- Versão 0.6 (2026-11-08: abre em modo apresentação em telas largas; botão fora do menu; opção para baixa visão) para a aula de 09/11. Rascunho para revisão do professor; depois vira Parte IV do caderno (src/projeto.yaml). -->
+<!-- Versão 0.7 (2026-11-08: slides legíveis com baixa visão: texto ampliado e rolagem dentro do slide, sem encolher) para a aula de 09/11. Rascunho para revisão do professor; depois vira Parte IV do caderno (src/projeto.yaml). -->
 <style>
 /* Layout: uma coluna de leitura, seções longas como "lâminas" para projetar; mesmas famílias e cores do caderno (design/padrao). */
 :root{
@@ -292,8 +292,17 @@ html[data-acesso=baixa-visao][data-theme=dark]{
   --cor-grade:rgba(255,255,255,.4);--cor-borda:rgba(255,255,255,.65);--cor-destaque:#9cc4ff;--cor-destaque-fundo:#0d1f3a;
   --cor-base:#7fe0a3;--cor-base-fundo:#0f2a1c;--cor-completo:#9cc4ff;--cor-completo-fundo:#0d1f3a;
   --cor-alem:#ffb38a;--cor-alem-fundo:#3a1e10;--cor-atencao:#ffd84d;--cor-atencao-fundo:#332800;--cor-hoje:#ff8a8a;--cor-palco:#111}
-html[data-acesso=baixa-visao].deck-aberto{font-size:100%}   /* o slide tem escala própria: só o contraste vale nele */
-html[data-acesso=baixa-visao] body{letter-spacing:.01em;word-spacing:.04em;line-height:1.7;overflow-wrap:anywhere}
+/* baixa visão nos slides (professor, 2026-11-08): o texto continua ampliado e o slide rola em vez de encolher */
+html[data-acesso=baixa-visao] .deck-slide{overflow-y:auto;overscroll-behavior:contain;padding-bottom:16px}
+html[data-acesso=baixa-visao] .deck-slide.capa-slide{justify-content:flex-start}
+html[data-acesso=baixa-visao] .deck-titulo{font-size:1.7rem}
+html[data-acesso=baixa-visao] .deck-topo{font-size:.6rem;padding-top:12px}
+html[data-acesso=baixa-visao] .deck-rodape{font-size:.62rem;padding-top:4px;padding-bottom:8px}
+html[data-acesso=baixa-visao] .deck-pagina{min-height:0;border-width:1px;padding:2px 10px}
+html[data-acesso=baixa-visao] .deck-topo span:last-child{display:none}
+html[data-acesso=baixa-visao] .perguntas .ex,html[data-acesso=baixa-visao] .versoes .zip{overflow-wrap:anywhere}
+.deck-mais{font-weight:700;color:var(--cor-destaque)}
+html[data-acesso=baixa-visao] body{letter-spacing:.01em;word-spacing:.04em;line-height:1.7;overflow-wrap:break-word}
 html[data-acesso=baixa-visao] a{text-decoration:underline;text-underline-offset:.15em;text-decoration-thickness:.08em}
 html[data-acesso=baixa-visao] :focus-visible{outline:3px solid var(--cor-texto);outline-offset:3px}
 html[data-acesso=baixa-visao] button{min-height:2.75rem;border-width:2px}
@@ -728,7 +737,7 @@ Página 4:</pre>
   <div class="col">
     <h2>Autoria, revisão e uso de IA</h2>
     <p>Projeto final da disciplina Desenvolvimento Web Front-End (Técnico em Informática integrado, IFPI, Campus São Raimundo Nonato), 4º bimestre de 2026. Proposição, requisitos, pesos, calendário e decisões: professor Alexandre Cajazeira Ramos, que responde pelo conteúdo. Esta página segue o caderno "HTML e CSS para layout" e o plano de ensino da disciplina.</p>
-    <p>Uso de IA: a redação desta página a partir da proposta e do calendário do professor foi feita com Claude (Claude Code), para organizar o texto e montar o HTML. Versão 0.6, de 08/11/2026, em revisão pelo professor. A página não guarda nada do que você faz nela.</p>
+    <p>Uso de IA: a redação desta página a partir da proposta e do calendário do professor foi feita com Claude (Claude Code), para organizar o texto e montar o HTML. Versão 0.7, de 08/11/2026, em revisão pelo professor. A página não guarda nada do que você faz nela.</p>
     <p class="so-tela">Material didático do <a href="https://cajazeiraalexandre.github.io/" target="_blank" rel="noopener">Laboratório de Dados Públicos</a>. Licença CC BY 4.0 para os textos.</p>
   </div>
 </footer>
@@ -737,7 +746,7 @@ Página 4:</pre>
   <div class="deck-palco" id="deck-palco">
     <div class="deck-topo"><span>Projeto final · Desenvolvimento Web Front-End</span><span>1º ano integrado · 4º bimestre</span></div>
     <div class="deck-slide" id="deck-slide" aria-live="polite"></div>
-    <div class="deck-rodape"><span id="deck-dica">← → avançam · F tela cheia · <button type="button" class="deck-pagina" id="deck-pagina">Ver como página (Esc)</button></span><span class="cont" id="deck-cont"></span></div>
+    <div class="deck-rodape"><span id="deck-dica">← → avançam · F tela cheia · <button type="button" class="deck-pagina" id="deck-pagina">Ver como página (Esc)</button></span><span><span class="deck-mais" id="deck-mais" hidden>role para ver mais ↓ · </span><span class="cont" id="deck-cont"></span></span></div>
     <div class="deck-barra"><i id="deck-barra"></i></div>
   </div>
   <button type="button" class="deck-seta ant" id="deck-ant" aria-label="Slide anterior">‹</button>
@@ -869,9 +878,19 @@ Página 4:</pre>
     palco.style.left=((window.innerWidth-W*k)/2)+'px';
     palco.style.top=((window.innerHeight-H*k)/2)+'px';
   }
+  function mais(){   /* aviso "role para ver mais" quando o slide passa da altura (baixa visão) */
+    q('#deck-mais').hidden = !(slide.scrollHeight - slide.scrollTop - slide.clientHeight > 4);
+  }
+  slide.addEventListener('scroll', mais);
+  function rolaOuPassa(dir){   /* no slide que rola, Espaço e PageDown descem até o fim antes de passar */
+    var resto = dir>0 ? slide.scrollHeight-slide.scrollTop-slide.clientHeight : slide.scrollTop;
+    if(resto>4){ slide.scrollBy({top: dir*slide.clientHeight*0.8, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}); }
+    else mostra(atual+dir);
+  }
   function ajusta(){
     /* reduz o conteúdo que não cabe: busca a maior escala (0,5 a 1) em que a altura cabe no slide */
     var cont=slide.querySelector('.deck-conteudo'); if(!cont) return;
+    if(acc.ativo){ cont.style.width=''; cont.style.transform=''; mais(); return; }   /* baixa visão: rola, não encolhe */
     var tit=slide.querySelector('.deck-titulo'), disp=slide.clientHeight-10-(tit?tit.offsetHeight+16:0)-6;
     function cabe(k){ cont.style.width=(100/k)+'%'; cont.style.transform= k<1 ? 'scale('+k+')' : ''; return cont.offsetHeight*k<=disp; }
     if(cabe(1)) return;
@@ -882,7 +901,7 @@ Página 4:</pre>
   function mostra(i){
     atual=Math.max(0, Math.min(SLIDES.length-1, i));
     var sl=SLIDES[atual];
-    slide.innerHTML=''; slide.className='deck-slide'+(sl.capa?' capa-slide':'');
+    slide.innerHTML=''; slide.scrollTop=0; slide.className='deck-slide'+(sl.capa?' capa-slide':'');
     void slide.offsetWidth; slide.classList.add('entra');
     if(sl.t){ var h=document.createElement('h2'); h.className='deck-titulo'; h.textContent=sl.t; slide.appendChild(h); }
     var cont=document.createElement('div'); cont.className='deck-conteudo';
@@ -930,8 +949,11 @@ Página 4:</pre>
     if(ev.target.closest && ev.target.closest('input, textarea')) return;
     if(!aberto){ if((ev.key==='p'||ev.key==='P') && !ev.ctrlKey && !ev.metaKey && !ev.altKey && window.innerWidth>900){ abre(0); } return; }
     var k=ev.key;
-    if(k==='ArrowRight'||k==='PageDown'||k===' '||k==='Enter'){ ev.preventDefault(); mostra(atual+1); }
-    else if(k==='ArrowLeft'||k==='PageUp'||k==='Backspace'){ ev.preventDefault(); mostra(atual-1); }
+    if(k==='ArrowRight'||k==='Enter'){ ev.preventDefault(); mostra(atual+1); }
+    else if(k==='ArrowLeft'||k==='Backspace'){ ev.preventDefault(); mostra(atual-1); }
+    else if(k==='PageDown'||k===' '){ ev.preventDefault(); rolaOuPassa(1); }
+    else if(k==='PageUp'){ ev.preventDefault(); rolaOuPassa(-1); }
+    else if((k==='ArrowDown'||k==='ArrowUp') && acc.ativo){ ev.preventDefault(); slide.scrollBy({top:(k==='ArrowDown'?1:-1)*60}); }
     else if(k==='Home'){ ev.preventDefault(); mostra(0); }
     else if(k==='End'){ ev.preventDefault(); mostra(SLIDES.length-1); }
     else if(k==='f'||k==='F'){ ev.preventDefault(); cheia(); }
