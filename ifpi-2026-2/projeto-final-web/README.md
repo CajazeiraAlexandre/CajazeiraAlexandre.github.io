@@ -1,6 +1,6 @@
 # Projeto final: o seu site com várias páginas
 
-**Tipo:** didatico · **Projeto:** programacao-web-didatico · **Status:** rascunho (piloto 0.5) ·
+**Tipo:** didatico · **Projeto:** programacao-web-didatico · **Status:** rascunho (piloto 0.6) ·
 **Endereço:** <https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-web/>
 
 ## Pergunta
@@ -20,6 +20,15 @@ por prova; lista em quatro blocos sem "Base/Completo"; apresentação com 30% da
 nada para preencher; formulário de envio na ordem do roteiro; salvamento no Google Drive; pasta compartilhada com o
 professor desde a primeira aula; modo apresentação.
 
+**Decisões locais (professor, 2026-11-08):**
+- Em tela larga (mais de 900 px e mais larga que alta), sem trecho no endereço, a página **abre como slides**; celular,
+  baixa visão ou endereço com trecho (`#pagina`, `#calendario`, `#acesso=…`) abrem a página. "Ver como página" (ou Esc)
+  sai dos slides e grava `#pagina`, para a próxima abertura ser a página. O botão "Modo apresentação" fica numa barra
+  própria no alto, fora do menu de conteúdos.
+- **Baixa visão**, com o mesmo desenho do caderno de HTML e CSS: texto de 125% a 200%, contraste alto, fundo escuro
+  opcional, uma coluna, foco visível, links sublinhados; guardada no navegador e no endereço
+  (`#acesso=baixa-visao&escala=150&tema=escuro`), que o professor pode enviar pronto. Nos slides vale só o contraste.
+
 **Decisão local:** a página é escrita à mão, sem montagem por script nem YAML (diferente do caderno), porque é um
 documento de uma aula e de um bimestre. O link do formulário de envio entra na variável `LINK_FORMULARIO` do script.
 
@@ -31,7 +40,7 @@ conteúdo é do professor e a IA não é autora):
 
 | Etapa | Ferramenta | Finalidade | Revisão humana |
 |---|---|---|---|
-| Redação a partir da proposta de 2026-11-05 e do calendário | Claude (Claude Code) | organizar o texto para os alunos e distribuir as etapas pelas aulas | professor, versões 0.1 a 0.5 (2026-11-08) |
+| Redação a partir da proposta de 2026-11-05 e do calendário | Claude (Claude Code) | organizar o texto para os alunos e distribuir as etapas pelas aulas | professor, versões 0.1 a 0.6 (2026-11-08) |
 | Página HTML e modo apresentação | Claude (Claude Code) | montar a página autocontida e os slides | professor; conferência técnica automática (marcação, script, largura no celular, slides) |
 
 ## Licença

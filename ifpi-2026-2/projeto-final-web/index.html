@@ -6,7 +6,7 @@
 <title>Projeto final: o seu site com várias páginas</title>
 <meta name="description" content="Orientações do projeto final de Desenvolvimento Web Front-End (1º ano integrado, IFPI/SRN): o que é, calendário do 4º bimestre, lista de requisitos que vale a nota, o que não pode e como entregar.">
 <meta name="robots" content="noindex">
-<!-- Versão 0.5 (2026-11-08: pasta compartilhada com o professor já na primeira aula; modo apresentação em slides 16:9) para a aula de 09/11. Rascunho para revisão do professor; depois vira Parte IV do caderno (src/projeto.yaml). -->
+<!-- Versão 0.6 (2026-11-08: abre em modo apresentação em telas largas; botão fora do menu; opção para baixa visão) para a aula de 09/11. Rascunho para revisão do professor; depois vira Parte IV do caderno (src/projeto.yaml). -->
 <style>
 /* Layout: uma coluna de leitura, seções longas como "lâminas" para projetar; mesmas famílias e cores do caderno (design/padrao). */
 :root{
@@ -232,10 +232,12 @@ table.req.criterios td.item{min-width:200px}
 .formulario-aviso a{font-weight:700}
 
 .botao.mini{font-size:.8rem;padding:2px 8px;vertical-align:baseline}
-code.email{user-select:all}
+code.email{user-select:all;overflow-wrap:anywhere}
+.etapa .marco{flex-wrap:wrap;max-width:100%}
+html[data-acesso=baixa-visao] code{overflow-wrap:anywhere}
 
 /* modo apresentação: quadro 16:9 com 1040 x 585 px lógicos, ampliado para caber na janela */
-.btn-apres{margin-left:auto;flex:none;font:inherit;font-weight:700;font-size:.9rem;border:1px solid var(--cor-destaque);color:var(--cor-destaque);background:transparent;border-radius:999px;padding:5px 14px;cursor:pointer;white-space:nowrap}
+.btn-apres{flex:none;font:inherit;font-weight:700;font-size:.9rem;border:1px solid var(--cor-destaque);color:var(--cor-destaque);background:transparent;border-radius:999px;padding:5px 14px;cursor:pointer;white-space:nowrap}
 .btn-apres:hover{background:var(--cor-destaque-fundo)}
 @media (max-width:900px){.btn-apres{display:none}}
 .deck{position:fixed;inset:0;z-index:50;background:var(--cor-palco)}
@@ -267,13 +269,52 @@ code.email{user-select:all}
 @keyframes entra{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion: reduce){.deck-slide.entra{animation:none}.deck-barra i{transition:none}}
 
+/* barra de leitura: modo apresentação e baixa visão (fora do menu de conteúdos) */
+.ferramentas{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin:0 0 22px;padding:8px 12px;border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-superficie);font-size:.92rem}
+.ferramentas label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;min-height:32px}
+.ferramentas input[type=checkbox]{width:1.15em;height:1.15em;margin:0;accent-color:var(--cor-texto)}
+.ferramentas .grupo{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px}
+.ferramentas .grupo button{font:inherit;font-weight:700;min-width:2.4em;min-height:32px;border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-fundo);color:var(--cor-texto);cursor:pointer;padding:2px 8px}
+.ferramentas .grupo button:disabled{opacity:.45;cursor:default}
+.ferramentas .valor{min-width:3.2em;text-align:center;font-variant-numeric:tabular-nums}
+.ferramentas .nota-acesso{flex-basis:100%;margin:0;font-size:.85rem;color:var(--cor-texto-secundario)}
+.deck-pagina{font:inherit;font-size:.78rem;font-weight:700;border:1px solid var(--cor-borda);background:var(--cor-superficie);color:var(--cor-texto);border-radius:999px;padding:3px 10px;cursor:pointer;margin-left:6px}
+
+/* baixa visão (pedido do professor, 2026-11-08; mesmo desenho do caderno de HTML e CSS): texto maior (--bv-escala),
+   contraste alto, uma coluna, foco visível, alvos maiores, links sublinhados; data-theme dá o fundo claro ou escuro */
+html[data-acesso=baixa-visao]{font-size:calc(100% * var(--bv-escala,1.5));--largura:64rem;
+  --cor-fundo:#fff;--cor-superficie:#fff;--cor-texto:#000;--cor-texto-secundario:#1a1a1a;--cor-texto-suave:#333;
+  --cor-grade:rgba(0,0,0,.35);--cor-borda:rgba(0,0,0,.6);--cor-destaque:#0b4ea2;--cor-destaque-fundo:#e6eefb;
+  --cor-base:#0a6b2f;--cor-base-fundo:#e7f4ec;--cor-completo:#0b4ea2;--cor-completo-fundo:#e6eefb;
+  --cor-alem:#a33a00;--cor-alem-fundo:#fbe9df;--cor-atencao:#8a5a00;--cor-atencao-fundo:#fff1c7;--cor-hoje:#b00020;--cor-palco:#d6d6d6}
+html[data-acesso=baixa-visao][data-theme=dark]{
+  --cor-fundo:#000;--cor-superficie:#000;--cor-texto:#fff;--cor-texto-secundario:#e8e8e8;--cor-texto-suave:#cfcfcf;
+  --cor-grade:rgba(255,255,255,.4);--cor-borda:rgba(255,255,255,.65);--cor-destaque:#9cc4ff;--cor-destaque-fundo:#0d1f3a;
+  --cor-base:#7fe0a3;--cor-base-fundo:#0f2a1c;--cor-completo:#9cc4ff;--cor-completo-fundo:#0d1f3a;
+  --cor-alem:#ffb38a;--cor-alem-fundo:#3a1e10;--cor-atencao:#ffd84d;--cor-atencao-fundo:#332800;--cor-hoje:#ff8a8a;--cor-palco:#111}
+html[data-acesso=baixa-visao].deck-aberto{font-size:100%}   /* o slide tem escala própria: só o contraste vale nele */
+html[data-acesso=baixa-visao] body{letter-spacing:.01em;word-spacing:.04em;line-height:1.7;overflow-wrap:anywhere}
+html[data-acesso=baixa-visao] a{text-decoration:underline;text-underline-offset:.15em;text-decoration-thickness:.08em}
+html[data-acesso=baixa-visao] :focus-visible{outline:3px solid var(--cor-texto);outline-offset:3px}
+html[data-acesso=baixa-visao] button{min-height:2.75rem;border-width:2px}
+html[data-acesso=baixa-visao] .ferramentas{font-size:1rem}
+html[data-acesso=baixa-visao] .menu{position:static}
+html[data-acesso=baixa-visao] .fatos,html[data-acesso=baixa-visao] .exemplo-paginas,html[data-acesso=baixa-visao] .cartoes,
+html[data-acesso=baixa-visao] .ritual,html[data-acesso=baixa-visao] .etapa,html[data-acesso=baixa-visao] .perguntas li{grid-template-columns:minmax(0,1fr)}
+html[data-acesso=baixa-visao] .etapa{gap:6px}
+html[data-acesso=baixa-visao] .etapa.hoje{margin-left:0;padding-left:12px}
+html[data-acesso=baixa-visao] .passos li{grid-template-columns:2.2rem minmax(0,1fr)}
+html[data-acesso=baixa-visao] .passos li .min{grid-column:2}
+html[data-acesso=baixa-visao] .perguntas .ex,html[data-acesso=baixa-visao] .pasta,html[data-acesso=baixa-visao] .modelo pre{font-size:1rem}
+html[data-acesso=baixa-visao] .cartao.nao,html[data-acesso=baixa-visao] .cartao.sim{border-left-width:6px}
+
 /* rodapé */
 footer.fim{margin-top:56px;border-top:1px solid var(--cor-grade);padding-top:20px;font-size:.9rem;color:var(--cor-texto-secundario)}
 footer.fim h2{font-size:1.1rem;color:var(--cor-texto);margin-bottom:8px}
 footer.fim p{max-width:var(--largura-texto);margin-bottom:8px}
 
 @media print{
-  .menu,.modelo .acoes,footer.fim .so-tela,.deck,.btn-apres,.botao.mini{display:none!important}
+  .menu,.ferramentas,.modelo .acoes,footer.fim .so-tela,.deck,.btn-apres,.botao.mini{display:none!important}
   body{font-size:10.5pt;padding:0}
   section.lamina{padding:14pt 0 0;break-inside:avoid}
   .capa{padding:0 0 10pt}
@@ -296,12 +337,15 @@ footer.fim p{max-width:var(--largura-texto);margin-bottom:8px}
     <a href="#entrega">Entrega e apresentação</a>
     <a href="#formulario">Formulário de envio</a>
     <a href="#duvidas">Dúvidas</a>
-    <button type="button" class="btn-apres" id="abrir-apres" title="Ver como slides (tecla P)">Modo apresentação</button>
   </div>
 </nav>
 
 <header class="capa">
   <div class="col">
+    <div class="ferramentas" id="ferramentas" role="group" aria-label="Modo de leitura">
+      <button type="button" class="btn-apres" id="abrir-apres" title="Ver como slides (tecla P)">Modo apresentação</button>
+      <span id="acesso"></span>
+    </div>
     <p class="chapeu">Desenvolvimento Web Front-End · 1º ano integrado · 4º bimestre</p>
     <h1>Projeto final: o seu site com várias páginas</h1>
     <p class="lede">Um site completo, com pelo menos quatro páginas ligadas por um menu, sobre um tema que você escolhe. Só HTML e CSS, como no caderno. Individual. É a nota do último bimestre.</p>
@@ -684,7 +728,7 @@ Página 4:</pre>
   <div class="col">
     <h2>Autoria, revisão e uso de IA</h2>
     <p>Projeto final da disciplina Desenvolvimento Web Front-End (Técnico em Informática integrado, IFPI, Campus São Raimundo Nonato), 4º bimestre de 2026. Proposição, requisitos, pesos, calendário e decisões: professor Alexandre Cajazeira Ramos, que responde pelo conteúdo. Esta página segue o caderno "HTML e CSS para layout" e o plano de ensino da disciplina.</p>
-    <p>Uso de IA: a redação desta página a partir da proposta e do calendário do professor foi feita com Claude (Claude Code), para organizar o texto e montar o HTML. Versão 0.5, de 08/11/2026, em revisão pelo professor. A página não guarda nada do que você faz nela.</p>
+    <p>Uso de IA: a redação desta página a partir da proposta e do calendário do professor foi feita com Claude (Claude Code), para organizar o texto e montar o HTML. Versão 0.6, de 08/11/2026, em revisão pelo professor. A página não guarda nada do que você faz nela.</p>
     <p class="so-tela">Material didático do <a href="https://cajazeiraalexandre.github.io/" target="_blank" rel="noopener">Laboratório de Dados Públicos</a>. Licença CC BY 4.0 para os textos.</p>
   </div>
 </footer>
@@ -693,7 +737,7 @@ Página 4:</pre>
   <div class="deck-palco" id="deck-palco">
     <div class="deck-topo"><span>Projeto final · Desenvolvimento Web Front-End</span><span>1º ano integrado · 4º bimestre</span></div>
     <div class="deck-slide" id="deck-slide" aria-live="polite"></div>
-    <div class="deck-rodape"><span id="deck-dica">← → avançam · F tela cheia · Esc sai</span><span class="cont" id="deck-cont"></span></div>
+    <div class="deck-rodape"><span id="deck-dica">← → avançam · F tela cheia · <button type="button" class="deck-pagina" id="deck-pagina">Ver como página (Esc)</button></span><span class="cont" id="deck-cont"></span></div>
     <div class="deck-barra"><i id="deck-barra"></i></div>
   </div>
   <button type="button" class="deck-seta ant" id="deck-ant" aria-label="Slide anterior">‹</button>
@@ -726,6 +770,42 @@ Página 4:</pre>
       copiar(b.getAttribute('data-copiar'), function(ok){ b.textContent= ok ? 'Copiado' : 'Selecione e copie'; setTimeout(function(){ b.textContent=rot; }, 1800); });
     }
   });
+
+  /* ---------- baixa visão: guardada neste navegador e no endereço (#acesso=baixa-visao&escala=150&tema=escuro) ---------- */
+  var ESCALAS=[125,150,175,200], acc={ativo:false, escala:150, tema:'claro'};
+  try{ var g=JSON.parse(localStorage.getItem('projeto-final-acesso')||'null'); if(g){ acc.ativo=!!g.ativo; if(ESCALAS.indexOf(g.escala)>=0) acc.escala=g.escala; acc.tema=g.tema==='escuro'?'escuro':'claro'; } }catch(e){}
+  if(/(^#|&)acesso=/.test(location.hash)){
+    try{ var hp=new URLSearchParams(location.hash.slice(1));
+      acc.ativo = hp.get('acesso')==='baixa-visao';
+      if(ESCALAS.indexOf(Number(hp.get('escala')))>=0) acc.escala=Number(hp.get('escala'));
+      acc.tema = hp.get('tema')==='escuro' ? 'escuro' : 'claro'; }catch(e){}
+  }
+  function hashAcesso(){ return acc.ativo ? '#acesso=baixa-visao&escala='+acc.escala+(acc.tema==='escuro'?'&tema=escuro':'') : '#pagina'; }
+  function aplicarAcesso(){
+    var r=document.documentElement;
+    if(acc.ativo){ r.setAttribute('data-acesso','baixa-visao'); r.style.setProperty('--bv-escala', String(acc.escala/100)); r.setAttribute('data-theme', acc.tema==='escuro'?'dark':'light'); }
+    else { r.removeAttribute('data-acesso'); r.style.removeProperty('--bv-escala'); r.removeAttribute('data-theme'); }
+    try{ localStorage.setItem('projeto-final-acesso', JSON.stringify(acc)); }catch(e){}
+  }
+  function barraAcesso(){
+    var caixa=document.getElementById('acesso'), i=ESCALAS.indexOf(acc.escala);
+    var h='<label><input type="checkbox" id="bv-liga"'+(acc.ativo?' checked':'')+'> <span><b>Baixa visão</b>'+(acc.ativo?'':': texto maior, contraste alto e uma coluna')+'</span></label>';
+    if(acc.ativo){
+      h+='<span class="grupo" role="group" aria-label="Tamanho do texto">Tamanho do texto: <button type="button" id="bv-menos" aria-label="Diminuir o texto"'+(i<=0?' disabled':'')+'>A−</button>'
+        +'<span class="valor" aria-live="polite">'+acc.escala+'%</span><button type="button" id="bv-mais" aria-label="Aumentar o texto"'+(i>=ESCALAS.length-1?' disabled':'')+'>A+</button></span>'
+        +'<label><input type="checkbox" id="bv-escuro"'+(acc.tema==='escuro'?' checked':'')+'> Fundo escuro</label>'
+        +'<p class="nota-acesso">O zoom do navegador (Ctrl e +) também funciona. Essas escolhas ficam guardadas neste navegador e no endereço da página, que pode ser copiado e enviado.</p>';
+    }
+    caixa.style.display='contents'; caixa.innerHTML=h;
+    function mudar(m, foco){ for(var k in m) acc[k]=m[k]; aplicarAcesso(); try{ history.replaceState(null,'',hashAcesso()); }catch(e){} barraAcesso(); var f=foco&&document.getElementById(foco); if(f) f.focus(); }
+    document.getElementById('bv-liga').addEventListener('change', function(){ mudar({ativo:this.checked}, 'bv-liga'); });
+    if(acc.ativo){
+      document.getElementById('bv-menos').addEventListener('click', function(){ mudar({escala:ESCALAS[i-1]}, 'bv-menos'); });
+      document.getElementById('bv-mais').addEventListener('click', function(){ mudar({escala:ESCALAS[i+1]}, 'bv-mais'); });
+      document.getElementById('bv-escuro').addEventListener('change', function(){ mudar({tema:this.checked?'escuro':'claro'}, 'bv-escuro'); });
+    }
+  }
+  aplicarAcesso(); barraAcesso();
 
   if(LINK_FORMULARIO){
     var av=document.getElementById('formulario-aviso');
@@ -815,14 +895,14 @@ Página 4:</pre>
     try{ history.replaceState(null,'','#apresentacao-'+(atual+1)); }catch(e){}
   }
   function abre(i){
-    aberto=true; deck.hidden=false; document.documentElement.style.overflow='hidden';
+    aberto=true; deck.hidden=false; document.documentElement.style.overflow='hidden'; document.documentElement.classList.add('deck-aberto');
     escala(); mostra(i||0); q('#deck-prox').focus();
   }
   function fecha(){
-    aberto=false; deck.hidden=true; document.documentElement.style.overflow='';
+    aberto=false; deck.hidden=true; document.documentElement.style.overflow=''; document.documentElement.classList.remove('deck-aberto');
     if(document.fullscreenElement && document.exitFullscreen){ document.exitFullscreen().catch(function(){}); }
     var sec=null; for(var id in alvo){ if(alvo[id]<=atual && (!sec || alvo[id]>=alvo[sec])) sec=id; }
-    try{ history.replaceState(null,'', sec ? '#'+sec : location.pathname); }catch(e){}
+    try{ history.replaceState(null,'', sec ? '#'+sec : hashAcesso()); }catch(e){}   /* #pagina: abre como página da próxima vez */
     var el=sec && document.getElementById(sec); if(el) el.scrollIntoView(); q('#abrir-apres').focus();
   }
   function cheia(){
@@ -838,6 +918,7 @@ Página 4:</pre>
   q('#deck-ant').addEventListener('click', function(){ mostra(atual-1); });
   q('#deck-prox').addEventListener('click', function(){ mostra(atual+1); });
   q('#deck-sair').addEventListener('click', fecha);
+  q('#deck-pagina').addEventListener('click', fecha);
   q('#deck-cheia').addEventListener('click', cheia);
   document.addEventListener('fullscreenchange', function(){ q('#deck-cheia').setAttribute('aria-label', document.fullscreenElement?'Sair da tela cheia':'Tela cheia'); setTimeout(function(){ escala(); ajusta(); }, 60); });
   window.addEventListener('resize', function(){ if(aberto){ escala(); ajusta(); } });
@@ -856,8 +937,12 @@ Página 4:</pre>
     else if(k==='f'||k==='F'){ ev.preventDefault(); cheia(); }
     else if(k==='Escape' && !document.fullscreenElement){ fecha(); }
   });
+  /* Abertura (pedido do professor, 2026-11-08): em tela larga, sem trecho no endereço, a página abre como slides.
+     Celular, baixa visão ou endereço com trecho (#pagina, #calendario, #acesso=…) abrem a página. */
   var m=/^#apresentacao(?:-(\d+))?$/.exec(location.hash);
+  var larga=window.innerWidth>900 && window.innerWidth>=window.innerHeight*1.15;
   if(m){ abre(m[1] ? parseInt(m[1],10)-1 : 0); }
+  else if(!location.hash && !acc.ativo && larga){ abre(0); }
 })();
 </script>
 </body>
