@@ -21,7 +21,6 @@ Subpasta `cultura/` (Cultura: fomento e políticas culturais): página própria 
 | [Onde se vota no Piauí](https://cajazeiraalexandre.github.io/pilotos/onde-se-vota-pi/) | visualizacao | rascunho (piloto) | `projetos/eleicoes/produtos/2026-10_onde-se-vota-pi` | 1.0 MB |
 | [Desmatamento no Brasil, governo a governo](https://cajazeiraalexandre.github.io/pilotos/desmatamento-governo-a-governo/) | story | revisao (piloto) | `projetos/meio-ambiente/produtos/2026-10_desmatamento-biomas-governo` | 0.7 MB |
 | [Interpolação entre conjuntos de polígonos](https://cajazeiraalexandre.github.io/pilotos/interpolacao-conjuntos-poligonos/) | nota-tecnica | rascunho (piloto) | `projetos/metodos-e-recursos/produtos/2026-10_interpolacao-conjuntos-poligonos` | 0.9 MB |
-| [HTML e CSS para layout: caderno de estudos e práticas](https://cajazeiraalexandre.github.io/pilotos/caderno-html-css/) | didatico | rascunho (piloto) | `projetos/programacao-web-didatico/produtos/2026-10_caderno-html-css` | 0.2 MB |
 | [Onde o fogo se concentra no Território Serra da Capivara](https://cajazeiraalexandre.github.io/pilotos/focos-de-calor-serra-da-capivara/) | visualizacao | rascunho (piloto) | `projetos/rio-piaui/produtos/2026-11_focos-de-calor-mskde` | 2.2 MB |
 | [As margens do Rio Piauí: uso do solo, desmatamento e fogo](https://cajazeiraalexandre.github.io/pilotos/margens-do-rio-piaui/) | narrativa | rascunho (piloto) | `projetos/rio-piaui/produtos/2026-11_margens-rio-piaui` | 1.2 MB |
 

@@ -1,6 +1,6 @@
 # HTML e CSS para layout: caderno de estudos e práticas
 
-**Tipo:** material didático sem bases de dados (ADR PW0001) · **Projeto:** programacao-web-didatico · **Status:** rascunho (piloto 0.1, outubro de 2026) · **Página:** https://cajazeiraalexandre.github.io/pilotos/caderno-html-css/ (após publicação)
+**Tipo:** material didático sem bases de dados (ADR PW0001) · **Projeto:** programacao-web-didatico · **Status:** rascunho (piloto 0.1, outubro de 2026) · **Página:** https://cajazeiraalexandre.github.io/ifpi-2026-2/caderno-html-css/ (após publicação)
 
 ## Pergunta
 Como revisar e praticar, com autonomia, o que foi dado em sala no 1º ano do curso Técnico em Informática (papéis de

@@ -1,0 +1,1919 @@
+<!doctype html>
+<html lang="pt-BR" data-ds="padrao">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML e CSS para layout: caderno de estudos e práticas</title>
+<meta name="description" content="Caderno de estudos e práticas de HTML e CSS para layout (box model, display e position, Flexbox e Grid), com editor embutido, práticas guiadas e desafios. Material didático do 1º ano do Técnico em Informática, IFPI.">
+<meta name="robots" content="noindex">
+<!-- Modelo do produto. O index.html é GERADO por `python projetos/programacao-web-didatico/analise/preparar_caderno.py`.
+     Edite src/ (conceitos.yaml, praticas.yaml, desafios.yaml, referencias.yaml, app.js), não o index.html. -->
+<style>
+/* Padrão do laboratório — v0.1
+ * GERADO por ferramentas/design.py a partir de design/padrao/design.yaml — não edite à mão. */
+:root {
+  color-scheme: light;
+  --fonte-texto: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fonte-titulo: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fonte-num: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --peso-titulo: 700;
+  --peso-texto: 400;
+  --entrelinha: 1.5;
+  --fs-titulo: 32px;
+  --fs-subtitulo: 22px;
+  --fs-texto: 16px;
+  --fs-grafico-titulo: 18px;
+  --fs-grafico-rotulo: 13px;
+  --fs-grafico-eixo: 12px;
+  --fs-nota: 12px;
+  --fs-destaque-numero: 48px;
+  --largura-texto: 680px;
+  --largura-max: 1120px;
+  --raio: 6px;
+  --espaco-p: 8px;
+  --espaco-m: 16px;
+  --espaco-g: 32px;
+  --espaco-gg: 64px;
+  --grafico-largura: 680px;
+  --grafico-proporcao: 0.5625;
+  --grafico-proporcao-mapa: 1.0;
+  --grafico-altura-min: 280px;
+  --grafico-linha: 2px;
+  --grafico-marcador: 8px;
+  --grafico-barra-raio: 4px;
+  --grafico-espaco-barras: 2px;
+  --grafico-margem-topo: 24px;
+  --grafico-margem-direita: 16px;
+  --grafico-margem-base: 40px;
+  --grafico-margem-esquerda: 48px;
+  --quebra-celular: 480px;
+  --quebra-tablet: 768px;
+  --quebra-desktop: 1120px;
+  --cor-seq-1: #cde2fb;
+  --cor-seq-2: #9ec5f4;
+  --cor-seq-3: #6da7ec;
+  --cor-seq-4: #3987e5;
+  --cor-seq-5: #256abf;
+  --cor-seq-6: #184f95;
+  --cor-seq-7: #0d366b;
+  --cor-status-bom: #0ca30c;
+  --cor-status-atencao: #fab219;
+  --cor-status-grave: #ec835a;
+  --cor-status-critico: #d03b3b;
+  --anotacao-cor: var(--cor-texto-secundario);
+  --anotacao-linha: 1px;
+  --cor-fundo: #f9f9f7;
+  --cor-superficie: #fcfcfb;
+  --cor-texto: #0b0b0b;
+  --cor-texto-secundario: #52514e;
+  --cor-texto-suave: #898781;
+  --cor-grade: #e1e0d9;
+  --cor-eixo: #c3c2b7;
+  --cor-borda: rgba(11,11,11,0.10);
+  --cor-destaque: #2a78d6;
+  --cor-cat-1: #2a78d6;
+  --cor-cat-2: #eb6834;
+  --cor-cat-3: #1baf7a;
+  --cor-cat-4: #eda100;
+  --cor-cat-5: #e87ba4;
+  --cor-cat-6: #008300;
+  --cor-cat-7: #4a3aa7;
+  --cor-cat-8: #e34948;
+  --cor-div-1: #b02f2f;
+  --cor-div-2: #e34948;
+  --cor-div-3: #f0a3a3;
+  --cor-div-4: #f0efec;
+  --cor-div-5: #9ec5f4;
+  --cor-div-6: #2a78d6;
+  --cor-div-7: #184f95;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --cor-fundo: #0d0d0d;
+    --cor-superficie: #1a1a19;
+    --cor-texto: #ffffff;
+    --cor-texto-secundario: #c3c2b7;
+    --cor-texto-suave: #898781;
+    --cor-grade: #2c2c2a;
+    --cor-eixo: #383835;
+    --cor-borda: rgba(255,255,255,0.10);
+    --cor-destaque: #3987e5;
+    --cor-cat-1: #3987e5;
+    --cor-cat-2: #d95926;
+    --cor-cat-3: #199e70;
+    --cor-cat-4: #c98500;
+    --cor-cat-5: #d55181;
+    --cor-cat-6: #008300;
+    --cor-cat-7: #9085e9;
+    --cor-cat-8: #e66767;
+    --cor-div-1: #e66767;
+    --cor-div-2: #c43c3c;
+    --cor-div-3: #7a3333;
+    --cor-div-4: #383835;
+    --cor-div-5: #1c5cab;
+    --cor-div-6: #3987e5;
+    --cor-div-7: #86b6ef;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --cor-fundo: #0d0d0d;
+  --cor-superficie: #1a1a19;
+  --cor-texto: #ffffff;
+  --cor-texto-secundario: #c3c2b7;
+  --cor-texto-suave: #898781;
+  --cor-grade: #2c2c2a;
+  --cor-eixo: #383835;
+  --cor-borda: rgba(255,255,255,0.10);
+  --cor-destaque: #3987e5;
+  --cor-cat-1: #3987e5;
+  --cor-cat-2: #d95926;
+  --cor-cat-3: #199e70;
+  --cor-cat-4: #c98500;
+  --cor-cat-5: #d55181;
+  --cor-cat-6: #008300;
+  --cor-cat-7: #9085e9;
+  --cor-cat-8: #e66767;
+  --cor-div-1: #e66767;
+  --cor-div-2: #c43c3c;
+  --cor-div-3: #7a3333;
+  --cor-div-4: #383835;
+  --cor-div-5: #1c5cab;
+  --cor-div-6: #3987e5;
+  --cor-div-7: #86b6ef;
+}
+@media (max-width: 480px) {
+  :root {
+    --fs-titulo: 24px;
+    --fs-subtitulo: 16px;
+    --fs-grafico-titulo: 14px;
+    --fs-destaque-numero: 36px;
+    --grafico-proporcao: 1.25;
+    --margem-lateral: 16px;
+  }
+}
+
+</style>
+<style>
+/* ==== web/componentes/lab.css ==== */
+/* lab.css — estilos dos componentes de interface do Laboratório de Dados Públicos.
+ * Design system padrão (design/padrao/design.yaml, seção `padroes`); ADR L0003.
+ * Usa só os tokens de design/<ds>/tokens.css (--cor-*, --fs-*, --espaco-*…): nenhuma cor fixa
+ * além de sombras e do halo de rótulos. Os produtos embutem este arquivo no HTML único (L0002).
+ *
+ * Seções: página e episódios · controles · cartões e grades · marcas e seleção · mapa ·
+ *         seletores no título · legendas · barras 100% · textos de apoio · tabelas e quadros ·
+ *         dica · fluxos (Sankey) · rodapé e bloco de metodologia
+ */
+*{box-sizing:border-box}
+html{overflow-anchor:none}
+body{margin:0;background:var(--cor-fundo);color:var(--cor-texto);font-family:var(--fonte-texto);font-size:var(--fs-texto);line-height:var(--entrelinha)}
+main{max-width:var(--largura-max);margin:0 auto;padding:0 var(--margem-lateral, var(--espaco-m)) var(--espaco-g)}
+header.capa{max-width:var(--largura-texto);padding:var(--espaco-g) 0 var(--espaco-m)}
+h1{font-family:var(--fonte-titulo);font-size:var(--fs-titulo);font-weight:var(--peso-titulo);line-height:1.15;margin:0 0 var(--espaco-p)}
+h2{font-size:var(--fs-subtitulo);line-height:1.2;margin:var(--espaco-g) 0 var(--espaco-p)}
+h3{font-size:var(--fs-grafico-titulo);margin:var(--espaco-m) 0 var(--espaco-p);line-height:1.25}
+/* numeração de gráficos e tabelas nos exploratórios e o sumário ☰ (Lab.numerarGraficos) */
+.num-figura{color:var(--cor-texto-secundario);font-weight:600}
+p.num-figura{font-size:var(--fs-nota);margin:var(--espaco-p) 0 4px}
+.sumario-bt{position:fixed;right:16px;bottom:16px;z-index:40;font:inherit;font-size:13.5px;font-weight:600;padding:8px 14px;border:1px solid var(--cor-borda);border-radius:999px;background:var(--cor-superficie);color:var(--cor-texto);box-shadow:0 4px 14px rgba(0,0,0,.18);cursor:pointer}
+.sumario-bt[aria-expanded="true"]{border-color:var(--cor-texto)}
+.sumario-figuras{position:fixed;top:0;right:0;bottom:0;z-index:41;width:min(400px,92vw);overflow:auto;background:var(--cor-superficie);border-left:1px solid var(--cor-borda);box-shadow:-8px 0 24px rgba(0,0,0,.18);padding:0 var(--espaco-m) var(--espaco-g);font-size:14px}
+.sumario-figuras[hidden]{display:none}
+.sumario-cab{position:sticky;top:0;display:flex;align-items:center;gap:8px;justify-content:space-between;background:var(--cor-superficie);padding:var(--espaco-m) 0 var(--espaco-p);border-bottom:1px solid var(--cor-borda)}
+.sumario-fechar{font:inherit;font-size:16px;border:0;background:none;color:var(--cor-texto);cursor:pointer;padding:4px 8px}
+.sumario-secao{margin:var(--espaco-m) 0 4px;font-size:12.5px;font-weight:700;color:var(--cor-texto-secundario)}
+.sumario-item{display:block;padding:5px 0;color:var(--cor-texto);text-decoration:none;line-height:1.35;border-bottom:1px dotted var(--cor-borda)}
+.sumario-item:hover,.sumario-item:focus{color:var(--cor-primaria,var(--cor-texto));text-decoration:underline}
+.sumario-item b{font-weight:600;color:var(--cor-texto-secundario)}
+@media (max-width:768px){.sumario-bt{padding:10px 14px}.sumario-bt-texto{display:none}}
+@media print{.sumario-bt,.sumario-figuras,.baixar-grafico{display:none}}
+.baixar-grafico button{font:inherit;font-size:12px;border:1px solid var(--cor-borda);background:none;color:var(--cor-texto-secundario);border-radius:999px;padding:1px 10px;cursor:pointer}
+p.baixar-grafico{margin:6px 0 var(--espaco-m)}
+.baixar-grafico button:hover{color:var(--cor-texto);border-color:var(--cor-texto)}
+.veu-exportar{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;display:grid;place-items:center;padding:16px}
+.caixa-exportar{background:var(--cor-superficie);color:var(--cor-texto);border-radius:12px;padding:12px;max-height:94vh;overflow:auto;max-width:100%;box-sizing:border-box}
+.caixa-exportar img{display:block;max-width:100%;height:auto;border:1px solid var(--cor-borda);border-radius:6px}
+.caixa-exportar p{font-size:13px;margin:8px 0 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;max-width:640px}
+.caixa-exportar p.fraco{color:var(--cor-texto-secundario);font-size:12px}
+.caixa-exportar a,.caixa-exportar button{font:inherit;font-size:13px;border:1px solid var(--cor-borda);background:none;color:var(--cor-texto);border-radius:999px;padding:2px 12px;cursor:pointer;text-decoration:none}
+p{max-width:var(--largura-texto)}
+.lead{color:var(--cor-texto-secundario)}
+.nota{font-size:var(--fs-nota);color:var(--cor-texto-secundario)}
+.aviso{border-left:3px solid var(--cor-status-atencao);background:var(--cor-superficie);padding:var(--espaco-p) var(--espaco-m);font-size:var(--fs-nota);margin:var(--espaco-p) 0;max-width:var(--largura-texto)}
+/* navegação entre episódios: fixa no topo, rolável no celular */
+nav.episodios{position:sticky;top:0;z-index:10;background:var(--cor-fundo);border-bottom:1px solid var(--cor-borda);
+     display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:8px 0;-webkit-overflow-scrolling:touch}
+nav.episodios::-webkit-scrollbar{display:none}
+nav.episodios button{flex:0 0 auto;font:inherit;font-size:14px;border:1px solid var(--cor-borda);background:var(--cor-superficie);
+     color:var(--cor-texto);border-radius:999px;padding:8px 14px;cursor:pointer;min-height:40px}
+nav.episodios button[aria-current="true"]{background:var(--cor-texto);color:var(--cor-fundo);border-color:var(--cor-texto)}
+nav.episodios .num{font-variant-numeric:tabular-nums;opacity:.7;margin-right:4px}
+section.episodio{display:none}
+section.episodio.entrando{animation:entrar .25s ease}
+section.episodio.ativo{display:block}
+@keyframes entrar{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){section.episodio.entrando{animation:none}html{scroll-behavior:auto}}
+.passo{display:flex;justify-content:space-between;gap:var(--espaco-m);margin-top:var(--espaco-g);border-top:1px solid var(--cor-borda);padding-top:var(--espaco-m)}
+.passo button{font:inherit;font-size:15px;border:1px solid var(--cor-borda);background:var(--cor-superficie);color:var(--cor-texto);
+     border-radius:var(--raio);padding:10px 14px;cursor:pointer;min-height:44px;max-width:48%}
+.passo button.proximo{margin-left:auto;background:var(--cor-texto);color:var(--cor-fundo);border-color:var(--cor-texto)}
+.controles{display:flex;flex-wrap:wrap;gap:var(--espaco-m);align-items:flex-end;margin:var(--espaco-m) 0}
+.campo{display:flex;flex-direction:column;gap:4px;font-size:var(--fs-nota);color:var(--cor-texto-secundario);min-width:0}
+select{font:inherit;font-size:15px;color:var(--cor-texto);background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:var(--raio);padding:8px;max-width:100%;min-height:40px}
+.alternar{display:inline-flex;flex-wrap:wrap;align-self:flex-start;width:fit-content;border:1px solid var(--cor-borda);border-radius:var(--raio);overflow:hidden;max-width:100%}
+.alternar button{font:inherit;font-size:14px;border:0;background:transparent;color:var(--cor-texto);padding:8px 12px;cursor:pointer;min-height:40px}
+.alternar button[aria-pressed="true"]{background:var(--cor-texto);color:var(--cor-fundo)}
+/* versão compacta, abaixo dos gráficos (Mapa | Círculos, Tamanho) */
+.campo.compacto{flex-direction:row;align-items:center;gap:8px;margin:var(--espaco-s,8px) 0;font-size:12px}
+.alternar.pequeno button{font-size:12px;padding:3px 10px;min-height:28px}
+.botao-modo{font:inherit;font-size:14px;border:1px solid var(--cor-borda);background:var(--cor-superficie);color:var(--cor-texto);
+  border-radius:var(--raio);padding:8px 12px;min-height:40px;cursor:pointer}
+.botao-modo:hover,.botao-modo:focus-visible{border-color:var(--cor-texto)}
+.grade2{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:var(--espaco-g);align-items:start}
+@media (max-width:768px){.grade2{grid-template-columns:minmax(0,1fr)}}
+.cartao{background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:var(--raio);padding:var(--espaco-m);min-width:0}
+svg{display:block}
+svg text{fill:var(--cor-texto-secundario);font-size:var(--fs-grafico-eixo)}
+/* contorno padrão de todas as marcas (polígonos, círculos fixos ou proporcionais, pontos) */
+.mapa path.u,circle.ponto{stroke:var(--cor-texto);stroke-opacity:.42;stroke-width:.7}
+circle.ponto.discrepante{stroke-opacity:1;stroke-width:1.6}
+.com-selecao path.u:not(.selecionado),.com-selecao [data-u]:not(.selecionado) circle.ponto,.com-selecao circle.ponto[data-u]:not(.selecionado){opacity:.45}
+.mapa path.u.selecionado,[data-u].selecionado circle.ponto,circle.ponto.selecionado{stroke:var(--cor-texto);stroke-opacity:1;stroke-width:2.6}
+.lupa{display:flex;align-items:center;gap:6px;margin:6px 0;max-width:340px}
+.lupa input{flex:1;font:inherit;font-size:14px;padding:7px 10px;border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-superficie);color:var(--cor-texto);min-height:38px}
+.painel-sel[hidden]{display:none}
+/* Mapa | Círculos sobre o canto inferior direito do desenho */
+.mapa-moldura{position:relative;max-width:560px}
+.barra-mapa{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:nowrap;max-width:560px;margin:6px 0 2px}
+.barra-mapa .lupa{margin:0;flex:0 1 300px;min-width:0}
+.barra-mapa .lupa input{min-width:0;width:100%}
+.barra-mapa .alternar{flex:none}
+.alternar.no-mapa button{font-size:12px;padding:3px 9px;min-height:30px}
+/* seletor dentro do título: as opções são parte da frase */
+.seletor-titulo button{font:inherit;border:0;background:none;padding:0 1px;margin:0;cursor:pointer;color:var(--cor-texto-secundario);
+  text-decoration:underline dotted;text-underline-offset:4px}
+.seletor-titulo button[aria-pressed="true"]{color:var(--cor-texto);text-decoration:underline solid 2px;text-underline-offset:4px}
+.seletor-titulo button:hover,.seletor-titulo button:focus-visible{color:var(--cor-destaque)}
+.lista-titulo{font:inherit;color:var(--cor-texto);background:transparent;border:0;border-bottom:2px solid var(--cor-texto);border-radius:0;
+  padding:0 1.1em 0 1px;cursor:pointer;max-width:100%;appearance:none;-webkit-appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
+  background-position:calc(100% - 9px) 55%,calc(100% - 4px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+.lista-titulo:hover,.lista-titulo:focus-visible{color:var(--cor-destaque);border-bottom-color:var(--cor-destaque)}
+.lista-titulo option{font-weight:400}
+.seletor-titulo .sep{color:var(--cor-texto-secundario);font-weight:400}
+.legendas-mapa{margin:4px 0 var(--espaco-p);max-width:560px}
+.legendas-mapa > .legenda:first-child,.legendas-mapa > .legenda-intensidade:first-child{margin-top:0}
+/* painel sob o gráfico: só quando o mapa não está ao lado (celular / coluna única) */
+@media (min-width:769px){.grade2 .painel-sel.painel-grafico{display:none}}
+/* legenda da liderança: grade fixa — mesma largura de quadro para todos os grupos, faixa escrita sobre a cor */
+.legenda-intensidade{display:grid;grid-template-columns:minmax(0,8em) repeat(4,minmax(36px,46px));gap:2px;align-items:center;
+  margin-top:var(--espaco-p);font-size:13px;color:var(--cor-texto)}
+.legenda-intensidade .nome{font-weight:600;font-size:12px;padding-right:6px;line-height:1.1;overflow-wrap:anywhere;min-width:0}
+.legenda-intensidade .quadro{height:18px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;
+  border-radius:2px;white-space:nowrap;text-shadow:0 0 2px var(--halo,transparent),0 0 1px var(--halo,transparent)}
+.painel-sel{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;background:var(--cor-fundo);border:1px solid var(--cor-borda);border-left:4px solid var(--cor-texto);border-radius:var(--raio);padding:8px 12px;margin-top:8px;font-size:14px}
+.painel-sel b{font-size:16px;flex-basis:100%}
+.painel-sel .acoes-sel{flex-basis:100%;display:flex;gap:8px;flex-wrap:wrap}
+.painel-sel .acoes-sel button{margin-top:4px}
+details.info{margin:2px 0 10px;font-size:13px;color:var(--cor-texto-secundario)}
+details.info summary{cursor:pointer;display:inline-block;color:var(--cor-texto-secundario);list-style:none;border:1px solid var(--cor-borda);border-radius:999px;padding:2px 10px;font-size:12.5px}
+details.info summary::-webkit-details-marker{display:none}
+details.info[open] summary{color:var(--cor-texto)}
+details.info p{margin:6px 0 0;max-width:var(--largura-texto)}
+details.info-notas{display:inline;margin:0 0 0 6px}
+details.info-notas[open]{display:block;margin:6px 0 0}
+h2.sub{font-size:20px;margin-top:var(--espaco-gg)}
+.mapa path.u:hover{stroke-opacity:1;stroke-width:1.6}
+.mapa path.u.ligado{stroke:var(--cor-texto);stroke-opacity:1;stroke-width:2.4}
+circle.ponto.ligado{stroke:var(--cor-texto);stroke-width:2.6;fill-opacity:1}
+.legenda{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--cor-texto-secundario);margin-top:var(--espaco-p);align-items:center}
+/* legenda interativa (Lab.linhasPontas › legenda): destaca a série no hover/foco; tocar fixa (L0003, graficos.linhas_pontas) */
+.legenda-interativa{gap:6px 8px}
+.legenda-interativa .item-legenda{font:inherit;font-size:14px;color:var(--cor-texto-secundario);background:none;border:1px solid transparent;border-radius:var(--raio);padding:4px 8px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;min-height:32px}
+.legenda-interativa .item-legenda:hover,.legenda-interativa .item-legenda:focus-visible{border-color:var(--cor-borda);color:var(--cor-texto)}
+.legenda-interativa .item-legenda[aria-pressed="true"]{border-color:var(--cor-texto);color:var(--cor-texto)}
+.legenda-interativa .item-legenda.apagada{opacity:.4}
+.amostra-linha{display:inline-block;width:20px;height:0;border-top:3px solid currentColor;border-radius:2px}
+.amostra-linha.tracejada{border-top-style:dashed}
+.chave{display:inline-flex;align-items:center;gap:6px}
+.chave .amostra{width:12px;height:12px;border-radius:3px;display:inline-block;flex:0 0 12px}   /* amostra própria do item, em qualquer contêiner (L0013) */
+.legenda .chave{display:inline-flex;align-items:center;gap:8px}
+.legenda .amostra{width:18px;height:18px;border-radius:3px;display:inline-block}
+.legenda .rampa{display:inline-flex;gap:2px}
+.legenda .rampa span{width:22px;height:16px;display:inline-block}
+/* legendas de escala: ~70% da largura do gráfico */
+.legenda-larga{width:min(70%,100%);max-width:560px;flex-wrap:nowrap}
+.legenda-larga .rampa{flex:1;display:flex}
+.legenda-larga .rampa span{flex:1;width:auto}
+.legenda.legenda-larga:has(.chave){flex-wrap:wrap;width:min(100%,560px)}
+/* escala contínua: rampa na largura toda, rótulos das pontas embaixo */
+.legenda-larga:not(:has(.chave)){display:grid;grid-template-columns:1fr 1fr;gap:4px 8px}
+.legenda-larga:not(:has(.chave)) > .rampa{grid-column:1/-1;grid-row:1}
+.legenda-larga:not(:has(.chave)) > span:first-child{grid-row:2;justify-self:start}
+.legenda-larga:not(:has(.chave)) > span:last-child{grid-row:2;justify-self:end}
+.legenda.legenda-larga .chave{flex:1 1 30%;min-width:140px}
+/* rampa divergente com três marcos: início, centro e fim */
+.legenda-tres{display:grid;grid-template-columns:1fr auto 1fr;gap:4px 8px;width:min(100%,560px)}
+.legenda-tres > .rampa{grid-column:1/-1;display:flex}
+.legenda-tres > .rampa span{flex:1;width:auto}
+.legenda-tres > span:nth-child(2){justify-self:start}
+.legenda-tres > span:nth-child(3){justify-self:center;text-align:center}
+.legenda-tres > span:nth-child(4){justify-self:end;text-align:right}
+.legenda.legenda-larga .chave .rampa{flex:1}
+.composicao{container-type:inline-size}   /* as quebras seguem o espaço do bloco, não a tela (L0008) */
+.composicao .linha{display:grid;grid-template-columns:150px minmax(0,1fr);gap:10px;align-items:center;margin:6px 0;font-size:14px}
+@container (max-width:420px){.composicao .linha{grid-template-columns:minmax(0,1fr);gap:2px;margin:4px 0}.composicao .linha .rot{font-weight:600}}
+@media (max-width:480px){.composicao .linha{grid-template-columns:minmax(0,1fr)}.composicao .linha .rot{font-weight:600}}
+.composicao .barra{display:flex;height:22px;gap:2px}
+.composicao .barra span{height:100%;min-width:2px;position:relative}
+.composicao .barra span:first-child{border-radius:4px 0 0 4px}
+.composicao .barra span:last-child{border-radius:0 4px 4px 0}
+.composicao .barra span b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;
+     text-shadow:0 0 2px var(--halo,transparent),0 0 2px var(--halo,transparent),0 0 1px var(--halo,transparent)}
+.composicao .barra{position:relative}
+.composicao .barra::after{content:"";position:absolute;left:50%;top:-4px;bottom:-4px;border-left:2px dotted var(--cor-texto);opacity:.75;pointer-events:none}
+.amostra-50{display:inline-block;width:0;height:14px;border-left:2px dotted var(--cor-texto)}
+.amostra.hachura{background:repeating-linear-gradient(45deg,var(--cor-ausente-contorno,var(--cor-eixo)) 0 1.5px,var(--cor-ausente,var(--cor-superficie)) 1.5px 5px);border:1px solid var(--cor-ausente-contorno,var(--cor-eixo))}
+.instrucao{font-size:14px;color:var(--cor-texto-secundario);margin:2px 0 8px}
+.placar{font-size:15px;font-weight:600;margin:4px 0 2px;max-width:none}
+.rodape-grafico{font-size:12.5px;line-height:1.5;color:var(--cor-texto-secundario);border-top:1px solid var(--cor-borda);margin-top:12px;padding-top:8px}
+.rodape-grafico a{color:inherit}
+.grade-evolucao{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr));gap:var(--espaco-m)}
+.frases-quartis{font-size:13px;color:var(--cor-texto-secundario);margin:8px 0 0;padding-left:18px}
+.composicao .vazio{font-size:var(--fs-nota);color:var(--cor-texto-suave)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(140px,100%),1fr));gap:var(--espaco-p);margin:var(--espaco-p) 0}
+.tile{background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:var(--raio);padding:10px 12px}
+.tile .rot{font-size:14px;color:var(--cor-texto-secundario);display:flex;align-items:center;gap:6px}
+.tile .val{font-size:24px;font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:6px 8px;border-bottom:1px solid var(--cor-grade);text-align:left;vertical-align:top}
+th{color:var(--cor-texto-secundario);font-weight:600}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.rolagem{overflow-x:auto;max-width:100%}
+.chip{display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:7px;vertical-align:-2px}
+.dica{position:fixed;pointer-events:none;background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:var(--raio);
+      padding:6px 10px;font-size:13px;box-shadow:0 6px 18px rgba(0,0,0,.15);display:none;z-index:30;max-width:280px}
+.dica b{display:block;font-size:15px}
+.sankey path.fluxo{fill:none;stroke-opacity:.35}
+.sankey path.fluxo:hover{stroke-opacity:.7}
+.sankey path.fluxo{transition:stroke-opacity .2s}
+.sankey path.fluxo.realce{stroke-opacity:.8}
+.sankey path.fluxo.apagado{stroke-opacity:.07}
+@media (prefers-reduced-motion:reduce){.sankey path.fluxo{transition:none}}
+.sankey rect{shape-rendering:crispEdges}
+.lista-mun{font-size:13px;columns:4 150px;column-gap:16px;margin:6px 0 0;padding-left:16px;line-height:1.45}
+.caixa-lista{max-height:220px;overflow:auto;border:1px solid var(--cor-borda);border-radius:var(--raio);padding:8px 12px;margin-top:8px;background:var(--cor-fundo)}
+.botoes-sankey{display:flex;gap:8px;flex-wrap:wrap}
+.botoes-sankey button{margin-top:0}
+button.tile-botao{font:inherit;color:inherit;text-align:left;cursor:pointer;border:1px solid var(--cor-borda)}
+button.tile-botao:hover{border-color:var(--cor-grupo)}
+button.tile-botao[aria-pressed="true"]{border:2px solid var(--cor-grupo);box-shadow:inset 0 0 0 1px var(--cor-grupo);padding:9px 11px}
+button.tile-botao:focus-visible{outline:2px solid var(--cor-texto);outline-offset:2px}
+footer{margin-top:var(--espaco-gg);border-top:1px solid var(--cor-borda);padding-top:var(--espaco-m)}
+details.metodologia{background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:var(--raio)}
+details.metodologia > summary{cursor:pointer;list-style:none;padding:14px 18px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+details.metodologia > summary::-webkit-details-marker{display:none}
+details.metodologia > summary::before{content:"▸";font-size:14px;color:var(--cor-texto-secundario);transition:transform .2s}
+details.metodologia[open] > summary::before{transform:rotate(90deg)}
+.met-titulo{font-size:19px;font-weight:700;color:var(--cor-texto)}
+.met-sub{font-size:13px;color:var(--cor-texto-secundario)}
+.met-corpo{padding:0 18px 18px;font-size:14.5px}
+.met-secao{border-top:1px solid var(--cor-grade);padding-top:6px;margin-top:10px}
+.met-secao h3{font-size:16px;margin:8px 0}
+.met-secao p{max-width:var(--largura-texto)}
+ol.passos{padding-left:20px} ol.passos li{margin:10px 0} ol.passos p{margin:4px 0}
+ul.arquivos{margin:0;padding-left:14px;font-size:12px;color:var(--cor-texto-secundario)}
+ul.adrs{padding-left:18px} ul.adrs li{margin:8px 0}
+/* bloco em camadas na folha ✎ Notas e fontes (L0014) */
+.met-camadas{display:grid;gap:0;margin-top:8px;border-top:1px solid var(--cor-grade)}
+details.met-camada{border-bottom:1px solid var(--cor-grade)}
+details.met-camada > summary{cursor:pointer;font-weight:600;padding:8px 2px;list-style:none;display:flex;justify-content:space-between;gap:8px}
+details.met-camada > summary::-webkit-details-marker{display:none}
+details.met-camada > summary::after{content:"▸";color:var(--cor-texto-secundario);transition:transform .2s}
+details.met-camada[open] > summary::after{transform:rotate(90deg)}
+.met-corpo-camada{padding:0 2px 10px;font-size:13px;min-width:0}
+.met-corpo-camada pre{white-space:pre;overflow-x:auto;font-size:11px;max-width:100%}
+.met-corpo-camada table{font-size:12px}
+details.codigo summary,details.pergunta summary{cursor:pointer;font-size:13px;color:var(--cor-texto-secundario)}
+details.pergunta{margin:6px 0} details.pergunta summary{font-size:14.5px;color:var(--cor-texto);font-weight:600}
+details.codigo pre{background:var(--cor-fundo);border:1px solid var(--cor-borda);border-radius:var(--raio);padding:10px;overflow:auto;font-size:12px;max-height:360px}
+.assinatura-final{font-size:13px;color:var(--cor-texto-secundario);margin:12px 0 0}
+.fora-escala{stroke-dasharray:4 3;stroke:var(--cor-texto)!important;stroke-opacity:1!important;stroke-width:1.6!important}
+.rotulo-fora{font-size:11px;font-weight:600;fill:var(--cor-texto);paint-order:stroke;stroke:var(--cor-superficie);stroke-width:3px}
+footer p{margin:4px 0;max-width:none}
+.assinatura{font-size:14px;color:var(--cor-texto-secundario);margin:0 0 var(--espaco-p)}
+.assinatura a{color:var(--cor-texto);text-decoration-color:var(--cor-eixo)}
+/* separa o nome do autor do link para o bloco de metodologia (não parecem um link só) */
+.assinatura .sep-assinatura{display:inline-block;margin:0 14px;color:var(--cor-eixo)}
+button.voltar{font:inherit;font-size:15px;border:1px solid var(--cor-borda);background:var(--cor-superficie);color:var(--cor-texto);
+     border-radius:var(--raio);padding:10px 14px;cursor:pointer;min-height:44px;margin-top:var(--espaco-m)}
+a{color:var(--cor-destaque)}
+.carregando{padding:var(--espaco-gg) 0;color:var(--cor-texto-secundario)}
+
+/* legenda interativa (Lab.sankey): item destaca os fluxos da categoria */
+.legenda-interativa .chave{cursor:pointer;border-radius:3px;padding:1px 4px;margin:-1px -4px}
+.legenda-interativa .chave:hover,.legenda-interativa .chave:focus-visible{background:var(--cor-grade);outline:none}
+/* legendas do sankey: centralizadas; com duas variáveis, uma acima (primeiro lado) e outra abaixo (último lado) */
+.legenda-sankey{justify-content:center;text-align:center;margin:10px auto 12px}
+.legenda-sankey .lado-legenda{flex-basis:100%;font-weight:700;font-size:14px;margin-bottom:2px}
+svg.sankey{display:block;margin-left:auto;margin-right:auto}
+/* card da distribuição do destaque no sankey (mesmo visual do card do mapa) */
+.painel-sankey{max-width:620px;margin:10px auto}
+.painel-sankey .bloco-dist{flex-basis:100%;display:flex;flex-direction:column;gap:1px;font-variant-numeric:tabular-nums}
+.painel-sankey .bloco-dist strong{font-size:13px;margin-top:4px}
+/* mapa: câmera, zoom, card flutuante, referência e fundo opcional (L0006; design.yaml › padroes.mapa_camera) */
+.mapa{position:relative;z-index:1;display:block}
+.mapa path,.mapa circle{vector-effect:non-scaling-stroke}
+.mapa-moldura>.mapa-fundo{position:absolute!important;left:0;top:0;z-index:0;pointer-events:none;transition:opacity .4s;background:transparent}
+.mapa .referencia path{fill:var(--cor-grade);fill-opacity:.55;stroke:var(--cor-eixo);stroke-opacity:.55;stroke-width:.6}
+.com-fundo .mapa .referencia path{fill-opacity:.1}
+.mapa .fundo-ref{fill:var(--cor-grade);fill-opacity:.55}
+.com-fundo .mapa .fundo-ref{fill-opacity:0}
+.com-fundo .mapa path.u{fill-opacity:.85}
+.mapa .rotulos-ref text{font-size:11.5px;font-weight:600;fill:var(--cor-texto);paint-order:stroke;stroke:var(--cor-superficie);stroke-width:3px}
+.mapa .rotulos-ref circle{fill:var(--cor-texto)}
+/* story (mapa compacto): rótulos das cidades discretos — competiam com as cores, setas e chamadas (pesquisador, 2026-10-27) */
+.bloco-mapa.compacto .rotulos-ref text{font-size:9.5px;font-weight:500;fill:var(--cor-texto-secundario);stroke-width:2.5px;opacity:.85}
+.bloco-mapa.compacto .rotulos-ref circle{fill:var(--cor-texto-secundario);r:1.5px;opacity:.85}
+.mapa-controles{position:absolute;top:8px;right:8px;z-index:3;display:flex;flex-direction:column;gap:4px}
+.mapa-controles button{width:34px;height:34px;padding:0;border-radius:8px;border:1px solid var(--cor-borda);background:var(--cor-superficie);color:var(--cor-texto);font:inherit;font-size:18px;line-height:1;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.mapa-controles button:hover{border-color:var(--cor-texto)}
+.mapa-aviso{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;background:rgba(0,0,0,.72);color:#fff;padding:6px 12px;border-radius:16px;font-size:13px;pointer-events:none;white-space:nowrap}
+.mapa-aviso[hidden],.mapa-moldura .painel-sel[hidden]{display:none}
+.mapa-atribuicao{position:absolute;right:4px;bottom:4px;z-index:3;font-size:10px;line-height:1.3;color:var(--cor-texto-secundario);background:color-mix(in srgb,var(--cor-superficie) 82%,transparent);padding:1px 5px;border-radius:3px;max-width:90%}
+.painel-sel.flutuante{position:absolute;z-index:4;max-width:min(280px,80%);margin:0;box-shadow:0 4px 16px rgba(0,0,0,.18)}
+.mapa-editar{position:absolute;left:4px;top:4px;z-index:4;display:flex;flex-direction:column;align-items:flex-start;gap:4px;max-width:80%;background:var(--cor-superficie);border:1px dashed var(--cor-destaque);border-radius:6px;padding:6px 8px;font-size:11px}
+.bloco-mapa.compacto,.mapa-moldura.compacto{height:100%;max-width:none}
+.mapa path.u.foco{stroke:var(--cor-texto);stroke-opacity:1;stroke-width:2}
+.painel-sel.rodape{position:absolute;left:8px;right:8px;bottom:8px;z-index:4;margin:0;box-shadow:0 4px 16px rgba(0,0,0,.18)}
+.painel-sel.rodape{font-size:12.5px;line-height:1.35;padding:6px 10px;gap:1px 10px;max-height:46%;overflow:auto}
+.painel-sel.rodape b{font-size:14px}
+.painel-sel.rodape .acoes-sel button{margin-top:2px;padding:2px 8px;font-size:12px;min-height:28px}
+.painel-sel.rodape.topo{top:8px;bottom:auto}
+.painel-sel.rodape span{flex-basis:100%}
+
+/* legenda-foco (Lab.legendaFoco): categoria destacada; as demais esmaecem — barras e linhas de tabela (pesquisador, 2026-10-12) */
+.barra span[data-cat]{transition:opacity .2s}
+.barra span.esmaecido{opacity:.22}
+tr[data-cat].esmaecido td{opacity:.4}
+tr[data-cat].em-foco td{font-weight:600}
+.legenda-interativa .item-legenda .amostra{width:14px;height:14px}
+@media (prefers-reduced-motion:reduce){.barra span[data-cat]{transition:none}}
+/* tabela de dados (Lab.tabelaDados): linhas recolhidas, busca e CSV */
+.tabela-dados{margin:var(--espaco-p) 0}
+.tabela-barra{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-bottom:6px}
+.tabela-barra .nota{margin-right:auto}
+.tabela-busca{font:inherit;font-size:14px;padding:5px 10px;border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-superficie);color:var(--cor-texto);min-width:0;flex:0 1 220px}
+.tabela-baixar,.tabela-mais{font:inherit;font-size:13px;font-weight:600;padding:4px 12px;border:1px solid var(--cor-borda);border-radius:999px;background:var(--cor-superficie);color:var(--cor-texto);cursor:pointer;min-height:32px}
+.grafico-baixar{display:inline-block;margin:2px 0 8px}
+.tabela-baixar:hover,.tabela-mais:hover,.tabela-baixar:focus-visible,.tabela-mais:focus-visible{border-color:var(--cor-texto)}
+.tabela-mais{margin-top:6px}
+/* barra na célula (D15) e cor nas células (D16) — padroes.tabelas */
+.tabela-dados td.cel-barra{background:linear-gradient(90deg,color-mix(in srgb,var(--cor-cat-1) 26%,transparent) var(--p),transparent var(--p)) left center/100% 72% no-repeat}
+.tabela-dados td.cel-calor{background:color-mix(in srgb,var(--cor-seq-6,var(--cor-cat-1)) var(--p),transparent)}
+/* diagrama de fluxo dos dados (Lab.diagramaFluxo): bases → operações → saídas (pesquisador, 2026-10-12) */
+.fluxo{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) minmax(0,1fr);gap:var(--espaco-p) 48px;margin:var(--espaco-p) 0;align-items:start;max-width:980px}
+.fluxo-col-1{padding-left:30px}   /* margem para os arcos entre operações */
+.fluxo-col{display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
+.fluxo-col > h4{margin:0 0 2px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--cor-texto-secundario)}
+.fluxo-no{border:1px solid var(--cor-borda);border-left:4px solid var(--cor-fluxo,var(--cor-borda));border-radius:var(--raio);background:var(--cor-superficie);padding:7px 9px;font-size:13.5px;line-height:1.3;transition:opacity .2s;cursor:default}
+.fluxo-no b{display:block;font-size:14px}
+.fluxo-no .tipo{display:inline-block;font-size:11px;font-weight:700;color:var(--cor-texto-secundario);text-transform:uppercase;letter-spacing:.03em;margin-bottom:2px}
+.fluxo-no .nota{display:block;margin-top:2px}
+.fluxo-no .de{display:none}
+.fluxo-no a{color:inherit}
+.fluxo-no.restrita .tipo::after{content:" · restrita";color:var(--cor-status-grave)}
+.fluxo.focado .fluxo-no:not(.ligado){opacity:.28}
+/* operações transversais (ex.: supressão): faixa à parte, sob as três colunas, sem ligações (pesquisador, 2026-10-14) */
+.fluxo-envelope{max-width:980px}
+.fluxo-transversais{margin:var(--espaco-p) 0;padding:8px 10px 10px;border:1px dashed var(--cor-borda);border-radius:var(--raio);display:flex;flex-wrap:wrap;gap:8px 12px;align-items:stretch}
+.fluxo-transversais > h4{flex:1 0 100%;margin:0;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--cor-texto-secundario)}
+.fluxo-transversal{flex:1 1 260px}
+.fluxo-transversal .alcance{color:var(--cor-texto-secundario);font-size:12.5px}
+.fluxo-envelope:has(.fluxo.focado) .fluxo-transversal:not(.ligado){opacity:.28}
+.fluxo.focado path:not(.ligado){opacity:.12}
+.fluxo svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible}
+.fluxo path{fill:none;stroke:var(--cor-eixo);stroke-width:1.4;transition:opacity .2s}
+.fluxo path.ligado{stroke:var(--cor-texto);stroke-width:2}
+@media (max-width:760px){
+  .fluxo{grid-template-columns:minmax(0,1fr);gap:var(--espaco-p)}
+  .fluxo-col-1{padding-left:0}
+  .fluxo svg{display:none}
+  .fluxo-no .de{display:block;font-size:12px;color:var(--cor-texto-secundario);margin-top:3px}
+}
+@media (prefers-reduced-motion:reduce){.fluxo-no,.fluxo path{transition:none}}
+
+/* ordenação no cabeçalho (Lab.tabelaDados) */
+.tabela-dados th .tabela-ordenar{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;text-align:inherit;display:inline-flex;align-items:baseline;gap:4px}
+.tabela-dados th.n .tabela-ordenar{flex-direction:row-reverse}
+.tabela-dados th .tabela-ordenar:hover,.tabela-dados th .tabela-ordenar:focus-visible{color:var(--cor-texto);text-decoration:underline}
+.tabela-dados th .seta::after{content:"↕";opacity:.35;font-size:.9em}
+.tabela-dados th[aria-sort="ascending"] .seta::after{content:"↑";opacity:1}
+.tabela-dados th[aria-sort="descending"] .seta::after{content:"↓";opacity:1}
+
+/* círculos sobrepostos (milhares de unidades; lab-mapa.js › SOBREPOR_MIN): translúcidos, com contorno claro */
+.mapa path.u.sobreposto{fill-opacity:.72;stroke:var(--cor-superficie);stroke-opacity:.9;stroke-width:.5}
+
+</style>
+<style>
+  /* caderno didático (local ao produto; mesmo vocabulário dos materiais de dataviz-didatico) */
+  .selo-didatico{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--cor-borda);border-radius:999px;padding:2px 10px;color:var(--cor-texto-secundario);margin-bottom:8px}
+  details.sobre-material{font-size:.875rem;color:var(--cor-texto-secundario);margin:0 0 10px;max-width:var(--largura-texto)}
+  details.sobre-material>summary{cursor:pointer;list-style:none}
+  details.sobre-material>summary::-webkit-details-marker{display:none}
+  details.sobre-material .mais{color:var(--cor-destaque);white-space:nowrap}
+  .abas-partes{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0 20px;position:sticky;top:0;z-index:5;background:var(--cor-fundo);padding:6px 0}
+  .abas-partes button{font:inherit;text-align:left;border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-superficie);color:var(--cor-texto);padding:8px 12px;cursor:pointer;display:flex;flex-direction:column}
+  .abas-partes button[aria-selected=true]{border-color:var(--cor-texto);box-shadow:inset 0 -3px 0 var(--cor-texto)}
+  .abas-partes .aba-num{font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--cor-texto-secundario)}
+  .abas-partes .aba-nome{font-weight:600}
+  @media (max-width:640px){.abas-partes{grid-template-columns:repeat(2,1fr);position:static}}
+  .trilhas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;margin:12px 0}
+  .trilhas h3{margin:0 0 6px}
+  .trilhas ol{padding-left:20px;margin:0;font-size:.9375rem}
+  .indice-secoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:8px;margin:10px 0 20px}
+  .item-indice{font:inherit;text-align:left;cursor:pointer;display:grid;grid-template-columns:auto 1fr;column-gap:10px;color:var(--cor-texto);background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:var(--raio);padding:10px 12px}
+  .item-indice .num{grid-row:span 2;font-weight:800;font-size:1.25rem;color:var(--cor-texto-secundario);min-width:1.4em}
+  .item-indice .tit{font-weight:700}
+  .item-indice .sub{font-size:.8125rem;color:var(--cor-texto-secundario)}
+  .item-indice:hover{border-color:var(--cor-texto)}
+  .estacao{border-top:1px solid var(--cor-grade);padding-top:18px;margin-top:40px;scroll-margin-top:90px}
+  .estacao .chapeu{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--cor-texto-secundario);margin:0}
+  .estacao h2{margin:2px 0 6px}
+  .resumo{font-size:1.0625rem;color:var(--cor-texto-secundario);max-width:var(--largura-texto);margin:0 0 12px}
+  .estacao p,.estacao li{max-width:var(--largura-texto)}
+  .ja-sei{border-left:4px solid var(--cor-status-bom);background:var(--cor-superficie);padding:10px 14px;margin:12px 0;border-radius:0 var(--raio) var(--raio) 0}
+  .ja-sei h4{margin:0 0 4px;font-size:.9375rem}
+  .ja-sei ul{margin:4px 0;padding-left:20px;font-size:.9375rem}
+  .ja-sei .pular{font:inherit;font-size:.875rem;border:0;background:none;color:var(--cor-destaque);padding:2px 0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+  .passo-bloco{background:var(--cor-superficie);border-left:4px solid var(--cor-destaque);padding:8px 12px;margin:10px 0;max-width:none}
+  .passo-bloco h4{margin:0 0 4px;font-size:.9375rem}
+  .passo-bloco p{margin:0}
+  .atencao{border-left:4px solid var(--cor-status-atencao);padding:6px 12px;margin:10px 0;font-size:.9375rem}
+  .dica-bloco{border-left:4px solid var(--cor-cat-2);padding:6px 12px;margin:10px 0;font-size:.9375rem}
+  pre.codigo{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8125rem;line-height:1.5;background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:var(--raio);padding:10px 12px;overflow-x:auto;margin:6px 0 12px;max-width:100%;white-space:pre}
+  .codigo-titulo{font-size:.875rem;font-weight:600;color:var(--cor-texto-secundario);margin:10px 0 0}
+  .rolagem{overflow-x:auto;margin:8px 0 12px}
+  .rolagem table{font-size:.875rem}
+  .mini{border:1px dashed var(--cor-texto-secundario);border-radius:var(--raio);padding:10px 14px;margin:14px 0}
+  .mini h4{margin:0 0 4px;font-size:.9375rem}
+  details.erros,details.fontes{border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-superficie);margin:10px 0;padding:0 14px}
+  details.erros>summary,details.fontes>summary{cursor:pointer;font-weight:700;padding:10px 0}
+  details.erros dl{margin:0 0 12px}
+  details.erros dt{font-weight:600;margin-top:8px}
+  details.erros dd{margin:2px 0 0;font-size:.9375rem;color:var(--cor-texto-secundario)}
+  details.fontes ul{margin:0 0 12px}
+  /* editor embutido */
+  .editor{border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-superficie);margin:12px 0 16px;overflow:hidden;max-width:none}
+  .editor-cab{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;border-bottom:1px solid var(--cor-grade)}
+  .editor-titulo{font-weight:600;font-size:.875rem;margin:0}
+  .editor-botoes{display:flex;gap:6px;flex-wrap:wrap}
+  .editor-botoes button,.bt-carregar{font:inherit;font-size:.8125rem;border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-fundo);color:var(--cor-texto);padding:4px 10px;cursor:pointer}
+  .editor-botoes button:hover,.bt-carregar:hover{border-color:var(--cor-texto)}
+  .editor-botoes button.principal{border-color:var(--cor-texto);font-weight:600}
+  .editor-corpo{display:grid;grid-template-columns:1fr 1fr}
+  @media (max-width:760px){.editor-corpo{grid-template-columns:1fr}}
+  .editor-codigo{display:grid;grid-template-rows:auto 1fr auto 1fr;min-width:0}
+  .editor-codigo label{font-size:.6875rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--cor-texto-secundario);padding:4px 10px 0;background:var(--cor-fundo)}
+  .editor-codigo textarea{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8125rem;line-height:1.45;border:0;border-bottom:1px solid var(--cor-grade);resize:vertical;padding:6px 10px;background:var(--cor-fundo);color:var(--cor-texto);tab-size:2;white-space:pre;overflow:auto;min-height:90px;width:100%;box-sizing:border-box}
+  .editor-codigo textarea:focus{outline:2px solid var(--cor-destaque);outline-offset:-2px}
+  .editor-resultado{border-left:1px solid var(--cor-grade);background:#fff;min-width:0;display:grid;grid-template-rows:auto 1fr}
+  @media (max-width:760px){.editor-resultado{border-left:0;border-top:1px solid var(--cor-grade)}}
+  .editor-resultado label{font-size:.6875rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--cor-texto-secundario);padding:4px 10px 0;background:var(--cor-fundo);border-bottom:1px solid var(--cor-grade)}
+  .editor-resultado iframe{width:100%;border:0;display:block;background:#fff;height:var(--altura-quadro,240px)}
+  .editor-nota{font-size:.8125rem;color:var(--cor-texto-secundario);padding:6px 12px;margin:0;border-top:1px solid var(--cor-grade)}
+  .editor-salvo{font-size:.75rem;color:var(--cor-texto-secundario)}
+  /* laboratório flex/grid */
+  .lab-play{border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-superficie);margin:12px 0 16px;padding:10px 12px;max-width:none}
+  .lab-play h4{margin:0 0 8px;font-size:.9375rem}
+  .lab-controles{display:flex;flex-wrap:wrap;gap:8px 16px;margin-bottom:8px}
+  .lab-controles label{font-size:.8125rem;display:flex;flex-direction:column;gap:2px}
+  .lab-controles select{font:inherit;font-size:.8125rem;padding:3px 6px;border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-fundo);color:var(--cor-texto)}
+  .lab-grade{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+  @media (max-width:760px){.lab-grade{grid-template-columns:1fr}}
+  .lab-grade iframe{width:100%;height:var(--altura-quadro,230px);border:1px solid var(--cor-grade);border-radius:var(--raio);background:#fff}
+  .lab-grade pre{margin:0;height:230px;overflow:auto;box-sizing:border-box}
+  /* práticas e desafios */
+  ol.instrucoes li{margin:6px 0}
+  details.solucao,details.gabarito,details.dicas{border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-superficie);margin:10px 0;padding:0 14px}
+  details.solucao>summary,details.gabarito>summary,details.dicas>summary{cursor:pointer;font-weight:700;padding:10px 0}
+  details.dicas details{margin:4px 0 8px}
+  details.dicas details>summary{cursor:pointer;color:var(--cor-destaque);font-size:.875rem}
+  details.dicas details p{margin:4px 0 0 0;border-left:3px solid var(--cor-grade);padding-left:10px}
+  details.gabarito .aviso-gabarito{font-size:.875rem;color:var(--cor-texto-secundario)}
+  .confira{border-left:4px solid var(--cor-status-bom);padding:6px 12px;margin:10px 0}
+  .confira h4{margin:0 0 4px;font-size:.9375rem}
+  .confira label{display:block;font-size:.9375rem;margin:3px 0;cursor:pointer}
+  .confira input{margin-right:6px}
+  .esperado{margin:10px 0}
+  .esperado h4{margin:0 0 4px;font-size:.9375rem}
+  .esperado iframe{width:100%;border:1px solid var(--cor-grade);border-radius:var(--raio);background:#fff;display:block;height:var(--altura-quadro,300px)}
+  .familia-chip{display:inline-block;font-size:.75rem;font-weight:700;border-radius:999px;padding:1px 8px;background:var(--cor-cat-1);color:#fff;margin-left:6px;vertical-align:middle}
+  .familia-chip.grid{background:var(--cor-cat-2)}
+  .link-cruzado{font:inherit;font-size:.875rem;border:0;background:none;color:var(--cor-destaque);padding:2px 0;cursor:pointer;text-align:left;text-decoration:underline;text-underline-offset:3px}
+  .links-conceito{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 8px}
+  .grade-apoio{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+  .grade-apoio h4{margin:0 0 4px;font-size:.9375rem}
+  .grade-apoio p{margin:4px 0;font-size:.875rem}
+  .lista-ref li{margin:4px 0}
+  .nota{font-size:.875rem;color:var(--cor-texto-secundario)}
+  .estado-chip{display:inline-block;font-size:.75rem;font-weight:700;border-radius:999px;padding:1px 8px;background:var(--cor-status-atencao);color:#111}
+  .estado-chip.ok{background:var(--cor-status-bom);color:#fff}
+  /* acessibilidade: barra e versão adaptada para baixa visão (decisão local do produto; README › Decisões locais).
+     Liga pelo atributo data-acesso="baixa-visao" na raiz: texto maior (escala em --bv-escala), contraste alto (AAA),
+     uma coluna, foco visível, alvos maiores, links sublinhados; data-theme="dark" (tokens) dá o fundo escuro. */
+  .acesso-barra{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;margin:0 0 14px;padding:8px 12px;border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-superficie);font-size:.9rem}
+  .acesso-barra:empty{display:none}
+  .acesso-barra label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;min-height:32px}
+  .acesso-barra input[type=checkbox]{width:1.15em;height:1.15em;margin:0;accent-color:var(--cor-texto)}
+  .acesso-barra .grupo{display:inline-flex;align-items:center;gap:6px}
+  .acesso-barra button{font:inherit;font-weight:700;min-width:2.4em;min-height:32px;border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-fundo);color:var(--cor-texto);cursor:pointer;padding:2px 8px}
+  .acesso-barra button:disabled{opacity:.45;cursor:default}
+  .acesso-barra .valor{min-width:3.2em;text-align:center;font-variant-numeric:tabular-nums}
+  .acesso-barra .nota-acesso{flex-basis:100%;margin:0;font-size:.85rem;color:var(--cor-texto-secundario)}
+  html[data-acesso=baixa-visao]{font-size:calc(100% * var(--bv-escala,1.5));
+    --fs-titulo:2rem;--fs-subtitulo:1.45rem;--fs-texto:1rem;--fs-nota:.9rem;--fs-grafico-titulo:1.15rem;--entrelinha:1.7;--largura-texto:100%;
+    --cor-fundo:#fff;--cor-superficie:#fff;--cor-texto:#000;--cor-texto-secundario:#1a1a1a;--cor-texto-suave:#333;
+    --cor-borda:rgba(0,0,0,.6);--cor-grade:rgba(0,0,0,.35);--cor-destaque:#0b4ea2;--cor-status-bom:#0a6b2f;--cor-status-atencao:#ffd84d}
+  html[data-acesso=baixa-visao][data-theme=dark]{--cor-fundo:#000;--cor-superficie:#000;--cor-texto:#fff;--cor-texto-secundario:#e8e8e8;--cor-texto-suave:#cfcfcf;
+    --cor-borda:rgba(255,255,255,.65);--cor-grade:rgba(255,255,255,.4);--cor-destaque:#9cc4ff;--cor-status-bom:#7fe0a3;--cor-status-atencao:#ffd84d}
+  html[data-acesso=baixa-visao] body{letter-spacing:.01em;word-spacing:.04em}
+  html[data-acesso=baixa-visao] p{margin-bottom:.9em}
+  html[data-acesso=baixa-visao] li{margin-bottom:.35em}
+  html[data-acesso=baixa-visao] a{text-decoration:underline;text-underline-offset:.15em;text-decoration-thickness:.08em}
+  html[data-acesso=baixa-visao] :focus-visible{outline:3px solid var(--cor-texto);outline-offset:3px}
+  html[data-acesso=baixa-visao] button,html[data-acesso=baixa-visao] select{min-height:2.75rem;border-width:2px}
+  html[data-acesso=baixa-visao] .acesso-barra{font-size:1rem}
+  html[data-acesso=baixa-visao] .abas-partes{position:static;grid-template-columns:repeat(2,1fr)}
+  html[data-acesso=baixa-visao] .editor-corpo,html[data-acesso=baixa-visao] .lab-grade{grid-template-columns:1fr}
+  html[data-acesso=baixa-visao] .editor-resultado{border-left:0;border-top:2px solid var(--cor-grade)}
+  html[data-acesso=baixa-visao] .editor-codigo textarea,html[data-acesso=baixa-visao] pre.codigo{font-size:1rem;line-height:1.6}
+  html[data-acesso=baixa-visao] .editor-codigo textarea{height:auto!important;min-height:11rem}
+  html[data-acesso=baixa-visao] .editor-codigo label,html[data-acesso=baixa-visao] .editor-resultado label{font-size:.85rem}
+  html[data-acesso=baixa-visao] .editor-resultado iframe,html[data-acesso=baixa-visao] .esperado iframe,html[data-acesso=baixa-visao] .lab-grade iframe{height:calc(var(--altura-quadro,300px) * var(--bv-escala,1.5))}
+  html[data-acesso=baixa-visao] .lab-controles select{font-size:1rem}
+  html[data-acesso=baixa-visao] .familia-chip,html[data-acesso=baixa-visao] .estado-chip,html[data-acesso=baixa-visao] .selo-didatico{background:var(--cor-superficie);color:var(--cor-texto);border:2px solid currentColor}
+  html[data-acesso=baixa-visao] .confira,html[data-acesso=baixa-visao] .atencao,html[data-acesso=baixa-visao] .dica-bloco{border-left-width:6px;border-left-color:var(--cor-texto)}
+  html[data-acesso=baixa-visao] .topo-link{font-size:1rem;padding:.5em 1em;border-width:2px}
+  html[data-acesso=baixa-visao] .assinatura,html[data-acesso=baixa-visao] .assinatura-final,html[data-acesso=baixa-visao] details.metodologia{font-size:1rem}
+  html[data-acesso=baixa-visao] .indice-secoes,html[data-acesso=baixa-visao] .grade-apoio,html[data-acesso=baixa-visao] .trilhas{grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+  .met-secao h3{font-size:1rem;margin:8px 0 4px}
+  .topo-link{position:fixed;right:14px;bottom:14px;z-index:6;font:inherit;font-size:.8125rem;border:1px solid var(--cor-borda);border-radius:999px;background:var(--cor-superficie);color:var(--cor-texto);padding:6px 12px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+</style>
+<script data-goatcounter="https://cajazeiraalexandre.goatcounter.com/count" async src="https://gc.zgo.at/count.v4.js" integrity="sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+" crossorigin="anonymous"></script>
+</head>
+<body>
+<main>
+  <div id="acesso" class="acesso-barra" role="group" aria-label="Acessibilidade"></div>
+  <header class="capa">
+    <h1>HTML e CSS para layout: caderno de estudos e práticas</h1>
+    <p class="assinatura">Por <a href="https://cajazeiraalexandre.github.io/" target="_blank" rel="noopener">Alexandre Cajazeira</a><span class="sep-assinatura" aria-hidden="true">|</span><a href="#rodape">Autoria, revisão e uso de IA ↓</a></p>
+    <p class="lead">Revisão e prática do que vimos em sala: o papel de cada linguagem, a estrutura de um arquivo HTML, a sintaxe do CSS, as tags semânticas, o box model, display e position, Flexbox e Grid. Cada conceito vem com um editor para experimentar na hora; a Parte II constrói o site da Serra da Capivara passo a passo; a Parte III traz oito desafios de Flexbox e Grid.</p>
+  </header>
+  <div id="app"><p class="carregando">Carregando o caderno…</p></div>
+  <footer id="rodape"></footer>
+</main>
+<div class="dica" id="dica" role="status" aria-live="polite"></div>
+<script id="dados" type="text/plain">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</script>
+<script>
+/* ==== web/componentes/lab-nucleo.js ==== */
+/* lab-nucleo.js — núcleo dos componentes de interface do Laboratório de Dados Públicos.
+ * Design system padrão (design/padrao/design.yaml, seção `padroes`); ADR L0003.
+ *
+ * Sem build: os produtos embutem os arquivos lab-*.js no HTML único (L0002), nesta ordem:
+ *   lab-nucleo → lab-selecao → lab-escalas → lab-mapa → lab-graficos → lab-sankey → lab-metodologia.
+ * Requer D3 v7 global (lab-sankey requer d3-sankey; lab-mapa usa flubber, se presente).
+ * Tudo fica em window.Lab. Os componentes só desenham: nenhum cálculo analítico (L0002).
+ *
+ * Uso mínimo:
+ *   Lab.configurar({ raiz: document.getElementById("app"), autor: "Nome", orgaos: { tse: "TSE" } });
+ *   sec.append(el("h3", {}, "Votos de ", Lab.seletorTituloLista("Grupo", opcoes, atual, aoMudar)));
+ */
+(function () {
+  "use strict";
+  const Lab = (window.Lab = window.Lab || {});
+
+  // ------------------------------------------------------------ configuração do produto
+  // raiz: elemento onde a página desenha (seleção e rótulos procuram dentro dele)
+  // autor: nome curto do rodapé dos gráficos · orgaos: chave da fonte → órgão (rodapé curto)
+  // artigos: forma com artigo quando há um só órgão ("TSE" → "do TSE")
+  // autorUrl (GitHub do autor) e projeto ({nome, url} do repositório) chegam da montagem (labdados.produto_web)
+  Lab.cfg = { raiz: document.body, autor: "", autorUrl: null, projeto: null, orgaos: {}, artigos: {}, ancoraMetodologia: "metodologia", ancoraRodape: "rodape" };
+  Lab.configurar = (c) => Object.assign(Lab.cfg, c);
+
+  // ------------------------------------------------------------ formatos (pt-BR)
+  const fmtInt = new Intl.NumberFormat("pt-BR");
+  const vazio = (v) => v === null || v === undefined;
+  Lab.fmtInt = fmtInt;
+  Lab.fmtPct = (v, d = 1) => (vazio(v) ? "—" : `${v.toLocaleString("pt-BR", { minimumFractionDigits: d, maximumFractionDigits: d })}%`);
+  Lab.fmtPP = (v) => (vazio(v) ? "—" : `${v.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })} p.p.`);
+  Lab.fmtR = (v) => (vazio(v) ? "—" : v.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+  /** Número grande abreviado: 1,23 mi · 460 mil · 9.876. */
+  Lab.fmtCompacto = (v) => (vazio(v) ? "—" : Math.abs(v) >= 1e6 ? `${(v / 1e6).toLocaleString("pt-BR", { maximumFractionDigits: 2 })} mi`
+    : Math.abs(v) >= 1e4 ? `${Math.round(v / 1000).toLocaleString("pt-BR")} mil` : fmtInt.format(v));
+  /** Com sinal explícito (+, −) e o formato do módulo. */
+  Lab.comSinal = (v, fmt) => (vazio(v) ? "—" : `${v > 0 ? "+" : v < 0 ? "−" : ""}${fmt(Math.abs(v))}`);
+
+  // ------------------------------------------------------------ elementos e tokens
+  /** el("div", {class, text, onclick, "data-x"}, ...filhos) — textos sempre por textContent. */
+  Lab.el = (tag, attrs = {}, ...filhos) => {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (v === null || v === undefined) continue;
+      if (k === "class") n.className = v; else if (k === "text") n.textContent = v;
+      else if (k.startsWith("on")) n.addEventListener(k.slice(2), v); else n.setAttribute(k, v);
+    }
+    for (const f of filhos) if (f !== null && f !== undefined && f !== false) n.append(f);
+    return n;
+  };
+  const el = Lab.el;
+  /** Valor de um token do design system (variável CSS --nome). */
+  Lab.token = (nome) => getComputedStyle(document.documentElement).getPropertyValue(`--${nome}`).trim();
+  const token = Lab.token;
+  Lab.semMovimento = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /** Tinta legível sobre uma cor de fundo (pela luminância). */
+  Lab.tinta = (c) => (d3.lab(c).l > 62 ? "#111" : "#fff");
+  /** Texto sobre cor: tinta pela luminância + contorno contrastante (--halo). */
+  Lab.comHalo = (n, fundo) => { const t = Lab.tinta(fundo); n.style.color = t; n.style.setProperty("--halo", t === "#111" ? "rgba(255,255,255,.75)" : "rgba(0,0,0,.45)"); return n; };
+  /** Base embutida em gzip+base64 (labdados.produto_web.codificar_base). */
+  Lab.decodificar = async (b64) => {
+    const bin = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+    const fluxo = new Blob([bin]).stream().pipeThrough(new DecompressionStream("gzip"));
+    return JSON.parse(await new Response(fluxo).text());
+  };
+
+  // ------------------------------------------------------------ dica (tooltip)
+  let dica = null;
+  const caixaDica = () => dica || (dica = document.getElementById("dica")
+    || document.body.appendChild(el("div", { class: "dica", id: "dica", role: "status", "aria-live": "polite" })));
+  /** Dica junto ao ponteiro: título em negrito + linhas (as vazias são ignoradas). */
+  Lab.mostrarDica = (ev, titulo, linhas) => {
+    const d = caixaDica();
+    d.replaceChildren(el("b", { text: titulo }), ...linhas.filter(Boolean).map((t) => el("div", { text: t })));
+    d.style.display = "block";
+    d.style.left = `${Math.min(ev.clientX + 14, innerWidth - d.offsetWidth - 8)}px`;
+    d.style.top = `${Math.min(ev.clientY + 14, innerHeight - d.offsetHeight - 8)}px`;
+  };
+  Lab.esconderDica = () => { if (dica) dica.style.display = "none"; };
+
+  // ------------------------------------------------------------ controles
+  /** Botões de alternância; `pequeno` = versão compacta, usada abaixo dos gráficos (Tamanho, Largura). */
+  Lab.alternar = (rotuloGrupo, opcoes, atual, aoMudar, pequeno = false) => {
+    const a = el("div", { class: pequeno ? "alternar pequeno" : "alternar", role: "group", "aria-label": rotuloGrupo });
+    for (const [v, r] of opcoes) a.append(el("button", { "aria-pressed": v === atual, text: r, "data-chave": `${rotuloGrupo}|${v}`, onclick: () => aoMudar(v) }));
+    return el("div", { class: pequeno ? "campo compacto" : "campo" }, rotuloGrupo, a);
+  };
+  /** Seletor dentro do título (poucas opções): as opções fazem parte da frase; a escolhida fica sublinhada. */
+  Lab.seletorTitulo = (rotulo, opcoes, atual, aoMudar) => {
+    const grupo = el("span", { class: "seletor-titulo", role: "group", "aria-label": rotulo });
+    opcoes.forEach(([v, r], i) => {
+      if (i) grupo.append(el("span", { class: "sep", "aria-hidden": "true", text: " / " }));
+      grupo.append(el("button", { type: "button", "aria-pressed": v === atual, "data-chave": `${rotulo}|${v}`, text: r, onclick: () => aoMudar(v) }));
+    });
+    return grupo;
+  };
+  /** Lista dentro do título (muitas opções): parece texto sublinhado com ▾; abre a lista nativa. */
+  Lab.seletorTituloLista = (rotulo, opcoes, atual, aoMudar) => {
+    const s = el("select", { class: "lista-titulo", "aria-label": rotulo, "data-chave": rotulo, onchange: (e) => aoMudar(e.target.value) });
+    // opções simples [valor, rótulo] ou agrupadas {grupo, opcoes: [[valor, rótulo], …]} (optgroup)
+    for (const o of opcoes) {
+      if (Array.isArray(o)) s.append(el("option", { value: o[0], text: o[1] }));
+      else { const g = el("optgroup", { label: o.grupo }); for (const [v, r] of o.opcoes) g.append(el("option", { value: v, text: r })); s.append(g); }
+    }
+    s.value = atual;
+    // largura = texto escolhido (o select nativo mediria a opção mais longa)
+    requestAnimationFrame(() => {
+      const ctx = document.createElement("canvas").getContext("2d");
+      ctx.font = getComputedStyle(s).font;
+      s.style.width = `${Math.ceil(ctx.measureText(s.selectedOptions[0]?.text || "").width) + 24}px`;
+    });
+    return s;
+  };
+  /** Lista com rótulo acima (formulários; nos gráficos, prefira seletorTituloLista). */
+  Lab.seletor = (rotuloCampo, opcoes, atual, aoMudar) => {
+    const s = el("select", { "data-chave": rotuloCampo, onchange: (e) => aoMudar(e.target.value) });
+    // opções simples [valor, rótulo] ou agrupadas {grupo, opcoes: [[valor, rótulo], …]} (optgroup)
+    for (const o of opcoes) {
+      if (Array.isArray(o)) s.append(el("option", { value: o[0], text: o[1] }));
+      else { const g = el("optgroup", { label: o.grupo }); for (const [v, r] of o.opcoes) g.append(el("option", { value: v, text: r })); s.append(g); }
+    }
+    s.value = atual;
+    return el("label", { class: "campo" }, rotuloCampo, s);
+  };
+  /** Botão que troca o modo de uma seção (ex.: "Detalhar distribuição de um único grupo" ⇄ "← Mapa de lideranças"). */
+  Lab.botaoModo = (texto, aoClicar, chave = "modo") => el("button", { type: "button", class: "botao-modo", "data-chave": chave, text: texto, onclick: aoClicar });
+
+  // ------------------------------------------------------------ amostras de cor
+  const amostra = (cor, classe = "amostra") => { const s = el("span", { class: classe }); s.style.background = cor; return s; };
+  /** Item de legenda: amostra + texto. */
+  Lab.chave = (cor, texto) => el("span", { class: "chave" }, amostra(cor), texto);
+  /** Quadradinho de cor para tabelas e quadros. */
+  Lab.chip = (cor) => amostra(cor, "chip");
+
+  // ------------------------------------------------------------ textos de apoio
+  /** Orientações de leitura: escondidas num "ⓘ Como ler o gráfico" sutil. Aceita vários parágrafos (ou elementos). */
+  Lab.instrucao = (...textos) => el("details", { class: "info" }, el("summary", {}, "ⓘ Como ler o gráfico"),
+    ...textos.filter(Boolean).map((t) => (typeof t === "string" ? el("p", { text: t }) : t)));
+  /** Subtítulo com os números (curto; o título não leva números). */
+  Lab.placar = (texto) => el("p", { class: "placar", text: texto });
+  /** Leva ao bloco de metodologia (abre o bloco). */
+  Lab.irRodape = (ev) => {
+    ev?.preventDefault();
+    const bloco = document.getElementById(Lab.cfg.ancoraMetodologia);
+    if (bloco) bloco.open = true;
+    (bloco || document.getElementById(Lab.cfg.ancoraRodape))?.scrollIntoView({ behavior: Lab.semMovimento() ? "auto" : "smooth" });
+  };
+  /** Rodapé de cada gráfico: fonte curta (link para a metodologia) + autoria; cobertura e notas num "ⓘ notas" recolhível.
+   *  fontes: chaves de Lab.cfg.orgaos. O gráfico se sustenta sozinho num print. */
+  Lab.rodape = ({ fontes = [], cobertura = null, nota = null } = {}) => {
+    const orgaos = [...new Set(fontes.map((k) => Lab.cfg.orgaos[k] || k))];
+    const deQuem = orgaos.length === 1 && Lab.cfg.artigos[orgaos[0]] ? Lab.cfg.artigos[orgaos[0]] : `de ${orgaos.join(", ")}`;
+    const f = el("div", { class: "rodape-grafico" },
+      el("span", {}, `Fonte: bases oficiais ${deQuem}. `),
+      el("a", { href: `#${Lab.cfg.ancoraRodape}`, onclick: Lab.irRodape, text: "Saiba mais ↓" }), " · ",
+      el("span", {}, "Análise e visualização: ", Lab.cfg.autorUrl ? el("a", { href: Lab.cfg.autorUrl, target: "_blank", rel: "noopener", text: Lab.cfg.autor }) : Lab.cfg.autor),
+      Lab.cfg.projeto ? el("span", {}, " · Projeto: ", el("a", { href: Lab.cfg.projeto.url, target: "_blank", rel: "noopener", text: `${Lab.cfg.projeto.nome} ↗` })) : null);
+    if (cobertura || nota) f.append(el("details", { class: "info info-notas" }, el("summary", {}, "ⓘ notas"),
+      ...[cobertura, nota].filter(Boolean).map((t) => el("p", { text: t }))));
+    return f;
+  };
+
+  // ------------------------------------------------------------ numeração de gráficos e tabelas (exploratórios)
+  /** Numera gráficos e tabelas da página ("Gráfico 7.2 · ", "Tabela 7.1 · " antes do título) e oferece o sumário deles
+   *  (botão ☰): ligado pela montagem nos produtos do tipo exploratório (labdados.produto_web → Lab.cfg.numerarGraficos;
+   *  pesquisador, 2026-10-23). Dentro de Lab.cfg.raiz (as partes estáticas da página, como o método, ficam de fora).
+   *  Gráfico = svg com 150 px ou mais de largura, ou uma das marcas desenhadas em HTML (MARCAS_GRAFICO: barras de 100%,
+   *  barras horizontais, pontos conectados, pequenos múltiplos; num gráfico próprio do produto, a classe "grafico" ou o
+   *  atributo data-grafico), fora de legendas, botões e tabelas. Tabela = <table> fora do "ⓘ Como ler", das dicas e das
+   *  legendas. O número vai no título (h3/h4) mais próximo antes dele, dentro do cartão ou da seção; marcas sob o mesmo
+   *  título dividem o número. Tabela sob um título que já tem número (o do gráfico ao lado) ganha o rótulo logo acima
+   *  dela. data-sem-numero deixa um bloco de fora. Em páginas com todas as seções numeradas ("7. Rede urbana"), conta por
+   *  seção; nas demais, em sequência. Refaz a conta sozinho quando a página redesenha (seletores, períodos). */
+  const largura = (s) => +(s.getAttribute("width") || "").replace("px", "") || +(s.getAttribute("viewBox") || "").split(/[\s,]+/)[2] || 0;
+  /** Último h3/h4 antes do elemento (em ordem do documento) dentro do seu cartão ou, fora de cartão, da seção.
+   *  Sem h3/h4 e com `h2` (seções sem número, cujo h2 é o título do gráfico), o último h2 antes dele na seção. */
+  const ultimoAntes = (caixa, sel, s) => [...caixa.querySelectorAll(sel)].filter((h) => h.compareDocumentPosition(s) & Node.DOCUMENT_POSITION_FOLLOWING).pop() || null;
+  const tituloAntes = (s, limite, h2) => ultimoAntes(s.closest(".cartao") || limite, "h3, h4", s) || (h2 ? ultimoAntes(limite, "h2", s) : null);
+  const MARCAS_GRAFICO = ".barra, .barras, .pc, .bp-barras, .mini-graf, .ranking, .grafico, [data-grafico]";
+  const FORA_GRAFICO = "button, summary, table, .legenda, .legendas-mapa, .chave, .item-legenda, .amostra, .dica, #rodape, #metodologia, [data-sem-numero]";
+  const FORA_TABELA = "table, .dica, .legenda, #rodape, #metodologia, [data-sem-numero]";
+  // tabelas recolhidas valem (ex.: a tabela de um gráfico num <details>), menos as do "ⓘ Como ler" e das "ⓘ notas"
+  const deApoio = (s) => /^ⓘ/.test(s.closest("details")?.querySelector(":scope > summary")?.textContent.trim() || "");
+  /** Texto como se lê na tela: seletores pelo item escolhido, sem os rótulos de número. */
+  const textoVisivel = (n) => [...n.childNodes].map((c) => (c.nodeType === 3 ? c.textContent : c.nodeType !== 1 || c.matches(".num-figura, .acc-resumo") ? ""
+    : c.tagName === "SELECT" ? c.selectedOptions[0]?.text || "" : textoVisivel(c))).join("").replace(/\s+/g, " ").trim();
+  Lab.numerarGraficos = (raiz = document.body) => {
+    raiz.querySelectorAll(".num-figura, .baixar-grafico").forEach((n) => n.remove());
+    const graficos = [...raiz.querySelectorAll(`svg, ${MARCAS_GRAFICO}`)].filter((s) => (s.tagName !== "svg" || largura(s) >= 150)
+      && !s.parentElement.closest(FORA_GRAFICO) && !s.parentElement.closest(`svg, ${MARCAS_GRAFICO}`));
+    const tabelas = [...raiz.querySelectorAll("table")].filter((s) => !s.parentElement.closest(FORA_TABELA) && !deApoio(s));
+    const secaoDe = (s) => s.closest("section");
+    const numSecao = (sec) => /^\s*(\d+)\./.exec(sec?.querySelector(":scope > h2")?.textContent || "")?.[1];
+    const todos = [...graficos, ...tabelas];
+    const porSecaoNumerada = todos.length > 0 && todos.every((s) => numSecao(secaoDe(s)));
+    const rotulados = new Set();   // títulos (ou elementos sem título) que já têm número
+    for (const [lista, nome, slug] of [[graficos, "Gráfico", "grafico"], [tabelas, "Tabela", "tabela"]]) {
+      const porSecao = new Map(), vistos = new Set();
+      let seq = 0;
+      for (const s of lista) {
+        const sec = secaoDe(s);
+        const titulo = tituloAntes(s, sec || raiz, !porSecaoNumerada);
+        if (titulo && vistos.has(titulo)) continue;   // mais de uma marca sob o mesmo título: um número só
+        const n = porSecaoNumerada ? `${numSecao(sec)}.${porSecao.set(sec, (porSecao.get(sec) || 0) + 1).get(sec)}` : String(++seq);
+        const id = `${slug}-${n.replace(".", "-")}`;
+        if (titulo) vistos.add(titulo);
+        if (titulo && !rotulados.has(titulo)) {
+          rotulados.add(titulo);
+          titulo.prepend(el("span", { class: "num-figura", id, "data-tipo": slug, text: `${nome} ${n} · ` }));
+        } else {   // sem título, ou título já numerado (a tabela do gráfico): rótulo logo acima
+          const caixa = slug === "tabela" ? s.closest(".tabela-dados") || s.closest(".rolagem") || s : s;
+          caixa.parentElement.insertBefore(el("p", { class: "num-figura", id, "data-tipo": slug, text: `${nome} ${n}` }), caixa);
+        }
+      }
+    }
+    // "⤓ Baixar imagem" (PNG/SVG) em cada caixa com gráfico: no rodapé do gráfico, ou logo depois da caixa
+    // com mais de um gráfico no cartão, um botão por gráfico, no fim do trecho dele (o último, no rodapé)
+    for (const caixa of new Set(graficos.map((s) => s.closest(".cartao") || s.parentElement))) {
+      const rod = [...caixa.querySelectorAll(".rodape-grafico")].pop(), noRodape = rod && rod.closest(".cartao") === caixa.closest(".cartao");
+      const ini = iniciosGraficos(caixa), varios = ini.length > 1;
+      (varios ? ini : [null]).forEach((_, i) => {
+        const ultimo = !varios || i === ini.length - 1, num = varios ? ini[i].querySelector(".num-figura")?.textContent.replace(/ · $/, "") || ini[i].textContent : "";
+        // separador e botão numa caixa só: a recontagem tira os dois juntos
+        const bt = el(ultimo ? "span" : "p", { class: "baixar-grafico" }, ultimo && noRodape ? " · " : "",
+          el("button", { type: "button", title: "Baixar este gráfico como imagem (PNG ou SVG)", onclick: () => Lab.exportarGrafico(caixa, varios ? i : null) }, varios ? `⤓ Baixar imagem do ${num}` : "⤓ Baixar imagem"));
+        if (ultimo) (noRodape ? rod : caixa).append(bt); else ini[i + 1].before(bt);
+      });
+    }
+  };
+  /** Sumário dos gráficos e tabelas (botão ☰ fixo): agrupado pela seção; ao escolher, a página abre a seção (os produtos
+   *  abrem a seção de um link interno) e rola até o item. */
+  const sumarioFiguras = () => {
+    const raiz = () => Lab.cfg.raiz || document.body;
+    const painel = el("nav", { class: "sumario-figuras", "aria-label": "Gráficos e tabelas", hidden: true });
+    const bt = el("button", { type: "button", class: "sumario-bt", "aria-expanded": "false", "aria-label": "Sumário de gráficos e tabelas", title: "Gráficos e tabelas" },
+      el("span", { "aria-hidden": "true", text: "☰" }), el("span", { class: "sumario-bt-texto", text: " Gráficos e tabelas" }));
+    const fechar = () => { painel.hidden = true; bt.setAttribute("aria-expanded", "false"); };
+    const ir = (ev, alvo) => {
+      ev.preventDefault();
+      fechar();
+      for (let d = alvo.closest("details:not([open])"); d; d = d.parentElement?.closest("details:not([open])")) d.open = true;
+      setTimeout(() => (document.getElementById(alvo.id) || alvo).scrollIntoView({ behavior: Lab.semMovimento() ? "auto" : "smooth", block: "start" }), 60);
+    };
+    const montar = () => {
+      const grupos = new Map();
+      for (const r of raiz().querySelectorAll(".num-figura")) {
+        const sec = r.closest("section"), h2 = sec?.querySelector(":scope > h2");
+        const nomeSec = h2 ? textoVisivel(h2.querySelector(".acc-titulo") || h2) : "";
+        const titulo = r.tagName === "SPAN" ? textoVisivel(r.parentElement) : (() => { const h = tituloAntes(r, sec || raiz(), !sec?.querySelector(":scope > h2")); return h ? textoVisivel(h) : ""; })();
+        if (!grupos.has(nomeSec)) grupos.set(nomeSec, []);
+        const a = el("a", { href: `#${r.id}`, class: `sumario-item sumario-${r.dataset.tipo}` },
+          el("b", { text: r.textContent.replace(/ · $/, "") }), titulo ? ` · ${titulo}` : "");
+        a.addEventListener("click", (ev) => ir(ev, r));
+        grupos.get(nomeSec).push(a);
+      }
+      const n = (tipo) => raiz().querySelectorAll(`.num-figura[data-tipo="${tipo}"]`).length;
+      painel.replaceChildren(
+        el("div", { class: "sumario-cab" }, el("strong", { text: `Gráficos (${n("grafico")}) e tabelas (${n("tabela")})` }),
+          el("button", { type: "button", class: "sumario-fechar", "aria-label": "Fechar o sumário", text: "✕", onclick: fechar })),
+        ...[...grupos].map(([sec, itens]) => el("div", { class: "sumario-grupo" }, sec ? el("p", { class: "sumario-secao", text: sec }) : null, ...itens)));
+    };
+    bt.addEventListener("click", () => {
+      if (!painel.hidden) return fechar();
+      montar(); painel.hidden = false; bt.setAttribute("aria-expanded", "true"); painel.querySelector("a, button")?.focus();
+    });
+    document.addEventListener("keydown", (ev) => { if (ev.key === "Escape" && !painel.hidden) { fechar(); bt.focus(); } });
+    document.addEventListener("pointerdown", (ev) => { if (!painel.hidden && !painel.contains(ev.target) && !bt.contains(ev.target)) fechar(); });
+    document.body.append(bt, painel);
+  };
+  // ------------------------------------------------------------ exportar gráfico (PNG/SVG) nos exploratórios
+  /** Imagem de um cartão de gráfico como se vê na tela: número e título, subtítulo, gráfico, legenda, notas e fonte; ficam
+   *  de fora o "ⓘ Como ler", as tabelas, os botões e a busca; seletores viram o texto escolhido (pesquisador, 2026-10-23;
+   *  como o "Baixar" dos stories). PNG: o cartão inteiro, 2×. SVG: vetorial nativo quando o gráfico é desenhado em SVG
+   *  (título, gráfico, legenda e fonte como elementos do SVG); quando é desenhado em HTML (barras), um SVG com o HTML
+   *  dentro, que abre no navegador mas pode não abrir em editores vetoriais (a janela avisa). */
+  const FORA_EXPORT = "details.info:not(.info-notas), .tabela-dados, .rolagem, table, button:not(.item-legenda), input, .busca-mapa, .mapa-controles, .alternar, .lupa, .sumario-bt, [data-sem-exportar]";
+  const ESCALA_EXPORT = 2;
+  /** Início de cada gráfico numerado na caixa: o título que leva o número (ou o rótulo solto, quando não há título). */
+  const iniciosGraficos = (caixa) => [...caixa.querySelectorAll(".num-figura[data-tipo='grafico']")].map((r) => (r.tagName === "SPAN" ? r.parentElement : r));
+  /** Na cópia de um cartão com vários gráficos, fica só o trecho do gráfico i: o que vem antes do primeiro (título do
+   *  cartão, subtítulo) e o rodapé ficam; os trechos dos outros saem. */
+  const soTrecho = (c, i) => {
+    const ini = iniciosGraficos(c), rod = [...c.querySelectorAll(".rodape-grafico")].pop();
+    if (i === null || ini.length < 2) return;
+    for (let j = 0; j < ini.length; j++) {   // em ordem: apagar o trecho j não toca no início do trecho j + 1
+      if (j === i) continue;
+      const r = document.createRange();
+      r.setStartBefore(ini[j]);
+      if (j + 1 < ini.length) r.setEndBefore(ini[j + 1]);
+      else if (rod && (ini[j].compareDocumentPosition(rod) & Node.DOCUMENT_POSITION_FOLLOWING)) r.setEndBefore(rod);
+      else r.setEndAfter(c.lastChild);
+      r.deleteContents();
+    }
+  };
+  const nomeArquivo = (caixa, i = null) => {
+    const n = (i === null ? caixa.querySelector(".num-figura[data-tipo='grafico']") : iniciosGraficos(caixa)[i].querySelector(".num-figura") || iniciosGraficos(caixa)[i])?.id || "grafico";
+    const base = (document.title || "grafico").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    return `${base}-${n}`;
+  };
+  const paraDataURL = (blob) => new Promise((ok, falha) => { const fr = new FileReader(); fr.onload = () => ok(fr.result); fr.onerror = falha; fr.readAsDataURL(blob); });
+  /** Cópia limpa do cartão, já no documento (fora da tela) para medir: seletores → texto, sem o que é de interação. */
+  const copiaLimpa = (caixa, trecho = null) => {
+    const c = caixa.cloneNode(true), sel0 = [...caixa.querySelectorAll("select")], sel1 = [...c.querySelectorAll("select")];
+    sel1.forEach((s, i) => s.replaceWith(el("b", { class: "selecao-export", text: sel0[i]?.selectedOptions[0]?.text || "" })));
+    // seletor de poucas opções (botões "a / b"): fica o texto da opção escolhida
+    c.querySelectorAll(".seletor-titulo").forEach((g) => g.replaceWith(el("b", { class: "selecao-export", text: g.querySelector('button[aria-pressed="true"]')?.textContent || "" })));
+    soTrecho(c, trecho);
+    c.querySelectorAll(FORA_EXPORT).forEach((n) => n.remove());
+    c.querySelectorAll(".baixar-grafico, .num-figura[data-tipo='tabela']").forEach((n) => n.remove());   // a tabela não vai: o rótulo dela também não
+    c.querySelectorAll(".rodape-grafico a").forEach((a_) => {   // "Saiba mais ↓" leva à página: sai, com o separador
+      if (!/Saiba mais/.test(a_.textContent)) return;
+      if (a_.nextSibling?.nodeType === 3 && a_.nextSibling.textContent.trim() === "·") a_.nextSibling.remove();
+      a_.remove();
+    });
+    c.querySelectorAll("canvas").forEach((n) => n.remove());   // fundo de mapa em canvas não entra na imagem
+    const w = caixa.getBoundingClientRect().width;
+    Object.assign(c.style, { position: "absolute", left: "-10000px", top: "0", width: `${w}px`, margin: "0", boxSizing: "border-box" });
+    document.body.append(c);
+    return { c, w: Math.ceil(w), h: Math.ceil(c.getBoundingClientRect().height) + 24 };   // folga: a fonte da imagem pode ocupar um pouco mais
+  };
+  // estilos da página (tokens + componentes + produto), sem @import; as fontes entram embutidas só na imagem PNG
+  const cssPagina = () => [...document.querySelectorAll("style")].map((s) => s.textContent).join("\n").replace(/@import[^;]+;/g, "");
+  let fontesEmbutidas = null;
+  const cssFontes = async () => {   // até 4 s; sem rede, a imagem sai com a fonte do sistema
+    if (fontesEmbutidas !== null) return fontesEmbutidas;
+    fontesEmbutidas = "";
+    const buscar = (async () => {
+      const urls = [...document.querySelectorAll("style")].flatMap((s) => [...s.textContent.matchAll(/@import\s+url\(["']?([^"')]+)["']?\)/g)].map((m) => m[1]));
+      for (const u of urls) {
+        let css = await (await fetch(u)).text();
+        for (const f of new Set([...css.matchAll(/url\((['"]?)([^'")]+)\1\)/g)].map((m) => m[2]))) {
+          css = css.split(f).join(await paraDataURL(await (await fetch(new URL(f, u).href)).blob()));
+        }
+        fontesEmbutidas += css;
+      }
+    })().catch(() => { fontesEmbutidas = ""; });
+    await Promise.race([buscar, new Promise((ok) => setTimeout(ok, 4000))]);
+    return fontesEmbutidas;
+  };
+  const svgComHTML = (c, w, h, css) => {
+    const xhtml = new XMLSerializer().serializeToString(c).replace(/ style="[^"]*position: absolute;[^"]*"/, "");
+    // na imagem, a raiz é o <svg>: leva os atributos do <html> (eixo, tema) e o texto do <body> (fonte, cor, tamanho)
+    const attrs = [...document.documentElement.attributes].filter((a_) => a_.name.startsWith("data-")).map((a_) => ` ${a_.name}="${a_.value.replace(/"/g, "&quot;")}"`).join("");
+    const b = getComputedStyle(document.body), corpo = ["font-family", "font-size", "line-height", "color"].map((k) => `${k}:${b.getPropertyValue(k).replace(/"/g, "'")}`).join(";");
+    return `<svg xmlns="http://www.w3.org/2000/svg"${attrs} width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><foreignObject x="0" y="0" width="${w}" height="${h}">`
+      + `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${w}px;${corpo};background:${Lab.token("cor-superficie") || "#fff"}"><style><![CDATA[${css.replace(/]]>/g, "]] >")}]]></style>${xhtml}</div></foreignObject></svg>`;
+  };
+  /** SVG nativo (gráfico em SVG): estilos calculados copiados para os elementos; título, subtítulo, legenda e fonte como texto. */
+  const PROPS = ["fill", "stroke", "stroke-width", "stroke-dasharray", "stroke-linecap", "opacity", "fill-opacity", "font-size", "font-family", "font-weight", "text-anchor", "dominant-baseline", "paint-order"];
+  const quebrar = (txt, max) => { const out = [""]; for (const p_ of String(txt).split(/\s+/)) { if ((out.at(-1) + " " + p_).trim().length > max) out.push(p_); else out[out.length - 1] = (out.at(-1) + " " + p_).trim(); } return out.filter(Boolean); };
+  const svgNativo = (caixa, grafico, trecho = null) => {
+    const NS = "http://www.w3.org/2000/svg", tok = (n) => Lab.token(n), fam = getComputedStyle(caixa).fontFamily;
+    const rg = grafico.getBoundingClientRect(), W = Math.ceil(Math.max(rg.width, 480)) + 32;
+    const g = grafico.cloneNode(true), o = [grafico, ...grafico.querySelectorAll("*")], d = [g, ...g.querySelectorAll("*")];
+    o.forEach((n, i) => { const cs = getComputedStyle(n); for (const pr of PROPS) { const v = cs.getPropertyValue(pr); if (v && v !== "normal") d[i].style.setProperty(pr, v); } });
+    const svg = document.createElementNS(NS, "svg"), txt = (x, y, s, opc = {}) => { const e = document.createElementNS(NS, "text"); e.setAttribute("x", x); e.setAttribute("y", y);
+      Object.entries({ "font-family": fam, "font-size": 13, fill: tok("cor-texto"), ...opc }).forEach(([k, v]) => e.setAttribute(k, v)); e.textContent = s; svg.append(e); return e; };
+    let y = 22;
+    const cx = copiaLimpa(caixa, trecho), limpo = (n) => n?.textContent.replace(/\s+/g, " ").trim() || "";
+    const hG = iniciosGraficos(cx.c)[0], hC = cx.c.querySelector("h3, h4");
+    if (hC && hG && hC !== hG) { for (const l of quebrar(limpo(hC), Math.floor(W / 7.2))) { txt(16, y, l, { "font-size": 13, "font-weight": 700, fill: tok("cor-texto-secundario") }); y += 18; } y += 2; }
+    for (const l of quebrar(limpo(hG || hC), Math.floor(W / 8.6))) { txt(16, y, l, { "font-size": 16, "font-weight": 700 }); y += 21; }
+    const plac = cx.c.querySelector(".placar")?.textContent.trim();
+    if (plac) { y += 2; for (const l of quebrar(plac, Math.floor(W / 7.2))) { txt(16, y, l, { "font-size": 13, "font-weight": 600 }); y += 17; } }
+    y += 8;
+    g.setAttribute("x", 16); g.setAttribute("y", y); g.setAttribute("width", rg.width); g.setAttribute("height", rg.height);
+    if (!g.getAttribute("viewBox")) g.setAttribute("viewBox", `0 0 ${rg.width} ${rg.height}`);
+    svg.append(g); y += rg.height + 14;
+    // legenda HTML (amostra de cor + texto) → retângulos e texto, em linhas
+    let x = 16;
+    for (const it of cx.c.querySelectorAll(".legenda .item-legenda, .legendas-mapa .item-legenda, .legenda .chave")) {
+      const am = it.querySelector(".amostra, i, span"), cor = am ? getComputedStyle(am).backgroundColor : null, s = it.textContent.trim();
+      const w = 16 + s.length * 6.6 + 14;
+      if (x + w > W - 16) { x = 16; y += 18; }
+      if (cor && cor !== "rgba(0, 0, 0, 0)") { const r = document.createElementNS(NS, "rect"); Object.entries({ x, y: y - 9, width: 10, height: 10, rx: 2, fill: cor }).forEach(([k, v]) => r.setAttribute(k, v)); svg.append(r); }
+      txt(x + 14, y, s, { "font-size": 12, fill: tok("cor-texto-secundario") }); x += w;
+    }
+    if (x > 16) y += 22;
+    const rod = cx.c.querySelector(".rodape-grafico")?.textContent.replace(/\s+/g, " ").trim();
+    for (const l of quebrar(rod || "", Math.floor(W / 6.4))) { txt(16, y, l, { "font-size": 11.5, fill: tok("cor-texto-secundario") }); y += 15; }
+    cx.c.remove();
+    const H = Math.ceil(y + 6);
+    svg.setAttribute("xmlns", NS); svg.setAttribute("width", W); svg.setAttribute("height", H); svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    const fundo = document.createElementNS(NS, "rect"); Object.entries({ x: 0, y: 0, width: W, height: H, fill: tok("cor-superficie") || "#fff" }).forEach(([k, v]) => fundo.setAttribute(k, v));
+    svg.prepend(fundo);
+    return new XMLSerializer().serializeToString(svg);
+  };
+  Lab.exportarGrafico = async (caixa, trecho = null) => {   // trecho: o gráfico i de um cartão com vários
+    const nome = nomeArquivo(caixa, trecho), ini = iniciosGraficos(caixa);
+    const noTrecho = (s) => trecho === null || ((ini[trecho].compareDocumentPosition(s) & Node.DOCUMENT_POSITION_FOLLOWING) && (!ini[trecho + 1] || (s.compareDocumentPosition(ini[trecho + 1]) & Node.DOCUMENT_POSITION_FOLLOWING)));
+    const graficos = [...caixa.querySelectorAll(`svg, ${MARCAS_GRAFICO}`)].filter((s) => (s.tagName !== "svg" || largura(s) >= 150) && !s.parentElement.closest(FORA_GRAFICO) && !s.parentElement.closest(`svg, ${MARCAS_GRAFICO}`) && noTrecho(s));
+    // vetorial nativo: um gráfico só, desenhado em SVG (ou uma caixa com um único SVG dentro, como os pontos conectados)
+    const g0 = graficos.length === 1 ? graficos[0] : null;
+    const svgUnico = !g0 ? null : g0.tagName === "svg" ? g0 : (g0.querySelectorAll("svg").length === 1 && !g0.querySelector(".barra, .barras") ? g0.querySelector("svg") : null);
+    const nativo = Boolean(svgUnico);
+    const { c, w, h } = copiaLimpa(caixa, trecho);
+    let png = null, erro = null;
+    try {
+      const img = new Image();
+      img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgComHTML(c, w, h, (await cssFontes()) + cssPagina()))}`;
+      await img.decode();
+      const cv = document.createElement("canvas"); cv.width = w * ESCALA_EXPORT; cv.height = h * ESCALA_EXPORT;
+      const ctx = cv.getContext("2d"); ctx.fillStyle = Lab.token("cor-superficie") || "#fff"; ctx.fillRect(0, 0, cv.width, cv.height);
+      ctx.drawImage(img, 0, 0, cv.width, cv.height);
+      png = cv.toDataURL("image/png");
+    } catch (e) { erro = e; }
+    const svgTexto = nativo ? svgNativo(caixa, svgUnico, trecho) : svgComHTML(c, w, h, cssPagina());
+    c.remove();
+    const urlSvg = URL.createObjectURL(new Blob([svgTexto], { type: "image/svg+xml" }));
+    const veu = el("div", { class: "veu-exportar", onclick: (ev) => { if (ev.target === veu) fechar(); } });
+    const fechar = () => { veu.remove(); URL.revokeObjectURL(urlSvg); };
+    veu.append(el("div", { class: "caixa-exportar", role: "dialog", "aria-label": "Baixar o gráfico como imagem" },
+      png ? el("img", { src: png, alt: `Imagem do gráfico: ${(trecho === null ? caixa.querySelector("h3, h4") : ini[trecho])?.textContent.trim() || ""}`, style: `width:${w}px` }) : el("p", { text: `Não foi possível gerar a imagem PNG neste navegador (${erro?.message || erro}). O SVG continua disponível.` }),
+      el("p", {}, png ? el("a", { href: png, download: `${nome}.png` }, `⤓ Baixar PNG (${w * ESCALA_EXPORT}×${h * ESCALA_EXPORT})`) : null,
+        el("a", { href: urlSvg, download: `${nome}.svg` }, nativo ? "⤓ Baixar SVG (vetorial)" : "⤓ Baixar SVG"),
+        el("button", { type: "button", onclick: fechar }, "Fechar")),
+      el("p", { class: "fraco", text: nativo ? "O SVG traz título, gráfico, legenda e fonte como vetor (abre em editores como Inkscape e Illustrator); a fonte do texto depende do computador."
+        : "Este gráfico é desenhado em HTML: o SVG guarda a página do gráfico e abre no navegador, mas editores vetoriais podem não mostrá-lo — para slides e documentos, prefira o PNG." })));
+    document.addEventListener("keydown", function esc(ev) { if (ev.key === "Escape") { fechar(); document.removeEventListener("keydown", esc); } });
+    document.body.append(veu);
+  };
+
+  // a raiz é lida a cada conta: o produto costuma definir Lab.cfg.raiz depois da montagem ligar a numeração
+  let numerando = null, refazerNumeracao = null;
+  const observarNumeracao = () => {
+    const marcas = `svg, table, ${MARCAS_GRAFICO}`;
+    const temFigura = (n) => n.nodeType === 1 && !n.classList?.contains("num-figura") && (n.matches(marcas) || n.querySelector?.(marcas));
+    const refazer = () => { numerando = null; obs.disconnect(); Lab.numerarGraficos(Lab.cfg.raiz || document.body); obs.observe(document.body, { childList: true, subtree: true }); };
+    const obs = new MutationObserver((ms) => {
+      if (!numerando && ms.some((m) => [...m.addedNodes, ...m.removedNodes].some(temFigura))) numerando = requestAnimationFrame(refazer);
+    });
+    refazerNumeracao = refazer;
+    refazer();
+    sumarioFiguras();
+  };
+  const configurarBase = Lab.configurar;
+  Lab.configurar = (c) => {
+    const raizAntes = Lab.cfg.raiz;
+    configurarBase(c);
+    if (refazerNumeracao && c.raiz && c.raiz !== raizAntes) {   // troca de raiz depois de ligada: a conta antiga sai
+      raizAntes?.querySelectorAll?.(".num-figura").forEach((n) => n.remove());
+      refazerNumeracao();
+    }
+    if (c.numerarGraficos && !Lab.cfg._numeracao) {
+      Lab.cfg._numeracao = true;
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => requestAnimationFrame(observarNumeracao));
+      else requestAnimationFrame(observarNumeracao);
+    }
+  };
+
+  // ------------------------------------------------------------ tabelas e quadros
+  /** Tabela simples; colunas numéricas alinhadas à direita (detecção automática ou `numericas`).
+   *  Célula pode ser texto ou lista de nós (ex.: [chip, "nome"]). */
+  Lab.tabela = (cab, linhas, numericas = false) => {
+    const ehNum = (c) => typeof c === "string" && /([\d—]|%|p\.p\.)$/.test(c.trim()) && /\d|—/.test(c);
+    const num = cab.map((_, i) => i > 0 && (numericas || (linhas.length > 0 && linhas.every((l) => ehNum(l[i])))));
+    const t = el("table");
+    t.append(el("thead", {}, el("tr", {}, ...cab.map((c, i) => el("th", { class: num[i] ? "n" : null, scope: "col" }, ...(Array.isArray(c) ? c : [c]))))));
+    t.append(el("tbody", {}, ...linhas.map((l) => el("tr", {}, ...l.map((c, i) => el("td", { class: num[i] ? "n" : null }, ...(Array.isArray(c) ? c : [c])))))));
+    return t;
+  };
+  /** Tabela de dados — PADRÃO DE TODA TABELA DE DADOS DO LABORATÓRIO (design.yaml › padroes.tabelas; pesquisador,
+   *  2026-10-12 e 2026-10-14):
+   *  - ordenar ao clicar no cabeçalho (crescente → decrescente → ordem original); ordena pelos números sem formatação
+   *    (`bruto`) ou, sem eles, pelo texto lido como número em pt-BR ("R$ 1,2 mi", "45,3%", "1.234"); "—" e "1 a 4" vão
+   *    para o fim; linhas fixas (`fixas(i)`; padrão: a que começa com "Total") ficam sempre no fim;
+   *  - até `limite` linhas visíveis (10) e "Mostrar todas as N";
+   *  - "Baixar tabela (CSV)" na ordem da tela, com os números SEM formatação (`bruto`; sem ela, o texto das células):
+   *    ";" como separador, vírgula decimal e BOM (abre no Excel);
+   *  - filtro de linhas opcional: `filtro` "auto" (quando passa do limite), true ou false.
+   *  `cat(i)`: id da linha para a Lab.legendaFoco. Aceita `tabela` (um <table> de Lab.tabela) no lugar de cab/linhas.
+   *  `arquivo`: nome sem extensão, ou função (caixa) → nome, chamada no clique. `ordenar: false` para tabelas com
+   *  hierarquia (linhas "dos quais"). */
+  Lab.tabelaDados = ({ cab, linhas, tabela = null, bruto = null, arquivo = "tabela", limite = 10, numericas = false, cat = null,
+    ordenar = true, filtro = "auto", fixas = null, barras = null, calor = null }) => {
+    const t = tabela || Lab.tabela(cab, linhas, numericas);
+    if (tabela) {   // tabela já montada (Lab.tabela): cabeçalho e linhas lidos do próprio elemento
+      cab = [...t.tHead.rows[0].cells].map((c) => c.textContent);
+      linhas = [...t.tBodies[0].rows].map((tr) => [...tr.cells].map((c) => c.textContent));
+    }
+    const tbody = t.tBodies[0];
+    const norm = (x) => String(x).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+    const fixa = fixas || ((i) => /^total\b/i.test(String(linhas[i]?.[0]?.textContent ?? linhas[i]?.[0] ?? "").trim()));
+    const R = [...tbody.rows].map((tr, i) => ({ tr, i, texto: norm(tr.textContent), fixa: !!fixa(i) }));
+    if (cat) R.forEach((r) => { const c = cat(r.i); if (c !== undefined && c !== null) r.tr.dataset.cat = String(c); });
+    // valor de ordenação de uma célula: número (do bruto ou lido do texto) ou texto; vazio → null (vai para o fim)
+    const numTexto = (s) => {
+      const x = String(s ?? "").trim();
+      if (!x || /^(—|-|1 a 4)$/.test(x)) return null;
+      const m = x.replace(/\s/g, " ").match(/^(R\$\s*)?([-−]?[\d.]+(,\d+)?)\s*(%|p\.p\.|mil|mi|bi)?\b/i);
+      if (!m) return undefined;
+      const v = Number(m[2].replace("−", "-").replaceAll(".", "").replace(",", "."));
+      return v * ({ mil: 1e3, mi: 1e6, bi: 1e9 }[(m[4] || "").toLowerCase()] || 1);
+    };
+    const chave = (r, j) => {
+      const b = bruto?.[r.i]?.[j];
+      if (typeof b === "number") return b;
+      const cel = r.tr.cells[j]?.textContent ?? "";
+      const n = typeof b === "string" && b !== "" ? numTexto(b) : numTexto(cel);
+      if (n === null) return null;
+      return n === undefined ? norm(typeof b === "string" && b !== "" ? b : cel) : n;
+    };
+    // barra na célula (D15): proporcional ao maior valor da coluna; cor nas células (D16): escala comum às colunas (matrizes)
+    const numDe = (r, j) => { const v = chave(r, j); return typeof v === "number" && Number.isFinite(v) ? v : null; };
+    const corpoR = R.filter((r) => !r.fixa);
+    for (const j of barras || []) {
+      const max = Math.max(0, ...corpoR.map((r) => Math.abs(numDe(r, j) ?? 0)));
+      if (max > 0) for (const r of corpoR) { const v = numDe(r, j), td = r.tr.cells[j]; if (v === null || !td) continue; td.classList.add("cel-barra"); td.style.setProperty("--p", `${(100 * Math.abs(v)) / max}%`); }
+    }
+    if (calor?.length) {
+      const vs = corpoR.flatMap((r) => calor.map((j) => numDe(r, j))).filter((v) => v !== null), lo = Math.min(...vs), hi = Math.max(...vs);
+      if (vs.length && hi > lo) for (const r of corpoR) for (const j of calor) { const v = numDe(r, j), td = r.tr.cells[j]; if (v === null || !td) continue; td.classList.add("cel-calor"); td.style.setProperty("--p", `${Math.round(6 + (50 * (v - lo)) / (hi - lo))}%`); }
+    }
+    let ordem = null, todas = false, termo = "";
+    const longa = linhas.length > limite;
+    const mais = longa ? el("button", { type: "button", class: "tabela-mais" }) : null;
+    const contagem = el("span", { class: "nota" });
+    const ordenadas = () => {
+      const corpo = R.filter((r) => !r.fixa), fim = R.filter((r) => r.fixa);
+      if (!ordem) return [...corpo, ...fim];
+      const { j, dir } = ordem;
+      const cmp = (a, b) => {
+        const x = chave(a, j), y = chave(b, j);
+        if (x === null && y === null) return a.i - b.i;
+        if (x === null) return 1; if (y === null) return -1;
+        const c = typeof x === "number" && typeof y === "number" ? x - y : String(x).localeCompare(String(y), "pt-BR");
+        return (c || a.i - b.i) * (c ? dir : 1);
+      };
+      return [...corpo.sort(cmp), ...fim];
+    };
+    const aplicar = () => {
+      const L = ordenadas();
+      tbody.replaceChildren(...L.map((r) => r.tr));
+      let vis = 0;
+      for (const r of L) { const casa = !termo || r.texto.includes(termo); const mostra = casa && (todas || termo || r.fixa || vis < limite); r.tr.hidden = !mostra; if (mostra && !r.fixa) vis++; }
+      const casam = termo ? R.filter((r) => r.texto.includes(termo)).length : linhas.length;
+      contagem.textContent = termo ? `${casam} de ${linhas.length} linhas` : longa && !todas ? `${limite} de ${linhas.length} linhas` : `${linhas.length} linhas`;
+      if (mais) { mais.hidden = !!termo; mais.textContent = todas ? "Mostrar menos" : `Mostrar todas as ${linhas.length} linhas`; }
+      if (ordenar) [...t.tHead.rows[0].cells].forEach((th, j) => th.setAttribute("aria-sort", ordem?.j === j ? (ordem.dir > 0 ? "ascending" : "descending") : "none"));
+    };
+    if (ordenar) [...t.tHead.rows[0].cells].forEach((th, j) => {
+      const rot = [...th.childNodes];
+      const bt = el("button", { type: "button", class: "tabela-ordenar", title: "Ordenar por esta coluna" }, ...rot, el("span", { class: "seta", "aria-hidden": "true" }));
+      bt.addEventListener("click", () => {
+        ordem = ordem?.j !== j ? { j, dir: th.classList.contains("n") ? -1 : 1 } : ordem.dir === (th.classList.contains("n") ? -1 : 1) ? { j, dir: -ordem.dir } : null;   // 3º clique: ordem original
+        aplicar();
+      });
+      th.replaceChildren(bt);
+    });
+    mais?.addEventListener("click", () => { todas = !todas; aplicar(); });
+    const csv = () => {
+      const cel = (v) => { if (v === null || v === undefined) return ""; if (typeof v === "number") return String(Math.round(v * 1e6) / 1e6).replace(".", ","); const s = Array.isArray(v) ? v.map((n) => n.textContent ?? n).join(" ") : String(v?.textContent ?? v); return /[;"\n]/.test(s) ? `"${s.replaceAll('"', '""')}"` : s; };
+      const corpo = ordenadas().map((r) => (bruto || linhas)[r.i].map(cel).join(";"));
+      const texto = "﻿" + [cab.map(cel).join(";"), ...corpo].join("\r\n");
+      const a = el("a", { href: URL.createObjectURL(new Blob([texto], { type: "text/csv;charset=utf-8" })), download: `${typeof arquivo === "function" ? arquivo(caixa) : arquivo}.csv` });
+      document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    };
+    const comFiltro = filtro === true || (filtro === "auto" && longa);
+    const busca = comFiltro ? el("input", { type: "search", class: "tabela-busca", placeholder: "Filtrar linhas…", "aria-label": "Filtrar linhas da tabela" }) : null;
+    busca?.addEventListener("input", () => { termo = norm(busca.value.trim()); aplicar(); });
+    const barra = el("div", { class: "tabela-barra" }, busca, contagem,
+      el("button", { type: "button", class: "tabela-baixar", onclick: csv, title: "Na ordem da tela; números sem formatação, separador ponto e vírgula" }, "▦ Baixar tabela (CSV)"));
+    aplicar();
+    const caixa = el("div", { class: "tabela-dados" }, barra, el("div", { class: "rolagem" }, t), mais);
+    caixa.baixarCsv = csv;   // usado por Lab.csvNosGraficos: o botão do gráfico baixa esta mesma tabela
+    return caixa;
+  };
+  /** CSV (separador ponto e vírgula, BOM para o Excel) de um cabeçalho e linhas de valores; números sem formatação. */
+  const celCsv = (v) => { if (v === null || v === undefined) return ""; if (typeof v === "number") return String(Math.round(v * 1e6) / 1e6).replace(".", ","); const s = String(v?.textContent ?? v).trim(); return /[;"\n]/.test(s) ? `"${s.replaceAll('"', '""')}"` : s; };
+  const baixarTexto = (texto, nome) => {
+    const a = el("a", { href: URL.createObjectURL(new Blob(["\ufeff" + texto], { type: "text/csv;charset=utf-8" })), download: `${nome}.csv` });
+    document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  };
+  /** Liga os dados de um gráfico ao seu elemento, para o "Baixar dados (CSV)" de `Lab.csvNosGraficos` (quando o gráfico
+   *  não tem tabela). cab: [coluna]; linhas: [[valor]] (ou função que as devolve, lida no clique); arquivo: nome sem .csv. */
+  Lab.comDados = (no, { cab, linhas, arquivo = null }) => {
+    if (!no) return no;
+    no.classList?.add("com-dados");
+    no.baixarCsv = () => { const L = typeof linhas === "function" ? linhas() : linhas;
+      baixarTexto([cab.map(celCsv).join(";"), ...L.map((r) => r.map(celCsv).join(";"))].join("\r\n"), arquivo || no.closest?.("section")?.id || "grafico"); };
+    return no;
+  };
+  /** Botão "▦ Baixar dados (CSV)" junto a cada gráfico (opcional; pesquisador, 2026-10-28). Um gráfico é um título
+   *  (h3/h4) seguido do "ⓘ Como ler o gráfico" (`Lab.instrucao`), que começa por "Gráfico", "Mapa" ou "Figura" (`titulo`)
+   *  ou que abre um `.cartao` com svg/canvas. O botão
+   *  entra logo depois do "ⓘ Como ler o gráfico" (ou do título) e baixa a primeira tabela de `Lab.tabelaDados` (ou, na
+   *  falta, uma <table> comum, com o texto da tela) que vem depois do título, na mesma seção e antes do gráfico seguinte — com o recorte e os seletores atuais. Idempotente;
+   *  com `observar: true`, refaz sozinho quando seções são desenhadas depois (acordeões). Devolve os títulos de gráficos
+   *  sem tabela, para conferência. */
+  Lab.csvNosGraficos = (raiz = document, { titulo = /^(Gráfico|Mapa|Figura)\b/, observar = false } = {}) => {
+    if (observar && !raiz.__csvObservado) {
+      raiz.__csvObservado = true;
+      let pend = false;
+      new MutationObserver(() => { if (pend) return; pend = true; requestAnimationFrame(() => { pend = false; Lab.csvNosGraficos(raiz, { titulo }); }); })
+        .observe(raiz, { childList: true, subtree: true });
+    }
+    const antes = (a, b) => !!(a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING);
+    const heads = [...raiz.querySelectorAll("h3, h4")].filter((h) => !h.closest(".tabela-dados, .met-corpo") &&
+      (titulo.test(h.textContent.trim()) || h.nextElementSibling?.matches("details.info") ||
+       (h.parentElement?.classList.contains("cartao") && h.parentElement.querySelector("svg, canvas"))));
+    // tabela do componente (números sem formatação) ou, na falta, uma <table> comum (o texto como está na tela)
+    const daTela = (t) => () => {
+      const cel = (c) => { const s = c.textContent.trim().replace(/\s+/g, " "); return /[;"\n]/.test(s) ? `"${s.replaceAll('"', '""')}"` : s; };
+      const texto = "\ufeff" + [...t.rows].filter((r) => !r.hidden).map((r) => [...r.cells].map(cel).join(";")).join("\r\n");
+      const nome = (t.closest("section")?.id || "grafico") + ".csv";
+      const a = el("a", { href: URL.createObjectURL(new Blob([texto], { type: "text/csv;charset=utf-8" })), download: nome });
+      document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    };
+    const tabs = [...raiz.querySelectorAll(".tabela-dados, table")].filter((t) => t.matches(".tabela-dados") ? typeof t.baixarCsv === "function"
+      : !t.closest(".tabela-dados, .met-corpo, details.info") && t.rows.length > 1)
+      .map((t) => { if (!t.baixarCsv) t.baixarCsv = daTela(t); return t; });
+    const dados = [...raiz.querySelectorAll(".com-dados")].filter((d) => typeof d.baixarCsv === "function");
+    const sem = [];
+    heads.forEach((h, k) => {
+      const prox = heads[k + 1], sec = h.closest("section");
+      const noBloco = (t) => antes(h, t) && (!prox || antes(t, prox)) && t.closest("section") === sec;
+      const tab = tabs.find(noBloco) || dados.find(noBloco);
+      let info = h.nextElementSibling;
+      while (info && info.matches("details.info, .grafico-baixar") && info.nextElementSibling?.matches("details.info")) info = info.nextElementSibling;
+      const velho = (info?.matches(".grafico-baixar") ? info : info?.nextElementSibling?.matches?.(".grafico-baixar") ? info.nextElementSibling : null);
+      if (!tab) { velho?.remove(); sem.push(h.textContent.trim().slice(0, 80)); return; }
+      if (velho) { velho.onclick = () => tab.baixarCsv(); return; }
+      const bt = el("button", { type: "button", class: "tabela-baixar grafico-baixar", title: "Os números deste gráfico, com o recorte atual; separador ponto e vírgula" }, "▦ Baixar dados (CSV)");
+      bt.onclick = () => tab.baixarCsv();
+      (info?.matches("details.info") ? info : h).after(bt);
+    });
+    return sem;
+  };
+  /** Quadros com um número grande por item. itens: [{chave, rotulo, cor, valor}].
+   *  Com `aoEscolher`, viram botões (o escolhido ganha a borda na cor do item). */
+  Lab.quadros = (itens, { atual = null, aoEscolher = null, chaveDado = "Quadro", rotulo = "Escolha" } = {}) =>
+    el("div", aoEscolher ? { class: "tiles", role: "group", "aria-label": rotulo } : { class: "tiles" }, ...itens.map((it) => {
+      const corpo = [el("div", { class: "rot" }, Lab.chip(it.cor), it.rotulo), el("div", { class: "val", text: it.valor })];
+      if (!aoEscolher) return el("div", { class: "tile" }, ...corpo);
+      const b = el("button", { type: "button", class: "tile tile-botao", "aria-pressed": it.chave === atual, "data-chave": `${chaveDado}|${it.chave}`, onclick: () => aoEscolher(it.chave) }, ...corpo);
+      b.style.setProperty("--cor-grupo", it.cor);
+      return b;
+    }));
+
+  // ------------------------------------------------------------ barra 100% (composição)
+  /** Uma linha de barra empilhada de 100%. segmentos: [{id?, cor, pct, texto, medio, curto, dica: [título, linhas]}]
+   *  (`id` liga o segmento à Lab.legendaFoco).
+   *  O rótulo encolhe (texto → medio → curto) ou sai quando não cabe: ver Lab.ajustarRotulos. */
+  Lab.linhaBarra100 = ({ rotulo, segmentos, abaixo = null, aria = null }) => {
+    const barra = el("div", { class: "barra", role: aria ? "img" : null, "aria-label": aria });
+    for (const s of segmentos) {
+      if (vazio(s.pct) || s.pct <= 0) continue;
+      const sp = el("span"); sp.style.width = `${s.pct}%`; sp.style.background = s.cor;
+      if (s.id !== undefined && s.id !== null) sp.dataset.cat = String(s.id);
+      if (s.texto) { const b = el("b", { text: s.texto, "data-medio": s.medio || null, "data-curto": s.curto || null }); Lab.comHalo(b, s.cor); sp.append(b); }
+      if (s.dica) { sp.addEventListener("pointermove", (ev) => Lab.mostrarDica(ev, s.dica[0], s.dica[1])); sp.addEventListener("pointerleave", Lab.esconderDica); }
+      barra.append(sp);
+    }
+    return el("div", { class: "linha" }, el("span", { class: "rot", text: rotulo }), el("div", {}, barra, abaixo ? el("div", { class: "vazio", text: abaixo }) : null));
+  };
+  /** Rótulos de barra que não cabem: tenta a forma média, depois a curta; se nada couber, sai (fica na dica e na tabela). */
+  Lab.ajustarRotulos = (raiz = Lab.cfg.raiz) => {
+    const cabe = (b) => { const t = document.createElement("span"); t.textContent = b.textContent; t.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;font:600 12px var(--fonte-texto)";
+      document.body.append(t); const ok = t.offsetWidth <= b.parentElement.clientWidth - 6; t.remove(); return ok; };
+    for (const b of raiz.querySelectorAll(".barra span b")) {
+      if (!b.isConnected || !b.parentElement.clientWidth) continue;   // fora da página ou em bloco fechado: mede depois (não apaga)
+      if (cabe(b)) continue;
+      if (b.dataset.medio) { b.textContent = b.dataset.medio; if (cabe(b)) continue; }
+      if (b.dataset.curto) b.textContent = b.dataset.curto;
+      if (!cabe(b)) b.remove();
+    }
+  };
+
+  // ------------------------------------------------------------ eixos e atualização
+  /** Eixo padronizado: linhas na cor de eixo, rótulos 12px secundários. Uso: g.call(d3.axisBottom(x)).call(Lab.eixo). */
+  Lab.eixo = (g) => g.call((x) => x.selectAll("line,path").attr("stroke", token("cor-eixo")))
+    .call((x) => x.selectAll("text").style("font-size", "12px").style("fill", token("cor-texto-secundario")));
+  /** Atualiza no lugar: mantém altura, posição de rolagem e o foco do controle usado (data-chave). */
+  Lab.noLugar = (fazer, raiz = Lab.cfg.raiz) => {
+    const y = scrollY;
+    const chave = document.activeElement?.dataset?.chave;
+    raiz.style.minHeight = `${raiz.offsetHeight}px`;
+    fazer();
+    scrollTo(0, y);
+    if (chave) raiz.querySelector(`[data-chave="${CSS.escape(chave)}"]`)?.focus({ preventScroll: true });
+    requestAnimationFrame(() => { raiz.style.minHeight = ""; });
+  };
+  /** Desenha `fazer()` só quando `no` chega perto da tela (desempenho: mapas com milhares de unidades em seções
+   *  fechadas não pesam no carregamento). Até lá, `no` guarda a altura `reserva` (px) para a rolagem não pular.
+   *  Sem IntersectionObserver, desenha na hora. */
+  Lab.quandoVisivel = (no, fazer, { margem = "400px", reserva = 420 } = {}) => {
+    if (!("IntersectionObserver" in window)) { fazer(); return; }
+    no.style.minHeight = `${reserva}px`;
+    const io = new IntersectionObserver((es) => {
+      if (!es.some((e) => e.isIntersecting)) return;
+      io.disconnect(); no.style.minHeight = ""; fazer();
+    }, { rootMargin: margem });
+    io.observe(no);
+  };
+  /** Largura útil de um gráfico na raiz (entre 320 px e `max`). */
+  Lab.largura = (max) => Math.max(320, Math.min(max, Lab.cfg.raiz.clientWidth - 34));
+  Lab.estreito = () => Lab.cfg.raiz.clientWidth < 600;
+})();
+
+/* ==== web/componentes/lab-metodologia.js ==== */
+/* lab-metodologia.js — bloco "Fontes de Dados, Metodologia e Códigos", padrão de todos os produtos (ADR L0003).
+ * Modelo: README do Agregador de Pesquisas (O POVO/DATADOC). O conteúdo vem pronto do Python
+ * (labdados.metodologia.montar): textos do produto (src/metodologia.yaml) + partes automáticas
+ * (fontes com datas e hashes do manifesto, ADRs, trechos de código, conferência de qualidade, versão).
+ *
+ * Lab.blocoMetodologia(m, { baixar: { rotulo, acao }, linkAutor: { href, texto } })
+ * Lab.rodapePagina(m, opts) → bloco + assinatura final (preenche o <footer id="rodape">).
+ */
+(function () {
+  "use strict";
+  const Lab = window.Lab;
+  const el = Lab.el;
+
+  /** Diagrama de fluxo dos dados (pesquisador, 2026-10-12; vale para os exploratórios): bases que entram → operações
+   *  (cruzamentos, filtros, agrupamentos…) → saídas do produto. Declarado em src/metodologia.yaml › fluxo:
+   *    entradas: [{id, rotulo, nota?, restrita?}] · operacoes: [{id, rotulo, tipo, de: [ids], nota?}] · saidas: [{id, rotulo, de, link?, nota?}]
+   *    transversais: [{id, rotulo, tipo, nota?, exceto?: [ids de saídas]}] — operações que valem para todas as saídas (ex.:
+   *    supressão de 1 a 4): ficam numa faixa à parte, sob o diagrama, sem uma ligação para cada saída; passar o mouse na
+   *    faixa acende as saídas a que ela se aplica (pesquisador, 2026-10-14).
+   *  Colunas por profundidade (uma operação que parte de outra vai para a coluna seguinte); ligações em SVG redesenhadas a
+   *  cada mudança de tamanho. Passar o mouse (ou focar) num nó acende o caminho dele — de onde vem e para onde vai. No
+   *  celular, uma coluna só, e cada nó diz de onde vem ("← …"). */
+  const TIPOS_FLUXO = { base: "base", cruzamento: "⨝ cruzamento", filtro: "⧩ filtro", agrupamento: "Σ agrupamento", derivacao: "ƒ derivação",
+    conferencia: "✓ conferência", supressao: "▦ supressão", saida: "saída" };
+  Lab.diagramaFluxo = (f) => {
+    const nos = new Map();
+    const add = (n, papel) => nos.set(n.id, { ...n, papel, de: [].concat(n.de || []) });
+    (f.entradas || []).forEach((n) => add(n, "entrada"));
+    (f.operacoes || []).forEach((n) => add(n, "operacao"));
+    (f.saidas || []).forEach((n) => add(n, "saida"));
+    const prof = new Map();
+    const nivel = (id, pilha = new Set()) => {
+      if (prof.has(id)) return prof.get(id);
+      const n = nos.get(id);
+      if (!n || pilha.has(id)) return 0;
+      pilha.add(id);
+      const v = n.papel === "entrada" ? 0 : 1 + Math.max(0, ...n.de.map((d) => nivel(d, pilha)));
+      prof.set(id, v);
+      return v;
+    };
+    [...nos.keys()].forEach((id) => nivel(id));
+    // três faixas: bases | operações (uma coluna, na ordem do caminho — profundidade, depois a ordem declarada) | saídas
+    const ordemDecl = [...nos.keys()];
+    const faixa = (papel) => [...nos.values()].filter((n) => n.papel === papel).sort((a, b) => (papel === "operacao" ? prof.get(a.id) - prof.get(b.id) : 0) || ordemDecl.indexOf(a.id) - ordemDecl.indexOf(b.id));
+    const colunas = [["Bases que entram", faixa("entrada")], ["Operações", faixa("operacao")], ["Saídas", faixa("saida")]];
+    const cor = { entrada: Lab.token("cor-cat-1"), operacao: Lab.token("cor-cat-3"), saida: Lab.token("cor-cat-2") };
+    const caixa = el("div", { class: "fluxo", role: "group", "aria-label": "Fluxo dos dados: bases, operações e saídas" });
+    const els = new Map();
+    for (const [k, [titulo, col]] of colunas.entries()) {
+      caixa.append(el("div", { class: `fluxo-col fluxo-col-${k}` }, el("h4", { text: titulo }), ...col.map((n) => {
+        const tipo = n.papel === "entrada" ? "base" : n.papel === "saida" ? "saida" : n.tipo || "derivacao";
+        const nomeDe = n.de.map((d) => nos.get(d)?.rotulo || d).join(", ");
+        const no = el("div", { class: `fluxo-no${n.restrita ? " restrita" : ""}`, tabindex: "0", "data-id": n.id,
+          "aria-label": `${n.rotulo}${nomeDe ? `, a partir de: ${nomeDe}` : ""}${n.nota ? `. ${n.nota}` : ""}` },
+          el("span", { class: "tipo", text: TIPOS_FLUXO[tipo] || tipo }),
+          n.link ? el("b", {}, el("a", { href: n.link, text: n.rotulo })) : el("b", { text: n.rotulo }),
+          n.nota ? el("span", { class: "nota", text: n.nota }) : null,
+          nomeDe ? el("span", { class: "de", text: `← ${nomeDe}` }) : null);
+        no.style.setProperty("--cor-fluxo", cor[n.papel]);
+        els.set(n.id, no);
+        return no;
+      })));
+    }
+    const svg = d3.select(caixa).append("svg").attr("aria-hidden", "true");
+    const arestas = [...nos.values()].flatMap((n) => n.de.filter((d) => nos.has(d)).map((d) => ({ de: d, para: n.id })));
+    const desenhar = () => {
+      const r0 = caixa.getBoundingClientRect();
+      if (!r0.width) return;
+      const ops = faixa("operacao").map((n) => n.id);
+      svg.selectAll("path").data(arestas).join("path").attr("d", (a) => {
+        const A = els.get(a.de).getBoundingClientRect(), B = els.get(a.para).getBoundingClientRect();
+        const y1 = A.top + A.height / 2 - r0.top, y2 = B.top + B.height / 2 - r0.top;
+        if (nos.get(a.de).papel === "operacao" && nos.get(a.para).papel === "operacao") {   // dentro da coluna: arco pela margem esquerda
+          const x1 = A.left - r0.left, x2 = B.left - r0.left, g = 10 + 5 * Math.min(4, Math.abs(ops.indexOf(a.para) - ops.indexOf(a.de)) - 1);
+          return `M${x1},${y1}C${x1 - g},${y1} ${x2 - g},${y2} ${x2},${y2}`;
+        }
+        const x1 = A.right - r0.left, x2 = B.left - r0.left, m = (x1 + x2) / 2;
+        return `M${x1},${y1}C${m},${y1} ${m},${y2} ${x2},${y2}`;
+      });
+    };
+    new ResizeObserver(desenhar).observe(caixa);
+    // operações transversais: faixa à parte, aplicada a todas as saídas (menos as de `exceto`)
+    const transv = (f.transversais || []).map((t) => {
+      const exceto = new Set(t.exceto || []), alvo = faixa("saida").filter((n) => !exceto.has(n.id)).map((n) => n.id);
+      const nomesExc = [...exceto].map((id) => nos.get(id)?.rotulo || id);
+      const no = el("div", { class: "fluxo-no fluxo-transversal", tabindex: "0", "data-id": t.id,
+        "aria-label": `${t.rotulo}: vale para todas as saídas${nomesExc.length ? `, exceto ${nomesExc.join(", ")}` : ""}${t.nota ? `. ${t.nota}` : ""}` },
+        el("span", { class: "tipo", text: `${TIPOS_FLUXO[t.tipo] || t.tipo || "operação"} · transversal` }), el("b", { text: t.rotulo }),
+        t.nota ? el("span", { class: "nota", text: t.nota }) : null,
+        el("span", { class: "nota alcance", text: `Vale para todas as saídas${nomesExc.length ? `, exceto: ${nomesExc.join(", ")}` : ""}.` }));
+      no.style.setProperty("--cor-fluxo", cor.operacao);
+      return { t, no, alvo };
+    });
+    const faixaT = transv.length ? el("div", { class: "fluxo-transversais" }, el("h4", { text: "Operações transversais" }), ...transv.map((x) => x.no)) : null;
+    const focarT = (x) => {
+      caixa.classList.toggle("focado", !!x);
+      const lig = new Set(x ? x.alvo : []);
+      for (const [k, no] of els) no.classList.toggle("ligado", lig.has(k));
+      svg.selectAll("path").classed("ligado", false);
+      for (const y of transv) y.no.classList.toggle("ligado", y === x);
+    };
+    for (const x of transv) {
+      x.no.addEventListener("pointerenter", () => focarT(x)); x.no.addEventListener("pointerleave", () => focarT(null));
+      x.no.addEventListener("focus", () => focarT(x)); x.no.addEventListener("blur", () => focarT(null));
+    }
+    // caminho de um nó: ancestrais e descendentes
+    const sobe = (id, s = new Set()) => { for (const a of arestas) if (a.para === id && !s.has(a.de)) { s.add(a.de); sobe(a.de, s); } return s; };
+    const desce = (id, s = new Set()) => { for (const a of arestas) if (a.de === id && !s.has(a.para)) { s.add(a.para); desce(a.para, s); } return s; };
+    const focar = (id) => {
+      caixa.classList.toggle("focado", !!id);
+      const lig = id ? new Set([id, ...sobe(id), ...desce(id)]) : new Set();
+      for (const [k, no] of els) no.classList.toggle("ligado", lig.has(k));
+      svg.selectAll("path").classed("ligado", (a) => lig.has(a.de) && lig.has(a.para));
+      // a faixa transversal acende junto quando o caminho chega a uma saída a que ela se aplica
+      for (const x of transv) x.no.classList.toggle("ligado", !!id && x.alvo.some((s) => lig.has(s)));
+    };
+    for (const [k, no] of els) {
+      no.addEventListener("pointerenter", () => focar(k)); no.addEventListener("pointerleave", () => focar(null));
+      no.addEventListener("focus", () => focar(k)); no.addEventListener("blur", () => focar(null));
+    }
+    caixa.classList.toggle("com-transversais", !!faixaT);
+    return faixaT ? el("div", { class: "fluxo-envelope" }, caixa, faixaT) : caixa;
+  };
+
+  /** Seções do bloco (o mesmo conteúdo no fim da página ou em camadas na folha ✎ Notas e fontes — L0014). */
+  const secoesMetodologia = (m, { baixar = null, linkAutor = null, endereco = null } = {}, secao) => {
+    const fontes = el("div", { class: "rolagem" }, Lab.tabela(["Base", "Órgão", "Arquivos (gerado na fonte · baixado em · hash)", "Link"],
+      m.fontes.map((f) => [
+        [el("code", { text: f.id }), el("div", { class: "nota", text: f.descricao })],
+        f.orgao,
+        [el("ul", { class: "arquivos" }, ...f.arquivos.map((a) => el("li", {}, el("code", { text: a.arquivo }),
+          ` · ${a.gerado_na_fonte ? a.gerado_na_fonte.replace(/ \d\d:\d\d:\d\d GMT$/, "") : "—"} · ${a.baixado_em || "—"} · ${a.sha256 || "—"}`)))],
+        f.url ? [el("a", { href: f.url, target: "_blank", rel: "noopener", text: "página oficial ↗" })] : "—"])));
+    const passos = el("ol", { class: "passos" }, ...m.passos.map((p) => el("li", {},
+      el("b", { text: p.titulo }), el("p", { text: p.texto }),
+      p.adrs ? el("div", { class: "nota" }, "Decisões: ", ...p.adrs.flatMap((id, k) => [k ? ", " : "", el("a", { href: `#adr-${id}`, text: id })])) : null,
+      p.trecho ? el("details", { class: "codigo" }, el("summary", {}, "Ver código"), el("pre", {}, el("code", { text: p.trecho }))) : null)));
+    const q = m.qualidade || {};
+    const adrs = el("ul", { class: "adrs" }, ...m.adrs.map((a) => el("li", { id: `adr-${a.id}` },
+      el("b", { text: `${a.id} — ${a.titulo}` }), el("span", { class: "nota", text: ` (${a.status})` }), el("div", { text: a.decisao }),
+      el("div", { class: "nota" }, "No repositório: ", el("code", { text: a.arquivo })))));
+    // sem a lista de códigos no metodologia.yaml, a seção some (antes, m.codigos ausente quebrava a folha inteira — 2026-10-16)
+    const codigos = m.codigos?.length ? el("div", { class: "rolagem" }, Lab.tabela(["Arquivo", "O que faz"], m.codigos.map((c) => [[el("code", { text: c.arquivo })], c.papel]))) : null;
+    const v = m.versao;
+    const citar = `${m.citacao || ""} Disponível em: ${endereco || location.href.split("#")[0]}. Acesso em: ${new Date().toLocaleDateString("pt-BR")}.`.trim();
+    return [
+        secao("Sobre este produto", el("p", { text: m.apresentacao })),
+        m.fluxo ? secao("Fluxo dos dados", el("p", { class: "nota", text: "Das bases oficiais às saídas desta página: passe o mouse (ou toque) num item para ver de onde ele vem e para onde vai." }), Lab.diagramaFluxo(m.fluxo)) : null,
+        secao("Fontes de dados", fontes,
+          el("p", { class: "nota", text: "Datas de geração informadas pela própria fonte; o hash identifica a versão exata de cada arquivo usado." }),
+          baixar ? el("button", { type: "button", class: "voltar", text: baixar.rotulo, onclick: baixar.acao }) : null),
+        secao("Passo a passo da metodologia", passos),
+        q.colunas ? secao("Conferência de qualidade", el("p", { text: `Situação: ${m.status_qualidade}. ${q.texto || ""}` }),
+          el("div", { class: "rolagem" }, Lab.tabela(q.colunas, q.linhas))) : null,
+        secao("Decisões metodológicas", adrs),
+        !codigos ? null : secao("Principais códigos", codigos, el("p", { class: "nota", text: "Os códigos estão no repositório do laboratório; o pacote reprodutível deste produto (dados, códigos e decisões) é gerado com ferramentas/exportar.py." })),
+        m.limitacoes?.length ? secao("Limitações", el("ul", {}, ...m.limitacoes.map((t) => el("li", { text: t })))) : null,
+        m.perguntas?.length ? secao("Perguntas frequentes", ...m.perguntas.map((p) => el("details", { class: "pergunta" }, el("summary", { text: p.p }), el("p", { text: p.r })))) : null,
+        secao("Autoria, uso de IA e licença",
+          el("p", {}, m.sobre, " ", linkAutor ? el("a", { href: linkAutor.href, target: "_blank", rel: "noopener", text: linkAutor.texto }) : null),
+          el("p", {}, el("b", { text: "Uso de IA: " }), m.uso_de_ia),
+          el("p", {}, el("b", { text: "Licença: " }), m.licenca),
+          el("p", {}, el("b", { text: "Versão: " }), `${v.numero ? `${v.numero}${v.data_versao ? ` (${new Date(v.data_versao + "T12:00").toLocaleDateString("pt-BR")})` : ""} · ` : ""}${v.status_produto}, dados gerados em ${new Date(v.gerado_em).toLocaleString("pt-BR")}`,
+            v.commit ? ` · código no commit ${v.commit}${v.alteracoes_nao_commitadas ? " (com alterações ainda não registradas)" : ""}` : ""),
+          el("p", {}, el("b", { text: "Como citar: " }), citar))].filter(Boolean);
+  };
+
+  Lab.blocoMetodologia = (m, opts = {}) => {
+    const secao = (titulo, ...filhos) => el("section", { class: "met-secao" }, el("h3", { text: titulo }), ...filhos);
+    return el("details", { class: "metodologia", id: Lab.cfg.ancoraMetodologia },
+      el("summary", {}, el("span", { class: "met-titulo", text: "Fontes de Dados, Metodologia e Códigos" }),
+        el("span", { class: "met-sub", text: "bases oficiais, passo a passo, códigos e decisões" })),
+      el("div", { class: "met-corpo" }, ...secoesMetodologia(m, opts, secao)));
+  };
+
+  /** O bloco em camadas, para a folha ✎ Notas e fontes de Visualizações e stories (L0014): cada seção recolhida; os
+   *  links para as decisões abrem a seção e rolam até o ADR dentro da folha (sem mexer no endereço da página). */
+  Lab.metodologiaEmCamadas = (m, opts = {}) => {
+    const secao = (titulo, ...filhos) => el("details", { class: "met-camada" }, el("summary", { text: titulo }), el("div", { class: "met-corpo-camada" }, ...filhos));
+    const caixa = el("div", { class: "met-camadas" }, ...secoesMetodologia(m, opts, secao));
+    caixa.addEventListener("click", (ev) => {
+      const a = ev.target.closest('a[href^="#adr-"]');
+      if (!a) return;
+      ev.preventDefault();
+      const alvo = caixa.querySelector(a.getAttribute("href"));
+      if (!alvo) return;
+      alvo.closest("details.met-camada").open = true;
+      alvo.scrollIntoView({ block: "nearest", behavior: Lab.semMovimento() ? "auto" : "smooth" });
+    });
+    return caixa;
+  };
+
+  /** Rodapé da página: bloco de metodologia + assinatura com link para a página do autor. */
+  Lab.rodapePagina = (m, { baixar = null, linkAutor = null } = {}) => {
+    const rodape = document.getElementById(Lab.cfg.ancoraRodape);
+    rodape.replaceChildren(Lab.blocoMetodologia(m, { baixar, linkAutor }),
+      el("p", { class: "assinatura-final" }, `Análise e visualização: ${Lab.cfg.autor}`,
+        linkAutor ? " · " : null, linkAutor ? el("a", { href: linkAutor.href, target: "_blank", rel: "noopener", text: linkAutor.rotuloCurto || linkAutor.texto }) : null));
+    // só o link interno ("Fontes, métodos e códigos ↓") leva à metodologia; o nome do autor abre o portfólio em nova aba
+    // o mesmo para o item do menu do topo marcado com data-metodologia (exploratórios; pesquisador, 2026-10-12)
+    for (const a of document.querySelectorAll('.assinatura a[href^="#"], a[data-metodologia]')) a.addEventListener("click", Lab.irRodape);
+  };
+})();
+
+</script>
+<script>
+Lab.configurar({"autorUrl": "https://github.com/CajazeiraAlexandre"});
+/* app.js — HTML e CSS para layout: caderno de estudos e práticas (material didático, piloto 0.1).
+ * Os textos chegam prontos do Python (analise/preparar_caderno.py, a partir dos YAML de src/). Aqui só se monta a
+ * página: as quatro partes, o editor embutido (HTML + CSS → iframe), os laboratórios de Flexbox e Grid, as práticas
+ * guiadas e os desafios. Textos vindos dos dados: textContent; código do aluno: só dentro do iframe (srcdoc, sem
+ * scripts). O que o aluno digita fica no localStorage deste navegador (um registro por editor). */
+(async function () {
+  "use strict";
+  const { el } = Lab;
+  const app = document.getElementById("app");
+  const CHAVE = "caderno-html-css:";
+  const guardar = (k, v) => { try { localStorage.setItem(CHAVE + k, v); } catch (e) { /* sem armazenamento */ } };
+  const ler = (k) => { try { return localStorage.getItem(CHAVE + k); } catch (e) { return null; } };
+  const apagar = (k) => { try { localStorage.removeItem(CHAVE + k); } catch (e) { /* nada */ } };
+
+  // ------------------------------------------------------------ acessibilidade: versão adaptada para baixa visão
+  // Pedido do professor (2026-10-28): ao marcar "Baixa visão", o caderno muda para texto maior, contraste alto, uma
+  // coluna, foco visível e resultado dos editores ampliado; tamanho (125–200%) e fundo escuro ajustáveis. Fica guardado
+  // neste navegador e vai no endereço (#acesso=baixa-visao&escala=150&tema=escuro) para o professor mandar o link pronto.
+  const ESCALAS = [125, 150, 175, 200];
+  const acc = { ativo: false, escala: 150, tema: "claro" };
+  try { const g = JSON.parse(ler("acesso") || "null"); if (g) Object.assign(acc, g); } catch (e) { /* padrão */ }
+  function aplicarAcesso() {
+    const raiz = document.documentElement;
+    if (acc.ativo) { raiz.dataset.acesso = "baixa-visao"; raiz.style.setProperty("--bv-escala", String(acc.escala / 100)); }
+    else { delete raiz.dataset.acesso; raiz.style.removeProperty("--bv-escala"); }
+    if (acc.ativo && acc.tema === "escuro") raiz.dataset.theme = "dark"; else delete raiz.dataset.theme;
+    guardar("acesso", JSON.stringify(acc));
+  }
+  const base = await Lab.decodificar(document.getElementById("dados").textContent.trim());
+  Lab.configurar({ raiz: app, autor: "Alexandre Ribeiro Cajazeira Ramos", orgaos: {}, artigos: {} });
+  const C = base.conceitos, P = base.praticas, D = base.desafios, REF = base.referencias, A = base.autoria;
+
+  // ------------------------------------------------------------ estado no endereço
+  const est = { parte: "1" };
+  try {
+    const p = new URLSearchParams(location.hash.slice(1));
+    if (p.has("parte")) est.parte = p.get("parte");
+    if (p.get("acesso") === "baixa-visao") acc.ativo = true;
+    if (ESCALAS.includes(Number(p.get("escala")))) acc.escala = Number(p.get("escala"));
+    if (p.get("tema") === "escuro") acc.tema = "escuro";
+  } catch (e) { /* padrão */ }
+  const hashDe = () => {
+    const p = new URLSearchParams(est);
+    if (acc.ativo) { p.set("acesso", "baixa-visao"); p.set("escala", String(acc.escala)); if (acc.tema === "escuro") p.set("tema", "escuro"); }
+    return `#${p}`;
+  };
+  aplicarAcesso();
+  history.replaceState(null, "", hashDe());
+  function irPara(parte, ancora) {
+    if (est.parte !== parte) { est.parte = parte; history.replaceState(null, "", hashDe()); render(); }
+    const alvo = ancora && document.getElementById(ancora);
+    if (!alvo) { if (!ancora) scrollTo(0, 0); return; }
+    if (alvo.tagName === "DETAILS") alvo.open = true;
+    alvo.scrollIntoView({ behavior: Lab.semMovimento?.() ? "auto" : "smooth", block: "start" });
+  }
+  // ------------------------------------------------------------ peças comuns
+  const linkExt = (texto, url) => el("a", { href: url, target: "_blank", rel: "noopener", text: texto });
+  const codigo = (texto, titulo) => [titulo ? el("p", { class: "codigo-titulo", text: titulo }) : null, el("pre", { class: "codigo" }, el("code", { text: texto }))];
+  const tabela = (t) => el("div", { class: "rolagem" }, Lab.tabela(t.cab, t.linhas));
+  /** Página completa do aluno. `previa=true`: na versão para baixa visão, amplia o resultado na mesma proporção do texto
+   *  (zoom na raiz, como o zoom do navegador); o arquivo aberto em nova aba ou copiado sai sempre no tamanho real. */
+  const documento = (html, css, previa = false) => {
+    const ampliar = previa && acc.ativo ? `<style>html{zoom:${acc.escala / 100}}</style>` : "";
+    return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>${css}</style>${ampliar}</head><body>${html}</body></html>`;
+  };
+  const moldura = (html, css, altura, aria) => {
+    const f = el("iframe", { sandbox: "allow-forms allow-popups allow-same-origin", title: aria, loading: "lazy" });
+    f.style.setProperty("--altura-quadro", `${altura}px`);
+    f.srcdoc = documento(html, css, true);
+    return f;
+  };
+  const botao = (texto, onclick, cls) => el("button", { type: "button", class: cls || "", text: texto, onclick });
+
+  /** Editor embutido: HTML e CSS editáveis, resultado ao vivo num iframe sem scripts; guarda no localStorage. */
+  function editor({ id, titulo, html = "", css = "", altura = 240, nota = null }) {
+    const salvoH = ler(`${id}:html`), salvoC = ler(`${id}:css`);
+    const taH = el("textarea", { spellcheck: "false", "aria-label": "HTML" });
+    const taC = el("textarea", { spellcheck: "false", "aria-label": "CSS" });
+    taH.value = salvoH ?? html; taC.value = salvoC ?? css;
+    const frame = el("iframe", { sandbox: "allow-forms allow-popups allow-same-origin", title: `Resultado: ${titulo}` });
+    frame.style.setProperty("--altura-quadro", `${altura}px`);
+    const alturaTa = Math.max(90, Math.round(altura / 2) - 14);
+    taH.style.height = `${alturaTa}px`; taC.style.height = `${alturaTa}px`;
+    const salvo = el("span", { class: "editor-salvo", text: salvoH !== null || salvoC !== null ? "código restaurado do seu navegador" : "" });
+    let timer = null;
+    const executar = () => { frame.srcdoc = documento(taH.value, taC.value, true); };
+    const mudou = () => {
+      guardar(`${id}:html`, taH.value); guardar(`${id}:css`, taC.value); salvo.textContent = "salvo neste navegador";
+      clearTimeout(timer); timer = setTimeout(executar, 450);
+    };
+    const restaurar = () => { taH.value = html; taC.value = css; apagar(`${id}:html`); apagar(`${id}:css`); salvo.textContent = ""; executar(); };
+    const abrir = () => { const u = URL.createObjectURL(new Blob([documento(taH.value, taC.value)], { type: "text/html" })); window.open(u, "_blank"); };
+    const copiar = async () => {
+      try { await navigator.clipboard.writeText(documento(taH.value, taC.value)); salvo.textContent = "arquivo completo copiado: cole no VS Code"; }
+      catch (e) { salvo.textContent = "não foi possível copiar; selecione e copie o texto"; }
+    };
+    for (const ta of [taH, taC]) {
+      ta.addEventListener("input", mudou);
+      ta.addEventListener("keydown", (ev) => {
+        if (ev.key === "Tab") { ev.preventDefault(); const s = ta.selectionStart, e2 = ta.selectionEnd; ta.value = ta.value.slice(0, s) + "  " + ta.value.slice(e2); ta.selectionStart = ta.selectionEnd = s + 2; mudou(); }
+        if (ev.key === "Enter" && (ev.ctrlKey || ev.metaKey)) { ev.preventDefault(); clearTimeout(timer); executar(); }
+      });
+    }
+    executar();
+    const caixa = el("div", { class: "editor", id: `ed-${id}` },
+      el("div", { class: "editor-cab" }, el("p", { class: "editor-titulo", text: titulo }),
+        el("div", { class: "editor-botoes" }, botao("▶ Executar", () => { clearTimeout(timer); executar(); }, "principal"), botao("↺ Restaurar", restaurar), botao("Abrir em nova aba", abrir), botao("Copiar arquivo completo", copiar))),
+      el("div", { class: "editor-corpo" },
+        el("div", { class: "editor-codigo" }, el("label", { text: "HTML (conteúdo do body)" }), taH, el("label", { text: "CSS" }), taC),
+        el("div", { class: "editor-resultado" }, el("label", {}, "Resultado ", salvo), frame)),
+      nota ? el("p", { class: "editor-nota", text: nota }) : null);
+    caixa.carregar = (h, c) => { if (h !== undefined && h !== null) taH.value = h; if (c !== undefined && c !== null) taC.value = c; mudou(); clearTimeout(timer); executar(); caixa.scrollIntoView({ behavior: "smooth", block: "center" }); };
+    return caixa;
+  }
+
+  /** Laboratório Flexbox / Grid: seletores mudam as propriedades, o CSS aparece ao lado e o resultado ao vivo. */
+  function playground(tipo, titulo) {
+    const itens = ["Pedra Furada", "Boqueirão", "Andorinhas", "Serra Branca", "Capivara"];
+    const html = `<div class="palco">${itens.map((t, i) => `<div class="item${i === 1 ? " b" : ""}">${t}</div>`).join("")}</div>`;
+    const comum = `body { margin: 0; font-family: Arial, sans-serif; }\n.palco { min-height: 210px; background: #f3ead8; padding: 8px; box-sizing: border-box; }\n.item { background: #2f5d3a; color: #fff; padding: 10px; border-radius: 8px; font-size: 14px; }\n.item.b { background: #d9822b; padding: 24px 10px; }`;
+    const def = tipo === "flex"
+      ? [["flex-direction", ["row", "column", "row-reverse", "column-reverse"]], ["justify-content", ["flex-start", "center", "flex-end", "space-between", "space-around", "space-evenly"]], ["align-items", ["stretch", "flex-start", "center", "flex-end"]], ["flex-wrap", ["nowrap", "wrap"]], ["gap", ["0", "8px", "16px", "32px"]]]
+      : [["grid-template-columns", ["1fr 1fr 1fr", "repeat(2, 1fr)", "repeat(4, 1fr)", "200px 1fr", "1fr 2fr", "repeat(auto-fit, minmax(120px, 1fr))"]], ["grid-auto-rows", ["auto", "60px", "100px"]], ["gap", ["0", "8px", "16px"]], ["justify-items", ["stretch", "start", "center", "end"]], ["align-items", ["stretch", "start", "center", "end"]]];
+    const extra = tipo === "flex" ? [["flex (no 2º item)", ["none", "1", "2", "0 0 200px"]]] : [["2º item ocupa", ["1 célula", "2 colunas", "2 linhas", "2 × 2"]]];
+    const sels = new Map();
+    const controles = el("div", { class: "lab-controles" }, ...[...def, ...extra].map(([prop, vals]) => {
+      const s = el("select", {}, ...vals.map((v) => el("option", { value: v, text: v })));
+      sels.set(prop, s); s.addEventListener("change", atualizar);
+      return el("label", {}, prop, s);
+    }));
+    const pre = el("pre", { class: "codigo" }, el("code", {}));
+    const frame = el("iframe", { sandbox: "allow-same-origin", title: `Laboratório ${tipo}` });
+    function cssAtual() {
+      const linhas = [`display: ${tipo};`, ...def.map(([p]) => `${p}: ${sels.get(p).value};`)];
+      let item = "";
+      if (tipo === "flex") { const v = sels.get("flex (no 2º item)").value; if (v !== "none") item = `.item.b { flex: ${v}; }`; }
+      else { const v = sels.get("2º item ocupa").value; item = v === "2 colunas" ? ".item.b { grid-column: span 2; }" : v === "2 linhas" ? ".item.b { grid-row: span 2; }" : v === "2 × 2" ? ".item.b { grid-column: span 2; grid-row: span 2; }" : ""; }
+      return `.palco {\n  ${linhas.join("\n  ")}\n}${item ? "\n" + item : ""}`;
+    }
+    function atualizar() { const css = cssAtual(); pre.firstChild.textContent = css; frame.srcdoc = documento(html, comum + "\n" + css, true); }
+    atualizar();
+    return el("div", { class: "lab-play" }, el("h4", { text: titulo }), controles, el("div", { class: "lab-grade" }, frame, pre),
+      el("p", { class: "nota", text: tipo === "flex" ? "O item laranja é mais alto de propósito: repare no que align-items faz com os outros. Com column, justify-content passa a agir na vertical." : "Mude as colunas e veja as peças se reposicionarem na ordem do HTML; o item laranja pode ocupar mais de uma célula." }));
+  }
+
+  const blocos = (lista, prefixo) => lista.map((b, i) => {
+    if (b.p) return el("p", { text: b.p });
+    if (b.lista) return el("ul", {}, ...b.lista.map((x) => el("li", { text: x })));
+    if (b.tabela) return tabela(b.tabela);
+    if (b.passo) return el("div", { class: "passo-bloco" }, el("h4", { text: b.passo.titulo }), el("p", { text: b.passo.texto }));
+    if (b.atencao) return el("div", { class: "atencao", text: b.atencao });
+    if (b.dica) return el("div", { class: "dica-bloco", text: b.dica });
+    if (b.codigo) return el("div", {}, ...codigo(b.codigo.texto, b.codigo.titulo));
+    if (b.editor) return editor({ id: `${prefixo}-${i}`, titulo: b.editor.titulo, html: b.editor.html, css: b.editor.css, altura: b.editor.altura, nota: b.editor.nota });
+    if (b.playground) return playground(b.playground.tipo, b.playground.titulo);
+    return null;
+  }).filter(Boolean);
+
+  // ------------------------------------------------------------ Parte I · Conceitos
+  const praticaDe = (conceito) => P.passos.find((p) => p.conceito === conceito);
+  function parte1() {
+    const sec = el("section", {});
+    sec.append(el("h2", { text: "Parte I · Conceitos" }),
+      el("p", { class: "resumo", text: "Oito seções, na ordem das aulas. Cada uma começa com o quadro “Já sei?”: se você consegue fazer os três itens, pule para a prática. Mexa em todos os editores — mudar um valor e ver o que acontece é o jeito mais rápido de aprender CSS." }),
+      el("div", { class: "indice-secoes" }, ...C.secoes.map((s, i) => el("button", { type: "button", class: "item-indice", onclick: () => irPara("1", `c-${s.id}`) },
+        el("span", { class: "num", text: String(i + 1) }), el("span", { class: "tit", text: s.titulo }), el("span", { class: "sub", text: s.resumo })))));
+    C.secoes.forEach((s, i) => {
+      const pr = praticaDe(s.id);
+      const estacao = el("section", { class: "estacao", id: `c-${s.id}` },
+        el("p", { class: "chapeu", text: `Seção ${i + 1} de ${C.secoes.length}` }), el("h2", { text: s.titulo }), el("p", { class: "resumo", text: s.resumo }),
+        el("div", { class: "ja-sei" }, el("h4", { text: "Já sei? Se você consegue…" }), el("ul", {}, ...s.ja_sei.map((x) => el("li", { text: x }))),
+          el("p", { style: "margin:4px 0 0" }, "…pule esta seção: ",
+            pr ? el("button", { type: "button", class: "pular", text: `ir à prática “${pr.titulo}” →`, onclick: () => irPara("2", pr.id) }) : null,
+            pr ? " ou " : "", el("button", { type: "button", class: "pular", text: "ir aos desafios →", onclick: () => irPara("3", null) }))),
+        ...blocos(s.blocos, `c-${s.id}`));
+      if (s.mini) estacao.append(el("div", { class: "mini" }, el("h4", { text: "Mini-desafio de 1 minuto" }), el("p", { text: s.mini.texto }),
+        editor({ id: `mini-${s.id}`, titulo: "Seu espaço", html: "<!-- seu HTML aqui -->\n", css: "/* seu CSS aqui */\n", altura: 200 })));
+      if (s.erros?.length) estacao.append(el("details", { class: "erros" }, el("summary", {}, `Erros comuns (${s.erros.length})`),
+        el("dl", {}, ...s.erros.flatMap((e) => [el("dt", { text: e.titulo }), el("dd", { text: e.texto })]))));
+      if (s.fontes?.length) estacao.append(el("details", { class: "fontes" }, el("summary", {}, "Fontes e leituras desta seção"),
+        el("ul", { class: "lista-ref" }, ...s.fontes.map((f) => el("li", {}, linkExt(f.texto + " ↗", f.url))))));
+      sec.append(estacao);
+    });
+    return sec;
+  }
+
+  // ------------------------------------------------------------ Parte II · Práticas guiadas
+  const confira = (itens, id) => el("div", { class: "confira" }, el("h4", { text: "Confira" }), ...itens.map((x, i) => {
+    const cb = el("input", { type: "checkbox" }); const k = `${id}:ok:${i}`; cb.checked = ler(k) === "1";
+    cb.addEventListener("change", () => guardar(k, cb.checked ? "1" : "0"));
+    return el("label", {}, cb, x);
+  }));
+  const conceitoDe = (id) => C.secoes.find((s) => s.id === id);
+  function parte2() {
+    const sec = el("section", {});
+    sec.append(el("h2", { text: "Parte II · Práticas guiadas: o site da Serra da Capivara" }), el("p", { class: "resumo", text: P.introducao }),
+      el("div", { class: "indice-secoes" }, ...P.passos.map((p, i) => el("button", { type: "button", class: "item-indice", onclick: () => irPara("2", p.id) },
+        el("span", { class: "num", text: String(i + 1) }), el("span", { class: "tit", text: p.titulo }), el("span", { class: "sub", text: p.objetivo })))));
+    P.passos.forEach((p, i) => {
+      const c = conceitoDe(p.conceito);
+      const ed = editor({ id: `pr-${p.id}`, titulo: `Passo ${i + 1}: seu código`, html: p.inicio.html, css: p.inicio.css, altura: 420, nota: i === 0 ? "O editor começa vazio; nos passos seguintes ele começa com a solução do passo anterior." : "O editor começa com a solução do passo anterior. Se você fez o passo anterior do seu jeito, use “Carregar” para trazer o seu código ou continue a partir daqui." });
+      sec.append(el("section", { class: "estacao", id: p.id },
+        el("p", { class: "chapeu", text: `Passo ${i + 1} de ${P.passos.length}` }), el("h2", { text: p.titulo }), el("p", { class: "resumo", text: p.objetivo }),
+        el("div", { class: "links-conceito" }, c ? el("button", { type: "button", class: "link-cruzado", text: `📖 Parte I · ${c.titulo}`, onclick: () => irPara("1", `c-${c.id}`) }) : null),
+        el("h4", { text: "O que fazer" }), el("ol", { class: "instrucoes" }, ...p.instrucoes.map((x) => el("li", { text: x }))),
+        ed,
+        el("details", { class: "solucao" }, el("summary", {}, "Ver a solução deste passo"),
+          el("p", { class: "nota", text: "Compare com o seu código antes de copiar: o importante é entender cada linha." }),
+          ...codigo(p.solucao.html, "HTML"), ...codigo(p.solucao.css, "CSS"),
+          el("p", {}, el("button", { type: "button", class: "bt-carregar", text: "Carregar a solução no editor", onclick: () => ed.carregar(p.solucao.html, p.solucao.css) }))),
+        confira(p.confira, `pr-${p.id}`)));
+    });
+    return sec;
+  }
+
+  // ------------------------------------------------------------ Parte III · Desafios
+  function parte3() {
+    const sec = el("section", {});
+    sec.append(el("h2", { text: "Parte III · Desafios finais: Flexbox e Grid" }), el("p", { class: "resumo", text: D.introducao }),
+      el("div", { class: "indice-secoes" }, ...D.desafios.map((d, i) => el("button", { type: "button", class: "item-indice", onclick: () => irPara("3", d.id) },
+        el("span", { class: "num", text: d.id.toUpperCase() }), el("span", { class: "tit", text: d.titulo }), el("span", { class: "sub", text: d.familia === "flex" ? "Flexbox" : "Grid Layout" })))));
+    D.desafios.forEach((d) => {
+      const c = conceitoDe(d.familia === "flex" ? "flexbox" : "grid");
+      const ed = editor({ id: `ds-${d.id}`, titulo: "Seu CSS (o HTML já está pronto)", html: d.html, css: d.css_inicio, altura: 360 });
+      sec.append(el("section", { class: "estacao", id: d.id },
+        el("p", { class: "chapeu", text: `Desafio ${d.id.toUpperCase()}` }),
+        el("h2", {}, d.titulo, el("span", { class: `familia-chip ${d.familia}`, text: d.familia === "flex" ? "Flexbox" : "Grid" })),
+        el("p", { text: d.enunciado }),
+        el("div", { class: "links-conceito" }, c ? el("button", { type: "button", class: "link-cruzado", text: `📖 Parte I · ${c.titulo}`, onclick: () => irPara("1", `c-${c.id}`) }) : null),
+        el("div", { class: "esperado" }, el("h4", { text: "Resultado esperado" }), moldura(d.html, d.gabarito, 300, `Resultado esperado do desafio ${d.id}`)),
+        ed,
+        el("details", { class: "dicas" }, el("summary", {}, `Dicas (${d.dicas.length}) — abra uma de cada vez`),
+          ...d.dicas.map((x, i) => el("details", {}, el("summary", {}, `Dica ${i + 1}`), el("p", { text: x })))),
+        el("details", { class: "gabarito" }, el("summary", {}, "Gabarito (só depois de tentar)"),
+          el("p", { class: "aviso-gabarito", text: "Há mais de um jeito certo. Compare: o que o gabarito faz que o seu não fez? O que o seu faz de diferente e também funciona?" }),
+          ...codigo(d.gabarito, "CSS do gabarito"),
+          el("p", {}, el("button", { type: "button", class: "bt-carregar", text: "Carregar o gabarito no editor", onclick: () => ed.carregar(null, d.gabarito) }))),
+        confira(d.confira, `ds-${d.id}`)));
+    });
+    return sec;
+  }
+
+  // ------------------------------------------------------------ Apoio
+  function parte4() {
+    const sec = el("section", {});
+    sec.append(el("h2", { text: "Apoio · Como estudar, fontes e glossário" }),
+      el("h3", { text: "Duas trilhas" }),
+      el("div", { class: "trilhas" }, ...REF.trilhas.map((t) => el("div", { class: "cartao trilha" }, el("h3", { text: t.titulo }), el("ol", {}, ...t.passos.map((x) => el("li", { text: x })))))),
+      el("h3", { text: "Ferramentas" }),
+      el("div", { class: "grade-apoio" }, ...REF.ferramentas.map((f) => el("div", { class: "cartao" }, el("h4", {}, f.url ? linkExt(f.titulo + " ↗", f.url) : f.titulo), el("p", { text: f.texto })))),
+      el("h3", { text: "Referências com links" }),
+      ...REF.grupos.flatMap((g) => [el("h4", { text: g.titulo }), el("ul", { class: "lista-ref" }, ...g.itens.map((it) => el("li", {}, it.url ? linkExt(it.texto + " ↗", it.url) : it.texto)))]),
+      el("h4", { text: "Slides da disciplina" }), el("ul", { class: "lista-ref" }, ...REF.slides.map((s) => el("li", { text: s }))), el("p", { class: "nota", text: REF.slides_nota }),
+      el("h3", { text: "Glossário de propriedades" }),
+      el("div", { class: "rolagem" }, Lab.tabela(["Propriedade", "O que faz", "Referência"], REF.glossario.map((g) => [g.termo, g.def, linkExt("W3Schools ↗", g.url)]))),
+      el("h3", { text: "Sobre este material" }),
+      el("p", { text: REF.sobre.objetivo }), el("p", {}, el("b", { text: "Ao final, você deve conseguir:" })), el("ul", {}, ...REF.sobre.objetivos_aprendizagem.map((o) => el("li", { text: o }))),
+      el("p", {}, el("b", { text: "Autoria: " }), A.autoria.texto), el("p", {}, el("b", { text: "Uso de IA: " }), A.uso_de_ia.texto, " Detalhes, etapas e estado da revisão no bloco ", el("a", { href: "#rodape", text: "Autoria, revisão e uso de IA" }), "."), el("p", { class: "nota", text: A.versao }));
+    return sec;
+  }
+
+  /** Rodapé do caderno: autoria, proposição, origem, uso de IA, estado da revisão, como foi feito, licença e citação
+   *  (substitui o bloco de fontes e metodologia dos produtos com dados — ADR PW0001). */
+  function rodapeAutoria() {
+    const sec = (titulo, ...filhos) => el("section", { class: "met-secao" }, el("h3", { text: titulo }), ...filhos);
+    const estadoChip = (e) => el("span", { class: `estado-chip ${e === "revisado" ? "ok" : e === "testado" ? "ok" : "pendente"}`, text: e });
+    const bloco = el("details", { class: "metodologia", id: "metodologia", open: "" },
+      el("summary", {}, el("span", { class: "met-titulo", text: "Autoria, revisão e uso de IA" }), " ", el("span", { class: "met-sub", text: "quem fez, o que foi proposto, o que a IA executou e o que já foi revisado" })),
+      el("div", { class: "met-corpo" },
+        sec("Autoria", el("p", {}, el("b", { text: A.autoria.nome }), ` — ${A.autoria.papel}. `, linkExt("Página do autor ↗", A.autoria.pagina)), el("p", { text: A.autoria.texto })),
+        sec("Proposição", el("p", { text: A.proposicao.texto }), el("p", {}, el("b", { text: "Decisões do professor nesta versão:" })), el("ul", {}, ...A.proposicao.decisoes.map((x) => el("li", { text: x })))),
+        sec("Origem do conteúdo", el("p", { text: A.origem.texto }), el("ul", {}, ...A.origem.materiais.map((x) => el("li", { text: x })))),
+        sec("Uso de IA", el("p", {}, el("b", { text: "Ferramenta: " }), A.uso_de_ia.ferramenta, ". ", A.uso_de_ia.texto),
+          el("div", { class: "rolagem" }, Lab.tabela(["Etapa", "O que a IA executou"], A.uso_de_ia.etapas.map((e) => [e.etapa, e.finalidade])))),
+        sec("Revisão humana", el("p", { text: A.revisao.texto }),
+          el("div", { class: "rolagem" }, Lab.tabela(["Parte", "Estado", "Por quem / como"], A.revisao.itens.map((i) => [i.parte, estadoChip(i.estado), i.por])))),
+        sec("Como este caderno é feito", el("p", { text: A.como_foi_feito })),
+        sec("Licença e citação", el("p", { text: A.licenca }), el("p", {}, el("b", { text: "Como citar: " }), A.citacao), el("p", {}, el("b", { text: "Contato: " }), A.contato))));
+    const rodape = document.getElementById("rodape");
+    rodape.replaceChildren(bloco, el("p", { class: "assinatura-final" }, `Autoria e responsabilidade: ${A.autoria.nome} · `, linkExt("Página do autor ↗", A.autoria.pagina), ` · ${A.versao}`));
+    for (const a of document.querySelectorAll('.assinatura a[href^="#"]')) if (Lab.irRodape) a.addEventListener("click", Lab.irRodape);
+  }
+
+  // ------------------------------------------------------------ barra de acessibilidade
+  function barraAcesso() {
+    const caixa = document.getElementById("acesso");
+    const mudar = (mudanca) => { Object.assign(acc, mudanca); aplicarAcesso(); history.replaceState(null, "", hashDe()); barraAcesso(); render(); };
+    const liga = el("input", { type: "checkbox", id: "bv-liga" }); liga.checked = acc.ativo;
+    liga.addEventListener("change", () => mudar({ ativo: liga.checked }));
+    const filhos = [el("label", { for: "bv-liga" }, liga, el("span", {}, el("b", { text: "Baixa visão" }), acc.ativo ? "" : ": texto maior, contraste alto e uma coluna"))];
+    if (acc.ativo) {
+      const i = ESCALAS.indexOf(acc.escala);
+      const menos = botao("A−", () => mudar({ escala: ESCALAS[i - 1] })); menos.disabled = i <= 0; menos.setAttribute("aria-label", "Diminuir o texto");
+      const mais = botao("A+", () => mudar({ escala: ESCALAS[i + 1] })); mais.disabled = i >= ESCALAS.length - 1; mais.setAttribute("aria-label", "Aumentar o texto");
+      const escuro = el("input", { type: "checkbox", id: "bv-escuro" }); escuro.checked = acc.tema === "escuro";
+      escuro.addEventListener("change", () => mudar({ tema: escuro.checked ? "escuro" : "claro" }));
+      filhos.push(
+        el("span", { class: "grupo", role: "group", "aria-label": "Tamanho do texto" }, "Tamanho do texto:", menos, el("span", { class: "valor", "aria-live": "polite", text: `${acc.escala}%` }), mais),
+        el("label", { for: "bv-escuro" }, escuro, "Fundo escuro"),
+        el("p", { class: "nota-acesso", text: "O zoom do navegador (Ctrl e +) também funciona. O resultado dos editores aparece ampliado na mesma proporção; “Abrir em nova aba” mostra a página no tamanho real. Essas escolhas ficam guardadas neste navegador e no endereço da página." }));
+    }
+    caixa.replaceChildren(...filhos);
+  }
+
+  // ------------------------------------------------------------ montagem
+  function render() {
+    const abas = el("nav", { class: "abas-partes", role: "tablist", "aria-label": "Partes do caderno" },
+      ...[["1", "Parte I", "Conceitos"], ["2", "Parte II", "Práticas guiadas"], ["3", "Parte III", "Desafios"], ["4", "Apoio", "Fontes e glossário"]].map(([v, a, b]) =>
+        el("button", { type: "button", role: "tab", "aria-selected": String(est.parte === v), onclick: () => irPara(v, null) },
+          el("span", { class: "aba-num", text: a }), el("span", { class: "aba-nome", text: b }))));
+    const sobre = el("details", { class: "sobre-material" },
+      el("summary", {}, el("b", { text: "Sobre este caderno. " }), "Revisão e prática de HTML e CSS para o 1º ano: conceitos com editor, o site da Serra da Capivara passo a passo e oito desafios de Flexbox e Grid. ", el("span", { class: "mais", text: "Objetivos, trilhas, autoria e uso de IA ▾" })),
+      el("p", {}, el("b", { text: "Ao final, você deve conseguir:" })), el("ul", {}, ...REF.sobre.objetivos_aprendizagem.map((o) => el("li", { text: o }))),
+      el("p", {}, el("b", { text: "Duas trilhas: " }), "quem já sabe lê só o quadro “Já sei?” de cada seção e vai aos desafios; quem prefere o passo a passo segue a ordem (detalhes na aba Apoio)."),
+      el("p", {}, el("b", { text: "Autoria: " }), A.autoria.texto), el("p", {}, el("b", { text: "Uso de IA: " }), A.uso_de_ia.texto, " Detalhes e estado da revisão no bloco ", el("a", { href: "#rodape", text: "Autoria, revisão e uso de IA" }), "."), el("p", { class: "nota", text: A.versao }));
+    app.replaceChildren(el("div", { class: "selo-didatico", text: `Material didático · ${A.versao.toLowerCase()}` }), sobre, abas,
+      est.parte === "2" ? parte2() : est.parte === "3" ? parte3() : est.parte === "4" ? parte4() : parte1());
+  }
+  if (!document.querySelector(".topo-link")) document.body.append(el("button", { type: "button", class: "topo-link", text: "↑ partes", "aria-label": "Voltar ao topo", onclick: () => scrollTo({ top: 0, behavior: "smooth" }) }));
+  rodapeAutoria();
+  barraAcesso();
+  render();
+})().catch((erro) => {
+  document.getElementById("app").textContent = `Não foi possível carregar o caderno: ${erro}. Use um navegador atualizado.`;
+  console.error(erro);
+});
+
+</script>
+</body>
+</html>
