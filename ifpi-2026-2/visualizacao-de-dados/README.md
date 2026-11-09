@@ -29,6 +29,10 @@ III (desafios) nesta primeira versão (pesquisador, 2026-11-07).
   você** (a atividade do slide 50). Sem testes nem jogo (revisão do professor, 2026-11-07).
 - **Apoio** (`src/referencias.yaml`): objetivos, autoria, uso de IA, slides, referências, bases (onde e como baixar),
   CSVs, materiais anteriores, como citar.
+- **Slides** (`slides.html`, 2026-11-09): versão HTML revista dos slides da aula, conforme a revisão em
+  `projetos/dataviz-didatico/docs/2026-11-09_revisao-slides-visualizacao.md` — 42 slides em cinco partes, com passos
+  dentro do slide, notas do apresentador (tecla N), figuras redesenhadas em português, um gráfico do DATADOC por slide e
+  exemplos brasileiros com os dados do material. `#todos` mostra todos os slides para imprimir em PDF.
 - **Caderno** (`caderno.ipynb`): refaz cada gráfico com pandas e matplotlib a partir dos CSVs e confere os números com
   a página (asserts).
 
@@ -64,6 +68,7 @@ PYTHONPATH=nucleo:. python projetos/dataviz-didatico/analise/preparar_dados_aber
 PYTHONPATH=nucleo:. python projetos/dataviz-didatico/analise/preparar_visualizacao.py
 python -m labdados.produto_web projetos/dataviz-didatico/produtos/2026-11_visualizacao-de-dados
 python projetos/dataviz-didatico/analise/caderno_visualizacao.py --rodar          # gera e confere o caderno
+PYTHONPATH=nucleo:. python projetos/dataviz-didatico/analise/gerar_slides_visualizacao.py   # slides.html
 pytest tests/test_dataviz_didatico_visualizacao.py
 ```
 
@@ -79,6 +84,7 @@ nº 2.664/2026; a responsabilidade pelo conteúdo é do professor e a IA não é
 | Escolha e preparo dos dados | Claude Code | escolher, entre os dados já preparados pelo projeto, um conjunto por aplicação; IPCA anual, histograma, Pearson, malha das UFs | números conferidos por testes automáticos; escolhas **pendentes** de validação |
 | Textos das aplicações | Claude Code | conceito, leituras guiadas, "o que o gráfico não diz", exemplos de código | **pendente** (selos `#revisao=1`) |
 | Página e caderno | Claude Code | montagem da página (D3) e do caderno (pandas + matplotlib) | caderno executado com paridade; revisão visual pendente |
+| Slides em HTML (2026-11-09) | Claude Code | a partir da revisão dos slides aceita pelo professor (“concordo com boa parte dos ajustes”): roteiro de 42 slides, figuras redesenhadas, gráficos com os dados do material, notas do apresentador com o texto dos slides originais | **pendente** (ajustes do professor) |
 | Renovação 0.3 (2026-11-07) | Claude Code | a partir da segunda revisão do professor (sem testes nem jogo; demonstração cadenciada): Parte II em passos que redesenham só o quadro; galeria explicada no lugar do exercício | **pendente** |
 | Renovação 0.2 (2026-11-07) | Claude Code | a partir da revisão do professor (marcas e canais mais bem explicados; tarefas uma a uma com exemplos; Parte II prática e dinâmica): figuras da Parte I, navegação das tarefas, jogo, construtor de gráfico, testes de leitura, “qual é a tarefa?” | **pendente** |
 
