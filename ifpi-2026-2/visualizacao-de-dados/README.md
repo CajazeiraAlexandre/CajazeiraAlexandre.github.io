@@ -30,7 +30,8 @@ III (desafios) nesta primeira versão (pesquisador, 2026-11-07).
 - **Apoio** (`src/referencias.yaml`): objetivos, autoria, uso de IA, slides, referências, bases (onde e como baixar),
   CSVs, materiais anteriores, como citar.
 - **Slides** (`slides.html`, 2026-11-09): versão HTML revista dos slides da aula, conforme a revisão em
-  `projetos/dataviz-didatico/docs/2026-11-09_revisao-slides-visualizacao.md` — 42 slides em cinco partes, com passos
+  `projetos/dataviz-didatico/docs/2026-11-09_revisao-slides-visualizacao.md` — 47 slides em cinco partes (desde 2026-11-09 com a visualização em todo o fluxo, exploratória × explicativa,
+  anatomia de um gráfico completo, tipos de paleta e daltonismo), com passos
   dentro do slide, notas do apresentador (tecla N), figuras redesenhadas em português, um gráfico do DATADOC por slide e
   exemplos brasileiros com os dados do material. `#todos` mostra todos os slides para imprimir em PDF.
 - **Caderno** (`caderno.ipynb`): refaz cada gráfico com pandas e matplotlib a partir dos CSVs e confere os números com
