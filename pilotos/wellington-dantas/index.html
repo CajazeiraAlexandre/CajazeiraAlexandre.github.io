@@ -624,6 +624,14 @@ body{margin:0;background:var(--cor-fundo);color:var(--cor-texto);overflow:hidden
 .viz-folha .ver-como{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--cor-borda);border-radius:999px;overflow:hidden;align-self:flex-start;width:max-content;max-width:100%}
 .viz-folha .ver-como button{font:inherit;font-size:13px;border:0;background:var(--cor-superficie);color:var(--cor-texto-secundario);padding:6px 12px;cursor:pointer}
 .viz-folha .ver-como button[aria-pressed="true"]{background:var(--cor-texto);color:var(--cor-fundo)}
+.lista-bairros{display:flex;flex-direction:column;margin-top:6px}
+.item-bairro{display:grid;grid-template-columns:24px 14px 1fr auto;gap:8px;align-items:center;padding:8px 2px;border-bottom:1px solid var(--cor-grade);cursor:pointer;font-size:14px}
+.item-bairro input{width:20px;height:20px;margin:0}.item-bairro.cheio{opacity:.45}
+.amostra-b{width:12px;height:12px;border-radius:3px;border:1px solid var(--cor-borda)}
+.item-bairro .v{font-size:12px;color:var(--cor-texto-secundario);font-variant-numeric:tabular-nums}
+.acoes-bairros{display:flex;gap:8px;flex-wrap:wrap}.acoes-bairros button{font:inherit;font-size:13px;border:1px solid var(--cor-borda);background:var(--cor-superficie);color:var(--cor-texto);border-radius:999px;padding:5px 12px;cursor:pointer}
+.link-explorar{font:inherit;font-size:12px;border:0;background:none;color:var(--cor-texto);text-decoration:underline;text-underline-offset:2px;cursor:pointer;padding:0}
+.modo-imagem .link-explorar{display:none}
 /* dieta da moldura no celular (Q-098): a nota fica numa linha e abre no toque */
 @media (max-width:599px){.cartao-s .nota-s{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer}
   .cartao-s .nota-s::after{content:""}.cartao-s .nota-s.aberta{-webkit-line-clamp:unset;display:block}}
@@ -2961,11 +2969,29 @@ Lab.configurar({"autorUrl": "https://github.com/CajazeiraAlexandre"});
   const tok = Lab.token;
 
   // ---------------------------------------------------------------- estado no endereço
-  const est = { cartao: C[0].id, forma: "pontos", fundo: "ruas", modo: "" };
+  const est = { cartao: C[0].id, forma: "pontos", fundo: "ruas", bairros: "", modo: "" };
   try { const p = new URLSearchParams(location.hash.slice(1)); for (const k of Object.keys(est)) if (p.has(k)) est[k] = p.get(k); } catch (e) { /* padrão */ }
   let i = Math.max(0, C.findIndex((c) => c.id === est.cartao));
   if (!["pontos", "bairros"].includes(est.forma)) est.forma = "pontos";
-  const gravar = () => history.replaceState(null, "", `#${new URLSearchParams({ cartao: C[i].id, forma: est.forma, fundo: est.fundo, ...(est.modo ? { modo: est.modo } : {}) })}`);
+  const gravar = () => history.replaceState(null, "", `#${new URLSearchParams({ cartao: C[i].id, forma: est.forma, fundo: est.fundo, ...(est.bairros ? { bairros: est.bairros } : {}), ...(est.modo ? { modo: est.modo } : {}) })}`);
+  // cartão dos bairros (pesquisador, 2026-11-10): todos os bairros com voto, a zona rural e os povoados podem entrar no
+  // gráfico pelo Explorar; abre com os sete maiores de 2024. Até 8 linhas por vez (as 8 cores categóricas, sem repetir);
+  // cada bairro guarda a cor enquanto estiver marcado (a cor segue o bairro, não a posição)
+  const MAX_LINHAS = 8;
+  const OPCOES_BAIRRO = G.filter((g) => (g.tipo === "bairro" || g.tipo === "rural" || g.id === "urbana_sem_bairro") && Object.keys(g.anos).length)
+    .sort((a, b) => (b.anos["2024"]?.votos ?? -1) - (a.anos["2024"]?.votos ?? -1));
+  const porGrupo = Object.fromEntries(G.map((g) => [g.id, g]));
+  const nomeGrupo = (g) => (g.id === "urbana_sem_bairro" ? "Povoados urbanizados" : g.nome);
+  const bairrosMarcados = () => {
+    const ids = est.bairros ? est.bairros.split(",").filter((id) => porGrupo[id]) : base.bairros_top.map((b) => b.id);
+    return ids.slice(0, MAX_LINHAS);
+  };
+  const vagaCor = new Map();   // id → índice da cor (1..8), estável enquanto o bairro estiver marcado
+  const corBairro = (ids) => {
+    for (const id of [...vagaCor.keys()]) if (!ids.includes(id)) vagaCor.delete(id);
+    for (const id of ids) if (!vagaCor.has(id)) { const usadas = new Set(vagaCor.values()); vagaCor.set(id, [1, 2, 3, 4, 5, 6, 7, 8].find((k) => !usadas.has(k))); }
+    return (id) => tok(`cor-cat-${vagaCor.get(id)}`);
+  };
   // fundos do mapa (pesquisador, 2026-11-10: sem fundo o leitor não se localiza). Padrão: ruas e nomes da Esri (carregam
   // também com a página aberta do computador); nas opções: OpenStreetMap detalhado (só na página publicada), satélite, nenhum.
   const esri = (srv) => (z, x, y) => `https://server.arcgisonline.com/ArcGIS/rest/services/${srv}/MapServer/tile/${z}/${y}/${x}`;
@@ -3046,9 +3072,10 @@ Lab.configurar({"autorUrl": "https://github.com/CajazeiraAlexandre"});
     const fig = el("div", { class: "figura" });
     const titulo = el(c.tipo === "capa" ? "h1" : "h2", { text: c.titulo });
     const cartao = el("article", { class: `cartao-s ${c.tipo}`, "aria-roledescription": "cartão", "aria-label": `${i + 1} de ${C.length}: ${c.titulo}` },
-      el("div", { class: "texto-s" }, el("p", { class: "cap", text: c.capitulo }), titulo, c.texto ? el("p", { class: "sub", text: c.texto }) : ""),
+      el("div", { class: "texto-s" }, el("p", { class: "cap", text: c.capitulo }), titulo,
+        c.texto ? el("p", { class: "sub", text: c.palco.grafico === "bairros" && est.bairros ? "Os bairros escolhidos em ⇄ Explorar (até 8 por vez)" : c.texto }) : ""),
       fig, c.nota ? el("p", { class: "nota-s", text: c.nota, title: "Toque para ler a nota inteira", onclick: (ev) => ev.currentTarget.classList.toggle("aberta") }) : "");
-    bExplorar.hidden = !["mapa", "mapa_rural"].includes(c.palco.grafico);
+    bExplorar.hidden = !["mapa", "mapa_rural", "bairros"].includes(c.palco.grafico);
     if (est.modo === "imagem") cartao.append(el("p", { class: "fonte-imagem", text: `${base.meta.titulo} · ${i + 1}/${C.length} · Fonte: TSE e IBGE · Laboratório de Dados Públicos` }));
     palco.replaceChildren(cartao);
     requestAnimationFrame(() => palcoDe(c, fig));
@@ -3195,6 +3222,7 @@ Lab.configurar({"autorUrl": "https://github.com/CajazeiraAlexandre"});
   }
   function explorar() {
     const c = C[i];
+    if (c.palco.grafico === "bairros") return explorarBairros();
     const grupo = (rotulo, chave, opcoes) => el("div", { class: "campo" }, el("b", { text: rotulo }),
       el("div", { class: "ver-como", role: "group", "aria-label": rotulo }, ...opcoes.map(([v, r]) =>
         el("button", { type: "button", "aria-pressed": String(est[chave] === v), text: r, onclick: () => { est[chave] = v; gravar(); desenhar(); explorar(); } }))));
@@ -3204,11 +3232,37 @@ Lab.configurar({"autorUrl": "https://github.com/CajazeiraAlexandre"});
       est.fundo === "osm" && location.protocol === "file:" ? el("p", { class: "fraco", text: "O OpenStreetMap só carrega na página publicada; aberta do computador, use ruas ou satélite." }) : null,
       el("p", { class: "fraco", text: "As escolhas valem para os mapas seguintes." }));
   }
+  function explorarBairros() {
+    const ids = bairrosMarcados(), corDe = corBairro(ids);
+    const marcar = (id, sim) => {
+      let novo = ids.filter((x) => x !== id);
+      if (sim) novo = [...novo, id];
+      est.bairros = novo.join(",") || "nenhum"; gravar(); desenhar(); explorarBairros();
+    };
+    const cheio = ids.length >= MAX_LINHAS;
+    const lista = el("div", { class: "lista-bairros" }, ...OPCOES_BAIRRO.map((b) => {
+      const marcado = ids.includes(b.id);
+      const cx = el("input", { type: "checkbox", disabled: !marcado && cheio ? "" : null });
+      cx.checked = marcado;
+      cx.onchange = () => marcar(b.id, cx.checked);
+      const amostra = el("span", { class: "amostra-b" });
+      if (marcado) amostra.style.background = corDe(b.id);
+      return el("label", { class: `item-bairro${!marcado && cheio ? " cheio" : ""}` }, cx, amostra, el("span", { class: "nome-b", text: nomeGrupo(b) }),
+        el("span", { class: "v", text: `${b.anos["2024"] ? fmtInt.format(b.anos["2024"].votos) : "—"} em 2024` }));
+    }));
+    abrirFolha("Bairros no gráfico",
+      el("p", { class: "fraco", text: `Marque até ${MAX_LINHAS} para comparar as trajetórias (as cores não se repetem). Em ordem de votos em 2024.` }),
+      el("div", { class: "acoes-bairros" },
+        el("button", { type: "button", onclick: () => { est.bairros = ""; gravar(); desenhar(); explorarBairros(); } }, "Voltar aos sete maiores"),
+        el("button", { type: "button", onclick: () => { est.bairros = "nenhum"; gravar(); desenhar(); explorarBairros(); } }, "Desmarcar todos")),
+      cheio ? el("p", { class: "fraco", text: `Já há ${MAX_LINHAS} linhas: desmarque um bairro para incluir outro.` }) : null,
+      lista);
+  }
   const COMO_LER = {
     mapa: "Cada círculo é um local de votação (escola, posto, associação). A área mostra quantos votos ele teve ali; a cor, quanto ele pesou entre os votos válidos para vereador no local. Toque num círculo para ver os números das quatro eleições. Dois dedos aproximam e movem o mapa. Local de votação não é moradia: o eleitor vota onde foi alocado, em geral perto de casa.",
     mapa_rural: "Só os locais de votação fora dos bairros e das áreas urbanas do IBGE. A área do círculo mostra os votos dele em 2024; a cor, o % dos votos válidos para vereador no local. Toque num círculo para ver as quatro eleições.",
     linha: "A linha vermelha são os votos dele em cada eleição. A tracejada é a mediana dos votos dos outros eleitos de cada eleição: metade dos eleitos teve mais votos que ela, metade teve menos. Toque nos pontos para ver os números.",
-    bairros: "Uma linha por bairro (a zona rural, tracejada): os votos dele somados nos locais de votação dentro do bairro, em cada eleição. Toque numa linha ou na legenda para destacá-la.",
+    bairros: "Uma linha por bairro (a zona rural, tracejada): os votos dele somados nos locais de votação dentro do bairro, em cada eleição. Toque numa linha ou na legenda para destacá-la. Em ⇄ Explorar dá para trocar os bairros do gráfico (até 8 por vez); a tabela abaixo traz todos.",
     saldo: "Votos dele em 2024 menos votos em 2020, somando os locais de votação de cada bairro. Vermelho, ganhou; azul, perdeu. Só entram saldos de 10 votos ou mais.",
     concentracao: "Cada barra são 100 votos dele numa eleição: a parte vermelha veio dos 5 locais em que ele foi mais votado; a clara, de todos os outros locais com voto. Quanto maior a parte vermelha, mais concentrado o voto.",
   };
@@ -3226,7 +3280,7 @@ Lab.configurar({"autorUrl": "https://github.com/CajazeiraAlexandre"});
       return { cab: ["Local de votação", "Área", `Votos ${ano}`, `% dos válidos ${ano}`], linhas: ls.map((lg) => [lg.nome, lg.area === "bairro" ? lg.bairro_nome : lg.area === "rural" ? "Zona rural" : "Fora dos bairros", lg.anos[ano].votos, lg.anos[ano].pct]) };
     }
     if (g === "linha") return { cab: ["Eleição", `Votos de ${NOME}`, "% dos válidos", "Mediana dos outros eleitos"], linhas: base.trajetoria.map((t) => [String(t.ano), t.votos, t.pct, Math.round(base.mediana[String(t.ano)])]) };
-    if (g === "bairros") return { cab: ["Bairro", ...ANOS], linhas: base.bairros_top.map((b) => [b.nome, ...ANOS.map((a) => b.anos[a]?.votos ?? null)]) };
+    if (g === "bairros") return { cab: ["Bairro", ...ANOS], linhas: OPCOES_BAIRRO.map((b) => [nomeGrupo(b), ...ANOS.map((a) => b.anos[a]?.votos ?? null)]) };   // todos, não só os marcados
     if (g === "saldo") return { cab: ["Bairro", "Votos 2020", "Votos 2024", "Saldo"], linhas: base.saldo.map((x) => [x.nome, x.antes, x.depois, x.dv]) };
     if (g === "concentracao") return { cab: ["Eleição", "% dos votos nos 5 locais mais fortes", "Locais com voto"], linhas: base.concentracao.map((x) => [x.ano, x.top5, x.locais_com_voto]) };
     return null;
@@ -3280,10 +3334,17 @@ Lab.configurar({"autorUrl": "https://github.com/CajazeiraAlexandre"});
           dicas: ANOS.map((a) => [`${a}`, [`Mediana: ${fmtInt.format(Math.round(base.mediana[a]))} votos`, `entre os ${base.n_mediana[a]} outros eleitos`]]) }] });
   }
   function bairros(fig) {
-    const cats = [1, 2, 3, 4, 5, 6, 7].map((k) => tok(`cor-cat-${k}`));
-    Lab.linhasPontas(fig, { pontas: ANOS, largura: largura(fig), legenda: true, fmt: (v) => fmtInt.format(Math.round(v)), aria: "Votos por bairro nas quatro eleições",
-      series: base.bairros_top.map((b, k) => ({ cor: cats[k], rotulo: b.nome, tracejado: b.tipo === "rural", valores: ANOS.map((a) => b.anos[a]?.votos ?? null),
-        dicas: ANOS.map((a) => [`${b.nome} · ${a}`, b.anos[a] ? [`${fmtInt.format(b.anos[a].votos)} votos · ${fmtPct(b.anos[a].peso)} do total dele`] : ["sem local"]]) })) });
+    const ids = bairrosMarcados(), corDe = corBairro(ids);
+    if (!ids.length) {
+      fig.append(el("p", { class: "legenda-s", text: "Nenhum bairro marcado. Use ⇄ Explorar para escolher os bairros." }));
+      return;
+    }
+    Lab.linhasPontas(fig, { pontas: ANOS, largura: largura(fig), legenda: true, fmt: (v) => fmtInt.format(Math.round(v)), aria: `Votos por bairro nas quatro eleições: ${ids.map((id) => nomeGrupo(porGrupo[id])).join(", ")}`,
+      series: ids.map((id) => { const b = porGrupo[id]; return { cor: corDe(id), rotulo: nomeGrupo(b), tracejado: b.tipo === "rural", valores: ANOS.map((a) => b.anos[a]?.votos ?? null),
+        dicas: ANOS.map((a) => [`${nomeGrupo(b)} · ${a}`, b.anos[a] ? [`${fmtInt.format(b.anos[a].votos)} votos · ${fmtPct(b.anos[a].peso)} do total dele`] : ["sem local de votação nesta eleição"]]) }; }) });
+    const padrao = !est.bairros;
+    fig.append(el("p", { class: "legenda-s" }, padrao ? "Os sete com mais votos em 2024. " : `${ids.length} ${ids.length === 1 ? "bairro escolhido" : "bairros escolhidos"}. `,
+      el("button", { type: "button", class: "link-explorar", onclick: () => explorar() }, "⇄ Ver outros bairros")));
   }
   function concentracao(fig) {
     // uma barra de 100 votos por eleição: os 5 locais mais fortes × os demais locais com voto (sem cinza: dois tons do vermelho)
