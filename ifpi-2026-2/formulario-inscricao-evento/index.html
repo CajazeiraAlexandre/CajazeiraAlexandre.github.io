@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Formulário de Inscrição do Evento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: credencial de evento. Faixa de navegação fixa, conteúdo em coluna de leitura, briefings como ingressos destacáveis, modo slides 16:9 */
+:root{
+  --bg:#F3F6F3; --surface:#FFFFFF; --ink:#14211A; --muted:#55635A; --line:#D6DED8;
+  --accent:#1E7A30; --accent-ink:#FFFFFF; --accent-soft:#E2F2E5;
+  --teal:#0F5E28; --teal-soft:#E2F2E5; --amber:#B3151A; --amber-soft:#FBE7E7;
+  --bar:#17632A; --bar-ink:#FFFFFF; --bar-accent:#A8E6B2; --if-green:#2F9E41; --if-red:#CD191E;
+  --qr-bg:#FFFFFF; --qr-fg:#000000;
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1510; --surface:#15211A; --ink:#E6EEE8; --muted:#9AAA9F; --line:#26372C;
+  --accent:#4CC25E; --accent-ink:#05200B; --accent-soft:#16381F;
+  --teal:#74D584; --teal-soft:#16381F; --amber:#FF7376; --amber-soft:#3B1719;
+  --bar:#0F2A17; --bar-ink:#F1F7F2; --bar-accent:#7FD98E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1510; --surface:#15211A; --ink:#E6EEE8; --muted:#9AAA9F; --line:#26372C;
+  --accent:#4CC25E; --accent-ink:#05200B; --accent-soft:#16381F;
+  --teal:#74D584; --teal-soft:#16381F; --amber:#FF7376; --amber-soft:#3B1719;
+  --bar:#0F2A17; --bar-ink:#F1F7F2; --bar-accent:#7FD98E; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bar)}
+a{color:var(--teal)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* barra superior */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bar);color:var(--bar-ink);border-bottom:4px solid var(--if-red)}
+.top .wrap{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;padding-block:10px}
+.brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.brand b{font-family:var(--f-display);font-size:1.15rem;letter-spacing:.01em}
+.brand span{font-size:.8rem;opacity:.75}
+nav.views{display:flex;gap:6px;flex-wrap:wrap}
+nav.views button{color:inherit;background:transparent;font-size:.9rem;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid color-mix(in srgb,var(--bar-ink) 35%,transparent)}
+nav.views button[aria-pressed="true"]{background:var(--bar-ink);border-color:var(--bar-ink);color:var(--bar)}
+
+/* cabeçalho da página */
+.hero{padding-block:36px 8px}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.hero h1{font-size:clamp(2.1rem,5vw,3.4rem);font-weight:800;margin:6px 0 10px}
+.hero p.lead{font-size:1.15rem;max-width:62ch;color:var(--muted);margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{font-size:.82rem;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+
+section.block{padding-block:28px;border-top:1px solid var(--line)}
+section.block:first-of-type{border-top:0}
+section.block > h2{font-size:1.6rem;margin-bottom:6px}
+section.block > p.sub{color:var(--muted);margin:0 0 16px;max-width:65ch}
+.prose{max-width:68ch}
+.prose p{margin:.4em 0}
+
+/* objetivos e entrega */
+.cols2{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.goal{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--if-green);border-radius:var(--r);padding:16px 18px;min-width:0}
+.goal.deliver{border-top-color:var(--if-red)}
+.goal h2{font-size:1.4rem}
+.goal ol,.goal ul{margin:0;padding-left:20px;display:grid;gap:6px}
+details.alt{margin-top:16px;max-width:760px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+details.alt summary{cursor:pointer;font-weight:600}
+#stage{cursor:pointer}
+#stage:focus{outline:none}
+#stage input,#stage button,#stage label,#stage a{cursor:auto}
+#stage button{cursor:pointer}
+.clickhint{font-size:.85rem;color:var(--muted)}
+
+.bigqr{background:var(--qr-bg);border:1px solid var(--line);border-radius:1.2cqw;padding:1.6cqw;width:30cqw;aspect-ratio:1;display:grid;place-items:center}
+.bigqr img,.bigqr canvas{width:100%!important;height:auto!important;display:block}
+.bigqr .ph{color:#55635A;font-size:1.4cqw;text-align:center}
+.ticket{scroll-margin-top:80px}
+.slide .results{padding-left:0}
+/* etapas */
+.steps{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin-top:8px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;min-width:0}
+.step .t{font-family:var(--f-mono);font-size:.8rem;color:var(--accent)}
+.step h3{font-size:1.05rem;margin:4px 0 4px}
+.step p{margin:0;font-size:.92rem;color:var(--muted)}
+
+/* ingresso */
+.tickets{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.ticket{position:relative;display:grid;grid-template-columns:74px 1fr;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);min-width:0}
+.ticket .stub{border-right:2px dashed var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:10px 4px;background:var(--accent-soft);border-radius:var(--r) 0 0 var(--r)}
+.ticket .stub small{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.ticket .stub b{font-family:var(--f-mono);font-size:1.6rem;color:var(--accent)}
+.ticket::before,.ticket::after{content:"";position:absolute;left:66px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:1px solid var(--line)}
+.ticket::before{top:-8px;clip-path:inset(50% 0 0 0)}
+.ticket::after{bottom:-8px;clip-path:inset(0 0 50% 0)}
+.ticket .body{padding:14px 16px;min-width:0}
+.ticket h3{font-size:1.15rem}
+.ticket .kind{font-size:.8rem;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.06em}
+.ticket dl{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;margin:8px 0;font-size:.88rem}
+.ticket dt{color:var(--muted)}
+.ticket dd{margin:0}
+.ticket .ask{font-size:.88rem;margin:6px 0 0;padding-left:18px}
+.ticket .extra{margin-top:8px;font-size:.86rem;background:var(--amber-soft);color:var(--ink);border-radius:6px;padding:6px 10px}
+.ticket .extra b{color:var(--amber)}
+.ticket .badge{position:absolute;top:10px;right:10px;font-size:.75rem;font-weight:700;background:var(--teal);color:var(--surface);padding:2px 8px;border-radius:999px}
+.ticket.taken{border-color:var(--teal)}
+
+/* sorteio */
+.drawbox{display:grid;gap:16px;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);align-items:start}
+@media (max-width:760px){.drawbox{grid-template-columns:1fr}}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+button,.btn{font:inherit;font-weight:600;font-size:.92rem;cursor:pointer;border-radius:8px;padding:9px 14px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button:disabled{opacity:.5;cursor:not-allowed}
+label.inline{display:flex;align-items:center;gap:8px;font-size:.92rem}
+input[type=number],input[type=url],input[type=text]{font:inherit;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+input[type=number]{width:72px}
+.results{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.results li{display:flex;gap:10px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:.92rem}
+.results li .mono{color:var(--accent);min-width:5.5em}
+.empty{color:var(--muted);font-size:.92rem}
+
+/* checklist */
+.checks{list-style:none;padding:0;margin:0;display:grid;gap:8px;max-width:72ch}
+.checks li{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.checks input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);flex:none}
+.checks label{cursor:pointer}
+.checks .bonus{font-size:.75rem;font-weight:700;color:var(--amber);margin-left:6px}
+.progress{font-family:var(--f-mono);font-size:.85rem;color:var(--muted);margin-top:8px}
+
+/* passos do Forms */
+ol.howto{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:10px;max-width:76ch}
+ol.howto > li{counter-increment:s;display:grid;grid-template-columns:38px 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+ol.howto > li::before{content:counter(s);font-family:var(--f-mono);font-weight:500;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--teal-soft);color:var(--teal)}
+ol.howto h3{font-family:var(--f-body);font-size:1rem;font-weight:600}
+ol.howto p{margin:2px 0 0;font-size:.93rem}
+.path{font-family:var(--f-mono);font-size:.84rem;background:var(--teal-soft);color:var(--ink);padding:1px 6px;border-radius:4px;white-space:normal}
+.note{border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:0;padding:10px 14px;background:var(--surface);max-width:76ch;font-size:.93rem;margin-top:12px}
+
+/* tabela */
+.tablewrap{overflow-x:auto;max-width:100%}
+table{border-collapse:collapse;width:100%;font-size:.92rem;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+td.num{font-family:var(--f-mono);text-align:right;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+
+/* QR */
+.qr{display:grid;gap:14px;grid-template-columns:minmax(0,1fr) auto;align-items:start;max-width:760px}
+@media (max-width:620px){.qr{grid-template-columns:1fr}}
+.qr input{width:100%}
+.qrout{background:var(--qr-bg);padding:12px;border-radius:8px;border:1px solid var(--line);width:204px;min-height:204px;display:grid;place-items:center}
+.qrout img,.qrout canvas{display:block}
+.qrout .ph{color:#596277;font-size:.8rem;text-align:center;padding:8px}
+.qrerr{color:var(--accent);font-size:.88rem;min-height:1.2em;margin:6px 0 0}
+
+/* rodízio */
+.ring{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:var(--f-mono);font-size:.9rem;margin-top:8px}
+.ring span{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:4px 8px}
+
+/* professor */
+.timeline{list-style:none;padding:0;margin:0;display:grid;gap:0;max-width:820px;border-left:2px solid var(--line)}
+.timeline li{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:10px 0 10px 16px;position:relative}
+.timeline li::before{content:"";position:absolute;left:-7px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.timeline .when{font-family:var(--f-mono);font-size:.85rem;color:var(--accent)}
+.timeline h3{font-family:var(--f-body);font-size:1rem;font-weight:600}
+.timeline p{margin:2px 0 0;font-size:.93rem;color:var(--muted)}
+.cols{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;min-width:0}
+.panel h3{font-size:1.05rem;margin-bottom:6px}
+.panel ul{margin:0;padding-left:18px;font-size:.93rem}
+.panel li{margin:3px 0}
+.problem{display:grid;gap:2px;margin:0 0 10px}
+.problem b{font-size:.93rem}
+.problem span{font-size:.9rem;color:var(--muted)}
+.copybox{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:.93rem;max-width:76ch;user-select:text}
+.copyrow{display:flex;gap:10px;align-items:center;margin-top:8px;flex-wrap:wrap}
+.ok{color:var(--teal);font-size:.88rem}
+
+
+
+/* slides */
+.deckbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding-block:14px}
+.deckbar .grp{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.timer{font-family:var(--f-mono);font-size:1.1rem;padding:6px 12px;border-radius:8px;background:var(--surface);border:1px solid var(--line);min-width:5.2em;text-align:center}
+.timer.done{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.deck{background:var(--bg)}
+.stage{position:relative;width:100%;max-width:100%;aspect-ratio:16/9;container-type:inline-size;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.slide{position:absolute;inset:0;padding:5cqw 6cqw;font-size:2.15cqw;line-height:1.45;display:flex;flex-direction:column;gap:2cqw}
+.slide h2{font-size:4.6cqw;font-weight:800}
+.slide .k{font-family:var(--f-mono);font-size:1.5cqw;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.slide ul,.slide ol{margin:0;padding-left:1.2em;display:grid;gap:.8cqw}
+.slide .big{font-family:var(--f-display);font-size:7cqw;font-weight:800;line-height:1.02}
+.slide .two{display:grid;grid-template-columns:1fr 1fr;gap:3cqw;min-height:0}
+.slide .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6cqw}
+.slide .tile{border:1px solid var(--line);border-radius:1cqw;padding:1.6cqw;background:var(--bg)}
+.slide .tile b{display:block;font-family:var(--f-mono);font-size:1.4cqw;color:var(--accent)}
+.slide .tile h3{font-size:2.3cqw;margin:.4cqw 0}
+.slide .tile p{margin:0;font-size:1.7cqw;color:var(--muted)}
+.slide table{font-size:1.75cqw}
+.slide th,.slide td{padding:.7cqw 1.2cqw}
+.slide .foot{margin-top:auto;font-size:1.4cqw;color:var(--muted);display:flex;justify-content:space-between}
+.slide.cover{background:var(--bar);color:var(--bar-ink);border-bottom:1.2cqw solid var(--if-red)}
+.slide.cover .k{color:var(--bar-accent)}
+.slide.cover .foot{color:color-mix(in srgb,var(--bar-ink) 75%,transparent)}
+.slide.cover .tile b{color:var(--bar-accent)}
+.slide .ticket{font-size:1.7cqw}
+.slide .ticket .stub b{font-size:3cqw}
+.slide .ticket h3{font-size:2.6cqw}
+.slide .qrout{width:22cqw;min-height:22cqw}
+.slide .results li{font-size:1.6cqw;padding:.6cqw 1cqw}
+.slide .ring{font-size:1.7cqw}
+.slidenum{font-family:var(--f-mono);font-size:.9rem;color:var(--muted)}
+.deck:fullscreen{display:grid;place-items:center;background:var(--bar)}
+.deck:fullscreen .stage{width:min(100vw,177.78vh);height:auto;border-radius:0;border:0}
+.deck:fullscreen .deckbar{display:none}
+@media (max-width:640px){
+  .stage{aspect-ratio:auto;container-type:normal;min-height:70vh}
+  .slide{position:static;padding:20px;font-size:16px;gap:12px}
+  .slide h2{font-size:1.6rem}.slide .k{font-size:.75rem}.slide .big{font-size:2.2rem}
+  .slide .two,.slide .grid4{grid-template-columns:1fr}
+  .slide .tile b{font-size:.75rem}.slide .tile h3{font-size:1rem}.slide .tile p{font-size:.88rem}
+  .slide table,.slide .results li,.slide .ring,.slide .ticket{font-size:.85rem}
+  .slide .ticket h3{font-size:1.05rem}.slide .ticket .stub b{font-size:1.4rem}
+  .slide .tile{border-radius:8px;padding:10px}.slide .qrout{width:204px;min-height:204px}
+  .slide .foot{font-size:.75rem}
+  .slide [style*="cqw"]{font-size:inherit!important}
+  .bigqr{width:min(80vw,320px);padding:12px;border-radius:10px}
+  .bigqr .ph{font-size:.85rem}
+}
+.pop{animation:pop .45s ease-out}
+@keyframes pop{from{transform:scale(.96)}to{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.pop{animation:none}}
+footer{padding-block:28px 40px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);margin-top:20px}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><b>Formulário de Inscrição do Evento</b><span>Introdução à Informática · Técnico em Eventos · 11/11/2026</span></div>
+    <nav class="views" aria-label="Visões da página">
+      <button type="button" data-view="roteiro">Roteiro da aula</button>
+      <button type="button" data-view="slides">Slides</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ===================== ROTEIRO (alunos) ===================== -->
+<main id="view-roteiro" class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Atividade prática em equipe · 2 aulas</div>
+    <h1>Construindo o formulário de inscrição de um evento</h1>
+    <p class="lead">Cada equipe sorteia um evento e recebe o pedido do cliente, o <b>briefing</b>. A missão é criar o formulário de inscrição desse evento no Google Forms, com as respostas indo para uma planilha e um QR code pronto para divulgar.</p>
+    <div class="meta">
+      <span class="chip">Equipes de 4 ou 5</span><span class="chip">Google Forms + Planilhas Google</span><span class="chip">Celular ou computador com internet</span><span class="chip">Entrega no fim da aula</span>
+    </div>
+  </div>
+
+  <section class="block" id="objetivos">
+    <div class="cols2">
+      <div class="goal">
+        <h2>Objetivos da aula</h2>
+        <p class="sub" style="margin:4px 0 10px">Ao final da aula, a equipe deve conseguir:</p>
+        <ol>
+          <li>Criar um formulário de inscrição no Google Forms a partir do pedido de um cliente, o briefing.</li>
+          <li>Escolher o tipo certo de pergunta para cada informação e configurar perguntas obrigatórias e validação.</li>
+          <li>Reunir as inscrições numa planilha.</li>
+          <li>Divulgar o formulário com link curto e QR code.</li>
+          <li>Decidir quais dados pessoais pedir, com base na LGPD.</li>
+        </ol>
+      </div>
+      <div class="goal deliver">
+        <h2>O que a equipe entrega hoje</h2>
+        <p class="sub" style="margin:4px 0 10px">Até o fim da aula:</p>
+        <ul>
+          <li><b>Formulário publicado</b>, com todos os itens do checklist.</li>
+          <li><b>Planilha ligada</b> ao formulário, com pelo menos 3 respostas do teste cruzado.</li>
+          <li><b>Link curto e QR code</b> do formulário, com a imagem do QR salva.</li>
+          <li><b>Professor como colaborador</b> do formulário.</li>
+          <li><b>Apresentação de 1 minuto</b> na mostra relâmpago.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Por que um formulário de inscrição?</h2>
+    <div class="prose">
+      <p>Na aula de 28/10 vocês pesquisaram plataformas de gestão de eventos. Quase todas começam pelo mesmo ponto: <b>a inscrição</b>. É ali que a organização descobre quantas pessoas vêm, quem são, do que precisam e como falar com elas.</p>
+      <p>Plataformas pagas fazem isso com muitos recursos. Hoje vocês vão montar a versão gratuita, com ferramentas que qualquer pequeno evento consegue usar.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Como a aula vai funcionar</h2>
+    <p class="sub">Quatro etapas e uma mostra rápida no final. O professor marca o tempo de cada etapa.</p>
+    <div class="steps">
+      <div class="step"><div class="t">10 min</div><h3>0. Sorteio</h3><p>Formem as equipes. Cada equipe sorteia um briefing.</p></div>
+      <div class="step"><div class="t">10 min</div><h3>1. Planejar no papel</h3><p>Listem as perguntas, o tipo de cada uma e quais serão obrigatórias.</p></div>
+      <div class="step"><div class="t">35 min</div><h3>2. Construir no Forms</h3><p>Montem o formulário com a identidade visual do evento.</p></div>
+      <div class="step"><div class="t">10 min</div><h3>3. Planilha, link e QR</h3><p>Liguem as respostas a uma planilha, encurtem o link e gerem o QR code.</p></div>
+      <div class="step"><div class="t">15 min</div><h3>4. Teste cruzado</h3><p>Uma equipe responde o formulário da outra. Depois, corrijam o que deu errado.</p></div>
+      <div class="step"><div class="t">12 min</div><h3>Mostra relâmpago</h3><p>1 minuto por equipe para mostrar o resultado.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="sorteio">
+    <h2>O sorteio</h2>
+    <p class="sub">O professor faz o sorteio pela tela. Cada evento sai uma única vez.</p>
+    <div class="drawbox" data-draw-root>
+      <div>
+        <div class="controls">
+          <label class="inline" for="teams-r">Equipes <input id="teams-r" class="js-teams" type="number" min="2" max="10" value="8"></label>
+          <button class="primary js-draw" type="button">Sortear briefing</button>
+          <button class="js-reset" type="button">Recomeçar</button>
+        </div>
+        <div class="js-current"><p class="empty">Nenhum briefing sorteado ainda.</p></div>
+      </div>
+      <div>
+        <h3 style="font-size:1.05rem;margin-bottom:8px">Resultado</h3>
+        <ul class="results js-results"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="briefings">
+    <h2>Os 10 briefings</h2>
+    <p class="sub">Leiam o seu com atenção: tudo o que o cliente pede precisa aparecer no formulário. O desafio extra vale bônus.</p>
+    <div class="tickets js-all-tickets"></div>
+  </section>
+
+  <section class="block">
+    <h2>Etapa 1: planejar no papel</h2>
+    <p class="sub">Antes de abrir o Forms, façam uma tabela simples com três colunas. Isso evita refazer tudo depois.</p>
+    <div class="tablewrap" style="max-width:760px">
+      <table>
+        <thead><tr><th>Pergunta</th><th>Tipo de pergunta</th><th>Obrigatória?</th></tr></thead>
+        <tbody>
+          <tr><td>Nome completo</td><td>Resposta curta</td><td>Sim</td></tr>
+          <tr><td>E-mail</td><td>Resposta curta, com validação de e-mail</td><td>Sim</td></tr>
+          <tr><td>Tamanho da camiseta</td><td>Múltipla escolha (P, M, G, GG)</td><td>Sim</td></tr>
+          <tr><td>Observações</td><td>Parágrafo</td><td>Não</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 style="font-size:1.15rem;margin:22px 0 8px">Qual tipo de pergunta usar?</h3>
+    <div class="tablewrap" style="max-width:760px">
+      <table>
+        <thead><tr><th>Tipo</th><th>Use quando</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr><td>Resposta curta</td><td>A resposta é uma palavra ou uma linha</td><td>Nome, e-mail, WhatsApp</td></tr>
+          <tr><td>Parágrafo</td><td>A pessoa precisa escrever mais</td><td>Observações, sugestões</td></tr>
+          <tr><td>Múltipla escolha</td><td>Só uma opção pode ser marcada</td><td>Corrida ou caminhada</td></tr>
+          <tr><td>Caixas de seleção</td><td>Pode marcar mais de uma opção</td><td>Dias de participação, equipamentos</td></tr>
+          <tr><td>Lista suspensa</td><td>Há muitas opções e só uma vale</td><td>Ponto de embarque, cidade</td></tr>
+          <tr><td>Escala linear</td><td>Uma nota de 1 a 5</td><td>Nível de experiência</td></tr>
+          <tr><td>Data / Horário</td><td>A resposta é uma data ou uma hora</td><td>Data de nascimento</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Dica:</b> sempre que der, troque o texto livre por opções. "Cidade" escrita à mão vira "SRN", "S. Raimundo" e "são raimundo nonato" na planilha. Uma lista resolve isso.</p>
+  </section>
+
+  <section class="block" id="checklist">
+    <h2>O formulário precisa ter</h2>
+    <p class="sub">Marquem cada item quando terminarem. A marcação fica salva só neste aparelho.</p>
+    <ul class="checks js-checks"></ul>
+    <div class="progress js-progress"></div>
+  </section>
+
+  <section class="block" id="forms">
+    <h2>Etapa 2: construir no Google Forms</h2>
+    <p class="sub">A tela pode mudar um pouco de um aparelho para outro, mas os caminhos são estes.</p>
+    <ol class="howto">
+      <li><div><h3>Criar o formulário</h3><p>Entrem em <span class="path">forms.google.com</span> com uma conta Google e cliquem em <span class="path">+ Em branco</span>. Pelo Drive também dá: <span class="path">Novo › Mais › Formulários Google</span>.</p></div></li>
+      <li><div><h3>Título e descrição</h3><p>Cliquem em "Formulário sem título". Escrevam o nome do evento e, na descrição, a data, o horário, o local e para que os dados serão usados.</p></div></li>
+      <li><div><h3>Adicionar perguntas</h3><p>Usem o botão <span class="path">+</span> (Adicionar pergunta). O tipo é escolhido no menu ao lado da pergunta. Liguem a chave <span class="path">Obrigatória</span> quando fizer sentido.</p></div></li>
+      <li><div><h3>Validar e-mail e números</h3><p>Na pergunta de resposta curta, abram os três pontos <span class="path">⋮ › Validação de resposta</span>. Para e-mail: <span class="path">Texto › Endereço de e-mail</span>. Para quantidade: <span class="path">Número › Entre</span> e digitem o mínimo e o máximo.</p></div></li>
+      <li><div><h3>Seções e desvios (desafio extra)</h3><p>Criem uma nova parte com <span class="path">Adicionar seção</span>. Numa pergunta de múltipla escolha, abram <span class="path">⋮ › Ir para a seção com base na resposta</span> e escolham para onde cada resposta leva.</p></div></li>
+      <li><div><h3>Identidade visual</h3><p>Cliquem no ícone de paleta, <span class="path">Personalizar tema</span>. Escolham uma imagem de cabeçalho, a cor do evento e o estilo do texto.</p></div></li>
+      <li><div><h3>Mensagem de confirmação</h3><p>Na aba <span class="path">Configurações › Apresentação › Mensagem de confirmação</span>, escrevam o que a pessoa lê depois de enviar. Exemplo: "Inscrição recebida! Chegue 30 minutos antes com um documento."</p></div></li>
+      <li><div><h3>Deixar qualquer pessoa responder</h3><p>Se estiverem usando conta institucional, vejam em <span class="path">Configurações › Respostas</span> se há uma opção que restringe as respostas a usuários da instituição. Desmarquem, senão o público do evento não consegue se inscrever.</p></div></li>
+    </ol>
+    <p class="note"><b>No celular:</b> o Google Forms abre pelo navegador. Se a tela ficar apertada, usem a opção "Versão para computador" do navegador ou montem no aparelho de quem tiver a tela maior.</p>
+  </section>
+
+  <section class="block" id="planilha">
+    <h2>Etapa 3: planilha, link curto e QR code</h2>
+    <ol class="howto">
+      <li><div><h3>Ligar à planilha</h3><p>Na aba <span class="path">Respostas</span>, cliquem em <span class="path">Vincular ao Planilhas</span> (ícone verde) e depois em <span class="path">Criar uma nova planilha</span>. Cada inscrição vira uma linha.</p></div></li>
+      <li><div><h3>Publicar e copiar o link</h3><p>Se aparecer o botão <span class="path">Publicar</span>, cliquem nele antes: sem isso ninguém consegue responder. Depois: <span class="path">Enviar › ícone de link › Encurtar URL › Copiar</span>.</p></div></li>
+      <li><div><h3>Gerar o QR code pelo Chrome</h3><p>Abram o link curto do formulário numa aba do navegador Chrome.</p>
+        <p><b>No computador:</b> <span class="path">⋮ › Transmitir, salvar e compartilhar › Criar código QR › Baixar</span>. Em algumas versões, o mesmo botão aparece como ícone de compartilhar na barra de endereço.</p>
+        <p><b>No celular (Chrome no Android ou no iPhone):</b> <span class="path">⋮ ou Compartilhar › Código QR › Baixar</span>.</p>
+        <p>O caminho muda um pouco conforme a versão do navegador. Se não acharem, peçam ajuda ao professor.</p></div></li>
+      <li><div><h3>Testar o QR code</h3><p>Apontem a câmera de outro celular para o QR. Ele precisa abrir o formulário.</p></div></li>
+      <li><div><h3>Dar acesso ao professor</h3><p>No formulário: <span class="path">⋮ › Adicionar colaboradores</span>, com o e-mail que o professor passar no quadro.</p></div></li>
+    </ol>
+    <details class="alt">
+      <summary>Alternativa: gerar o QR code nesta página</summary>
+      <p style="font-size:.92rem;margin:8px 0 10px">Use só se o Chrome não estiver disponível. Cole o link do formulário e tire um print do código.</p>
+      <div class="qr js-qr" data-qr>
+        <div>
+          <label for="qr-in-r" style="font-weight:600;font-size:.95rem">Link do formulário</label>
+          <input id="qr-in-r" class="js-qr-in" type="url" placeholder="https://forms.gle/..." inputmode="url" autocomplete="off">
+          <p class="qrerr js-qr-err" aria-live="polite"></p>
+        </div>
+        <div class="qrout js-qr-out"><span class="ph">O QR code aparece aqui.</span></div>
+      </div>
+    </details>
+  </section>
+
+  <section class="block" id="teste">
+    <h2>Etapa 4: teste cruzado</h2>
+    <div class="prose">
+      <p>Cada equipe responde o formulário da equipe seguinte. Cada integrante envia uma inscrição, como se fosse o público do evento.</p>
+      <div class="ring js-ring"></div>
+      <p style="margin-top:12px">Depois, voltem ao próprio formulário e abram a planilha:</p>
+      <ul>
+        <li>As respostas chegaram nas linhas certas?</li>
+        <li>Alguma pergunta confundiu quem respondeu?</li>
+        <li>Alguma resposta veio "bagunçada" e podia virar uma lista de opções?</li>
+      </ul>
+      <p>Escolham <b>uma melhoria</b> e façam antes da mostra.</p>
+    </div>
+  </section>
+
+  <section class="block" id="privacidade">
+    <h2>Dados pessoais: peçam só o necessário</h2>
+    <div class="prose">
+      <p>Todo formulário de inscrição coleta dados pessoais, e a Lei Geral de Proteção de Dados (LGPD, Lei 13.709/2018) pede cuidado com isso.</p>
+      <ul>
+        <li>Perguntem só o que a organização vai usar de verdade.</li>
+        <li>Não peçam CPF, RG ou endereço completo se o evento não precisa.</li>
+        <li>Digam na descrição para que os dados servem.</li>
+        <li>Para menores de idade, peçam o contato de um responsável.</li>
+      </ul>
+      <p class="note">Pergunta para a equipe: <b>se esta planilha vazasse, alguém sairia prejudicado?</b> Se a resposta for sim, revejam as perguntas.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mostra">
+    <h2>Mostra relâmpago</h2>
+    <div class="prose">
+      <p>1 minuto por equipe. Mostrem o QR code ou a tela do formulário e respondam:</p>
+      <ol>
+        <li>Qual é o evento e quem é o público?</li>
+        <li>Qual pergunta foi a mais importante, e por quê?</li>
+        <li>Que decisão vocês tomaram sobre dados pessoais?</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="avaliacao">
+    <h2>Como será avaliado</h2>
+    <p class="sub">Esta atividade vale para a nota do 4º bimestre.</p>
+    <div class="tablewrap" style="max-width:760px">
+      <table>
+        <thead><tr><th>Critério</th><th style="text-align:right">Pontos</th></tr></thead>
+        <tbody>
+          <tr><td>Atende ao briefing: todas as informações que o cliente pediu</td><td class="num">3,0</td></tr>
+          <tr><td>Perguntas bem configuradas: tipos variados, obrigatórias e validação</td><td class="num">2,0</td></tr>
+          <tr><td>Identidade visual e mensagem de confirmação</td><td class="num">1,5</td></tr>
+          <tr><td>Planilha ligada, com as respostas do teste cruzado</td><td class="num">1,5</td></tr>
+          <tr><td>Link curto e QR code funcionando</td><td class="num">1,0</td></tr>
+          <tr><td>Mostra relâmpago: clareza e participação da equipe</td><td class="num">1,0</td></tr>
+          <tr><td><b>Total</b></td><td class="num"><b>10,0</b></td></tr>
+          <tr><td>Bônus: desafio extra do briefing (nota máxima 10)</td><td class="num">+0,5</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Entrega:</b> até o fim da aula, o professor precisa estar como colaborador do formulário e o QR code precisa ser mostrado na mostra. <b>Não apaguem o formulário depois da aula.</b></p>
+  </section>
+
+</main>
+
+<!-- ===================== SLIDES ===================== -->
+<main id="view-slides" class="wrap" hidden>
+  <div class="deck" id="deck">
+    <div class="deckbar">
+      <div class="grp">
+        <button type="button" id="prev" aria-label="Slide anterior">←</button>
+        <span class="slidenum" id="slidenum">1 / 1</span>
+        <button type="button" id="next" aria-label="Próximo slide">→</button>
+        <button type="button" id="fs">Tela cheia</button>
+      </div>
+      <div class="grp" aria-label="Cronômetro">
+        <button type="button" data-min="5">5 min</button>
+        <button type="button" data-min="10">10</button>
+        <button type="button" data-min="15">15</button>
+        <button type="button" data-min="35">35</button>
+        <span class="timer" id="timer" aria-live="off">00:00</span>
+        <button type="button" id="tplay">Iniciar</button>
+      </div>
+    </div>
+    <div class="stage" id="stage" tabindex="0" aria-label="Slides: clique para avançar">
+
+      <section class="slide cover">
+        <div class="k">Introdução à Informática · Técnico em Eventos · 11/11/2026</div>
+        <div class="big" style="margin-top:auto">Formulário de inscrição do evento</div>
+        <p style="font-size:2.8cqw;max-width:34em;margin:0">Hoje vocês são a equipe de tecnologia de um evento da região e vão criar, no Google Forms, a inscrição que o público vai usar.</p>
+        <div class="foot"><span>Prof. Alexandre Cajazeira</span><span>Atividade prática em equipe · 2 aulas</span></div>
+      </section>
+
+      <section class="slide">
+        <div class="k">Objetivos da aula</div>
+        <h2>Ao final da aula, a equipe deve conseguir</h2>
+        <ol style="font-size:2.4cqw">
+          <li>Criar um formulário de inscrição a partir de um briefing</li>
+          <li>Escolher o tipo certo de pergunta e configurar obrigatórias e validação</li>
+          <li>Reunir as inscrições numa planilha</li>
+          <li>Divulgar com link curto e QR code</li>
+          <li>Decidir quais dados pessoais pedir (LGPD)</li>
+        </ol>
+      </section>
+
+      <section class="slide">
+        <div class="k">O que a equipe entrega hoje</div>
+        <h2>Até o fim da aula</h2>
+        <div class="grid4" style="grid-template-columns:repeat(3,1fr)">
+          <div class="tile"><b>1</b><h3>Formulário publicado</h3><p>Com todos os itens do checklist</p></div>
+          <div class="tile"><b>2</b><h3>Planilha ligada</h3><p>Com pelo menos 3 respostas do teste cruzado</p></div>
+          <div class="tile"><b>3</b><h3>Link curto e QR code</h3><p>Com a imagem do QR salva</p></div>
+          <div class="tile"><b>4</b><h3>Professor colaborador</h3><p>Adicionado no formulário</p></div>
+          <div class="tile"><b>5</b><h3>Mostra relâmpago</h3><p>1 minuto por equipe</p></div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="k">Lembram do dia 28/10?</div>
+        <h2>As plataformas que vocês pesquisaram começam pelo mesmo ponto</h2>
+        <div class="big" style="color:var(--accent)">a inscrição</div>
+        <ul>
+          <li>Quantas pessoas vêm?</li>
+          <li>Quem são e do que precisam?</li>
+          <li>Como falar com elas antes do evento?</li>
+        </ul>
+      </section>
+
+      <section class="slide">
+        <div class="k">A missão</div>
+        <h2>Criar o formulário de inscrição do evento que a equipe sortear</h2>
+        <div class="grid4">
+          <div class="tile"><b>01</b><h3>Formulário</h3><p>No Google Forms, com a cara do evento</p></div>
+          <div class="tile"><b>02</b><h3>Planilha</h3><p>Cada inscrição vira uma linha</p></div>
+          <div class="tile"><b>03</b><h3>Link curto</h3><p>Fácil de mandar no WhatsApp</p></div>
+          <div class="tile"><b>04</b><h3>QR code</h3><p>Pronto para o cartaz</p></div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="k">Como vai ser</div>
+        <h2>Quatro etapas e uma mostra</h2>
+        <table>
+          <thead><tr><th>Etapa</th><th>O que fazer</th><th style="text-align:right">Tempo</th></tr></thead>
+          <tbody>
+            <tr><td>0. Sorteio</td><td>Formar equipes e sortear o briefing</td><td class="num">10 min</td></tr>
+            <tr><td>1. Planejar</td><td>Perguntas, tipos e obrigatórias no papel</td><td class="num">10 min</td></tr>
+            <tr><td>2. Construir</td><td>Montar o formulário no Google Forms</td><td class="num">35 min</td></tr>
+            <tr><td>3. Divulgar</td><td>Planilha, link curto e QR code</td><td class="num">10 min</td></tr>
+            <tr><td>4. Testar</td><td>Teste cruzado entre equipes e ajuste</td><td class="num">15 min</td></tr>
+            <tr><td>Mostra</td><td>1 minuto por equipe</td><td class="num">12 min</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="slide">
+        <div class="k">O que é um briefing?</div>
+        <h2>É o pedido do cliente</h2>
+        <div class="two">
+          <ul>
+            <li>Diz que evento é, quando, onde e para quem.</li>
+            <li>Lista o que a organização <b>precisa saber</b> de cada inscrito.</li>
+            <li>Traz um <b>desafio extra</b>, que vale bônus.</li>
+          </ul>
+          <div class="tile"><b>Regra</b><h3>Tudo o que o cliente pede precisa estar no formulário.</h3><p>O que ele não pediu, só entra se fizer sentido para o evento.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-draw-root>
+        <div class="k">O sorteio</div>
+        <div class="two" style="flex:1;min-height:0">
+          <div style="display:flex;flex-direction:column;gap:1.4cqw;min-width:0">
+            <div class="controls" style="margin:0">
+              <label class="inline" for="teams-s">Equipes <input id="teams-s" class="js-teams" type="number" min="2" max="10" value="8"></label>
+              <button class="primary js-draw" type="button">Sortear</button>
+              <button class="js-reset" type="button">Recomeçar</button>
+            </div>
+            <div class="js-current"><p class="empty">Clique em Sortear.</p></div>
+          </div>
+          <ul class="results js-results"></ul>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="k">Etapa 1 · 10 min</div>
+        <h2>Planejar no papel antes de abrir o Forms</h2>
+        <table>
+          <thead><tr><th>Pergunta</th><th>Tipo</th><th>Obrigatória?</th></tr></thead>
+          <tbody>
+            <tr><td>Nome completo</td><td>Resposta curta</td><td>Sim</td></tr>
+            <tr><td>E-mail</td><td>Resposta curta + validação</td><td>Sim</td></tr>
+            <tr><td>Tamanho da camiseta</td><td>Múltipla escolha</td><td>Sim</td></tr>
+            <tr><td>Observações</td><td>Parágrafo</td><td>Não</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0">Sempre que der, troquem texto livre por opções.</p>
+      </section>
+
+      <section class="slide">
+        <div class="k">Etapa 1 · tipos de pergunta</div>
+        <h2>Qual tipo usar?</h2>
+        <table>
+          <tbody>
+            <tr><td><b>Resposta curta</b></td><td>Nome, e-mail, WhatsApp</td></tr>
+            <tr><td><b>Múltipla escolha</b></td><td>Só uma opção: corrida ou caminhada</td></tr>
+            <tr><td><b>Caixas de seleção</b></td><td>Várias opções: dias, equipamentos</td></tr>
+            <tr><td><b>Lista suspensa</b></td><td>Muitas opções: ponto de embarque</td></tr>
+            <tr><td><b>Escala linear</b></td><td>Nota de 1 a 5</td></tr>
+            <tr><td><b>Data / Horário</b></td><td>Data de nascimento</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="slide">
+        <div class="k">Checklist</div>
+        <h2>O formulário precisa ter</h2>
+        <ol class="js-checks-slide" style="font-size:1.85cqw;columns:2;column-gap:4cqw;display:block"></ol>
+      </section>
+
+      <section class="slide">
+        <div class="k">Etapa 2 · 35 min</div>
+        <h2>Construir no Google Forms</h2>
+        <ol>
+          <li><span class="path">forms.google.com › + Em branco</span></li>
+          <li>Título e descrição: data, horário, local e uso dos dados</li>
+          <li><span class="path">+</span> Adicionar pergunta, escolher o tipo, marcar <span class="path">Obrigatória</span></li>
+          <li>E-mail: <span class="path">⋮ › Validação de resposta › Texto › Endereço de e-mail</span></li>
+          <li>Visual: <span class="path">Personalizar tema</span> (cabeçalho, cor e fonte)</li>
+          <li><span class="path">Configurações › Apresentação › Mensagem de confirmação</span></li>
+        </ol>
+        <p style="margin:0">Desafio extra: <span class="path">Adicionar seção</span> e <span class="path">⋮ › Ir para a seção com base na resposta</span></p>
+      </section>
+
+      <section class="slide">
+        <div class="k">Etapa 3 · 10 min</div>
+        <h2>Planilha, link curto e QR code</h2>
+        <div class="two">
+          <ol>
+            <li><span class="path">Respostas › Vincular ao Planilhas › Criar</span></li>
+            <li><span class="path">Publicar</span>, se o botão aparecer</li>
+            <li><span class="path">Enviar › link › Encurtar URL › Copiar</span></li>
+            <li><span class="path">⋮ › Adicionar colaboradores</span>: e-mail do professor</li>
+          </ol>
+          <div class="tile"><b>QR code pelo Chrome</b><h3>Abram o link curto no Chrome</h3>
+            <p><b>Computador:</b> ⋮ › Transmitir, salvar e compartilhar › Criar código QR › Baixar</p>
+            <p style="margin-top:.8cqw"><b>Celular:</b> ⋮ ou Compartilhar › Código QR › Baixar</p>
+            <p style="margin-top:.8cqw">Testem com a câmera de outro celular.</p></div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="k">Etapa 4 · 15 min</div>
+        <h2>Teste cruzado</h2>
+        <p style="margin:0">Cada equipe responde o formulário da equipe seguinte. Cada integrante envia uma inscrição.</p>
+        <div class="ring js-ring"></div>
+        <ul>
+          <li>As respostas chegaram na planilha?</li>
+          <li>Alguma pergunta confundiu quem respondeu?</li>
+          <li>Escolham <b>uma melhoria</b> e façam antes da mostra.</li>
+        </ul>
+      </section>
+
+      <section class="slide">
+        <div class="k">Dados pessoais · LGPD</div>
+        <h2>Peçam só o que o evento precisa</h2>
+        <div class="two">
+          <ul>
+            <li>Nada de CPF, RG ou endereço se o evento não usa.</li>
+            <li>Digam na descrição para que os dados servem.</li>
+            <li>Menores de idade: contato de um responsável.</li>
+          </ul>
+          <div class="tile"><b>Pergunta para a equipe</b><h3>Se esta planilha vazasse, alguém sairia prejudicado?</h3><p>Se sim, revejam as perguntas.</p></div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <div class="k">Mostra relâmpago · 1 min por equipe</div>
+        <h2>Mostrem o QR code e respondam</h2>
+        <ol style="font-size:2.6cqw">
+          <li>Qual é o evento e quem é o público?</li>
+          <li>Qual pergunta foi a mais importante, e por quê?</li>
+          <li>Que decisão vocês tomaram sobre dados pessoais?</li>
+        </ol>
+      </section>
+
+      <section class="slide">
+        <div class="k">Avaliação · nota do 4º bimestre</div>
+        <h2>Como será avaliado</h2>
+        <table>
+          <tbody>
+            <tr><td>Atende ao briefing</td><td class="num">3,0</td></tr>
+            <tr><td>Perguntas bem configuradas</td><td class="num">2,0</td></tr>
+            <tr><td>Identidade visual e confirmação</td><td class="num">1,5</td></tr>
+            <tr><td>Planilha com respostas do teste</td><td class="num">1,5</td></tr>
+            <tr><td>Link curto e QR funcionando</td><td class="num">1,0</td></tr>
+            <tr><td>Mostra relâmpago</td><td class="num">1,0</td></tr>
+            <tr><td>Bônus: desafio extra</td><td class="num">+0,5</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="slide" id="slide-qr">
+        <div class="k">Consultem o briefing da equipe</div>
+        <div class="two" style="flex:1;min-height:0;align-items:center">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:1.2cqw;min-width:0">
+            <div class="bigqr js-bigqr" aria-label="QR code da página com os briefings"><span class="ph">Carregando o QR code…</span></div>
+            <div class="mono js-bigqr-url" style="font-size:1.5cqw;color:var(--muted);text-align:center;word-break:break-all"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1.4cqw;min-width:0">
+            <h2 style="font-size:3.8cqw">Apontem a câmera do celular para o QR code</h2>
+            <p style="margin:0">A página abre na lista de briefings. Procurem o evento da sua equipe:</p>
+            <ul class="results js-results"></ul>
+            <details class="qrlink" style="font-size:1.4cqw">
+              <summary>Trocar o link do QR code</summary>
+              <div style="display:flex;gap:.8cqw;flex-wrap:wrap;margin-top:.8cqw">
+                <input id="bigqr-in" type="url" class="js-bigqr-in" style="flex:1;min-width:0;font-size:1.4cqw" autocomplete="off">
+                <button type="button" class="js-bigqr-save" style="font-size:1.4cqw">Usar este link</button>
+                <button type="button" class="js-bigqr-default" style="font-size:1.4cqw">Voltar ao padrão</button>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <p class="clickhint">Clique no slide para avançar (na borda esquerda, para voltar). Também funcionam as setas do teclado, a barra de espaço e o deslize do dedo no celular. O sorteio dos slides é o mesmo do roteiro.</p>
+</main>
+
+
+
+<footer><div class="wrap">Material de apoio · Introdução à Informática · Técnico em Eventos Integrado · IFPI Campus São Raimundo Nonato · 2026</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+const BRIEFINGS=[
+ {id:1,nome:"Festival Sons da Serra",tipo:"Show musical gratuito",quando:"Sáb., 12/12, 19h",onde:"Praça central de São Raimundo Nonato",publico:"Público geral, todas as idades",vagas:"500 ingressos gratuitos",
+  pede:["Nome completo e e-mail","Faixa etária","Cidade onde mora","Como ficou sabendo do festival"],extra:"Perguntar com quantas pessoas vem, aceitando só números de 1 a 5 (validação)."},
+ {id:2,nome:"Oficina Fotografia de Celular",tipo:"Oficina prática",quando:"Sáb., 05/12, 8h às 12h",onde:"Museu do Homem Americano",publico:"Estudantes e turistas",vagas:"25 vagas",
+  pede:["Nome, e-mail e WhatsApp","Idade","Nível de experiência (iniciante, intermediário, avançado)","Sistema do celular (Android ou iPhone)"],extra:"Se a pessoa tiver menos de 18 anos, abrir uma seção pedindo nome e telefone do responsável."},
+ {id:3,nome:"Feira Jovem Empreendedor",tipo:"Feira de expositores",quando:"Sex. e sáb., 04 e 05/12",onde:"Ginásio do IFPI",publico:"Estudantes com um negócio ou uma ideia",vagas:"30 estandes",
+  pede:["Nome do responsável e e-mail","Nome do negócio","Categoria (alimentação, artesanato, moda, tecnologia, serviços)","Precisa de tomada de energia?"],extra:"Caixas de seleção com os dias em que o expositor vai participar."},
+ {id:4,nome:"Corrida e Caminhada Ecológica 5 km",tipo:"Evento esportivo",quando:"Dom., 13/12, 6h",onde:"Avenida principal da cidade",publico:"A partir de 14 anos",vagas:"200 vagas",
+  pede:["Nome, e-mail e data de nascimento","Modalidade (corrida ou caminhada)","Tamanho da camiseta (P, M, G, GG)","Nome e telefone de um contato de emergência"],extra:"Termo de responsabilidade como pergunta obrigatória: \"Declaro que estou em condições de participar\"."},
+ {id:5,nome:"Campeonato de Games IFPI",tipo:"Torneio de e-sports",quando:"Qua., 09/12, 14h",onde:"Laboratório de Informática",publico:"Estudantes do IFPI",vagas:"16 equipes",
+  pede:["Nome da equipe","Jogo (lista suspensa com 3 opções)","Nome e turma do capitão","Apelido (nickname) dos jogadores"],extra:"Uma seção diferente para cada jogo, com uma pergunta só daquele jogo."},
+ {id:6,nome:"Seminário Mulheres na Ciência",tipo:"Palestra e minicursos",quando:"Qui., 10/12, 8h",onde:"Auditório do IFPI",publico:"Estudantes do ensino médio e superior",vagas:"150 vagas",
+  pede:["Nome completo, como deve sair no certificado","E-mail","Escola ou instituição","Minicurso da tarde (escolher 1 de 3)"],extra:"Pergunta de escala de 1 a 5: \"Quanto você conhece sobre cientistas brasileiras?\""},
+ {id:7,nome:"Mostra de Talentos",tipo:"Apresentações artísticas",quando:"Sex., 11/12, 19h",onde:"Pátio do IFPI",publico:"Estudantes e comunidade",vagas:"20 apresentações",
+  pede:["Nome artístico e e-mail","Tipo de apresentação (música, dança, poesia, teatro, outro)","Tempo estimado (até 5 minutos)","Equipamentos necessários (microfone, caixa de som, violão, projetor)"],extra:"Pergunta opcional com o link de um vídeo de ensaio, com validação de URL."},
+ {id:8,nome:"Roteiro Turístico da Serra",tipo:"Visita guiada com transporte",quando:"Sáb., 28/11, 7h",onde:"Embarque no centro da cidade",publico:"Turistas e moradores",vagas:"40 lugares no ônibus",
+  pede:["Nome, e-mail e WhatsApp","Idade","Ponto de embarque (lista suspensa com 3 pontos)","Precisa de acessibilidade no transporte?"],extra:"Seção final com as regras da visita (água, protetor, calçado) e uma caixa obrigatória \"Li e concordo\"."},
+ {id:9,nome:"Festival Gastronômico do Sertão",tipo:"Inscrição de barracas",quando:"Sáb. e dom., 19 e 20/12",onde:"Praça do mercado",publico:"Cozinheiros e pequenos negócios da região",vagas:"25 barracas",
+  pede:["Nome do responsável e WhatsApp","Prato principal","Faixa de preço (até R$ 10, de R$ 10 a 20, acima de R$ 20)","Precisa de ponto de água?"],extra:"Escala de 1 a 5 para \"experiência com vendas em eventos\"."},
+ {id:10,nome:"Formatura do 3º ano",tipo:"Confirmação de presença",quando:"Sex., 18/12, 20h",onde:"Clube da cidade",publico:"Formandos e famílias",vagas:"Até 4 convidados por formando",
+  pede:["Nome do formando e turma","Vai comparecer? (sim ou não)","Número de convidados (1 a 4)","Nomes dos convidados"],extra:"Quem responder \"não\" vai direto para o envio, e a mensagem de confirmação explica o traje."}
+];
+const CHECKS=[
+ "Título com o nome do evento e descrição com data, horário, local e uso dos dados",
+ "Nome completo e e-mail obrigatórios, com validação de e-mail",
+ "Todas as informações que o cliente pediu no briefing",
+ "Pelo menos 3 tipos diferentes de pergunta",
+ "Só as perguntas necessárias marcadas como obrigatórias",
+ "Tema visual com a identidade do evento (cor e imagem de cabeçalho)",
+ "Mensagem de confirmação personalizada",
+ "Respostas ligadas a uma planilha",
+ "Link encurtado e QR code funcionando",
+ "Desafio extra do briefing"
+];
+const byId=id=>BRIEFINGS.find(b=>b.id===id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function load(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+
+let state=load('sb-draw-v1',{teams:8,draws:[]});
+if(!Array.isArray(state.draws))state={teams:8,draws:[]};
+
+function ticketHTML(b,team){
+  return '<article class="ticket'+(team?' taken':'')+'" id="briefing-'+String(b.id).padStart(2,'0')+'">'+
+   '<div class="stub"><small>Briefing</small><b>'+String(b.id).padStart(2,'0')+'</b></div>'+
+   '<div class="body">'+(team?'<span class="badge">Equipe '+team+'</span>':'')+
+   '<div class="kind">'+esc(b.tipo)+'</div><h3>'+esc(b.nome)+'</h3>'+
+   '<dl><dt>Quando</dt><dd>'+esc(b.quando)+'</dd><dt>Onde</dt><dd>'+esc(b.onde)+'</dd><dt>Público</dt><dd>'+esc(b.publico)+'</dd><dt>Vagas</dt><dd>'+esc(b.vagas)+'</dd></dl>'+
+   '<div style="font-size:.85rem;font-weight:600">O cliente precisa saber:</div><ul class="ask">'+b.pede.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ul>'+
+   '<div class="extra"><b>Desafio extra:</b> '+esc(b.extra)+'</div></div></article>';
+}
+function teamOf(id){const i=state.draws.indexOf(id);return i<0?0:i+1}
+
+function renderDraw(animId){
+  const max=Math.min(state.teams,BRIEFINGS.length);
+  document.querySelectorAll('.js-teams').forEach(i=>{if(document.activeElement!==i)i.value=state.teams});
+  document.querySelectorAll('.js-draw').forEach(b=>{b.disabled=state.draws.length>=max;b.textContent=state.draws.length>=max?'Todas as equipes sorteadas':(b.closest('.slide')?'Sortear':'Sortear briefing')+' (equipe '+(state.draws.length+1)+')'});
+  document.querySelectorAll('.js-results').forEach(ul=>{
+    ul.innerHTML=state.draws.length?state.draws.map((id,i)=>'<li><span class="mono">Equipe '+(i+1)+'</span><span>'+esc(byId(id).nome)+'</span></li>').join(''):'<li class="empty" style="background:transparent;border-style:dashed">Ninguém sorteado ainda.</li>';
+  });
+  document.querySelectorAll('.js-current').forEach(c=>{
+    if(!state.draws.length){c.innerHTML='<p class="empty">Nenhum briefing sorteado ainda.</p>';return}
+    const last=state.draws[state.draws.length-1];
+    c.innerHTML='<p class="mono" style="margin:0 0 6px;color:var(--accent)">Equipe '+state.draws.length+' recebeu:</p>'+ticketHTML(byId(last),0);
+    if(animId&&!reduce){const t=c.querySelector('.ticket');t.classList.add('pop')}
+  });
+  const all=document.querySelector('.js-all-tickets');
+  if(all)all.innerHTML=BRIEFINGS.map(b=>ticketHTML(b,teamOf(b.id))).join('');
+  renderRing();
+}
+function renderRing(){
+  const n=Math.max(2,Math.min(10,state.teams));
+  let h='';for(let i=1;i<=n;i++){h+='<span>Equipe '+i+' → '+(i===n?1:i+1)+'</span>'}
+  document.querySelectorAll('.js-ring').forEach(r=>r.innerHTML=h);
+}
+let drawing=false;
+function draw(){
+  if(drawing)return;
+  const max=Math.min(state.teams,BRIEFINGS.length);
+  if(state.draws.length>=max)return;
+  const left=BRIEFINGS.filter(b=>!state.draws.includes(b.id));
+  const pick=left[Math.floor(Math.random()*left.length)];
+  const finish=()=>{state.draws.push(pick.id);save('sb-draw-v1',state);drawing=false;renderDraw(pick.id)};
+  if(reduce||left.length===1){finish();return}
+  drawing=true;let k=0;const spins=14;
+  const tick=()=>{
+    const b=left[k%left.length];
+    document.querySelectorAll('.js-current').forEach(c=>c.innerHTML='<p class="mono" style="margin:0 0 6px;color:var(--muted)">Sorteando para a equipe '+(state.draws.length+1)+'…</p>'+ticketHTML(b,0));
+    k++; if(k<spins)setTimeout(tick,60+k*12); else finish();
+  };tick();
+}
+document.addEventListener('click',e=>{
+  if(e.target.closest('.js-draw'))draw();
+  if(e.target.closest('.js-reset')){
+    const b=e.target.closest('.js-reset');
+    if(b.dataset.armed){state.draws=[];save('sb-draw-v1',state);delete b.dataset.armed;b.textContent='Recomeçar';renderDraw()}
+    else{b.dataset.armed='1';b.textContent='Confirmar: apagar sorteio';setTimeout(()=>{if(b.dataset.armed){delete b.dataset.armed;b.textContent='Recomeçar'}},4000)}
+  }
+});
+document.querySelectorAll('.js-teams').forEach(inp=>inp.addEventListener('change',()=>{
+  let v=parseInt(inp.value,10);if(isNaN(v))v=8;v=Math.max(2,Math.min(10,v));
+  if(v<state.draws.length)v=state.draws.length;
+  state.teams=v;save('sb-draw-v1',state);renderDraw();
+}));
+
+/* checklist */
+let checks=load('sb-check-v1',[]);
+function renderChecks(){
+  const ul=document.querySelector('.js-checks');
+  ul.innerHTML=CHECKS.map((c,i)=>'<li><input type="checkbox" id="chk-'+i+'" '+(checks.includes(i)?'checked':'')+'><label for="chk-'+i+'">'+esc(c)+(i===CHECKS.length-1?'<span class="bonus">BÔNUS</span>':'')+'</label></li>').join('');
+  document.querySelector('.js-progress').textContent=checks.filter(i=>i<CHECKS.length-1).length+' de '+(CHECKS.length-1)+' itens obrigatórios concluídos';
+  const ol=document.querySelector('.js-checks-slide');
+  if(ol)ol.innerHTML=CHECKS.map((c,i)=>'<li style="break-inside:avoid;margin-bottom:.8cqw">'+esc(c)+(i===CHECKS.length-1?' <b style="color:var(--amber)">(bônus)</b>':'')+'</li>').join('');
+}
+document.addEventListener('change',e=>{
+  const m=e.target.id&&e.target.id.match(/^chk-(\d+)$/);if(!m)return;
+  const i=+m[1];checks=e.target.checked?[...new Set([...checks,i])]:checks.filter(x=>x!==i);save('sb-check-v1',checks);
+  document.querySelector('.js-progress').textContent=checks.filter(i=>i<CHECKS.length-1).length+' de '+(CHECKS.length-1)+' itens obrigatórios concluídos';
+});
+
+/* QR */
+document.querySelectorAll('[data-qr]').forEach(box=>{
+  const inp=box.querySelector('.js-qr-in'),out=box.querySelector('.js-qr-out'),err=box.querySelector('.js-qr-err');
+  let timer;
+  inp.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(make,250)});
+  function make(){
+    const v=inp.value.trim();err.textContent='';
+    if(!v){out.innerHTML='<span class="ph">O QR code aparece aqui.</span>';return}
+    if(!/^https?:\/\/\S+\.\S+/.test(v)){err.textContent='Cole o link completo, começando com https://';return}
+    if(typeof QRCode==='undefined'){err.textContent='O gerador não carregou. Use o Chrome: ⋮ › Transmitir, salvar e compartilhar › Criar código QR.';return}
+    out.innerHTML='';
+    const size=out.closest('.slide')&&out.clientWidth>220?Math.min(out.clientWidth-24,360):180;
+    try{new QRCode(out,{text:v,width:size,height:size,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M})}
+    catch(e){err.textContent='Não foi possível gerar o QR code para este link.'}
+  }
+});
+
+/* QR do último slide: leva os alunos à lista de briefings */
+const DEFAULT_QR='https://cajazeiraalexandre.github.io/ifpi-2026-2/formulario-inscricao-evento/#briefings';
+let bigUrl=load('sb-bigqr-v1',DEFAULT_QR);
+function drawBigQR(){
+  const box=document.querySelector('.js-bigqr'),u=document.querySelector('.js-bigqr-url'),inp=document.querySelector('.js-bigqr-in');
+  if(!box)return; u.textContent=bigUrl.replace(/^https?:\/\//,''); if(document.activeElement!==inp)inp.value=bigUrl;
+  if(typeof QRCode==='undefined'){box.innerHTML='<span class="ph">O gerador de QR não carregou. Mostre o link abaixo.</span>';return}
+  box.innerHTML='';
+  try{new QRCode(box,{text:bigUrl,width:512,height:512,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M})}catch(e){box.innerHTML='<span class="ph">Não foi possível gerar o QR.</span>'}
+}
+document.querySelector('.js-bigqr-save').addEventListener('click',()=>{const v=document.querySelector('.js-bigqr-in').value.trim();if(/^https?:\/\/\S+\.\S+/.test(v)){bigUrl=v;save('sb-bigqr-v1',bigUrl);drawBigQR()}});
+document.querySelector('.js-bigqr-default').addEventListener('click',()=>{bigUrl=DEFAULT_QR;save('sb-bigqr-v1',bigUrl);drawBigQR()});
+drawBigQR();
+
+/* slides */
+const slides=[...document.querySelectorAll('#stage .slide')];
+let cur=0;
+function showSlide(i){cur=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,k)=>s.hidden=k!==cur);document.getElementById('slidenum').textContent=(cur+1)+' / '+slides.length}
+document.getElementById('prev').onclick=()=>showSlide(cur-1);
+document.getElementById('next').onclick=()=>showSlide(cur+1);
+document.getElementById('fs').onclick=()=>{const d=document.getElementById('deck');try{const p=d.requestFullscreen&&d.requestFullscreen();if(p&&p.catch)p.catch(()=>{})}catch(e){}};
+const stage=document.getElementById('stage');
+stage.addEventListener('click',e=>{
+  if(e.target.closest('button,input,label,a,select,textarea,details'))return;
+  if(getSelection&&String(getSelection()).length)return;
+  const r=stage.getBoundingClientRect();
+  if(e.clientX-r.left<r.width*0.25)showSlide(cur-1);else showSlide(cur+1);
+});
+let tx=null;
+stage.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+stage.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(dx)>50){showSlide(cur+(dx<0?1:-1))}},{passive:true});
+document.addEventListener('keydown',e=>{
+  if(currentView!=='slides')return;
+  if(e.target.matches('input,textarea'))return;
+  if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();showSlide(cur+1)}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();showSlide(cur-1)}
+});
+
+/* cronômetro */
+let remain=0,run=null;const tEl=document.getElementById('timer'),tBtn=document.getElementById('tplay');
+const fmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+function stop(){clearInterval(run);run=null;tBtn.textContent='Iniciar'}
+function start(){if(remain<=0)return;tEl.classList.remove('done');run=setInterval(()=>{remain--;tEl.textContent=fmt(remain);if(remain<=0){stop();tEl.classList.add('done');tEl.textContent='Tempo!'}},1000);tBtn.textContent='Pausar'}
+document.querySelectorAll('[data-min]').forEach(b=>b.onclick=()=>{stop();remain=+b.dataset.min*60;tEl.classList.remove('done');tEl.textContent=fmt(remain);start()});
+tBtn.onclick=()=>{run?stop():start()};
+
+/* visões: botões trocam a visão direto, sem depender do endereço da página */
+const VIEWS=['roteiro','slides'];let currentView='roteiro';
+function setView(v,fromHash){
+  if(!VIEWS.includes(v))v='roteiro';
+  currentView=v;
+  VIEWS.forEach(x=>document.getElementById('view-'+x).hidden=x!==v);
+  document.querySelectorAll('nav.views button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===v)));
+  window.scrollTo(0,0);
+  if(v==='slides'){try{stage.focus({preventScroll:true})}catch(e){}}
+  if(!fromHash){try{history.replaceState(null,'','#'+v)}catch(e){}}
+}
+document.querySelectorAll('nav.views button').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+window.addEventListener('hashchange',()=>{const h=(location.hash||'').slice(1);if(VIEWS.includes(h))setView(h,true)});
+
+renderDraw();renderChecks();showSlide(0);
+(function(){const h=(location.hash||'').slice(1);setView(VIEWS.includes(h)?h:'roteiro',true);if(h&&!VIEWS.includes(h)){const el=document.getElementById(h);if(el)setTimeout(()=>el.scrollIntoView({block:'start'}),60)}})();
+})();
+</script>
+
+</body>
+</html>
