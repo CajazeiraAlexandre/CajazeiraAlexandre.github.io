@@ -720,15 +720,15 @@ footer{padding-block:28px 40px;color:var(--muted);font-size:.85rem;border-top:1p
       </section>
 
       <section class="slide" id="slide-qr">
-        <div class="k">Consultem o briefing da equipe</div>
+        <div class="k">Página da equipe: entregas e briefings</div>
         <div class="two" style="flex:1;min-height:0;align-items:center">
           <div style="display:flex;flex-direction:column;align-items:center;gap:1.2cqw;min-width:0">
-            <div class="bigqr js-bigqr" aria-label="QR code da página com os briefings"><span class="ph">Carregando o QR code…</span></div>
+            <div class="bigqr js-bigqr" aria-label="QR code da página da equipe: entregas, gerador de QR e briefings"><span class="ph">Carregando o QR code…</span></div>
             <div class="mono js-bigqr-url" style="font-size:1.5cqw;color:var(--muted);text-align:center;word-break:break-all"></div>
           </div>
           <div style="display:flex;flex-direction:column;gap:1.4cqw;min-width:0">
             <h2 style="font-size:3.8cqw">Apontem a câmera do celular para o QR code</h2>
-            <p style="margin:0">A página abre na lista de briefings. Procurem o evento da sua equipe:</p>
+            <p style="margin:0">A página traz as entregas, um gerador de QR e os briefings. Procurem o número do evento da sua equipe:</p>
             <ul class="results js-results"></ul>
             <details class="qrlink" style="font-size:1.4cqw">
               <summary>Trocar o link do QR code</summary>
@@ -894,7 +894,7 @@ document.querySelectorAll('[data-qr]').forEach(box=>{
 });
 
 /* QR do último slide: leva os alunos à lista de briefings */
-const DEFAULT_QR='https://cajazeiraalexandre.github.io/ifpi-2026-2/formulario-inscricao-evento/#briefings';
+const DEFAULT_QR='https://cajazeiraalexandre.github.io/ifpi-2026-2/formulario-inscricao-evento/equipes/';
 let bigUrl=load('sb-bigqr-v1',DEFAULT_QR);
 function drawBigQR(){
   const box=document.querySelector('.js-bigqr'),u=document.querySelector('.js-bigqr-url'),inp=document.querySelector('.js-bigqr-in');

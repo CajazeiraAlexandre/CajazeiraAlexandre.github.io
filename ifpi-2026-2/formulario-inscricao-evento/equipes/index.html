@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Página da equipe</title>
+<meta name="description" content="Entregas da atividade Formulário de Inscrição do Evento, gerador de QR code e os 10 briefings.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#F3F6F3; --surface:#FFFFFF; --ink:#14211A; --muted:#55635A; --line:#D6DED8;
+  --accent:#1E7A30; --accent-ink:#FFFFFF; --accent-soft:#E2F2E5;
+  --teal:#0F5E28; --teal-soft:#E2F2E5; --amber:#B3151A; --amber-soft:#FBE7E7;
+  --bar:#17632A; --bar-ink:#FFFFFF; --if-green:#2F9E41; --if-red:#CD191E;
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1510; --surface:#15211A; --ink:#E6EEE8; --muted:#9AAA9F; --line:#26372C;
+  --accent:#4CC25E; --accent-ink:#05200B; --accent-soft:#16381F;
+  --teal:#74D584; --teal-soft:#16381F; --amber:#FF7376; --amber-soft:#3B1719;
+  --bar:#0F2A17; --bar-ink:#F1F7F2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1510; --surface:#15211A; --ink:#E6EEE8; --muted:#9AAA9F; --line:#26372C;
+  --accent:#4CC25E; --accent-ink:#05200B; --accent-soft:#16381F;
+  --teal:#74D584; --teal-soft:#16381F; --amber:#FF7376; --amber-soft:#3B1719;
+  --bar:#0F2A17; --bar-ink:#F1F7F2; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;margin:0}
+a{color:var(--teal)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+.top{position:sticky;top:0;z-index:9;background:var(--bar);color:var(--bar-ink);border-bottom:4px solid var(--if-red);padding-top:env(safe-area-inset-top,0px)}
+.top .wrap{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;justify-content:space-between;padding-block:10px}
+.brand b{font-family:var(--f-display);font-size:1.1rem}
+.brand span{font-size:.8rem;opacity:.8;margin-left:8px}
+.top nav{display:flex;gap:6px;flex-wrap:wrap}
+.top nav a{color:inherit;text-decoration:none;font-size:.85rem;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid color-mix(in srgb,var(--bar-ink) 35%,transparent)}
+
+.hero{padding-block:30px 6px}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.hero h1{font-size:clamp(1.9rem,5vw,3rem);font-weight:800;margin:6px 0 10px}
+.hero p.lead{font-size:1.08rem;max-width:62ch;color:var(--muted);margin:0}
+
+section.block{scroll-margin-top:110px;padding-block:26px;border-top:1px solid var(--line)}
+section.block > h2{font-size:1.55rem;margin-bottom:6px}
+section.block > p.sub{color:var(--muted);margin:0 0 16px;max-width:65ch}
+
+/* entregas */
+ol.deliver{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:12px;max-width:820px}
+ol.deliver > li{counter-increment:s;display:grid;grid-template-columns:42px minmax(0,1fr);gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+ol.deliver > li::before{content:counter(s);font-family:var(--f-mono);font-size:1.05rem;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink)}
+ol.deliver h3{font-size:1.15rem;margin:4px 0 6px}
+ol.deliver p{margin:4px 0;font-size:.95rem}
+ol.deliver ul{margin:6px 0 0;padding-left:20px;font-size:.93rem;display:grid;gap:3px}
+.pts{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);margin-left:6px;font-weight:500;white-space:nowrap}
+.path{font-family:var(--f-mono);font-size:.84rem;background:var(--teal-soft);color:var(--ink);padding:1px 6px;border-radius:4px}
+.bonus{font-size:.72rem;font-weight:700;color:var(--amber);margin-left:4px}
+.note{border:1px solid var(--line);border-left:4px solid var(--amber);padding:10px 14px;background:var(--surface);max-width:820px;font-size:.93rem;margin:14px 0 0}
+
+/* gerador de QR */
+.qr{display:grid;gap:16px;grid-template-columns:minmax(0,1fr) auto;align-items:start;max-width:820px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+@media (max-width:620px){.qr{grid-template-columns:1fr}}
+.qr label{font-weight:600;font-size:.95rem;display:block;margin-bottom:4px}
+.qr input{width:100%;font:inherit;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.qrerr{color:var(--amber);font-size:.88rem;min-height:1.3em;margin:6px 0 0}
+.qrout{background:#FFFFFF;padding:12px;border-radius:8px;border:1px solid var(--line);width:224px;min-height:224px;display:grid;place-items:center;justify-self:center}
+.qrout img,.qrout canvas{display:block}
+.qrout .ph{color:#55635A;font-size:.82rem;text-align:center;padding:8px}
+.qrbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+button{font:inherit;font-weight:600;font-size:.92rem;cursor:pointer;border-radius:8px;padding:9px 14px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button:disabled{opacity:.45;cursor:not-allowed}
+
+/* atalhos dos briefings */
+.jump{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+.jump a{font-family:var(--f-mono);font-size:.95rem;text-decoration:none;min-width:44px;text-align:center;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--accent)}
+.jump a:hover{border-color:var(--accent)}
+
+/* ingresso */
+.tickets{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+@media (max-width:360px){.tickets{grid-template-columns:1fr}}
+.ticket{position:relative;display:grid;grid-template-columns:70px minmax(0,1fr);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);min-width:0;scroll-margin-top:130px}
+.ticket:target{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.ticket .stub{border-right:2px dashed var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:10px 4px;background:var(--accent-soft);border-radius:var(--r) 0 0 var(--r)}
+.ticket .stub small{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.ticket .stub b{font-family:var(--f-mono);font-size:1.55rem;color:var(--accent)}
+.ticket .body{padding:14px 16px;min-width:0}
+.ticket h3{font-size:1.15rem}
+.ticket .kind{font-size:.78rem;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.06em}
+.ticket dl{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;margin:8px 0;font-size:.88rem}
+.ticket dt{color:var(--muted)}
+.ticket dd{margin:0}
+.ticket .ask{font-size:.88rem;margin:6px 0 0;padding-left:18px}
+.ticket .extra{margin-top:8px;font-size:.86rem;background:var(--amber-soft);color:var(--ink);border-radius:6px;padding:6px 10px}
+.ticket .extra b{color:var(--amber)}
+
+/* tabela */
+.tablewrap{overflow-x:auto;max-width:620px}
+table{border-collapse:collapse;width:100%;font-size:.92rem;background:var(--surface);border:1px solid var(--line)}
+th,td{text-align:left;padding:7px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num{font-family:var(--f-mono);text-align:right;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+
+footer{padding-block:24px 40px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);margin-top:10px}
+@media print{.top,.qr,.jump{display:none}.ticket{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><b>Página da equipe</b><span>Formulário de Inscrição do Evento · 11/11/2026</span></div>
+    <nav aria-label="Atalhos"><a href="#entregas">Entregas</a><a href="#qr">Gerar QR</a><a href="#briefings">Briefings</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Atividade prática em equipe</div>
+    <h1>O que a equipe entrega hoje</h1>
+    <p class="lead">Quatro entregas até o fim da aula e 1 minuto de apresentação na mostra. Achem o seu briefing pelo número que a equipe sorteou.</p>
+  </div>
+
+  <section class="block" id="entregas">
+    <h2>Entregas</h2>
+    <p class="sub">Tudo no Google, com a conta de um integrante da equipe. Não apaguem nada depois da aula.</p>
+    <ol class="deliver">
+      <li><div>
+        <h3>Formulário no Google Forms <span class="pts">6,5 pontos</span></h3>
+        <p>Criem em <span class="path">forms.google.com › + Em branco</span>. O formulário precisa ter:</p>
+        <ul>
+          <li>Título com o nome do evento e descrição com data, horário, local e para que os dados serão usados.</li>
+          <li>Nome completo e e-mail obrigatórios, com validação de e-mail (<span class="path">⋮ › Validação de resposta</span>).</li>
+          <li>Todas as informações que o cliente pediu no briefing.</li>
+          <li>Pelo menos 3 tipos diferentes de pergunta.</li>
+          <li>Só as perguntas necessárias marcadas como obrigatórias.</li>
+          <li>Tema com a identidade do evento: cor e imagem de cabeçalho (ícone de paleta).</li>
+          <li>Mensagem de confirmação personalizada (<span class="path">Configurações › Apresentação</span>).</li>
+          <li>Desafio extra do briefing<span class="bonus">BÔNUS +0,5</span></li>
+        </ul>
+      </div></li>
+      <li><div>
+        <h3>Planilha com as respostas <span class="pts">1,5 ponto</span></h3>
+        <p>No formulário, abram a aba <span class="path">Respostas › Vincular ao Planilhas › Criar uma nova planilha</span>. Cada inscrição vira uma linha.</p>
+        <p>A planilha precisa ter <b>pelo menos 3 respostas</b> do teste cruzado: a equipe seguinte responde o formulário de vocês.</p>
+      </div></li>
+      <li><div>
+        <h3>Compartilhar com o professor <span class="pts">obrigatório</span></h3>
+        <p>Usem o e-mail que o professor escrever no quadro.</p>
+        <ul>
+          <li><b>Formulário:</b> <span class="path">⋮ (canto superior direito) › Adicionar colaboradores</span>, digitem o e-mail e cliquem em <span class="path">Concluído</span>.</li>
+          <li><b>Planilha:</b> botão <span class="path">Compartilhar</span> (canto superior direito), digitem o e-mail, deixem como <span class="path">Editor</span> e cliquem em <span class="path">Enviar</span>.</li>
+        </ul>
+        <p>No celular, abram o formulário e a planilha pelo navegador. Se o menu não aparecer, usem a opção "Versão para computador".</p>
+      </div></li>
+      <li><div>
+        <h3>Link curto e QR code <span class="pts">1,0 ponto</span></h3>
+        <p>Se aparecer o botão <span class="path">Publicar</span>, cliquem nele antes. Depois: <span class="path">Enviar › ícone de link › Encurtar URL › Copiar</span>.</p>
+        <p>Colem o link no <a href="#qr">gerador abaixo</a>, baixem a imagem e testem com a câmera de outro celular: o QR precisa abrir o formulário.</p>
+      </div></li>
+      <li><div>
+        <h3>Mostra relâmpago <span class="pts">1,0 ponto</span></h3>
+        <p>1 minuto por equipe. Mostrem o QR code e digam qual é o evento, qual pergunta foi a mais importante e que decisão tomaram sobre dados pessoais.</p>
+      </div></li>
+    </ol>
+    <p class="note"><b>Dados pessoais:</b> peçam só o que o evento vai usar. Nada de CPF, RG ou endereço completo se o evento não precisa (LGPD).</p>
+  </section>
+
+  <section class="block" id="qr">
+    <h2>Gerar o QR code</h2>
+    <p class="sub">Colem o link curto do formulário. O código aparece na hora; baixem a imagem para usar no cartaz.</p>
+    <div class="qr">
+      <div>
+        <label for="qr-in">Link do formulário</label>
+        <input id="qr-in" type="url" placeholder="https://forms.gle/..." inputmode="url" autocomplete="off" spellcheck="false">
+        <p class="qrerr" id="qr-err" aria-live="polite"></p>
+        <div class="qrbtns">
+          <button type="button" class="primary" id="qr-dl" disabled>Baixar imagem do QR</button>
+          <button type="button" id="qr-clear">Limpar</button>
+        </div>
+        <p style="font-size:.85rem;color:var(--muted);margin:10px 0 0">Se o botão de baixar não funcionar no celular, tirem um print da tela. Pelo Chrome também dá: <span class="path">⋮ ou Compartilhar › Código QR</span>.</p>
+      </div>
+      <div class="qrout" id="qr-out" aria-label="QR code do link digitado"><span class="ph">O QR code aparece aqui.</span></div>
+    </div>
+  </section>
+
+  <section class="block" id="briefings">
+    <h2>Os 10 briefings</h2>
+    <p class="sub">Toquem no número do briefing da equipe. Tudo o que o cliente pede precisa aparecer no formulário.</p>
+    <nav class="jump" aria-label="Ir para o briefing"><a href="#briefing-01">01</a><a href="#briefing-02">02</a><a href="#briefing-03">03</a><a href="#briefing-04">04</a><a href="#briefing-05">05</a><a href="#briefing-06">06</a><a href="#briefing-07">07</a><a href="#briefing-08">08</a><a href="#briefing-09">09</a><a href="#briefing-10">10</a></nav>
+    <div class="tickets" id="tickets"></div>
+  </section>
+
+  <section class="block" id="pontos">
+    <h2>Pontuação</h2>
+    <div class="tablewrap">
+      <table>
+        <tbody>
+          <tr><td>Atende ao briefing: todas as informações que o cliente pediu</td><td class="num">3,0</td></tr>
+          <tr><td>Perguntas bem configuradas: tipos variados, obrigatórias e validação</td><td class="num">2,0</td></tr>
+          <tr><td>Identidade visual e mensagem de confirmação</td><td class="num">1,5</td></tr>
+          <tr><td>Planilha ligada, com as respostas do teste cruzado</td><td class="num">1,5</td></tr>
+          <tr><td>Link curto e QR code funcionando</td><td class="num">1,0</td></tr>
+          <tr><td>Mostra relâmpago: clareza e participação da equipe</td><td class="num">1,0</td></tr>
+          <tr><td><b>Total</b></td><td class="num"><b>10,0</b></td></tr>
+          <tr><td>Bônus: desafio extra do briefing (nota máxima 10)</td><td class="num">+0,5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Material de apoio · Introdução à Informática · Técnico em Eventos Integrado · IFPI Campus São Raimundo Nonato · 2026 · <a href="../">Roteiro completo da aula</a></div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+const BRIEFINGS=[
+ {id:1,nome:"Festival Sons da Serra",tipo:"Show musical gratuito",quando:"Sáb., 12/12, 19h",onde:"Praça central de São Raimundo Nonato",publico:"Público geral, todas as idades",vagas:"500 ingressos gratuitos",
+  pede:["Nome completo e e-mail","Faixa etária","Cidade onde mora","Como ficou sabendo do festival"],extra:"Perguntar com quantas pessoas vem, aceitando só números de 1 a 5 (validação)."},
+ {id:2,nome:"Oficina Fotografia de Celular",tipo:"Oficina prática",quando:"Sáb., 05/12, 8h às 12h",onde:"Museu do Homem Americano",publico:"Estudantes e turistas",vagas:"25 vagas",
+  pede:["Nome, e-mail e WhatsApp","Idade","Nível de experiência (iniciante, intermediário, avançado)","Sistema do celular (Android ou iPhone)"],extra:"Se a pessoa tiver menos de 18 anos, abrir uma seção pedindo nome e telefone do responsável."},
+ {id:3,nome:"Feira Jovem Empreendedor",tipo:"Feira de expositores",quando:"Sex. e sáb., 04 e 05/12",onde:"Ginásio do IFPI",publico:"Estudantes com um negócio ou uma ideia",vagas:"30 estandes",
+  pede:["Nome do responsável e e-mail","Nome do negócio","Categoria (alimentação, artesanato, moda, tecnologia, serviços)","Precisa de tomada de energia?"],extra:"Caixas de seleção com os dias em que o expositor vai participar."},
+ {id:4,nome:"Corrida e Caminhada Ecológica 5 km",tipo:"Evento esportivo",quando:"Dom., 13/12, 6h",onde:"Avenida principal da cidade",publico:"A partir de 14 anos",vagas:"200 vagas",
+  pede:["Nome, e-mail e data de nascimento","Modalidade (corrida ou caminhada)","Tamanho da camiseta (P, M, G, GG)","Nome e telefone de um contato de emergência"],extra:"Termo de responsabilidade como pergunta obrigatória: \"Declaro que estou em condições de participar\"."},
+ {id:5,nome:"Campeonato de Games IFPI",tipo:"Torneio de e-sports",quando:"Qua., 09/12, 14h",onde:"Laboratório de Informática",publico:"Estudantes do IFPI",vagas:"16 equipes",
+  pede:["Nome da equipe","Jogo (lista suspensa com 3 opções)","Nome e turma do capitão","Apelido (nickname) dos jogadores"],extra:"Uma seção diferente para cada jogo, com uma pergunta só daquele jogo."},
+ {id:6,nome:"Seminário Mulheres na Ciência",tipo:"Palestra e minicursos",quando:"Qui., 10/12, 8h",onde:"Auditório do IFPI",publico:"Estudantes do ensino médio e superior",vagas:"150 vagas",
+  pede:["Nome completo, como deve sair no certificado","E-mail","Escola ou instituição","Minicurso da tarde (escolher 1 de 3)"],extra:"Pergunta de escala de 1 a 5: \"Quanto você conhece sobre cientistas brasileiras?\""},
+ {id:7,nome:"Mostra de Talentos",tipo:"Apresentações artísticas",quando:"Sex., 11/12, 19h",onde:"Pátio do IFPI",publico:"Estudantes e comunidade",vagas:"20 apresentações",
+  pede:["Nome artístico e e-mail","Tipo de apresentação (música, dança, poesia, teatro, outro)","Tempo estimado (até 5 minutos)","Equipamentos necessários (microfone, caixa de som, violão, projetor)"],extra:"Pergunta opcional com o link de um vídeo de ensaio, com validação de URL."},
+ {id:8,nome:"Roteiro Turístico da Serra",tipo:"Visita guiada com transporte",quando:"Sáb., 28/11, 7h",onde:"Embarque no centro da cidade",publico:"Turistas e moradores",vagas:"40 lugares no ônibus",
+  pede:["Nome, e-mail e WhatsApp","Idade","Ponto de embarque (lista suspensa com 3 pontos)","Precisa de acessibilidade no transporte?"],extra:"Seção final com as regras da visita (água, protetor, calçado) e uma caixa obrigatória \"Li e concordo\"."},
+ {id:9,nome:"Festival Gastronômico do Sertão",tipo:"Inscrição de barracas",quando:"Sáb. e dom., 19 e 20/12",onde:"Praça do mercado",publico:"Cozinheiros e pequenos negócios da região",vagas:"25 barracas",
+  pede:["Nome do responsável e WhatsApp","Prato principal","Faixa de preço (até R$ 10, de R$ 10 a 20, acima de R$ 20)","Precisa de ponto de água?"],extra:"Escala de 1 a 5 para \"experiência com vendas em eventos\"."},
+ {id:10,nome:"Formatura do 3º ano",tipo:"Confirmação de presença",quando:"Sex., 18/12, 20h",onde:"Clube da cidade",publico:"Formandos e famílias",vagas:"Até 4 convidados por formando",
+  pede:["Nome do formando e turma","Vai comparecer? (sim ou não)","Número de convidados (1 a 4)","Nomes dos convidados"],extra:"Quem responder \"não\" vai direto para o envio, e a mensagem de confirmação explica o traje."}
+];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pad=n=>String(n).padStart(2,'0');
+document.getElementById('tickets').innerHTML=BRIEFINGS.map(b=>
+  '<article class="ticket" id="briefing-'+pad(b.id)+'">'+
+  '<div class="stub"><small>Briefing</small><b>'+pad(b.id)+'</b></div>'+
+  '<div class="body"><div class="kind">'+esc(b.tipo)+'</div><h3>'+esc(b.nome)+'</h3>'+
+  '<dl><dt>Quando</dt><dd>'+esc(b.quando)+'</dd><dt>Onde</dt><dd>'+esc(b.onde)+'</dd><dt>Público</dt><dd>'+esc(b.publico)+'</dd><dt>Vagas</dt><dd>'+esc(b.vagas)+'</dd></dl>'+
+  '<div style="font-size:.85rem;font-weight:600">O cliente precisa saber:</div><ul class="ask">'+b.pede.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ul>'+
+  '<div class="extra"><b>Desafio extra:</b> '+esc(b.extra)+'</div></div></article>').join('');
+if(location.hash){const go=()=>{const el=document.getElementById(location.hash.slice(1));if(el)el.scrollIntoView({block:'start',behavior:'instant'})};(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>setTimeout(go,30))}
+
+/* gerador de QR */
+const inp=document.getElementById('qr-in'),out=document.getElementById('qr-out'),err=document.getElementById('qr-err'),dl=document.getElementById('qr-dl');
+const PH='<span class="ph">O QR code aparece aqui.</span>';
+let timer;
+function make(){
+  const v=inp.value.trim();err.textContent='';dl.disabled=true;
+  if(!v){out.innerHTML=PH;return}
+  if(!/^https?:\/\/\S+\.\S+/.test(v)){out.innerHTML=PH;err.textContent='Colem o link completo, começando com https://';return}
+  if(typeof QRCode==='undefined'){err.textContent='O gerador não carregou. Usem o Chrome: ⋮ ou Compartilhar › Código QR.';return}
+  out.innerHTML='';
+  try{new QRCode(out,{text:v,width:200,height:200,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});dl.disabled=false}
+  catch(e){err.textContent='Não foi possível gerar o QR code para este link.'}
+}
+inp.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(make,250)});
+document.getElementById('qr-clear').addEventListener('click',()=>{inp.value='';make();inp.focus()});
+dl.addEventListener('click',()=>{
+  /* gera de novo em 1000 px, com margem branca, para a imagem sair nítida no cartaz */
+  const v=inp.value.trim(),tmp=document.createElement('div');
+  try{new QRCode(tmp,{text:v,width:1000,height:1000,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M})}catch(e){return}
+  const src=tmp.querySelector('canvas');if(!src)return;
+  const m=80,c=document.createElement('canvas');c.width=c.height=src.width+2*m;
+  const g=c.getContext('2d');g.fillStyle='#ffffff';g.fillRect(0,0,c.width,c.height);g.drawImage(src,m,m);
+  const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download='qr-code-formulario.png';
+  document.body.appendChild(a);a.click();a.remove();
+});
+})();
+</script>
+</body>
+</html>
