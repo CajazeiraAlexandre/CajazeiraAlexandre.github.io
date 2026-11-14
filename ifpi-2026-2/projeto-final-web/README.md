@@ -1,6 +1,6 @@
-# Projeto final: o seu site com várias páginas
+# Projeto final: um site com várias páginas
 
-**Tipo:** didatico · **Projeto:** programacao-web-didatico · **Status:** rascunho (piloto 0.9) ·
+**Tipo:** didatico · **Projeto:** programacao-web-didatico · **Status:** rascunho (piloto 1.0) ·
 **Endereço:** <https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-web/>
 
 ## Pergunta
@@ -39,6 +39,15 @@ professor desde a primeira aula; modo apresentação.
 - **Sorteio da ordem das apresentações em 14/11**, com toda a turma, inclusive quem faltar.
 - **Entrega de todos até 23/11 (versão 0.9):** zip final no Drive e formulário de envio, também para quem apresenta
   em 30/11; antes, cada um entregava até o dia da própria apresentação.
+- **Equipes de até 3, com nota individual (professor, 2026-11-14; projeto final 1.0, Aula 2 0.5):** "os alunos estão
+  com muita dificuldade". As equipes se formam no início da Aula 2 (14/11), escolhem um dos temas de 09/11 e seguem com
+  o site de quem tem esse tema. O mínimo continua de quatro páginas, com divisão livre do trabalho. A aula de 23/11 passa
+  a ser de finalização com o apoio do professor, com o sorteio da ordem das equipes no fim; todas as equipes apresentam
+  em 30/11. Entrega até domingo, 29/11: zip final da equipe e formulário de envio de cada integrante (com os nomes dos
+  colegas). A avaliação é individual: o professor faz perguntas específicas a cada integrante. Substitui o sorteio de
+  14/11 (metade da turma em cada data) e a entrega de todos até 23/11. Propostos pelo assistente, a confirmar: até 5 min
+  por equipe, com cada integrante falando ao menos uma parte do roteiro; Marco 3 enviado por cada integrante; na Aula 2,
+  a equipe trabalha num computador só, trocando quem digita; quem faltar em 30/11 responde às perguntas na 2ª chamada.
 - A Aula 2 tem página própria (`2026-11_aula-2-estrutura-html`), ligada no calendário.
 - **QR code no fim da página** e no último slide, com o endereço público, para os alunos abrirem no celular. É gerado com
   `segno` (SVG embutido, preto no branco em qualquer tema). A leitura foi conferida com zxing-cpp.

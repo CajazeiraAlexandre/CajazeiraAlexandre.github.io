@@ -1,6 +1,6 @@
 # Aula 2: as quatro páginas em HTML
 
-**Tipo:** didatico · **Projeto:** programacao-web-didatico · **Status:** rascunho (0.4) ·
+**Tipo:** didatico · **Projeto:** programacao-web-didatico · **Status:** rascunho (0.5) ·
 **Endereço previsto:** <https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-aula-2/>
 
 ## Pergunta
@@ -32,6 +32,8 @@ Deriva de `2026-11_projeto-final-orientacoes` (v0.8): calendário, marcos, pesos
   celular". A página do projeto final também saiu do diário na versão 0.8.
 - **Semana do MUV sem aula e sorteio com toda a turma** (professor, 2026-11-13, versão 0.3): ver o README da página
   do projeto final.
+- **Equipes formadas no início da aula** (professor, 2026-11-14, versão 0.5): primeiro passo da aula; o sorteio saiu
+  daqui e vai para 23/11 (ordem das equipes). Ver o README da página do projeto final.
 - **QR code no fim da página** e no último slide (12º), com o endereço público (professor, 2026-11-13); SVG gerado com
   `segno`, preto no branco, com a leitura conferida.
 

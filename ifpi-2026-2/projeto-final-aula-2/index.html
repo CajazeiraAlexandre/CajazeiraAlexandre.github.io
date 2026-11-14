@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Aula 2: as quatro páginas em HTML</title>
-<meta name="description" content="Roteiro da aula de 14/11 do projeto final de Desenvolvimento Web Front-End (1º ano integrado, IFPI/SRN): passo a passo, esqueleto de uma página, menu, conferência do Marco 2, sorteio das apresentações e como salvar a versão 2.">
+<meta name="description" content="Roteiro da aula de 14/11 do projeto final de Desenvolvimento Web Front-End (1º ano integrado, IFPI/SRN): passo a passo, esqueleto de uma página, menu, conferência do Marco 2, formação das equipes e como salvar a versão 2.">
 <meta name="robots" content="noindex">
-<!-- Versão 0.4 (2026-11-13: entrega de todos até 23/11). Versão 0.3 (2026-11-13: sem o diário de avanços; sorteio com toda a turma; semana do MUV sem aula, a pedido do professor) para a aula de 14/11. Escrita à mão, com o CSS e o script da página do projeto final (2026-11_projeto-final-orientacoes, v0.7). Rascunho para revisão do professor. -->
+<!-- Versão 0.5 (2026-11-14: equipes de até 3 formadas no início da aula, nota individual; 23/11 finalização e sorteio da ordem das equipes; apresentações em 30/11; entrega até 29/11). Versão 0.4 (2026-11-13: entrega de todos até 23/11). Versão 0.3 (2026-11-13: sem o diário de avanços; sorteio com toda a turma; semana do MUV sem aula, a pedido do professor) para a aula de 14/11. Escrita à mão, com o CSS e o script da página do projeto final (2026-11_projeto-final-orientacoes, v0.7). Rascunho para revisão do professor. -->
 <style>
 /* Layout: uma coluna de leitura, seções longas como "lâminas" para projetar; mesmas famílias e cores do caderno (design/padrao). */
 :root{
@@ -385,7 +385,7 @@ html[data-acesso=baixa-visao] .etapa.feita{opacity:1}
     <a href="#esqueleto">Esqueleto</a>
     <a href="#problemas">Deu problema?</a>
     <a href="#confira">Confira: Marco 2</a>
-    <a href="#sorteio">Sorteio</a>
+    <a href="#equipes">Equipes</a>
     <a href="#salvar">Salvar a v2</a>
     <a href="#qr">QR code</a>
   </div>
@@ -399,12 +399,12 @@ html[data-acesso=baixa-visao] .etapa.feita{opacity:1}
     </div>
     <p class="chapeu">Projeto final · Desenvolvimento Web Front-End · 1º ano integrado</p>
     <h1>Aula 2: as quatro páginas em HTML</h1>
-    <p class="lede">Hoje o site ganha corpo: as quatro páginas da sua ficha, com a mesma estrutura, um menu que leva de uma à outra e o conteúdo do seu tema. Ainda sem estilo: o CSS fica para a semana que vem.</p>
+    <p class="lede">Hoje você forma a sua equipe, de até 3 integrantes, e o site ganha corpo: as quatro páginas da ficha, com a mesma estrutura, um menu que leva de uma à outra e o conteúdo do tema. Ainda sem estilo: o CSS fica para a semana que vem.</p>
     <div class="fatos">
       <div class="fato"><div class="rot">Hoje</div><div class="val">14/11, sábado</div><div class="sub">2 aulas · reposição de segunda</div></div>
       <div class="fato"><div class="rot">Meta</div><div class="val">Marco 2</div><div class="sub">4 páginas abrindo e menu funcionando</div></div>
       <div class="fato"><div class="rot">Vale</div><div class="val">2,5 pontos</div><div class="sub">bloco 1 da avaliação</div></div>
-      <div class="fato"><div class="rot">Você sai com</div><div class="val">a v2 no Drive</div><div class="sub">…_v2_14-11.zip</div></div>
+      <div class="fato"><div class="rot">Você sai com</div><div class="val">equipe e v2</div><div class="sub">…_v2_14-11.zip no Drive</div></div>
     </div>
   </div>
 </header>
@@ -420,8 +420,8 @@ html[data-acesso=baixa-visao] .etapa.feita{opacity:1}
       </li>
       <li class="etapa hoje">
         <div class="quando"><div class="data">14/11</div><div class="dia">sábado · 2 aulas</div><span class="tipo">Aula 2</span></div>
-        <div class="oque"><h3>Estrutura: as quatro páginas em HTML</h3>
-          <p>Esqueleto de cada página com <code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code> e <code>footer</code>; menu com links funcionando; <code>estilo.css</code> ligado em todas; textos e imagens do seu tema. No fim, sorteio da ordem das apresentações.</p>
+        <div class="oque"><h3>Equipes e estrutura: as quatro páginas em HTML</h3>
+          <p>Primeiro, as equipes de até 3. Depois, o esqueleto de cada página com <code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code> e <code>footer</code>; menu com links funcionando; <code>estilo.css</code> ligado em todas; textos e imagens do tema.</p>
           <div class="marco"><b>Marco 2</b> bloco 1 da lista pronto: 4 páginas abrindo e o menu levando de uma à outra</div></div>
       </li>
       <li class="etapa menor">
@@ -429,8 +429,12 @@ html[data-acesso=baixa-visao] .etapa.feita{opacity:1}
         <div class="oque"><h3>Estilo: identidade, Flexbox e Grid</h3><p>Sem aula. Na segunda, 16/11, o professor publica orientações; estude pelo caderno e continue o site em casa. Marco 3: um print de cada página com CSS, pelo SUAP, até sexta, 20/11.</p></div>
       </li>
       <li class="etapa menor">
-        <div class="quando"><div class="data">23/11 e 30/11</div><div class="dia">segundas</div><span class="tipo aval">Aulas 3 e 4</span></div>
-        <div class="oque"><h3>Apresentações</h3><p>Metade da turma em cada data, pela ordem sorteada hoje. A entrega é de todos até 23/11, também de quem apresenta em 30/11.</p></div>
+        <div class="quando"><div class="data">23/11</div><div class="dia">segunda</div><span class="tipo">Aula 3</span></div>
+        <div class="oque"><h3>Finalização com o professor</h3><p>Terminar o site com o apoio do professor e ensaiar o roteiro. No fim, sorteio da ordem das equipes. Entrega até domingo, 29/11: zip final e o formulário de cada integrante.</p></div>
+      </li>
+      <li class="etapa menor">
+        <div class="quando"><div class="data">30/11</div><div class="dia">segunda</div><span class="tipo aval">Aula 4</span></div>
+        <div class="oque"><h3>Apresentações: todas as equipes</h3><p>O professor faz perguntas específicas a cada integrante: a nota é individual.</p></div>
       </li>
     </ol>
   </div>
@@ -439,17 +443,17 @@ html[data-acesso=baixa-visao] .etapa.feita{opacity:1}
 <section class="lamina" id="hoje">
   <div class="col">
     <h2>Hoje: passo a passo</h2>
-    <p class="sub-h2">No fim da aula você sai com as quatro páginas abrindo no navegador, o menu funcionando e a versão 2 salva no seu Google Drive. Isso é o Marco 2.</p>
+    <p class="sub-h2">No fim da aula a sua equipe sai com as quatro páginas abrindo no navegador, o menu funcionando e a versão 2 salva no seu Google Drive. Isso é o Marco 2.</p>
     <ol class="passos">
-      <li><div><div class="t">Abrir a versão 1</div><div class="d">Entre no <b>drive.google.com</b>, abra a pasta <b>Projeto final Web</b>, baixe o <code>…_v1_09-11.zip</code>, clique com o botão direito e escolha <b>Extrair aqui</b>. Abra a pasta extraída no VS Code. <b>Faltou em 09/11?</b> Avise o professor agora: você preenche a ficha do tema, cria a pasta e o Drive (parte "Só hoje" da <a href="https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-web/#salvar" target="_blank" rel="noopener">página do projeto final</a>) e segue daqui.</div></div><div class="min">10 min</div></li>
-      <li><div><div class="t">Criar os arquivos das quatro páginas</div><div class="d">Ao lado do <code>index.html</code>, crie os outros três com os nomes que estão no seu <code>ficha.txt</code> (ex.: <code>produtos.html</code>, <code>produto.html</code>, <code>contato.html</code>). Sem espaço, acento ou maiúscula.</div></div><div class="min">5 min</div></li>
+      <li><div><div class="t">Formar a equipe</div><div class="d">Até 3 integrantes. A equipe escolhe <b>um</b> dos temas de 09/11 e segue com o site de quem tem esse tema. Escreva num papel os nomes, a turma e o tema e entregue ao professor. Os outros não apagam a própria v1. <b>Faltou em 09/11?</b> Entre numa equipe: o tema é de um colega. O site é da equipe, mas a <a href="#equipes">nota é de cada um</a>.</div></div><div class="min">10 min</div></li>
+      <li><div><div class="t">Abrir a versão 1 do site da equipe</div><div class="d">Quem tem o tema escolhido entra no <b>drive.google.com</b>, abre a pasta <b>Projeto final Web</b>, baixa o <code>…_v1_09-11.zip</code>, clica com o botão direito e escolhe <b>Extrair aqui</b>. Abra a pasta extraída no VS Code. A equipe senta junto nesse computador e troca quem digita a cada página: todos precisam saber explicar tudo.</div></div><div class="min">5 min</div></li>
+      <li><div><div class="t">Criar os arquivos das quatro páginas</div><div class="d">Ao lado do <code>index.html</code>, crie os outros três com os nomes que estão no <code>ficha.txt</code> (ex.: <code>produtos.html</code>, <code>produto.html</code>, <code>contato.html</code>). Sem espaço, acento ou maiúscula.</div></div><div class="min">5 min</div></li>
       <li><div><div class="t">Montar o esqueleto do <code>index.html</code></div><div class="d">No <code>head</code>: o <code>title</code> e o <code>link</code> para o <code>estilo.css</code>. No <code>body</code>: <code>header</code> com o nome do site e o <code>nav</code>, depois <code>main</code> e <code>footer</code>. Use o <a href="#esqueleto">esqueleto</a> e troque tudo pelo seu tema.</div></div><div class="min">15 min</div></li>
       <li><div><div class="t">Fazer o menu</div><div class="d">Dentro do <code>nav</code>, uma lista com um link para cada página. O <code>href</code> é o nome do arquivo, igualzinho. Abra o <code>index.html</code> no navegador e clique.</div></div><div class="min">10 min</div></li>
       <li><div><div class="t">Repetir nas outras três páginas</div><div class="d">Copie o <code>index.html</code> inteiro para cada página e troque só o <code>title</code> e o que está dentro do <code>main</code>. O <code>header</code>, o <code>nav</code> e o <code>footer</code> ficam iguais em todas.</div></div><div class="min">10 min</div></li>
-      <li><div><div class="t">Colocar o conteúdo do seu tema</div><div class="d">Em cada <code>main</code>, uma <code>section</code> por assunto, com <code>h2</code> e parágrafos. Pelo menos uma lista no site. Imagens dentro da pasta <code>imagens/</code>, cada uma com um <code>alt</code> que diz o que ela mostra. Textos seus. Sem CSS a página fica feia, e hoje é assim mesmo.</div></div><div class="min">20 min</div></li>
+      <li><div><div class="t">Colocar o conteúdo do tema</div><div class="d">Em cada <code>main</code>, uma <code>section</code> por assunto, com <code>h2</code> e parágrafos. Pelo menos uma lista no site. Imagens dentro da pasta <code>imagens/</code>, cada uma com um <code>alt</code> que diz o que ela mostra. Textos seus. Sem CSS a página fica feia, e hoje é assim mesmo.</div></div><div class="min">20 min</div></li>
       <li><div><div class="t">Conferir o Marco 2 e mostrar ao professor</div><div class="d">Passe a lista <a href="#confira">Confira</a> em cada página e chame o professor com o site aberto no navegador.</div></div><div class="min">5 min</div></li>
-      <li><div><div class="t">Sorteio da ordem das apresentações</div><div class="d">O professor sorteia quem apresenta em 23/11 e quem apresenta em 30/11, com toda a turma, inclusive quem faltou. Anote a sua data no caderno ou no celular.</div></div><div class="min">5 min</div></li>
-      <li><div><div class="t">Salvar a versão 2</div><div class="d">Compactar a pasta, renomear para <code>…_v2_14-11.zip</code>, arrastar para o Drive e sair da conta Google. Veja <a href="#salvar">Salvar a v2</a>.</div></div><div class="min">10 min</div></li>
+      <li><div><div class="t">Salvar a versão 2</div><div class="d">Compactar a pasta, renomear para <code>…_v2_14-11.zip</code>, arrastar para a pasta do Drive de quem tem o tema, compartilhar a pasta com os colegas da equipe e sair da conta Google. Veja <a href="#salvar">Salvar a v2</a>.</div></div><div class="min">10 min</div></li>
     </ol>
   </div>
 </section>
@@ -534,7 +538,7 @@ html[data-acesso=baixa-visao] .etapa.feita{opacity:1}
 <section class="lamina" id="confira">
   <div class="col">
     <h2>Confira antes de mostrar: Marco 2</h2>
-    <p class="sub-h2">É o bloco 1 da avaliação, com os mesmos pontos da página do projeto final. Confira em cada uma das quatro páginas.</p>
+    <p class="sub-h2">É o bloco 1 da avaliação, com os mesmos pontos da página do projeto final. Confira em cada uma das quatro páginas. O site é da equipe; a nota é de cada um.</p>
     <div class="patamares">
       <div class="patamar bloco">
         <header><h3><span class="num-bloco">1</span>Páginas e HTML</h3><span class="quando-bloco">vale no Marco 2 · hoje</span><span class="pts">2,5 pontos</span></header>
@@ -557,16 +561,16 @@ html[data-acesso=baixa-visao] .etapa.feita{opacity:1}
   </div>
 </section>
 
-<section class="lamina" id="sorteio">
+<section class="lamina" id="equipes">
   <div class="col">
-    <h2>Sorteio e semana que vem</h2>
+    <h2>Equipes e semana que vem</h2>
     <div class="cartoes">
-      <div class="cartao"><h3>Sorteio da ordem das apresentações</h3>
-        <p>No fim da aula, o professor sorteia a ordem: metade da turma apresenta em <b>23/11</b> e metade em <b>30/11</b>. O sorteio é hoje e inclui toda a turma: quem faltou também recebe uma data. Anote a sua no caderno ou no celular.</p>
-        <p style="margin-top:8px">Quem tiver dificuldade de falar para a turma combina com o professor uma conversa individual, com os mesmos critérios. O roteiro da apresentação está na <a href="https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-web/#entrega" target="_blank" rel="noopener">página do projeto final</a>.</p></div>
+      <div class="cartao"><h3>Site da equipe, nota de cada um</h3>
+        <p>Equipes de até 3 integrantes, com um site só, de pelo menos quatro páginas. A avaliação é <b>individual</b>: na apresentação, o professor faz perguntas específicas a cada integrante, sobre qualquer parte do site, e dá a nota de cada um. Por isso, todos precisam saber explicar tudo, não só o que fizeram.</p>
+        <p style="margin-top:8px"><b>23/11:</b> aula para terminar o site com o professor e sorteio da ordem das equipes. <b>29/11, domingo:</b> entrega do zip final e do formulário de cada integrante. <b>30/11:</b> todas as equipes apresentam. O roteiro está na <a href="https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-web/#entrega" target="_blank" rel="noopener">página do projeto final</a>.</p></div>
       <div class="cartao"><h3>16 a 20/11: semana do MUV, sem aula</h3>
-        <p>Na segunda, 16/11, no horário da aula, o professor publica orientações para a semana. Estude pelo caderno e continue o site em casa: cores e fontes, box model, Flexbox e Grid. Baixe a v2 do Drive e salve a v3.</p>
-        <p style="margin-top:8px"><b>Marco 3:</b> até sexta, 20/11, um print de cada página com CSS, enviado pelo SUAP.</p>
+        <p>Na segunda, 16/11, no horário da aula, o professor publica orientações para a semana. Estude pelo caderno e continue o site em casa: cores e fontes, box model, Flexbox e Grid. Baixe a v2 do Drive e salve a v3. A equipe combina quem faz o quê.</p>
+        <p style="margin-top:8px"><b>Marco 3:</b> até sexta, 20/11, um print de cada página com CSS, enviado pelo SUAP por cada integrante.</p>
         <p class="destaque-dia"><b>Sem computador em casa?</b> Fale com o professor hoje: é o último dia para avisar.</p></div>
     </div>
   </div>
@@ -581,7 +585,8 @@ html[data-acesso=baixa-visao] .etapa.feita{opacity:1}
         <ol>
           <li>Botão direito na pasta do site, <b>Compactar</b> (ou <b>Enviar para › Pasta compactada</b>).</li>
           <li>Renomeie: nome do site, <code>_v2_14-11</code>, como abaixo.</li>
-          <li>Arraste o zip para a pasta <b>Projeto final Web</b> do Drive e espere aparecer.</li>
+          <li>Arraste o zip para a pasta <b>Projeto final Web</b> do Drive de quem tem o tema e espere aparecer.</li>
+          <li>Compartilhe essa pasta com os colegas da equipe: <b>Compartilhar</b>, o e-mail de cada um, permissão <b>Editor</b>. O professor já está nela desde 09/11.</li>
           <li><b>Saia da sua conta Google</b> antes de deixar o computador.</li>
         </ol></li>
       <li><p class="q">Deu problema?</p><h3>Plano B</h3>
@@ -617,7 +622,7 @@ html[data-acesso=baixa-visao] .etapa.feita{opacity:1}
   <div class="col">
     <h2>Autoria, revisão e uso de IA</h2>
     <p>Aula 2 do projeto final da disciplina Desenvolvimento Web Front-End (Técnico em Informática integrado, IFPI, Campus São Raimundo Nonato), 14/11/2026. Projeto, calendário, marcos, pesos e decisões: professor Alexandre Cajazeira Ramos, que responde pelo conteúdo. Esta página detalha a Aula 2 da <a href="https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-web/" target="_blank" rel="noopener">página do projeto final</a> e segue o caderno "HTML e CSS para layout".</p>
-    <p>Uso de IA: a redação do passo a passo a partir da página do projeto final e o HTML foram feitos com Claude (Claude Code), a pedido do professor. Versão 0.4, de 13/11/2026, em revisão pelo professor. A página não guarda nada do que você faz nela.</p>
+    <p>Uso de IA: a redação do passo a passo a partir da página do projeto final e o HTML foram feitos com Claude (Claude Code), a pedido do professor. Versão 0.5, de 14/11/2026, em revisão pelo professor. A página não guarda nada do que você faz nela.</p>
     <p class="so-tela">Material didático do <a href="https://cajazeiraalexandre.github.io/" target="_blank" rel="noopener">Laboratório de Dados Públicos</a>. Licença CC BY 4.0 para os textos.</p>
   </div>
 </footer>
@@ -723,7 +728,7 @@ html[data-acesso=baixa-visao] .etapa.feita{opacity:1}
     {t:'Deu problema?', partes:[c('#problemas .cartoes')], secoes:['problemas']},
     {t:'Confira antes de mostrar: Marco 2', partes:[c('#confira .patamar.bloco')], secoes:['confira']},
     {t:'Para a semana que vem', partes:[c('#confira .patamar.prep', true)]},
-    {t:'Sorteio e semana que vem', partes:[c('#sorteio .cartoes')], secoes:['sorteio']},
+    {t:'Equipes e semana que vem', partes:[c('#equipes .cartoes')], secoes:['equipes']},
     {t:'Antes de sair: salvar a v2', partes:[c('#salvar .ritual'), c('#salvar .versoes')], secoes:['salvar']},
     {t:'Abra esta página no celular', partes:[c('#qr .qr-caixa')], secoes:['qr']}
   ];
