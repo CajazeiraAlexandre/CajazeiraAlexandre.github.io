@@ -1,6 +1,6 @@
 # Aula 2: as quatro páginas em HTML
 
-**Tipo:** didatico · **Projeto:** programacao-web-didatico · **Status:** rascunho (0.3, aguarda validação) ·
+**Tipo:** didatico · **Projeto:** programacao-web-didatico · **Status:** rascunho (0.4) ·
 **Endereço previsto:** <https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-aula-2/>
 
 ## Pergunta

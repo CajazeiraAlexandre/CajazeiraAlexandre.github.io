@@ -1,6 +1,6 @@
 # Projeto final: o seu site com várias páginas
 
-**Tipo:** didatico · **Projeto:** programacao-web-didatico · **Status:** rascunho (piloto 0.8) ·
+**Tipo:** didatico · **Projeto:** programacao-web-didatico · **Status:** rascunho (piloto 0.9) ·
 **Endereço:** <https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-web/>
 
 ## Pergunta
@@ -37,6 +37,8 @@ professor desde a primeira aula; modo apresentação.
 - **Semana do MUV (16 a 20/11) sem aula a distância:** o professor só publica orientações, principalmente no horário da
   aula de segunda, e reforça o estudo dos materiais. As apresentações passam a ser as Aulas 3 (23/11) e 4 (30/11).
 - **Sorteio da ordem das apresentações em 14/11**, com toda a turma, inclusive quem faltar.
+- **Entrega de todos até 23/11 (versão 0.9):** zip final no Drive e formulário de envio, também para quem apresenta
+  em 30/11; antes, cada um entregava até o dia da própria apresentação.
 - A Aula 2 tem página própria (`2026-11_aula-2-estrutura-html`), ligada no calendário.
 - **QR code no fim da página** e no último slide, com o endereço público, para os alunos abrirem no celular. É gerado com
   `segno` (SVG embutido, preto no branco em qualquer tema). A leitura foi conferida com zxing-cpp.
