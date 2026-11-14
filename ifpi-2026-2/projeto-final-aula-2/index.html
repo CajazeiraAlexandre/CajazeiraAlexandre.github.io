@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aula 2: as quatro páginas em HTML</title>
+<meta name="description" content="Roteiro da aula de 14/11 do projeto final de Desenvolvimento Web Front-End (1º ano integrado, IFPI/SRN): passo a passo, esqueleto de uma página, menu, conferência do Marco 2, sorteio das apresentações e como salvar a versão 2.">
+<meta name="robots" content="noindex">
+<!-- Versão 0.3 (2026-11-13: sem o diário de avanços; sorteio com toda a turma; semana do MUV sem aula, a pedido do professor) para a aula de 14/11. Escrita à mão, com o CSS e o script da página do projeto final (2026-11_projeto-final-orientacoes, v0.7). Rascunho para revisão do professor. -->
+<style>
+/* Layout: uma coluna de leitura, seções longas como "lâminas" para projetar; mesmas famílias e cores do caderno (design/padrao). */
+:root{
+  --fonte-texto: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fonte-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --cor-fundo:#f9f9f7; --cor-superficie:#fcfcfb; --cor-texto:#0b0b0b; --cor-texto-secundario:#52514e;
+  --cor-texto-suave:#898781; --cor-grade:#e1e0d9; --cor-borda:rgba(11,11,11,.12);
+  --cor-destaque:#2a78d6; --cor-destaque-fundo:#e4effb;
+  --cor-base:#1baf7a; --cor-base-fundo:#e3f6ee;
+  --cor-completo:#2a78d6; --cor-completo-fundo:#e4effb;
+  --cor-alem:#eb6834; --cor-alem-fundo:#fdebe3;
+  --cor-atencao:#fab219; --cor-atencao-fundo:#fff6dc;
+  --cor-hoje:#d03b3b; --cor-palco:#dddcd5;
+  --raio:8px; --largura:960px; --largura-texto:70ch;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --cor-fundo:#15161a; --cor-superficie:#1e2025; --cor-texto:#f1f1ee; --cor-texto-secundario:#b9b8b1;
+    --cor-texto-suave:#85847d; --cor-grade:#2d2f36; --cor-borda:rgba(255,255,255,.14);
+    --cor-destaque:#6da7ec; --cor-destaque-fundo:#1b2a40;
+    --cor-base:#3ccb97; --cor-base-fundo:#15332a;
+    --cor-completo:#6da7ec; --cor-completo-fundo:#1b2a40;
+    --cor-alem:#f0865a; --cor-alem-fundo:#3a241b;
+    --cor-atencao:#fab219; --cor-atencao-fundo:#3a3117;
+    --cor-hoje:#f06a6a; --cor-palco:#08090b;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --cor-fundo:#15161a; --cor-superficie:#1e2025; --cor-texto:#f1f1ee; --cor-texto-secundario:#b9b8b1;
+  --cor-texto-suave:#85847d; --cor-grade:#2d2f36; --cor-borda:rgba(255,255,255,.14);
+  --cor-destaque:#6da7ec; --cor-destaque-fundo:#1b2a40;
+  --cor-base:#3ccb97; --cor-base-fundo:#15332a;
+  --cor-completo:#6da7ec; --cor-completo-fundo:#1b2a40;
+  --cor-alem:#f0865a; --cor-alem-fundo:#3a241b;
+  --cor-atencao:#fab219; --cor-atencao-fundo:#3a3117;
+  --cor-hoje:#f06a6a; --cor-palco:#08090b;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--cor-fundo);color:var(--cor-texto);font-family:var(--fonte-texto);font-size:1.0625rem;line-height:1.6;
+  padding-block:0 48px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+a{color:var(--cor-destaque);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--cor-destaque);outline-offset:2px}
+h1,h2,h3{line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem, 5vw, 3.25rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(1.5rem, 3vw, 2rem);font-weight:800}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0}
+.col{max-width:var(--largura);margin:0 auto}
+.texto{max-width:var(--largura-texto)}
+code{font-family:var(--fonte-mono);font-size:.9em;background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:4px;padding:0 5px}
+
+/* menu fixo */
+.menu{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:var(--cor-fundo);border-bottom:1px solid var(--cor-grade)}
+.menu .col{display:flex;gap:4px;overflow-x:auto;padding:8px 0;scrollbar-width:thin}
+.menu a{white-space:nowrap;text-decoration:none;color:var(--cor-texto-secundario);font-weight:600;font-size:.9rem;padding:6px 10px;border-radius:999px}
+.menu a:hover{background:var(--cor-superficie);color:var(--cor-texto)}
+
+/* capa */
+.capa{padding:48px 0 32px;border-bottom:1px solid var(--cor-grade)}
+.chapeu{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cor-texto-secundario)}
+.capa .lede{font-size:clamp(1.15rem, 2.2vw, 1.5rem);color:var(--cor-texto-secundario);max-width:var(--largura-texto);margin-top:16px}
+.fatos{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 200px), 1fr));gap:12px;margin-top:28px}
+.fato{background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:var(--raio);padding:14px 16px;min-width:0}
+.fato .rot{font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--cor-texto-secundario)}
+.fato .val{font-size:1.35rem;font-weight:800;line-height:1.2;margin-top:4px}
+.fato .sub{font-size:.9rem;color:var(--cor-texto-secundario);margin-top:2px}
+
+section.lamina{padding:44px 0 8px;scroll-margin-top:64px}
+section.lamina>.col>h2{margin-bottom:8px}
+.sub-h2{color:var(--cor-texto-secundario);max-width:var(--largura-texto);margin-bottom:20px}
+
+/* temas */
+.temas{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.temas span{border:1px solid var(--cor-borda);background:var(--cor-superficie);border-radius:999px;padding:6px 14px;font-weight:600;font-size:.95rem}
+.exemplo-paginas{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 190px), 1fr));gap:10px;margin-top:20px}
+.pagina-ex{border:2px solid var(--cor-borda);border-radius:var(--raio);padding:10px 12px;background:var(--cor-superficie);min-width:0}
+.pagina-ex .n{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--cor-texto-secundario)}
+.pagina-ex .t{font-weight:700;margin-top:2px}
+.pagina-ex .d{font-size:.9rem;color:var(--cor-texto-secundario)}
+.pagina-ex .esq{display:grid;gap:3px;margin-top:8px}
+.pagina-ex .esq i{display:block;height:7px;border-radius:2px;background:var(--cor-grade)}
+.pagina-ex .esq i.menu-b{background:var(--cor-destaque);opacity:.7}
+.pagina-ex .esq .duas{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.pagina-ex .esq .tres{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px}
+.pagina-ex .esq .tres i,.pagina-ex .esq .duas i{height:18px}
+
+/* calendário */
+.linha{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+.etapa{min-width:0;display:grid;grid-template-columns:150px 1fr;gap:0 20px;position:relative;padding:14px 0 18px;border-top:1px solid var(--cor-grade)}
+.etapa:last-child{border-bottom:1px solid var(--cor-grade)}
+.etapa .quando{min-width:0}
+.etapa .data{font-weight:800;font-size:1.15rem;font-variant-numeric:tabular-nums;line-height:1.2}
+.etapa .dia{font-size:.85rem;color:var(--cor-texto-secundario)}
+.etapa .tipo{display:inline-block;margin-top:6px;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:4px;padding:2px 6px;background:var(--cor-superficie);border:1px solid var(--cor-borda);color:var(--cor-texto-secundario)}
+.etapa .tipo.muv{background:var(--cor-atencao-fundo);border-color:transparent;color:var(--cor-texto)}
+.etapa .tipo.aval{background:var(--cor-completo-fundo);border-color:transparent;color:var(--cor-texto)}
+.etapa .oque{min-width:0}
+.etapa .oque h3{margin-bottom:4px}
+.etapa .oque p{color:var(--cor-texto-secundario)}
+.etapa .marco{display:inline-flex;align-items:center;gap:8px;margin-top:10px;background:var(--cor-base-fundo);border-radius:var(--raio);padding:8px 12px;font-size:.95rem;color:var(--cor-texto)}
+.etapa .marco b{color:var(--cor-base)}
+.etapa .marco.entrega{background:var(--cor-completo-fundo)}
+.etapa .marco.entrega b{color:var(--cor-completo)}
+.etapa.hoje{background:linear-gradient(90deg, var(--cor-superficie), transparent);border-left:4px solid var(--cor-hoje);padding-left:16px;margin-left:-20px}
+.etapa.hoje .data::after{content:"hoje";font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--cor-hoje);margin-left:8px;vertical-align:middle}
+.etapa.menor{padding:10px 0 12px}
+.etapa.menor .data{font-size:1rem}
+.etapa.menor .oque h3{font-size:1rem}
+@media (max-width:640px){
+  .etapa{grid-template-columns:1fr;gap:4px}
+  .etapa.hoje{margin-left:-12px;padding-left:8px}
+}
+
+/* plano de hoje */
+.passos{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:passo}
+.passos li{display:grid;grid-template-columns:44px 1fr auto;gap:0 14px;align-items:start;background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:var(--raio);padding:12px 14px;min-width:0}
+.passos li::before{counter-increment:passo;content:counter(passo);font-weight:800;font-size:1.4rem;line-height:1;color:var(--cor-destaque);padding-top:2px}
+.passos li .t{font-weight:700}
+.passos li .d{color:var(--cor-texto-secundario);font-size:.95rem}
+.passos li .min{font-size:.8rem;font-weight:700;color:var(--cor-texto-secundario);white-space:nowrap;font-variant-numeric:tabular-nums;padding-top:3px}
+@media (max-width:640px){.passos li{grid-template-columns:36px 1fr}.passos li .min{grid-column:2}}
+
+
+/* botões */
+.botao{font:inherit;font-weight:700;font-size:.95rem;border:1px solid var(--cor-borda);background:var(--cor-fundo);color:var(--cor-texto);border-radius:6px;padding:8px 14px;cursor:pointer}
+.botao.primario{background:var(--cor-destaque);border-color:var(--cor-destaque);color:#fff}
+.botao:hover{filter:brightness(.96)}
+.aviso-copia{font-size:.9rem;color:var(--cor-texto-secundario)}
+
+/* lista de requisitos */
+.patamares{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;margin-top:8px}
+.patamar{min-width:0;border:1px solid var(--cor-borda);border-radius:var(--raio);overflow:hidden;background:var(--cor-superficie)}
+.patamar header{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;padding:12px 16px}
+.patamar header h3{font-size:1.3rem}
+.patamar header .pts{font-weight:800;font-variant-numeric:tabular-nums;margin-left:auto}
+.patamar header .exp{flex-basis:100%;color:var(--cor-texto-secundario);font-size:.95rem}
+.patamar.base header{background:var(--cor-base-fundo)}
+.patamar.completo header{background:var(--cor-completo-fundo)}
+.patamar.alem header{background:var(--cor-alem-fundo)}
+.rolagem{overflow-x:auto}
+table.req{width:100%;border-collapse:collapse;font-size:.98rem}
+table.req th{text-align:left;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--cor-texto-secundario);padding:8px 10px;border-bottom:1px solid var(--cor-grade);font-weight:700}
+table.req td{padding:9px 10px;border-bottom:1px solid var(--cor-grade);vertical-align:top}
+table.req tr:last-child td{border-bottom:0}
+table.req td.item b{display:block}
+table.req td.item span{color:var(--cor-texto-secundario);font-size:.92rem}
+table.req td.como{color:var(--cor-texto-secundario);font-size:.92rem;min-width:140px}
+table.req td.pts{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.req td.ref{white-space:nowrap;font-size:.85rem}
+.alem-lista{display:flex;flex-wrap:wrap;gap:8px;padding:14px 16px}
+
+/* não pode / entrega / apresentação */
+.cartoes{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 280px), 1fr));gap:12px;margin-top:8px}
+.cartao{background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:var(--raio);padding:14px 16px;min-width:0}
+.cartao h3{margin-bottom:6px}
+.cartao p,.cartao li{color:var(--cor-texto-secundario);font-size:.97rem}
+.cartao ul,.cartao ol{margin:6px 0 0;padding-left:20px}
+.cartao li{margin:3px 0}
+.cartao.nao{border-left:4px solid var(--cor-hoje)}
+.cartao.sim{border-left:4px solid var(--cor-base)}
+.pasta{font-family:var(--fonte-mono);font-size:.9rem;line-height:1.5;background:var(--cor-fundo);border:1px solid var(--cor-borda);border-radius:6px;padding:10px 12px;margin-top:8px;white-space:pre;overflow-x:auto}
+.roteiro{counter-reset:fala;list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}
+.roteiro li{display:grid;grid-template-columns:28px 1fr;gap:8px;color:var(--cor-texto-secundario)}
+.roteiro li::before{counter-increment:fala;content:counter(fala);font-weight:800;color:var(--cor-destaque)}
+.roteiro li b{color:var(--cor-texto)}
+
+
+/* lista em blocos */
+.resumo-blocos{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.resumo-blocos a{display:inline-flex;gap:8px;align-items:baseline;text-decoration:none;color:var(--cor-texto);border:1px solid var(--cor-borda);background:var(--cor-superficie);border-radius:999px;padding:6px 14px;font-weight:600;font-size:.95rem}
+.resumo-blocos a b{font-variant-numeric:tabular-nums;color:var(--cor-destaque)}
+.resumo-blocos .total{border-style:dashed}
+.patamar.bloco header{background:var(--cor-destaque-fundo)}
+.patamar header .quando-bloco{font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--cor-texto-secundario)}
+.patamar header .num-bloco{display:inline-grid;place-items:center;width:1.7em;height:1.7em;border-radius:50%;background:var(--cor-destaque);color:#fff;font-size:.85em;margin-right:6px;vertical-align:.1em}
+
+/* rotina de salvar */
+.ritual{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 260px), 1fr));gap:12px;counter-reset:rit}
+.ritual li{background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:var(--raio);padding:14px 16px;min-width:0}
+.ritual li .q{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--cor-texto-secundario)}
+.ritual li h3{margin:2px 0 6px}
+.ritual li h3::before{counter-increment:rit;content:counter(rit) ". ";color:var(--cor-destaque)}
+.ritual li ol{margin:0;padding-left:20px;color:var(--cor-texto-secundario);font-size:.97rem}
+.ritual li ol li{background:none;border:0;padding:0;margin:3px 0}
+.ritual li.salvar{border-color:var(--cor-base);box-shadow:inset 0 3px 0 var(--cor-base)}
+.versoes{display:flex;flex-wrap:wrap;gap:6px 4px;align-items:center;margin-top:12px}
+.versoes .zip{font-family:var(--fonte-mono);font-size:.85rem;border:1px solid var(--cor-borda);background:var(--cor-fundo);border-radius:6px;padding:6px 10px;min-width:0}
+.versoes .zip small{display:block;font-family:var(--fonte-texto);font-size:.75rem;color:var(--cor-texto-secundario)}
+.versoes .seta{color:var(--cor-texto-suave);font-weight:700;padding:0 2px}
+.versoes .zip.final{border-color:var(--cor-completo);background:var(--cor-completo-fundo)}
+.primeira-vez{margin-top:16px}
+
+/* modelo da ficha do tema */
+.modelo{margin-top:24px;border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-superficie);padding:16px 18px}
+.modelo h3{margin-bottom:4px}
+.modelo .nota{font-size:.9rem;color:var(--cor-texto-secundario);margin-bottom:10px;max-width:var(--largura-texto)}
+.modelo pre{font-family:var(--fonte-mono);font-size:.92rem;line-height:1.6;background:var(--cor-fundo);border:1px solid var(--cor-borda);border-radius:6px;padding:10px 14px;margin:0;overflow-x:auto}
+.modelo .acoes{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+
+/* prévia do formulário de envio */
+.form-partes{display:grid;gap:14px;margin-top:8px}
+.form-parte{border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-superficie);overflow:hidden;min-width:0}
+.form-parte>h3{font-size:1.05rem;padding:10px 16px;background:var(--cor-destaque-fundo);margin:0}
+.form-parte>h3 .np{color:var(--cor-destaque);margin-right:6px}
+.form-parte>h3 .liga{font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--cor-texto-secundario);margin-left:8px}
+.perguntas{list-style:none;margin:0;padding:0}
+.perguntas li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:4px 20px;padding:10px 16px;border-top:1px solid var(--cor-grade)}
+.perguntas li:first-child{border-top:0}
+.perguntas .q{font-weight:700}
+.perguntas .q small{display:block;font-weight:400;color:var(--cor-texto-secundario);font-size:.88rem}
+.perguntas .ex{color:var(--cor-texto-suave);font-size:.92rem;font-style:italic}
+.perguntas .ex code{font-style:normal}
+@media (max-width:640px){.perguntas li{grid-template-columns:minmax(0,1fr)}}
+table.req.criterios td.item{min-width:200px}
+.criterio-nota{margin-top:10px;font-size:.92rem;color:var(--cor-texto-secundario);padding:0 16px 14px}
+.alem-lista span{display:inline-flex;align-items:center;border:1px dashed var(--cor-borda);border-radius:999px;padding:6px 12px;font-size:.95rem}
+.formulario-aviso{margin-top:12px;padding:10px 14px;border-radius:var(--raio);background:var(--cor-destaque-fundo);font-size:.95rem}
+.formulario-aviso a{font-weight:700}
+
+.botao.mini{font-size:.8rem;padding:2px 8px;vertical-align:baseline}
+code.email{user-select:all;overflow-wrap:anywhere}
+.etapa .marco{flex-wrap:wrap;max-width:100%}
+html[data-acesso=baixa-visao] code{overflow-wrap:anywhere}
+
+/* modo apresentação: quadro 16:9 com 1040 x 585 px lógicos, ampliado para caber na janela */
+.btn-apres{flex:none;font:inherit;font-weight:700;font-size:.9rem;border:1px solid var(--cor-destaque);color:var(--cor-destaque);background:transparent;border-radius:999px;padding:5px 14px;cursor:pointer;white-space:nowrap}
+.btn-apres:hover{background:var(--cor-destaque-fundo)}
+@media (max-width:900px){.btn-apres{display:none}}
+.deck{position:fixed;inset:0;z-index:50;background:var(--cor-palco)}
+.deck-palco{position:absolute;left:0;top:0;width:1040px;height:585px;transform-origin:0 0;background:var(--cor-fundo);color:var(--cor-texto);border-radius:6px;box-shadow:0 12px 48px rgba(0,0,0,.22);overflow:hidden;display:flex;flex-direction:column;font-size:1.0625rem;line-height:1.55}
+.deck-topo{display:flex;justify-content:space-between;gap:16px;padding:20px 40px 0;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cor-texto-secundario)}
+.deck-slide{flex:1;min-height:0;padding:10px 40px 0;overflow:hidden}
+.deck-titulo{font-size:2.05rem;font-weight:800;line-height:1.1;margin:0 0 16px;text-wrap:balance}
+.deck-conteudo{transform-origin:0 0;display:grid;gap:14px;align-content:start}
+.deck-conteudo .sub-h2{margin:0;font-size:1.15rem}
+.deck-conteudo .etapa.hoje{margin-left:-16px}
+.deck-slide.capa-slide{display:flex;flex-direction:column;justify-content:center;padding-bottom:30px}
+.deck-slide.capa-slide h1{font-size:3.4rem;margin:6px 0 4px}
+.deck-slide.capa-slide .lede{font-size:1.45rem;margin-top:8px}
+.deck-rodape{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:8px 40px 12px;font-size:.78rem;color:var(--cor-texto-suave)}
+.deck-rodape .cont{font-variant-numeric:tabular-nums;font-weight:700;color:var(--cor-texto-secundario)}
+.deck-barra{height:4px;background:var(--cor-grade)}
+.deck-barra i{display:block;height:100%;background:var(--cor-destaque);transition:width .25s ease}
+.deck-seta{position:fixed;top:50%;transform:translateY(-50%);z-index:51;width:52px;height:52px;border-radius:50%;border:1px solid var(--cor-borda);background:var(--cor-superficie);color:var(--cor-texto);font-size:1.7rem;line-height:1;cursor:pointer;opacity:.75}
+.deck-seta:hover{opacity:1}
+.deck-seta:disabled{opacity:.2;cursor:default}
+.deck-seta.ant{left:max(12px, env(safe-area-inset-left, 0px))}
+.deck-seta.prox{right:max(12px, env(safe-area-inset-right, 0px))}
+.deck-ctrl{position:fixed;top:calc(14px + env(safe-area-inset-top, 0px));right:max(16px, env(safe-area-inset-right, 0px));z-index:51;display:flex;flex-direction:column;gap:8px}
+.deck-ctrl button{width:44px;height:44px;display:grid;place-items:center;font:inherit;font-size:1.2rem;line-height:1;border:1px solid var(--cor-borda);background:var(--cor-superficie);color:var(--cor-texto);border-radius:50%;padding:0;cursor:pointer;opacity:.75}
+.deck-ctrl button:hover{opacity:1}
+.deck:fullscreen .deck-seta,.deck:fullscreen .deck-ctrl{opacity:.12}
+.deck:fullscreen .deck-seta:hover,.deck:fullscreen .deck-ctrl:hover{opacity:1}
+.deck-slide.entra{animation:entra .22s ease-out}
+@keyframes entra{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.deck-slide.entra{animation:none}.deck-barra i{transition:none}}
+
+/* barra de leitura: modo apresentação e baixa visão (fora do menu de conteúdos) */
+.ferramentas{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin:0 0 22px;padding:8px 12px;border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-superficie);font-size:.92rem}
+.ferramentas label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;min-height:32px}
+.ferramentas input[type=checkbox]{width:1.15em;height:1.15em;margin:0;accent-color:var(--cor-texto)}
+.ferramentas .grupo{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px}
+.ferramentas .grupo button{font:inherit;font-weight:700;min-width:2.4em;min-height:32px;border:1px solid var(--cor-borda);border-radius:var(--raio);background:var(--cor-fundo);color:var(--cor-texto);cursor:pointer;padding:2px 8px}
+.ferramentas .grupo button:disabled{opacity:.45;cursor:default}
+.ferramentas .valor{min-width:3.2em;text-align:center;font-variant-numeric:tabular-nums}
+.ferramentas .nota-acesso{flex-basis:100%;margin:0;font-size:.85rem;color:var(--cor-texto-secundario)}
+.deck-pagina{font:inherit;font-size:.78rem;font-weight:700;border:1px solid var(--cor-borda);background:var(--cor-superficie);color:var(--cor-texto);border-radius:999px;padding:3px 10px;cursor:pointer;margin-left:6px}
+
+/* baixa visão (pedido do professor, 2026-11-08; mesmo desenho do caderno de HTML e CSS): texto maior (--bv-escala),
+   contraste alto, uma coluna, foco visível, alvos maiores, links sublinhados; data-theme dá o fundo claro ou escuro */
+html[data-acesso=baixa-visao]{font-size:calc(100% * var(--bv-escala,1.5));--largura:64rem;
+  --cor-fundo:#fff;--cor-superficie:#fff;--cor-texto:#000;--cor-texto-secundario:#1a1a1a;--cor-texto-suave:#333;
+  --cor-grade:rgba(0,0,0,.35);--cor-borda:rgba(0,0,0,.6);--cor-destaque:#0b4ea2;--cor-destaque-fundo:#e6eefb;
+  --cor-base:#0a6b2f;--cor-base-fundo:#e7f4ec;--cor-completo:#0b4ea2;--cor-completo-fundo:#e6eefb;
+  --cor-alem:#a33a00;--cor-alem-fundo:#fbe9df;--cor-atencao:#8a5a00;--cor-atencao-fundo:#fff1c7;--cor-hoje:#b00020;--cor-palco:#d6d6d6}
+html[data-acesso=baixa-visao][data-theme=dark]{
+  --cor-fundo:#000;--cor-superficie:#000;--cor-texto:#fff;--cor-texto-secundario:#e8e8e8;--cor-texto-suave:#cfcfcf;
+  --cor-grade:rgba(255,255,255,.4);--cor-borda:rgba(255,255,255,.65);--cor-destaque:#9cc4ff;--cor-destaque-fundo:#0d1f3a;
+  --cor-base:#7fe0a3;--cor-base-fundo:#0f2a1c;--cor-completo:#9cc4ff;--cor-completo-fundo:#0d1f3a;
+  --cor-alem:#ffb38a;--cor-alem-fundo:#3a1e10;--cor-atencao:#ffd84d;--cor-atencao-fundo:#332800;--cor-hoje:#ff8a8a;--cor-palco:#111}
+/* baixa visão nos slides (professor, 2026-11-08): o texto continua ampliado e o slide rola em vez de encolher */
+html[data-acesso=baixa-visao] .deck-slide{overflow-y:auto;overscroll-behavior:contain;padding-bottom:16px}
+html[data-acesso=baixa-visao] .deck-slide.capa-slide{justify-content:flex-start}
+html[data-acesso=baixa-visao] .deck-titulo{font-size:1.7rem}
+html[data-acesso=baixa-visao] .deck-topo{font-size:.6rem;padding-top:12px}
+html[data-acesso=baixa-visao] .deck-rodape{font-size:.62rem;padding-top:4px;padding-bottom:8px}
+html[data-acesso=baixa-visao] .deck-pagina{min-height:0;border-width:1px;padding:2px 10px}
+html[data-acesso=baixa-visao] .deck-topo span:last-child{display:none}
+html[data-acesso=baixa-visao] .perguntas .ex,html[data-acesso=baixa-visao] .versoes .zip{overflow-wrap:anywhere}
+.deck-mais{font-weight:700;color:var(--cor-destaque)}
+html[data-acesso=baixa-visao] body{letter-spacing:.01em;word-spacing:.04em;line-height:1.7;overflow-wrap:break-word}
+html[data-acesso=baixa-visao] a{text-decoration:underline;text-underline-offset:.15em;text-decoration-thickness:.08em}
+html[data-acesso=baixa-visao] :focus-visible{outline:3px solid var(--cor-texto);outline-offset:3px}
+html[data-acesso=baixa-visao] button{min-height:2.75rem;border-width:2px}
+html[data-acesso=baixa-visao] .ferramentas{font-size:1rem}
+html[data-acesso=baixa-visao] .menu{position:static}
+html[data-acesso=baixa-visao] .fatos,html[data-acesso=baixa-visao] .exemplo-paginas,html[data-acesso=baixa-visao] .cartoes,
+html[data-acesso=baixa-visao] .ritual,html[data-acesso=baixa-visao] .etapa,html[data-acesso=baixa-visao] .perguntas li{grid-template-columns:minmax(0,1fr)}
+html[data-acesso=baixa-visao] .etapa{gap:6px}
+html[data-acesso=baixa-visao] .etapa.hoje{margin-left:0;padding-left:12px}
+html[data-acesso=baixa-visao] .passos li{grid-template-columns:2.2rem minmax(0,1fr)}
+html[data-acesso=baixa-visao] .passos li .min{grid-column:2}
+html[data-acesso=baixa-visao] .perguntas .ex,html[data-acesso=baixa-visao] .pasta,html[data-acesso=baixa-visao] .modelo pre{font-size:1rem}
+html[data-acesso=baixa-visao] .cartao.nao,html[data-acesso=baixa-visao] .cartao.sim{border-left-width:6px}
+
+/* QR code para abrir a página no celular (professor, 2026-11-13); preto no branco em qualquer tema, para a câmera ler */
+.qr-caixa{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:var(--raio);padding:18px 20px}
+.qr-caixa .qr{flex:none;width:200px;height:200px;background:#fff;border-radius:6px}
+.qr-caixa .qr svg{display:block;width:100%;height:100%;shape-rendering:crispEdges}
+.qr-caixa .qr-texto{flex:1 1 240px;min-width:0}
+.qr-caixa .qr-texto p{color:var(--cor-texto-secundario)}
+.qr-caixa .qr-texto .url{margin-top:8px;font-family:var(--fonte-mono);font-size:.95rem;overflow-wrap:anywhere}
+.deck-conteudo .qr-caixa{justify-content:center;padding:24px}
+.deck-conteudo .qr-caixa .qr{width:340px;height:340px}
+.deck-conteudo .qr-caixa .qr-texto{flex:0 1 380px;font-size:1.25rem}
+
+/* rodapé */
+footer.fim{margin-top:56px;border-top:1px solid var(--cor-grade);padding-top:20px;font-size:.9rem;color:var(--cor-texto-secundario)}
+footer.fim h2{font-size:1.1rem;color:var(--cor-texto);margin-bottom:8px}
+footer.fim p{max-width:var(--largura-texto);margin-bottom:8px}
+
+@media print{
+  .menu,.ferramentas,.modelo .acoes,footer.fim .so-tela,.deck,.btn-apres,.botao.mini{display:none!important}
+  body{font-size:10.5pt;padding:0}
+  section.lamina{padding:14pt 0 0;break-inside:avoid}
+  .capa{padding:0 0 10pt}
+  .etapa.hoje{background:none}
+  a{color:inherit}
+}
+
+/* ---- próprios da Aula 2 ---- */
+.etapa.feita .data::after{content:"feita";font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--cor-base);margin-left:8px;vertical-align:middle}
+.etapa.feita{opacity:.8}
+.par-codigo{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:820px){.par-codigo{grid-template-columns:minmax(0,1fr)}}
+/* nos slides, o esqueleto em duas colunas para caber legível */
+.deck-conteudo .modelo{padding:12px 14px;min-width:0}
+.deck-conteudo .modelo pre{min-width:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.deck-conteudo .modelo pre{columns:2;column-gap:28px;column-rule:1px solid var(--cor-grade);line-height:1.5;font-size:.84rem;overflow:visible}
+html[data-acesso=baixa-visao] .deck-conteudo .modelo pre{columns:1}
+.partes{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.partes li{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:4px 12px;background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:var(--raio);padding:9px 12px;min-width:0}
+.partes li code{justify-self:start;align-self:start;font-weight:700}
+.partes li span{color:var(--cor-texto-secundario);font-size:.95rem}
+@media (max-width:640px){.partes li{grid-template-columns:minmax(0,1fr)}}
+.confira{list-style:none;margin:0;padding:0}
+.confira li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:0 12px;align-items:start;padding:10px 16px;border-top:1px solid var(--cor-grade)}
+.confira li:first-child{border-top:0}
+.confira li::before{content:"";width:20px;height:20px;border:2px solid var(--cor-texto-secundario);border-radius:4px;margin-top:3px}
+.confira li b{display:block}
+.confira li .d{color:var(--cor-texto-secundario);font-size:.93rem}
+.confira li .pts{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.confira-total{display:flex;justify-content:space-between;gap:12px;padding:10px 16px;border-top:2px solid var(--cor-borda);font-weight:800}
+.confira-total b{color:var(--cor-destaque);font-variant-numeric:tabular-nums}
+.patamar.prep header{background:var(--cor-atencao-fundo)}
+.versoes .zip.agora{border-color:var(--cor-base);background:var(--cor-base-fundo);box-shadow:inset 0 3px 0 var(--cor-base)}
+.versoes .zip.passada{opacity:.7}
+.destaque-dia{margin-top:12px;padding:10px 14px;border-radius:var(--raio);background:var(--cor-atencao-fundo);font-size:.98rem}
+html[data-acesso=baixa-visao] .par-codigo,html[data-acesso=baixa-visao] .partes li,html[data-acesso=baixa-visao] .confira li{grid-template-columns:minmax(0,1fr)}
+html[data-acesso=baixa-visao] .confira li::before{display:none}
+html[data-acesso=baixa-visao] .etapa.feita{opacity:1}
+</style>
+<script data-goatcounter="https://cajazeiraalexandre.goatcounter.com/count" async src="https://gc.zgo.at/count.v4.js" integrity="sha384-nRw6qfbWyJha9LhsOtSb2YJDyZdKvvCFh0fJYlkquSFjUxp9FVNugbfy8q1jdxI+" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="menu" aria-label="Seções desta página">
+  <div class="col">
+    <a href="#onde">Onde estamos</a>
+    <a href="#hoje">Passo a passo</a>
+    <a href="#esqueleto">Esqueleto</a>
+    <a href="#problemas">Deu problema?</a>
+    <a href="#confira">Confira: Marco 2</a>
+    <a href="#sorteio">Sorteio</a>
+    <a href="#salvar">Salvar a v2</a>
+    <a href="#qr">QR code</a>
+  </div>
+</nav>
+
+<header class="capa">
+  <div class="col">
+    <div class="ferramentas" id="ferramentas" role="group" aria-label="Modo de leitura">
+      <button type="button" class="btn-apres" id="abrir-apres" title="Ver como slides (tecla P)">Modo apresentação</button>
+      <span id="acesso"></span>
+    </div>
+    <p class="chapeu">Projeto final · Desenvolvimento Web Front-End · 1º ano integrado</p>
+    <h1>Aula 2: as quatro páginas em HTML</h1>
+    <p class="lede">Hoje o site ganha corpo: as quatro páginas da sua ficha, com a mesma estrutura, um menu que leva de uma à outra e o conteúdo do seu tema. Ainda sem estilo: o CSS fica para a semana que vem.</p>
+    <div class="fatos">
+      <div class="fato"><div class="rot">Hoje</div><div class="val">14/11, sábado</div><div class="sub">2 aulas · reposição de segunda</div></div>
+      <div class="fato"><div class="rot">Meta</div><div class="val">Marco 2</div><div class="sub">4 páginas abrindo e menu funcionando</div></div>
+      <div class="fato"><div class="rot">Vale</div><div class="val">2,5 pontos</div><div class="sub">bloco 1 da avaliação</div></div>
+      <div class="fato"><div class="rot">Você sai com</div><div class="val">a v2 no Drive</div><div class="sub">…_v2_14-11.zip</div></div>
+    </div>
+  </div>
+</header>
+
+<section class="lamina" id="onde">
+  <div class="col">
+    <h2>Onde estamos no projeto</h2>
+    <p class="sub-h2">Cada aula tem um marco. O de hoje é o esqueleto do site: tudo o que existe antes do CSS. O calendário completo está na <a href="https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-web/#calendario" target="_blank" rel="noopener">página do projeto final</a>.</p>
+    <ol class="linha">
+      <li class="etapa menor feita">
+        <div class="quando"><div class="data">09/11</div><div class="dia">segunda</div><span class="tipo">Aula 1</span></div>
+        <div class="oque"><h3>Tema e esboço</h3><p>Tema aprovado, desenho das 4 páginas, ficha do tema e v1 na pasta do Drive compartilhada com o professor.</p></div>
+      </li>
+      <li class="etapa hoje">
+        <div class="quando"><div class="data">14/11</div><div class="dia">sábado · 2 aulas</div><span class="tipo">Aula 2</span></div>
+        <div class="oque"><h3>Estrutura: as quatro páginas em HTML</h3>
+          <p>Esqueleto de cada página com <code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code> e <code>footer</code>; menu com links funcionando; <code>estilo.css</code> ligado em todas; textos e imagens do seu tema. No fim, sorteio da ordem das apresentações.</p>
+          <div class="marco"><b>Marco 2</b> bloco 1 da lista pronto: 4 páginas abrindo e o menu levando de uma à outra</div></div>
+      </li>
+      <li class="etapa menor">
+        <div class="quando"><div class="data">16 a 20/11</div><div class="dia">semana do MUV · sem aula</div><span class="tipo muv">Estudo em casa</span></div>
+        <div class="oque"><h3>Estilo: identidade, Flexbox e Grid</h3><p>Sem aula. Na segunda, 16/11, o professor publica orientações; estude pelo caderno e continue o site em casa. Marco 3: um print de cada página com CSS, pelo SUAP, até sexta, 20/11.</p></div>
+      </li>
+      <li class="etapa menor">
+        <div class="quando"><div class="data">23/11 e 30/11</div><div class="dia">segundas</div><span class="tipo aval">Aulas 3 e 4</span></div>
+        <div class="oque"><h3>Apresentações</h3><p>Metade da turma em cada data, pela ordem sorteada hoje.</p></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="lamina" id="hoje">
+  <div class="col">
+    <h2>Hoje: passo a passo</h2>
+    <p class="sub-h2">No fim da aula você sai com as quatro páginas abrindo no navegador, o menu funcionando e a versão 2 salva no seu Google Drive. Isso é o Marco 2.</p>
+    <ol class="passos">
+      <li><div><div class="t">Abrir a versão 1</div><div class="d">Entre no <b>drive.google.com</b>, abra a pasta <b>Projeto final Web</b>, baixe o <code>…_v1_09-11.zip</code>, clique com o botão direito e escolha <b>Extrair aqui</b>. Abra a pasta extraída no VS Code. <b>Faltou em 09/11?</b> Avise o professor agora: você preenche a ficha do tema, cria a pasta e o Drive (parte "Só hoje" da <a href="https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-web/#salvar" target="_blank" rel="noopener">página do projeto final</a>) e segue daqui.</div></div><div class="min">10 min</div></li>
+      <li><div><div class="t">Criar os arquivos das quatro páginas</div><div class="d">Ao lado do <code>index.html</code>, crie os outros três com os nomes que estão no seu <code>ficha.txt</code> (ex.: <code>produtos.html</code>, <code>produto.html</code>, <code>contato.html</code>). Sem espaço, acento ou maiúscula.</div></div><div class="min">5 min</div></li>
+      <li><div><div class="t">Montar o esqueleto do <code>index.html</code></div><div class="d">No <code>head</code>: o <code>title</code> e o <code>link</code> para o <code>estilo.css</code>. No <code>body</code>: <code>header</code> com o nome do site e o <code>nav</code>, depois <code>main</code> e <code>footer</code>. Use o <a href="#esqueleto">esqueleto</a> e troque tudo pelo seu tema.</div></div><div class="min">15 min</div></li>
+      <li><div><div class="t">Fazer o menu</div><div class="d">Dentro do <code>nav</code>, uma lista com um link para cada página. O <code>href</code> é o nome do arquivo, igualzinho. Abra o <code>index.html</code> no navegador e clique.</div></div><div class="min">10 min</div></li>
+      <li><div><div class="t">Repetir nas outras três páginas</div><div class="d">Copie o <code>index.html</code> inteiro para cada página e troque só o <code>title</code> e o que está dentro do <code>main</code>. O <code>header</code>, o <code>nav</code> e o <code>footer</code> ficam iguais em todas.</div></div><div class="min">10 min</div></li>
+      <li><div><div class="t">Colocar o conteúdo do seu tema</div><div class="d">Em cada <code>main</code>, uma <code>section</code> por assunto, com <code>h2</code> e parágrafos. Pelo menos uma lista no site. Imagens dentro da pasta <code>imagens/</code>, cada uma com um <code>alt</code> que diz o que ela mostra. Textos seus. Sem CSS a página fica feia, e hoje é assim mesmo.</div></div><div class="min">20 min</div></li>
+      <li><div><div class="t">Conferir o Marco 2 e mostrar ao professor</div><div class="d">Passe a lista <a href="#confira">Confira</a> em cada página e chame o professor com o site aberto no navegador.</div></div><div class="min">5 min</div></li>
+      <li><div><div class="t">Sorteio da ordem das apresentações</div><div class="d">O professor sorteia quem apresenta em 23/11 e quem apresenta em 30/11, com toda a turma, inclusive quem faltou. Anote a sua data no caderno ou no celular.</div></div><div class="min">5 min</div></li>
+      <li><div><div class="t">Salvar a versão 2</div><div class="d">Compactar a pasta, renomear para <code>…_v2_14-11.zip</code>, arrastar para o Drive e sair da conta Google. Veja <a href="#salvar">Salvar a v2</a>.</div></div><div class="min">10 min</div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="lamina" id="esqueleto">
+  <div class="col">
+    <h2>O esqueleto de uma página</h2>
+    <p class="sub-h2">Toda página do site tem as mesmas partes. O exemplo é o <code>index.html</code> de um site imaginário, a Doce Caatinga. Copie, cole no seu <code>index.html</code> e troque o que é da Doce Caatinga pelo seu tema: nome, textos, páginas do menu, imagens.</p>
+    <div class="par-codigo">
+      <div class="modelo" style="margin-top:0">
+        <h3>index.html</h3>
+<pre id="modelo-esqueleto">&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Início · Doce Caatinga&lt;/title&gt;
+  &lt;link rel="stylesheet" href="estilo.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Doce Caatinga&lt;/h1&gt;
+    &lt;nav&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href="index.html"&gt;Início&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="produtos.html"&gt;Produtos&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="produto.html"&gt;Doce de buriti&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="contato.html"&gt;Contato&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;section&gt;
+      &lt;h2&gt;Quem somos&lt;/h2&gt;
+      &lt;p&gt;Doces de frutas da Caatinga.&lt;/p&gt;
+      &lt;img src="imagens/loja.jpg" alt="Potes de doce no balcão"&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;Doce Caatinga · São Raimundo Nonato&lt;/p&gt;
+    &lt;p&gt;Imagens: fotos próprias&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <div class="acoes">
+          <button type="button" class="botao primario copiar-modelo">Copiar esqueleto</button>
+          <span class="aviso-copia" aria-live="polite"></span>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:10px">O que cada parte faz</h3>
+        <ul class="partes">
+          <li><code>&lt;title&gt;</code><span>O nome que aparece na aba. Muda em cada página: "Início", "Produtos", "Contato"…</span></li>
+          <li><code>&lt;link&gt;</code><span>Liga o <code>estilo.css</code>. Hoje ele está vazio, mas já fica ligado em todas as páginas: na semana que vem é só escrever o CSS.</span></li>
+          <li><code>&lt;header&gt;</code><span>O topo do site, com o nome e o menu. Igual em todas as páginas.</span></li>
+          <li><code>&lt;nav&gt;</code><span>O menu: uma lista de links, um para cada página.</span></li>
+          <li><code>&lt;main&gt;</code><span>O conteúdo principal. É a única parte que muda de uma página para outra.</span></li>
+          <li><code>&lt;section&gt;</code><span>Um bloco do <code>main</code> por assunto, cada um com o seu <code>h2</code>.</span></li>
+          <li><code>&lt;footer&gt;</code><span>O rodapé, igual em todas: contato e de onde vieram as imagens.</span></li>
+        </ul>
+        <p style="margin-top:12px;color:var(--cor-texto-secundario);font-size:.95rem">Revise no <a href="https://cajazeiraalexandre.github.io/ifpi-2026-2/caderno-html-css/" target="_blank" rel="noopener">caderno</a>: estrutura do HTML (seção 2) e tags semânticas (seção 4).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lamina" id="problemas">
+  <div class="col">
+    <h2>Deu problema?</h2>
+    <p class="sub-h2">Os quatro problemas mais comuns de hoje. Tente estes antes de chamar o professor.</p>
+    <div class="cartoes">
+      <div class="cartao"><h3>O link não abre a página</h3><p>O <code>href</code> tem que ser igual ao nome do arquivo, letra por letra: <code>Produtos.html</code> não é <code>produtos.html</code>. Confira espaço, acento e o <code>.html</code> no fim.</p></div>
+      <div class="cartao"><h3>A imagem não aparece</h3><p>O caminho é <code>imagens/foto.jpg</code>, com o nome da pasta. A extensão tem que ser igual: <code>.jpg</code>, <code>.JPG</code> e <code>.jpeg</code> são diferentes. Nunca use <code>C:\Users\…</code>.</p></div>
+      <div class="cartao"><h3>Mudei e nada aconteceu</h3><p>Salvou com <b>Ctrl+S</b>? Atualize o navegador com <b>F5</b>. Confira se você está editando a pasta extraída, e não um arquivo de dentro do zip.</p></div>
+      <div class="cartao"><h3>O menu ficou diferente numa página</h3><p>Copie de novo o <code>header</code> inteiro do <code>index.html</code> e cole por cima. Mudou o menu? Mude nas quatro páginas.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="lamina" id="confira">
+  <div class="col">
+    <h2>Confira antes de mostrar: Marco 2</h2>
+    <p class="sub-h2">É o bloco 1 da avaliação, com os mesmos pontos da página do projeto final. Confira em cada uma das quatro páginas.</p>
+    <div class="patamares">
+      <div class="patamar bloco">
+        <header><h3><span class="num-bloco">1</span>Páginas e HTML</h3><span class="quando-bloco">vale no Marco 2 · hoje</span><span class="pts">2,5 pontos</span></header>
+        <ul class="confira">
+          <li><div><b>As 4 páginas abrem no navegador</b><span class="d">cada uma com o seu <code>&lt;title&gt;</code> na aba e conteúdo próprio</span></div><span class="pts">1,0</span></li>
+          <li><div><b>O mesmo menu em todas</b><span class="d">abra cada página e clique nos quatro links: todos levam à página certa</span></div><span class="pts">0,5</span></li>
+          <li><div><b>Estrutura semântica</b><span class="d"><code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code> e <code>footer</code> em cada página</span></div><span class="pts">0,5</span></li>
+          <li><div><b>Conteúdo bem marcado</b><span class="d">imagens com <code>alt</code>, textos em parágrafos e pelo menos uma lista</span></div><span class="pts">0,5</span></li>
+        </ul>
+        <div class="confira-total"><span>Total do bloco 1</span><b>2,5</b></div>
+      </div>
+      <div class="patamar prep">
+        <header><h3>Para a semana que vem</h3><span class="exp">Não vale ponto hoje, mas deixa o site pronto para o CSS.</span></header>
+        <ul class="confira">
+          <li><div><b><code>estilo.css</code> ligado em todas as páginas</b><span class="d">com <code>&lt;link rel="stylesheet" href="estilo.css"&gt;</code> no <code>head</code></span></div><span></span></li>
+          <li><div><b>Nada de estilo no HTML</b><span class="d">nenhum <code>style="…"</code>, nenhum <code>&lt;center&gt;</code> ou <code>&lt;font&gt;</code></span></div><span></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lamina" id="sorteio">
+  <div class="col">
+    <h2>Sorteio e semana que vem</h2>
+    <div class="cartoes">
+      <div class="cartao"><h3>Sorteio da ordem das apresentações</h3>
+        <p>No fim da aula, o professor sorteia a ordem: metade da turma apresenta em <b>23/11</b> e metade em <b>30/11</b>. O sorteio é hoje e inclui toda a turma: quem faltou também recebe uma data. Anote a sua no caderno ou no celular.</p>
+        <p style="margin-top:8px">Quem tiver dificuldade de falar para a turma combina com o professor uma conversa individual, com os mesmos critérios. O roteiro da apresentação está na <a href="https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-web/#entrega" target="_blank" rel="noopener">página do projeto final</a>.</p></div>
+      <div class="cartao"><h3>16 a 20/11: semana do MUV, sem aula</h3>
+        <p>Na segunda, 16/11, no horário da aula, o professor publica orientações para a semana. Estude pelo caderno e continue o site em casa: cores e fontes, box model, Flexbox e Grid. Baixe a v2 do Drive e salve a v3.</p>
+        <p style="margin-top:8px"><b>Marco 3:</b> até sexta, 20/11, um print de cada página com CSS, enviado pelo SUAP.</p>
+        <p class="destaque-dia"><b>Sem computador em casa?</b> Fale com o professor hoje: é o último dia para avisar.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="lamina" id="salvar">
+  <div class="col">
+    <h2>Antes de sair: salvar a v2</h2>
+    <p class="sub-h2">Os computadores do laboratório podem apagar tudo até a próxima aula. Nunca termine sem uma cópia no seu Drive.</p>
+    <ol class="ritual">
+      <li class="salvar"><p class="q">Últimos 10 min · obrigatório</p><h3>Salvar</h3>
+        <ol>
+          <li>Botão direito na pasta do site, <b>Compactar</b> (ou <b>Enviar para › Pasta compactada</b>).</li>
+          <li>Renomeie: nome do site, <code>_v2_14-11</code>, como abaixo.</li>
+          <li>Arraste o zip para a pasta <b>Projeto final Web</b> do Drive e espere aparecer.</li>
+          <li><b>Saia da sua conta Google</b> antes de deixar o computador.</li>
+        </ol></li>
+      <li><p class="q">Deu problema?</p><h3>Plano B</h3>
+        <ol>
+          <li>Sem internet ou sem entrar no Drive: mande o zip por e-mail para você mesmo.</li>
+          <li>Ou peça ao professor para copiar no pendrive dele.</li>
+          <li>Não apague a v1: cada zip é uma fotografia do site naquele dia.</li>
+        </ol></li>
+    </ol>
+    <div class="versoes" aria-label="Versões do site ao longo do projeto, com a de hoje em destaque">
+      <span class="zip passada">doce-caatinga_v1_09-11.zip<small>tema e pasta</small></span><span class="seta" aria-hidden="true">›</span>
+      <span class="zip agora">doce-caatinga_v2_14-11.zip<small>hoje: 4 páginas em HTML</small></span><span class="seta" aria-hidden="true">›</span>
+      <span class="zip">doce-caatinga_v3_20-11.zip<small>CSS e layout</small></span><span class="seta" aria-hidden="true">›</span>
+      <span class="zip final">doce-caatinga_v4_final.zip<small>a versão entregue</small></span>
+    </div>
+  </div>
+</section>
+
+<section class="lamina" id="qr">
+  <div class="col">
+    <h2>Abra esta página no celular</h2>
+    <div class="qr-caixa">
+      <div class="qr" role="img" aria-label="QR code com o endereço desta página: https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-aula-2/"><svg viewBox="0 0 45 45" class="segno"><path fill="#fff" d="M0 0h45v45h-45z"/><path class="qrline" stroke="#000" d="M4 4.5h7m3 0h2m2 0h1m1 0h3m1 0h2m1 0h2m3 0h1m1 0h7m-37 1h1m5 0h1m3 0h2m2 0h4m1 0h1m5 0h1m1 0h1m2 0h1m5 0h1m-37 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h1m2 0h1m1 0h4m2 0h1m3 0h1m1 0h1m1 0h3m1 0h1m-37 1h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h1m3 0h1m1 0h1m2 0h1m2 0h4m1 0h1m1 0h3m1 0h1m-37 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h2m1 0h1m1 0h2m3 0h1m1 0h1m2 0h1m1 0h1m1 0h3m1 0h1m-37 1h1m5 0h1m1 0h1m2 0h2m2 0h1m2 0h1m2 0h2m1 0h1m2 0h2m1 0h1m5 0h1m-37 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-29 1h3m1 0h3m4 0h1m1 0h2m3 0h2m-28 1h1m1 0h5m2 0h2m1 0h4m2 0h1m1 0h1m3 0h3m3 0h5m-35 1h1m1 0h2m4 0h1m1 0h1m3 0h4m3 0h3m4 0h1m2 0h1m1 0h1m1 0h1m-35 1h1m3 0h2m1 0h1m2 0h2m1 0h1m3 0h1m1 0h3m1 0h1m2 0h2m1 0h1m1 0h5m-35 1h1m5 0h5m1 0h1m1 0h1m4 0h2m3 0h4m3 0h1m2 0h1m-36 1h3m2 0h2m1 0h2m2 0h2m2 0h1m5 0h4m2 0h2m1 0h1m1 0h3m-36 1h1m1 0h1m8 0h1m1 0h1m2 0h5m1 0h1m1 0h1m2 0h1m2 0h1m3 0h1m-36 1h3m2 0h3m1 0h1m1 0h3m1 0h3m2 0h1m3 0h6m1 0h3m2 0h1m-37 1h1m3 0h2m2 0h2m2 0h4m1 0h2m1 0h2m1 0h1m3 0h3m1 0h2m3 0h1m-33 1h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h1m6 0h5m1 0h4m1 0h1m1 0h1m-36 1h1m1 0h3m3 0h2m1 0h4m1 0h2m1 0h1m2 0h1m7 0h1m3 0h1m-35 1h1m2 0h1m1 0h1m4 0h2m2 0h3m1 0h1m2 0h1m4 0h2m1 0h1m2 0h4m-37 1h1m1 0h1m1 0h2m1 0h1m1 0h2m1 0h1m1 0h2m3 0h3m4 0h1m1 0h3m2 0h1m2 0h1m-37 1h1m1 0h5m1 0h2m1 0h1m2 0h2m1 0h4m1 0h1m1 0h3m2 0h2m1 0h3m-35 1h2m1 0h1m4 0h1m4 0h1m2 0h1m1 0h3m2 0h1m4 0h1m4 0h1m1 0h1m-36 1h2m1 0h4m1 0h3m1 0h1m1 0h2m2 0h1m3 0h1m4 0h1m3 0h3m2 0h1m-36 1h4m3 0h1m1 0h6m5 0h2m1 0h1m1 0h1m4 0h2m-33 1h2m4 0h1m3 0h1m1 0h4m2 0h4m3 0h2m2 0h4m1 0h1m1 0h1m-37 1h1m1 0h1m1 0h1m3 0h2m1 0h1m1 0h5m3 0h1m1 0h1m1 0h1m2 0h1m2 0h1m2 0h1m-35 1h1m1 0h2m2 0h1m3 0h1m2 0h2m2 0h1m2 0h1m1 0h1m3 0h2m3 0h2m2 0h2m-37 1h1m1 0h1m1 0h2m1 0h3m2 0h2m2 0h1m4 0h2m1 0h1m2 0h2m2 0h3m-34 1h1m1 0h7m4 0h2m1 0h2m4 0h1m1 0h9m1 0h3m-29 1h2m1 0h1m1 0h1m2 0h6m1 0h1m1 0h1m2 0h1m3 0h2m1 0h1m-36 1h7m2 0h2m4 0h1m1 0h1m3 0h1m2 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m-37 1h1m5 0h1m1 0h3m1 0h1m1 0h1m1 0h3m1 0h2m2 0h1m3 0h1m3 0h2m1 0h2m-37 1h1m1 0h3m1 0h1m1 0h1m3 0h5m4 0h1m1 0h3m1 0h6m1 0h2m-36 1h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h2m1 0h2m1 0h1m2 0h1m5 0h2m1 0h2m2 0h1m-37 1h1m1 0h3m1 0h1m1 0h2m2 0h5m1 0h2m1 0h1m4 0h2m5 0h4m-37 1h1m5 0h1m3 0h3m1 0h2m3 0h4m3 0h1m1 0h3m1 0h2m2 0h1m-37 1h7m1 0h1m2 0h2m1 0h2m1 0h1m1 0h2m1 0h2m1 0h2m2 0h2m1 0h5"/></svg></div>
+      <div class="qr-texto">
+        <p>Aponte a câmera do celular para o código. Deixe aberta no celular durante a aula e siga o passo a passo enquanto trabalha no computador.</p>
+        <p class="url"><a href="https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-aula-2/">cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-aula-2/</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="fim">
+  <div class="col">
+    <h2>Autoria, revisão e uso de IA</h2>
+    <p>Aula 2 do projeto final da disciplina Desenvolvimento Web Front-End (Técnico em Informática integrado, IFPI, Campus São Raimundo Nonato), 14/11/2026. Projeto, calendário, marcos, pesos e decisões: professor Alexandre Cajazeira Ramos, que responde pelo conteúdo. Esta página detalha a Aula 2 da <a href="https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-web/" target="_blank" rel="noopener">página do projeto final</a> e segue o caderno "HTML e CSS para layout".</p>
+    <p>Uso de IA: a redação do passo a passo a partir da página do projeto final e o HTML foram feitos com Claude (Claude Code), a pedido do professor. Versão 0.3, de 13/11/2026, em revisão pelo professor. A página não guarda nada do que você faz nela.</p>
+    <p class="so-tela">Material didático do <a href="https://cajazeiraalexandre.github.io/" target="_blank" rel="noopener">Laboratório de Dados Públicos</a>. Licença CC BY 4.0 para os textos.</p>
+  </div>
+</footer>
+
+<div class="deck" id="deck" hidden role="dialog" aria-modal="true" aria-label="Modo apresentação">
+  <div class="deck-palco" id="deck-palco">
+    <div class="deck-topo"><span>Projeto final · Aula 2 · 14/11</span><span>Desenvolvimento Web Front-End · 1º ano integrado</span></div>
+    <div class="deck-slide" id="deck-slide" aria-live="polite"></div>
+    <div class="deck-rodape"><span id="deck-dica">← → avançam · F tela cheia · <button type="button" class="deck-pagina" id="deck-pagina">Ver como página (Esc)</button></span><span><span class="deck-mais" id="deck-mais" hidden>role para ver mais ↓ · </span><span class="cont" id="deck-cont"></span></span></div>
+    <div class="deck-barra"><i id="deck-barra"></i></div>
+  </div>
+  <button type="button" class="deck-seta ant" id="deck-ant" aria-label="Slide anterior">‹</button>
+  <button type="button" class="deck-seta prox" id="deck-prox" aria-label="Próximo slide">›</button>
+  <div class="deck-ctrl"><button type="button" id="deck-sair" title="Sair (Esc)" aria-label="Sair do modo apresentação">✕</button><button type="button" id="deck-cheia" title="Tela cheia (F)" aria-label="Tela cheia">⛶</button></div>
+</div>
+
+<script>
+(function(){
+  /* ---------- copiar (por delegação: vale na página e dentro dos slides) ---------- */
+  function copiar(texto, feito){
+    function fallback(){
+      var ta=document.createElement('textarea'); ta.value=texto; document.body.appendChild(ta); ta.select();
+      var ok=false; try{ ok=document.execCommand('copy'); }catch(e){}
+      document.body.removeChild(ta); feito(ok);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(texto).then(function(){ feito(true); }, fallback); }
+    else fallback();
+  }
+  document.addEventListener('click', function(ev){
+    var b=ev.target.closest('.copiar-modelo, [data-copiar]'); if(!b) return;
+    if(b.classList.contains('copiar-modelo')){
+      var caixa=b.closest('.modelo'), aviso=caixa.querySelector('.aviso-copia');
+      copiar(caixa.querySelector('pre').textContent, function(ok){ aviso.textContent= ok ? 'Esqueleto copiado. Cole no seu index.html e troque pelo seu tema.' : 'Selecione o modelo e copie com Ctrl+C.'; });
+    } else {
+      var rot=b.textContent;
+      copiar(b.getAttribute('data-copiar'), function(ok){ b.textContent= ok ? 'Copiado' : 'Selecione e copie'; setTimeout(function(){ b.textContent=rot; }, 1800); });
+    }
+  });
+
+  /* ---------- baixa visão: guardada neste navegador e no endereço (#acesso=baixa-visao&escala=150&tema=escuro) ---------- */
+  var ESCALAS=[125,150,175,200], acc={ativo:false, escala:150, tema:'claro'};
+  try{ var g=JSON.parse(localStorage.getItem('projeto-final-acesso')||'null'); if(g){ acc.ativo=!!g.ativo; if(ESCALAS.indexOf(g.escala)>=0) acc.escala=g.escala; acc.tema=g.tema==='escuro'?'escuro':'claro'; } }catch(e){}
+  if(/(^#|&)acesso=/.test(location.hash)){
+    try{ var hp=new URLSearchParams(location.hash.slice(1));
+      acc.ativo = hp.get('acesso')==='baixa-visao';
+      if(ESCALAS.indexOf(Number(hp.get('escala')))>=0) acc.escala=Number(hp.get('escala'));
+      acc.tema = hp.get('tema')==='escuro' ? 'escuro' : 'claro'; }catch(e){}
+  }
+  function hashAcesso(){ return acc.ativo ? '#acesso=baixa-visao&escala='+acc.escala+(acc.tema==='escuro'?'&tema=escuro':'') : '#pagina'; }
+  function aplicarAcesso(){
+    var r=document.documentElement;
+    if(acc.ativo){ r.setAttribute('data-acesso','baixa-visao'); r.style.setProperty('--bv-escala', String(acc.escala/100)); r.setAttribute('data-theme', acc.tema==='escuro'?'dark':'light'); }
+    else { r.removeAttribute('data-acesso'); r.style.removeProperty('--bv-escala'); r.removeAttribute('data-theme'); }
+    try{ localStorage.setItem('projeto-final-acesso', JSON.stringify(acc)); }catch(e){}
+  }
+  function barraAcesso(){
+    var caixa=document.getElementById('acesso'), i=ESCALAS.indexOf(acc.escala);
+    var h='<label><input type="checkbox" id="bv-liga"'+(acc.ativo?' checked':'')+'> <span><b>Baixa visão</b>'+(acc.ativo?'':': texto maior, contraste alto e uma coluna')+'</span></label>';
+    if(acc.ativo){
+      h+='<span class="grupo" role="group" aria-label="Tamanho do texto">Tamanho do texto: <button type="button" id="bv-menos" aria-label="Diminuir o texto"'+(i<=0?' disabled':'')+'>A−</button>'
+        +'<span class="valor" aria-live="polite">'+acc.escala+'%</span><button type="button" id="bv-mais" aria-label="Aumentar o texto"'+(i>=ESCALAS.length-1?' disabled':'')+'>A+</button></span>'
+        +'<label><input type="checkbox" id="bv-escuro"'+(acc.tema==='escuro'?' checked':'')+'> Fundo escuro</label>'
+        +'<p class="nota-acesso">O zoom do navegador (Ctrl e +) também funciona. Essas escolhas ficam guardadas neste navegador e no endereço da página, que pode ser copiado e enviado.</p>';
+    }
+    caixa.style.display='contents'; caixa.innerHTML=h;
+    function mudar(m, foco){ for(var k in m) acc[k]=m[k]; aplicarAcesso(); try{ history.replaceState(null,'',hashAcesso()); }catch(e){} barraAcesso(); var f=foco&&document.getElementById(foco); if(f) f.focus(); }
+    document.getElementById('bv-liga').addEventListener('change', function(){ mudar({ativo:this.checked}, 'bv-liga'); });
+    if(acc.ativo){
+      document.getElementById('bv-menos').addEventListener('click', function(){ mudar({escala:ESCALAS[i-1]}, 'bv-menos'); });
+      document.getElementById('bv-mais').addEventListener('click', function(){ mudar({escala:ESCALAS[i+1]}, 'bv-mais'); });
+      document.getElementById('bv-escuro').addEventListener('change', function(){ mudar({tema:this.checked?'escuro':'claro'}, 'bv-escuro'); });
+    }
+  }
+  aplicarAcesso(); barraAcesso();
+
+  /* ---------- modo apresentação ----------
+     Cada slide clona partes da própria página (um texto só para os dois modos).
+     Para mudar os slides, edite a lista SLIDES: título, partes (funções que devolvem nós) e seções que o slide representa. */
+  function q(sel){ return document.querySelector(sel); }
+  function qa(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+  function clone(el, semTitulo){
+    if(!el) return null;
+    var k=el.cloneNode(true); k.removeAttribute('id');
+    k.querySelectorAll('[id]').forEach(function(x){ x.removeAttribute('id'); });
+    if(semTitulo){ var h=k.querySelector('h3'); if(h) h.remove(); }
+    return k;
+  }
+  function c(sel, semTitulo){ return function(){ return clone(q(sel), semTitulo); }; }
+  function n(sel, i, semTitulo){ return function(){ return clone(qa(sel)[i], semTitulo); }; }
+  function itens(sel, de, ate){ return function(){
+    var o=q(sel), k=o.cloneNode(false); k.removeAttribute('id');
+    if(o.classList.contains('passos') && de) k.style.counterReset='passo '+de;   /* numeração continua no 2º slide */
+    Array.prototype.slice.call(o.children, de, ate).forEach(function(li){ k.appendChild(clone(li)); });
+    return k; }; }
+
+  var SLIDES=[
+    {capa:true, partes:[c('.capa .chapeu'), c('.capa h1'), c('.capa .lede'), c('.capa .fatos')], secoes:[]},
+    {t:'Onde estamos no projeto', partes:[c('#onde .linha')], secoes:['onde']},
+    {t:'Hoje: passo a passo (1 a 5)', partes:[itens('#hoje .passos',0,5)], secoes:['hoje']},
+    {t:'Hoje: passo a passo (6 a 9)', partes:[itens('#hoje .passos',5,9)]},
+    {t:'O esqueleto de uma página', partes:[c('#esqueleto .modelo', true)], secoes:['esqueleto']},
+    {t:'O que cada parte faz', partes:[c('#esqueleto .partes')]},
+    {t:'Deu problema?', partes:[c('#problemas .cartoes')], secoes:['problemas']},
+    {t:'Confira antes de mostrar: Marco 2', partes:[c('#confira .patamar.bloco')], secoes:['confira']},
+    {t:'Para a semana que vem', partes:[c('#confira .patamar.prep', true)]},
+    {t:'Sorteio e semana que vem', partes:[c('#sorteio .cartoes')], secoes:['sorteio']},
+    {t:'Antes de sair: salvar a v2', partes:[c('#salvar .ritual'), c('#salvar .versoes')], secoes:['salvar']},
+    {t:'Abra esta página no celular', partes:[c('#qr .qr-caixa')], secoes:['qr']}
+  ];
+  var alvo={}; SLIDES.forEach(function(sl,i){ (sl.secoes||[]).forEach(function(id){ alvo[id]=i; }); });
+
+  var deck=q('#deck'), palco=q('#deck-palco'), slide=q('#deck-slide'), atual=0, aberto=false;
+  var W=1040, H=585;
+
+  function escala(){
+    var mx=window.innerWidth<700?8:72, my=window.innerWidth<700?8:14, k=Math.min((window.innerWidth-2*mx)/W, (window.innerHeight-2*my)/H);
+    palco.style.transform='scale('+k+')';
+    palco.style.left=((window.innerWidth-W*k)/2)+'px';
+    palco.style.top=((window.innerHeight-H*k)/2)+'px';
+  }
+  function mais(){   /* aviso "role para ver mais" quando o slide passa da altura (baixa visão) */
+    q('#deck-mais').hidden = !(slide.scrollHeight - slide.scrollTop - slide.clientHeight > 4);
+  }
+  slide.addEventListener('scroll', mais);
+  function rolaOuPassa(dir){   /* no slide que rola, Espaço e PageDown descem até o fim antes de passar */
+    var resto = dir>0 ? slide.scrollHeight-slide.scrollTop-slide.clientHeight : slide.scrollTop;
+    if(resto>4){ slide.scrollBy({top: dir*slide.clientHeight*0.8, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}); }
+    else mostra(atual+dir);
+  }
+  function ajusta(){
+    /* reduz o conteúdo que não cabe: busca a maior escala (0,5 a 1) em que a altura cabe no slide */
+    var cont=slide.querySelector('.deck-conteudo'); if(!cont) return;
+    if(acc.ativo){ cont.style.width=''; cont.style.transform=''; mais(); return; }   /* baixa visão: rola, não encolhe */
+    var tit=slide.querySelector('.deck-titulo'), disp=slide.clientHeight-10-(tit?tit.offsetHeight+16:0)-6;
+    function cabe(k){ cont.style.width=(100/k)+'%'; cont.style.transform= k<1 ? 'scale('+k+')' : ''; return cont.offsetHeight*k<=disp; }
+    if(cabe(1)) return;
+    var lo=0.5, hi=1;
+    for(var i=0;i<8;i++){ var m=(lo+hi)/2; if(cabe(m)) lo=m; else hi=m; }
+    cabe(lo);
+  }
+  function mostra(i){
+    atual=Math.max(0, Math.min(SLIDES.length-1, i));
+    var sl=SLIDES[atual];
+    slide.innerHTML=''; slide.scrollTop=0; slide.className='deck-slide'+(sl.capa?' capa-slide':'');
+    void slide.offsetWidth; slide.classList.add('entra');
+    if(sl.t){ var h=document.createElement('h2'); h.className='deck-titulo'; h.textContent=sl.t; slide.appendChild(h); }
+    var cont=document.createElement('div'); cont.className='deck-conteudo';
+    sl.partes.forEach(function(f){ var el=f(); if(el) cont.appendChild(el); });
+    slide.appendChild(cont);
+    ajusta();
+    q('#deck-cont').textContent=(atual+1)+' / '+SLIDES.length;
+    q('#deck-barra').style.width=((atual+1)/SLIDES.length*100)+'%';
+    q('#deck-ant').disabled=atual===0; q('#deck-prox').disabled=atual===SLIDES.length-1;
+    try{ history.replaceState(null,'','#apresentacao-'+(atual+1)); }catch(e){}
+  }
+  function abre(i){
+    aberto=true; deck.hidden=false; document.documentElement.style.overflow='hidden'; document.documentElement.classList.add('deck-aberto');
+    escala(); mostra(i||0); q('#deck-prox').focus();
+  }
+  function fecha(){
+    aberto=false; deck.hidden=true; document.documentElement.style.overflow=''; document.documentElement.classList.remove('deck-aberto');
+    if(document.fullscreenElement && document.exitFullscreen){ document.exitFullscreen().catch(function(){}); }
+    var sec=null; for(var id in alvo){ if(alvo[id]<=atual && (!sec || alvo[id]>=alvo[sec])) sec=id; }
+    try{ history.replaceState(null,'', sec ? '#'+sec : hashAcesso()); }catch(e){}   /* #pagina: abre como página da próxima vez */
+    var el=sec && document.getElementById(sec); if(el) el.scrollIntoView(); q('#abrir-apres').focus();
+  }
+  function cheia(){
+    if(document.fullscreenElement){ document.exitFullscreen().catch(function(){}); }
+    else if(deck.requestFullscreen){ deck.requestFullscreen().catch(function(){}); }
+  }
+
+  q('#abrir-apres').addEventListener('click', function(){
+    /* começa pelo slide da seção que está na tela */
+    var i=0; for(var id in alvo){ var el=document.getElementById(id); if(el && el.getBoundingClientRect().top<window.innerHeight*0.4 && alvo[id]>i) i=alvo[id]; }
+    abre(window.scrollY<200 ? 0 : i);
+  });
+  q('#deck-ant').addEventListener('click', function(){ mostra(atual-1); });
+  q('#deck-prox').addEventListener('click', function(){ mostra(atual+1); });
+  q('#deck-sair').addEventListener('click', fecha);
+  q('#deck-pagina').addEventListener('click', fecha);
+  q('#deck-cheia').addEventListener('click', cheia);
+  document.addEventListener('fullscreenchange', function(){ q('#deck-cheia').setAttribute('aria-label', document.fullscreenElement?'Sair da tela cheia':'Tela cheia'); setTimeout(function(){ escala(); ajusta(); }, 60); });
+  window.addEventListener('resize', function(){ if(aberto){ escala(); ajusta(); } });
+  slide.addEventListener('click', function(ev){
+    var a=ev.target.closest('a[href^="#"]'); if(!a) return;
+    ev.preventDefault(); var id=a.getAttribute('href').slice(1); if(id in alvo) mostra(alvo[id]);
+  });
+  document.addEventListener('keydown', function(ev){
+    if(ev.target.closest && ev.target.closest('input, textarea')) return;
+    if(!aberto){ if((ev.key==='p'||ev.key==='P') && !ev.ctrlKey && !ev.metaKey && !ev.altKey && window.innerWidth>900){ abre(0); } return; }
+    var k=ev.key;
+    if(k==='ArrowRight'||k==='Enter'){ ev.preventDefault(); mostra(atual+1); }
+    else if(k==='ArrowLeft'||k==='Backspace'){ ev.preventDefault(); mostra(atual-1); }
+    else if(k==='PageDown'||k===' '){ ev.preventDefault(); rolaOuPassa(1); }
+    else if(k==='PageUp'){ ev.preventDefault(); rolaOuPassa(-1); }
+    else if((k==='ArrowDown'||k==='ArrowUp') && acc.ativo){ ev.preventDefault(); slide.scrollBy({top:(k==='ArrowDown'?1:-1)*60}); }
+    else if(k==='Home'){ ev.preventDefault(); mostra(0); }
+    else if(k==='End'){ ev.preventDefault(); mostra(SLIDES.length-1); }
+    else if(k==='f'||k==='F'){ ev.preventDefault(); cheia(); }
+    else if(k==='Escape' && !document.fullscreenElement){ fecha(); }
+  });
+  /* Abertura (pedido do professor, 2026-11-08): em tela larga, sem trecho no endereço, a página abre como slides.
+     Celular, baixa visão ou endereço com trecho (#pagina, #calendario, #acesso=…) abrem a página. */
+  var m=/^#apresentacao(?:-(\d+))?$/.exec(location.hash);
+  var larga=window.innerWidth>900 && window.innerWidth>=window.innerHeight*1.15;
+  if(m){ abre(m[1] ? parseInt(m[1],10)-1 : 0); }
+  else if(!location.hash && !acc.ativo && larga){ abre(0); }
+})();
+</script>
+</body>
+</html>

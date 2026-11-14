@@ -1,6 +1,6 @@
 # Projeto final: o seu site com várias páginas
 
-**Tipo:** didatico · **Projeto:** programacao-web-didatico · **Status:** rascunho (piloto 0.7) ·
+**Tipo:** didatico · **Projeto:** programacao-web-didatico · **Status:** rascunho (piloto 0.8) ·
 **Endereço:** <https://cajazeiraalexandre.github.io/ifpi-2026-2/projeto-final-web/>
 
 ## Pergunta
@@ -29,6 +29,17 @@ professor desde a primeira aula; modo apresentação.
   opcional, uma coluna, foco visível, links sublinhados; guardada no navegador e no endereço
   (`#acesso=baixa-visao&escala=150&tema=escuro`), que o professor pode enviar pronto. Nos slides, a baixa visão mantém o texto ampliado e o contraste alto; o slide
   rola em vez de encolher (aviso "role para ver mais"; Espaço e PageDown descem até o fim antes de passar).
+
+**Decisões do professor em 2026-11-13 (versão 0.8):**
+- **Sem `diario.txt`:** os alunos não mantêm um registro de avanços (só dois ou três conseguiriam). Saiu da pasta do
+  site, da rotina de salvar e da árvore da entrega; as respostas do formulário são escritas na hora de enviar, com o
+  site aberto.
+- **Semana do MUV (16 a 20/11) sem aula a distância:** o professor só publica orientações, principalmente no horário da
+  aula de segunda, e reforça o estudo dos materiais. As apresentações passam a ser as Aulas 3 (23/11) e 4 (30/11).
+- **Sorteio da ordem das apresentações em 14/11**, com toda a turma, inclusive quem faltar.
+- A Aula 2 tem página própria (`2026-11_aula-2-estrutura-html`), ligada no calendário.
+- **QR code no fim da página** e no último slide, com o endereço público, para os alunos abrirem no celular. É gerado com
+  `segno` (SVG embutido, preto no branco em qualquer tema). A leitura foi conferida com zxing-cpp.
 
 **Decisão local:** a página é escrita à mão, sem montagem por script nem YAML (diferente do caderno), porque é um
 documento de uma aula e de um bimestre. O link do formulário de envio entra na variável `LINK_FORMULARIO` do script.
