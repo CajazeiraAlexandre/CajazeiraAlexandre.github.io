@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Formação de Avaliadores — Mostra MUV 2026</title>
-<meta name="description" content="Slides da formação de avaliadores da Mostra MUV 2026: acesso ao Projetin, ficha de avaliação, régua de notas, ciclo no estande e imprevistos.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400..700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap">
 <style>
@@ -225,7 +224,19 @@ section.green .divnum{color:var(--accent-soft)}
 .contacts{display:flex;gap:28px;flex-wrap:wrap}
 .contacts p{font-size:28px;font-weight:700;color:#FDFDFB;background:#2A2083;border-radius:999px;padding:10px 24px}
 
-/* ---- base dos slides ---- */
+/* botões do Projetin: quais valem na MUV */
+.btnrow{display:grid;grid-template-columns:repeat(11,1fr);gap:16px;margin-top:8px}
+.nb{height:150px;border-radius:20px;display:flex;align-items:center;justify-content:center}
+.nb p{font-family:'Oswald','Arial Narrow',Arial,sans-serif;font-size:72px;font-weight:700;line-height:1}
+.nb.ok p{color:#FDFDFB}
+.nb.no{background:#ECECEC;border:3px dashed #B5B5B5}
+.nb.no p{color:#B0B0B0;text-decoration:line-through}
+.btnleg{display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+.btnleg p{font-size:30px}
+.nb.l3 p{color:#2B2300}.nb.l2 p{color:#2B1600}
+
+
+/* ---- base dos slides (o visualizador do claude.ai usa content-box; não forçar border-box) ---- */
 .deck section{width:1920px;height:1080px;position:relative;overflow:hidden;flex:none}
 .deck section *{margin:0}
 .deck section ul{padding-left:1.2em}
@@ -261,6 +272,7 @@ body.lista.com-notas .lista-nota{display:block}
 body.lista .deck *{animation:none!important}
 body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 .lista-nota{display:none;max-width:100%;font-size:14px;line-height:1.45;color:#D3D0F0;margin:-4px 0 6px;padding:0 4px}
+/* aviso para girar o celular */
 .girar{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;text-align:center;background:#1C1270;color:#FDFDFB}
 .girar[hidden]{display:none}
 .girar .icone{width:72px;height:72px;color:#A6D9B4;animation:girarCel 1.6s ease-in-out infinite alternate}
@@ -272,12 +284,13 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 @media (prefers-reduced-motion: reduce){.deck *{animation:none!important} .girar .icone{animation:none;transform:rotate(-90deg)}}
 @media print{
   @page{size:1920px 1080px;margin:0}
-  body{background:#fff} .barra,.nota,.lista-nota{display:none!important}
+  body{background:#fff} .barra,.nota,.lista-nota,.girar{display:none!important}
   .palco{position:static;display:block;padding:0} .palco .deck{transform:none!important;box-shadow:none}
   .palco .deck section{display:flex!important;break-after:page;position:relative!important;transform:none!important}
   .palco .deck .moldura{width:auto!important;height:auto!important;box-shadow:none!important}
   .deck *{animation:none!important}
 }
+
 </style>
 </head>
 <body>
@@ -305,7 +318,7 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 </div>
 <div class="cards">
 <div class="card rise" style="--i:0"><p class="kicker">1</p><h3>Acesso</h3><p>Entrar no Projetin e chegar à sua lista de trabalhos.</p></div>
-<div class="card rise" style="--i:1"><p class="kicker">2</p><h3>A ficha</h3><p>20 critérios, notas de 0 a 10 e a régua comum.</p></div>
+<div class="card rise" style="--i:1"><p class="kicker">2</p><h3>A ficha</h3><p>20 critérios, notas de 0 a 5, como manda o edital.</p></div>
 <div class="card rise" style="--i:2"><p class="kicker">3</p><h3>No estande</h3><p>O ciclo de cada avaliação e como escrever a observação.</p></div>
 <div class="card rise" style="--i:3"><p class="kicker">4</p><h3>Imprevistos</h3><p>Sem internet, nota errada, equipe ausente.</p></div>
 </div>
@@ -377,7 +390,7 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 <div class="mp rise" style="--i:2"><p class="n">3</p><h3>MOSTRA MUV</h3><p>O cartão da feira</p></div>
 <div class="mp rise" style="--i:3"><p class="n">4</p><h3>Trabalhos</h3><p>“Avaliação de Trabalhos”, se pedir</p></div>
 <div class="mp rise" style="--i:4"><p class="n">5</p><h3>Escolha</h3><p>O trabalho pelo código</p></div>
-<div class="mp rise" style="--i:5"><p class="n">6</p><h3>Notas</h3><p>0 a 10 nos 20 critérios</p></div>
+<div class="mp rise" style="--i:5"><p class="n">6</p><h3>Notas</h3><p>0 a 5 nos 20 critérios</p></div>
 <div class="mp rise" style="--i:6"><p class="n">7</p><h3>Observação</h3><p>Confira o total e escreva</p></div>
 <div class="mp rise" style="--i:7"><p class="n">8</p><h3>Enviar</h3><p>E confirmar o envio</p></div>
 </div>
@@ -504,18 +517,18 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 <img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="14" data-nota="A imagem vem da prévia oficial da ficha, que o Projetin descreve como a ficha que o avaliador verá. Na prévia aparece um 7 de exemplo marcado; na avaliação real, você escolhe cada nota." id="sim-notas" data-transition="fade">
+<section data-n="14" data-nota="A imagem vem da prévia oficial da ficha, que o Projetin descreve como a ficha que o avaliador verá. No exemplo, o 4 (Bom) está marcado. Na MUV, nenhuma nota passa de 5." id="sim-notas" data-transition="fade">
 <div class="split">
 <div class="device wide fade" style="--i:0">
-<img src="manual-avaliadores-muv-2026/af23d66fb48d.webp" alt="Critério 1 da ficha no celular, com a rubrica e os botões de nota de 0 a 10 em duas linhas">
-<div class="tap" style="left:246px;top:368px"></div>
+<img src="manual-avaliadores-muv-2026/577c0c8585bf.webp" alt="Critério 1 da ficha no celular, com a rubrica de 5 níveis e os botões de nota de 0 a 10 em duas linhas, com o 4 (Bom) marcado">
+<div class="tap" style="left:349px;top:319px"></div>
 </div>
 <div class="explain">
 <div class="prog"><div class="done"></div><div class="done"></div><div class="done"></div><div class="done"></div><div class="done"></div><div class="on"></div><div></div><div></div></div>
 <p class="kicker">Passo 6 de 8 · Notas</p>
 <h2>Toque uma nota em cada critério</h2>
-<p>No celular, os botões de <b>0 a 10</b> ficam em duas linhas. Role a tela até o critério 20.</p>
-<div class="card warn" style="flex:0"><p>Use a régua combinada e <b>ignore os “5,0 pts”</b> da rubrica: um 5 nos botões é Regular.</p></div>
+<p>No celular, os botões de 0 a 10 ficam em duas linhas. <b>Use só 5, 4, 3, 2 ou 0.</b> Role a tela até o critério 20.</p>
+<div class="card warn" style="flex:0"><p>A rubrica acima dos botões é a régua: <b>Excelente = 5</b>. Os botões de 6 a 10 não se usam na MUV.</p></div>
 <p class="src-real">Tela real do Projetin</p>
 </div>
 </div>
@@ -525,27 +538,27 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 <section data-n="15" data-nota="As observações são opcionais no sistema, mas pedimos que todos escrevam." id="sim-total" data-transition="fade">
 <div class="split">
 <div class="device wide fade" style="--i:0">
-<img src="manual-avaliadores-muv-2026/86205f7a9941.webp" alt="Final da ficha no celular: critério 20, Pontuação Total de 200 e o campo Observações (opcional), com até 500 caracteres">
+<img src="manual-avaliadores-muv-2026/b43710838aa5.webp" alt="Final da ficha no celular: critério 20 com o 4 marcado, Pontuação Total de 200 e o campo Observações (opcional), com até 500 caracteres">
 <div class="tap" style="left:207px;top:624px"></div>
 </div>
 <div class="explain">
 <div class="prog"><div class="done"></div><div class="done"></div><div class="done"></div><div class="done"></div><div class="done"></div><div class="done"></div><div class="on"></div><div></div></div>
 <p class="kicker">Passo 7 de 8 · Total e observação</p>
 <h2>Confira o total e escreva a observação</h2>
-<p>A <b>Pontuação Total</b> soma sozinha, até 200. Em <b>Observações</b>, escreva um ponto forte e uma sugestão, em até 500 caracteres.</p>
+<p>A <b>Pontuação Total</b> soma sozinha. O sistema escreve “de 200”, mas na MUV o máximo é <b>100</b>: se passar de 100, alguma nota está acima de 5. Em <b>Observações</b>, escreva um ponto forte e uma sugestão.</p>
 <p class="src-real">Tela real do Projetin</p>
 </div>
 </div>
 <img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="16" data-nota="Depois do envio, o trabalho passa a contar como concluído na sua lista. Volte para a lista e siga para o próximo estande." id="sim-enviada" data-transition="fade">
+<section data-n="16" data-nota="O total aparece “de 200” porque o sistema calcula com botões até 10; na MUV, o máximo real é 100. Depois do envio, o trabalho passa a contar como concluído na sua lista. Volte para a lista e siga para o próximo estande." id="sim-enviada" data-transition="fade">
 <div class="split">
 <div class="pj fade" style="--i:0">
 <div class="pj-bar"><p class="t">EXA-07</p><p class="s">Título do trabalho…</p></div>
 <div class="pj-body">
 <p class="pj-ok">Avaliação enviada em 18/11/2026 às 09:42. Você pode editar até o prazo.</p>
-<div class="pj-total"><p>Pontuação Total</p><p>162 / 200</p></div>
+<div class="pj-total"><p>Pontuação Total</p><p>81 / 200</p></div>
 <p class="pj-btn">Enviar</p>
 </div>
 <p class="pj-snack">Avaliação enviada com sucesso!</p>
@@ -575,57 +588,72 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 <img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="18" data-nota="As 12 perguntas do diário valem 120 de 200 pontos, os mesmos 60% do manual. As 8 de apresentação valem 80 de 200, os mesmos 40%. Criatividade inclui sustentabilidade." id="estrutura">
+<section data-n="18" data-nota="Edital, itens 10.2 a 10.4: Etapa 1 (diário de bordo) até 60 pontos, 4 critérios de 15 pontos com 3 itens cada; Etapa 2 (apresentação) até 40 pontos, 4 critérios de 10 pontos com 2 itens cada. Criatividade inclui sustentabilidade." id="estrutura">
 <div class="head">
 <p class="eyebrow">Do manual para o Projetin</p>
 <h2>Os 8 critérios do manual viram 20 perguntas na ficha</h2>
 </div>
 <div class="map">
 <div class="mcol a rise" style="--i:0">
-<p class="mtag">Diário de bordo · 60%</p>
+<p class="mtag">Diário de bordo · 60 pontos</p>
 <div class="mrow"><p>Ideia e objetivo</p><p class="q">perguntas 1–3</p></div>
 <div class="mrow"><p>Metodologia</p><p class="q">perguntas 4–6</p></div>
 <div class="mrow"><p>Resultados</p><p class="q">perguntas 7–9</p></div>
 <div class="mrow"><p>Conclusão</p><p class="q">perguntas 10–12</p></div>
 </div>
 <div class="mcol b rise" style="--i:1">
-<p class="mtag">Apresentação · 40%</p>
+<p class="mtag">Apresentação · 40 pontos</p>
 <div class="mrow"><p>Clareza</p><p class="q">13–14</p></div>
 <div class="mrow"><p>Domínio</p><p class="q">15–16</p></div>
 <div class="mrow"><p>Criatividade</p><p class="q">17–18</p></div>
 <div class="mrow"><p>Relevância</p><p class="q">19–20</p></div>
 </div>
 </div>
-<p style="font-size:28px">Cada pergunta vale de 0 a 10. No Projetin a soma vai até <b>200</b>; no manual, até <b>100</b>. O peso é o mesmo, e a nota final é a <b>média dos 3 avaliadores</b>.</p>
+<p style="font-size:28px">Cada pergunta vale de 0 a 5: 12 × 5 = <b>60</b> no diário e 8 × 5 = <b>40</b> na apresentação, total <b>100</b>, como no edital. A nota final é a <b>média dos 3 avaliadores</b>.</p>
 <img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="19" data-nota="Régua combinada com a coordenação. Pedir que todos tirem uma foto deste slide." id="regua">
+<section data-n="19" data-nota="Edital da Mostra MUV, Anexo V (Ficha de avaliação dos projetos): Excelente (5), Bom (4), Regular (3), Fraco (2), Ausente (0). Pedir que todos tirem uma foto deste slide." id="regua">
 <div class="head">
 <p class="eyebrow">A régua de notas</p>
-<h2>Os 5 níveis do manual, em notas de 0 a 10</h2>
+<h2>A régua do edital: cada pergunta vale de 0 a 5</h2>
 </div>
 <div class="scale">
-<div class="lvl l5 rise" style="--i:0"><p class="v">9–10</p><p>Excelente</p></div>
-<div class="lvl l4 rise" style="--i:1"><p class="v">7–8</p><p>Bom</p></div>
-<div class="lvl l3 rise" style="--i:2"><p class="v">5–6</p><p>Regular</p></div>
-<div class="lvl l2 rise" style="--i:3"><p class="v">2–4</p><p>Fraco</p></div>
-<div class="lvl l1 rise" style="--i:4"><p class="v">0–1</p><p>Ausente</p></div>
+<div class="lvl l5 rise" style="--i:0"><p class="v">5</p><p>Excelente</p></div>
+<div class="lvl l4 rise" style="--i:1"><p class="v">4</p><p>Bom</p></div>
+<div class="lvl l3 rise" style="--i:2"><p class="v">3</p><p>Regular</p></div>
+<div class="lvl l2 rise" style="--i:3"><p class="v">2</p><p>Fraco</p></div>
+<div class="lvl l1 rise" style="--i:4"><p class="v">0</p><p>Ausente</p></div>
 </div>
-<p>As cores são as do manual. No Projetin, cada pergunta tem botões de 0 a 10: use esta correspondência para que todos avaliem com a mesma régua.</p>
+<p>São os 5 níveis do Anexo V do edital, com as cores do manual. Só existem estas notas: <b>5, 4, 3, 2 ou 0</b>. Não há nota 1.</p>
 <img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="20" data-nota="Este é o erro mais provável. Quem marcar 5 achando que deu nota máxima derruba o trabalho no ranking." id="cinco" class="dark" style="justify-content:center">
+<section data-n="20" data-nota="O Projetin usa botões de 0 a 10 para todas as feiras e não deixa a coordenação mudar esse limite. Por isso a régua do edital depende do avaliador. Na conferência, a coordenação procura notas acima de 5 e totais acima de 100." id="botoes">
+<div class="head">
+<p class="eyebrow">Na tela do Projetin</p>
+<h2>Onze botões na tela, cinco valem na MUV</h2>
+</div>
+<div class="btnrow rise" style="--i:0">
+<div class="nb ok l1"><p>0</p></div><div class="nb no"><p>1</p></div><div class="nb ok l2"><p>2</p></div><div class="nb ok l3"><p>3</p></div><div class="nb ok l4"><p>4</p></div><div class="nb ok l5"><p>5</p></div><div class="nb no"><p>6</p></div><div class="nb no"><p>7</p></div><div class="nb no"><p>8</p></div><div class="nb no"><p>9</p></div><div class="nb no"><p>10</p></div>
+</div>
+<div class="btnleg rise" style="--i:1">
+<p><b>0</b> Ausente</p><p><b>2</b> Fraco</p><p><b>3</b> Regular</p><p><b>4</b> Bom</p><p><b>5</b> Excelente</p>
+</div>
+<div class="card warn rise" style="--i:2;flex:none"><p>O sistema permite marcar de 0 a 10 e não bloqueia notas maiores. Quem garante a régua do edital é o avaliador: <b>nenhuma nota acima de 5</b>.</p></div>
+<img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
+
+</section>
+<section data-n="21" data-nota="Este é o erro mais provável: marcar 8, 9 ou 10 por costume. Uma nota acima de 5 distorce a média do trabalho e o ranking. Se o total passar de 100, há nota errada." id="cinco" class="dark" style="justify-content:center">
 <p class="eyebrow">Atenção</p>
-<h1>Um 5 nos botões é <span class="hl">Regular</span>, não Excelente</h1>
+<h1>No Projetin, <span class="hl">5 é a nota máxima</span></h1>
 <div class="card" style="flex:0">
-<p>Na ficha, a rubrica mostra “Excelente 5,0 · Bom 4,0 · Regular 3,0…”. <b style="color:#F3F4EE">Ignore esses números</b> e use a régua de 0 a 10 do slide anterior.</p>
+<p>Os botões do sistema vão até 10, mas a régua do edital vai até 5. <b style="color:#F3F4EE">Nunca marque de 6 a 10.</b> A rubrica de cada critério já mostra a régua certa: “Excelente 5,0 · Bom 4,0 · Regular 3,0 · Fraco 2,0 · Ausente 0,0”.</p>
 </div>
 <img class="brand" src="manual-avaliadores-muv-2026/0be97fdffce9.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="21" data-nota="As perguntas são sugestões para puxar a conversa. Confirme no diário o que a equipe disser." id="crit-a">
+<section data-n="22" data-nota="As perguntas são sugestões para puxar a conversa. Confirme no diário o que a equipe disser." id="crit-a">
 <div class="head">
 <p class="eyebrow">Diário de bordo · Ideia e objetivo (1–3) · Metodologia (4–6)</p>
 <h2>O que observar e o que perguntar</h2>
@@ -643,7 +671,7 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 <img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="22" data-nota="O critério 8 conversa com o 1: compare a resposta com a pergunta que a equipe escreveu no começo." id="crit-b">
+<section data-n="23" data-nota="O critério 8 conversa com o 1: compare a resposta com a pergunta que a equipe escreveu no começo." id="crit-b">
 <div class="head">
 <p class="eyebrow">Diário de bordo · Resultados (7–9) · Conclusão (10–12)</p>
 <h2>Resultados, conclusão e fontes</h2>
@@ -661,7 +689,7 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 <img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="23" data-nota="Para os critérios 15 e 16, dirija as perguntas a integrantes diferentes, incluindo os mais tímidos." id="crit-c">
+<section data-n="24" data-nota="Para os critérios 15 e 16, dirija as perguntas a integrantes diferentes, incluindo os mais tímidos." id="crit-c">
 <div class="head">
 <p class="eyebrow">Apresentação · Clareza · Domínio · Criatividade · Relevância</p>
 <h2>A conversa no estande</h2>
@@ -680,7 +708,7 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 <img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="24" data-nota="Agora o roteiro prático, do momento em que você chega ao estande até o envio da ficha." id="sec-estande">
+<section data-n="25" data-nota="Agora o roteiro prático, do momento em que você chega ao estande até o envio da ficha." id="sec-estande">
 <img class="blob-t" src="manual-avaliadores-muv-2026/a399a9cbaa42.webp" alt="">
 <p class="eyebrow">Parte 3</p>
 <div class="divrow">
@@ -693,7 +721,7 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 <img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="25" data-nota="Enviar na hora é essencial: fichas preenchidas de memória no fim do dia perdem qualidade e atrasam o ranking." id="ciclo">
+<section data-n="26" data-nota="Enviar na hora é essencial: fichas preenchidas de memória no fim do dia perdem qualidade e atrasam o ranking." id="ciclo">
 <div class="head">
 <p class="eyebrow">Cerca de 15 minutos por trabalho</p>
 <h2>O ciclo em cada estande</h2>
@@ -711,7 +739,7 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 <img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="26" data-nota="A observação é curta, específica e aponta um próximo passo possível para estudantes da educação básica." id="observacao">
+<section data-n="27" data-nota="A observação é curta, específica e aponta um próximo passo possível para estudantes da educação básica." id="observacao">
 <div class="head">
 <p class="eyebrow">A observação</p>
 <h2>Escreva como se a equipe fosse ler</h2>
@@ -728,7 +756,7 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 <img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="27" data-nota="Conflito de interesse: se você orienta, coorienta, conhece a equipe de perto ou tem parentesco, avise a coordenação e não avalie." id="praticas">
+<section data-n="28" data-nota="Conflito de interesse: se você orienta, coorienta, conhece a equipe de perto ou tem parentesco, avise a coordenação e não avalie." id="praticas">
 <div class="head">
 <p class="eyebrow">Postura</p>
 <h2>Boas práticas</h2>
@@ -754,7 +782,7 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 <img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="28" data-nota="Os monitores circulam pelo auditório e são o primeiro ponto de ajuda." id="sec-imprevistos">
+<section data-n="29" data-nota="Os monitores circulam pelo auditório e são o primeiro ponto de ajuda." id="sec-imprevistos">
 <img class="blob-t" src="manual-avaliadores-muv-2026/a399a9cbaa42.webp" alt="">
 <p class="eyebrow">Parte 4</p>
 <div class="divrow">
@@ -767,7 +795,7 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 <img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="29" data-nota="Não tente corrigir uma nota errada compensando em outro trabalho. Depois do prazo, só a coordenação consegue ajustar." id="faq">
+<section data-n="30" data-nota="Não tente corrigir uma nota errada compensando em outro trabalho. Depois do prazo, só a coordenação consegue ajustar." id="faq">
 <div class="head">
 <p class="eyebrow">Se algo der errado</p>
 <h2>Procure um monitor</h2>
@@ -778,14 +806,14 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 <tr><td>Equipe incompleta</td><td>Avalie com os presentes e informe a comissão</td></tr>
 <tr><td>Trabalho da lista ausente</td><td>Avise um monitor para registrar a ausência</td></tr>
 <tr><td>Fiquei sem internet</td><td>Reconecte ao Wi-Fi; se não voltar, peça a ficha impressa</td></tr>
-<tr><td>Enviei uma nota errada</td><td>Abra o trabalho e corrija: dá para editar até o prazo</td></tr>
+<tr><td>Enviei nota errada ou acima de 5</td><td>Abra o trabalho e corrija: dá para editar até o prazo</td></tr>
 <tr><td>Equipe sem diário de bordo</td><td>Avalie pelo que mostrarem e registre nas observações</td></tr>
 <tr><td>Terminei antes do prazo</td><td>Avise: pode haver trabalhos precisando de avaliador</td></tr>
 </table>
 <img class="brand" src="manual-avaliadores-muv-2026/05951f20efee.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="30" data-nota="A ficha impressa é só para último caso. Sempre que a rede estiver funcionando, avalie direto no Projetin." id="plano-c" class="dark">
+<section data-n="31" data-nota="A ficha impressa é só para último caso. Sempre que a rede estiver funcionando, avalie direto no Projetin." id="plano-c" class="dark">
 <div class="head">
 <p class="eyebrow">Último caso</p>
 <h2>Sem internet? Os monitores têm <span class="hl">fichas impressas</span></h2>
@@ -793,13 +821,13 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 <div class="cards">
 <div class="card rise" style="--i:0"><p class="kicker">1</p><h3>Tente o Wi-Fi</h3><p>Reconecte à rede dos avaliadores antes de qualquer coisa.</p></div>
 <div class="card rise" style="--i:1"><p class="kicker">2</p><h3>Peça a ficha</h3><p>Um monitor entrega a ficha impressa com os mesmos 20 critérios.</p></div>
-<div class="card rise" style="--i:2"><p class="kicker">3</p><h3>Preencha completa</h3><p>Código do trabalho, seu nome e as 20 notas de 0 a 10, com a mesma régua.</p></div>
+<div class="card rise" style="--i:2"><p class="kicker">3</p><h3>Preencha completa</h3><p>Código do trabalho, seu nome e as 20 notas: 5, 4, 3, 2 ou 0.</p></div>
 <div class="card rise" style="--i:3"><p class="kicker">4</p><h3>Devolva na hora</h3><p>Entregue ao monitor. A coordenação lança no sistema.</p></div>
 </div>
 <img class="brand" src="manual-avaliadores-muv-2026/0be97fdffce9.webp" alt="Mostra MUV">
 
 </section>
-<section data-n="31" data-nota="Reforçar o e-mail da Feira para dúvidas. Abrir para perguntas rápidas." id="fechamento" class="dark" style="padding:128px 128px 160px;gap:40px">
+<section data-n="32" data-nota="Reforçar o e-mail da Feira para dúvidas. Abrir para perguntas rápidas." id="fechamento" class="dark" style="padding:128px 128px 160px;gap:40px">
 <img src="manual-avaliadores-muv-2026/0be97fdffce9.webp" alt="Logo Mostra MUV" style="width:220px;height:122px;object-fit:contain">
 <h2>Obrigado por apoiar a ciência na Serra da Capivara!</h2>
 <div style="background:#FDFDFB;border-radius:28px;padding:40px 48px;display:flex;flex-direction:column;gap:12px">
@@ -821,7 +849,7 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
 </div>
 <nav class="barra" aria-label="Navegação dos slides">
   <button type="button" id="ant" aria-label="Slide anterior">‹</button>
-  <span class="cont" id="cont" aria-live="polite">1 / 31</span>
+  <span class="cont" id="cont" aria-live="polite">1 / 32</span>
   <button type="button" id="prox" aria-label="Próximo slide">›</button>
   <span class="tt">Formação de Avaliadores — Mostra MUV 2026</span>
   <button type="button" id="bNota" aria-pressed="false" title="Notas do apresentador (N)">Notas</button>
@@ -834,7 +862,6 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
   var cont=document.getElementById('cont'), nota=document.getElementById('nota'), notaTxt=document.getElementById('notaTxt');
   var bNota=document.getElementById('bNota'), bModo=document.getElementById('bModo');
   var mostrarNota=false, lista=false;
-  // molduras e notas do modo lista
   S.forEach(function(s){
     var m=document.createElement('div'); m.className='moldura'; s.parentNode.insertBefore(m,s); m.appendChild(s);
     if(s.dataset.nota){var p=document.createElement('p'); p.className='lista-nota'; p.textContent='Nota: '+s.dataset.nota; m.after(p);}
@@ -879,17 +906,16 @@ body.lista #ant,body.lista #prox,body.lista #cont{display:none}
     else if(k==='n'||k==='N'){bNota.click()} else if(k==='l'||k==='L'){bModo.click()}
     else if(k==='f'||k==='F'){document.getElementById('bTela').click()}
   });
-  var x0=null;
-  document.querySelector('.palco').addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
-  document.querySelector('.palco').addEventListener('touchend',function(e){
+  var x0=null, palco=document.querySelector('.palco');
+  palco.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  palco.addEventListener('touchend',function(e){
     if(lista||x0===null) return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40) ir(i+(dx<0?1:-1)); x0=null;
   });
-  document.querySelector('.palco').addEventListener('click',function(e){
+  palco.addEventListener('click',function(e){
     if(lista||e.target.closest('a')) return; ir(i+(e.clientX>window.innerWidth/3?1:-1));
   });
   window.addEventListener('resize',ajustar);
   window.addEventListener('orientationchange',function(){setTimeout(ajustar,150)});
-  // celular em pé: aviso para girar a tela ao começar
   var g=document.getElementById('girar'), emPe=matchMedia('(orientation: portrait)');
   if(matchMedia('(pointer: coarse)').matches && emPe.matches && !/[?&]lista/.test(location.search)){
     g.hidden=false;
